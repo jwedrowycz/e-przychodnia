@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rejestracja{% endblock %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    {{ form_row(form.email) }}
+    {{ form_row(form.password) }}
+{#    {{ form_row(form.powtorz_haslo) }}#}
+
+
+    {{ form_row(form.imie) }}
+    {{ form_row(form.nazwisko) }}
+    {{ form_row(form.PESEL) }}
+    {{ form_row(form.telefon) }}
+    {{ form_row(form.adres_zamieszkania) }}
+    {{ form_row(form.miasto) }}
+    {{ form_row(form.kod_pocztowy) }}
+    {{ form_row(form.submit, {'label': 'Rejestruj'}) }}
+    {{ form_end(form) }}
+
+
+
+{% endblock %}
