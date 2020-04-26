@@ -3,10 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PacjentRepository")
+ * @UniqueEntity(fields={"email"}, message="Taki adres email jest już zarejestrowany")
+ * @UniqueEntity(fields={"PESEL"}, message="Istnieje już pacjent z takim PESELem")
+ * @UniqueEntity(fields={"telefon"}, message="Taki numer telefonu jest już zarejestrowany")
  */
 class Pacjent implements UserInterface
 {
@@ -69,7 +73,7 @@ class Pacjent implements UserInterface
     private $kod_pocztowy;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
      */
     private $data_dolaczenia;
 

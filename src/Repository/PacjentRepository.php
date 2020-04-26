@@ -30,7 +30,6 @@ class PacjentRepository extends ServiceEntityRepository implements PasswordUpgra
         if (!$user instanceof Pacjent) {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
         }
-
         $user->setPassword($newEncodedPassword);
         $this->_em->persist($user);
         $this->_em->flush();
