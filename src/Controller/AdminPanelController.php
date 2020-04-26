@@ -3,27 +3,41 @@
 namespace App\Controller;
 
 use App\Entity\Pacjent;
-use App\Form\RegistrationFormType;
-use App\Security\CustomAuthenticator;
+use App\Form\AddUserType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
-class RegistrationController extends AbstractController
+/**
+  * @IsGranted("ROLE_ADMIN")
+  */
+
+/**
+ * @Route("/admin", name="admin.")
+ */
+class AdminPanelController extends AbstractController
 {
     /**
-     * @Route("/register", name="register")
+     * @Route("/", name="index")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, CustomAuthenticator $authenticator): Response
+    public function index()
     {
-        if ($this->isGranted('ROLE_USER')) {
-            return $this->redirectToRoute('home',['msg'=>'fail']);
-        }
+        return $this->render('admin_panel/index.html.twig', [
+
+        ]);
+    }
+
+    /**
+     * @Route("/add", name="add_user")
+     */
+    // DODAWANIE UŻYTKOWNIKA-PRACOWNIKA
+    public function add_user(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    {
         $user = new Pacjent();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form = $this->createForm(AddUserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -34,16 +48,15 @@ class RegistrationController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
-            $user->setRoles(['ROLE_USER']);
+            $user->setRoles(['ROLE_OPERATOR']);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('login');
+            return $this->redirectToRoute('admin.add_user', ['msg'=>'success']);
         }
-
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
+        return $this->render('admin_panel/add_user.html.twig', [
+            'addUserForm' => $form->createView(),
         ]);
     }
 }

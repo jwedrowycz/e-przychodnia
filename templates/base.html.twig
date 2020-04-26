@@ -7,7 +7,40 @@
     </head>
     <body>
     <header>
-        <a href="{{ path('register') }}">Rejestracja</a>
+        <nav class="navbar">
+            <a href="#" class="logo">logo</a>
+            <ul class="main-nav" id="js-menu">
+                <li>
+                    <a href="{{ path('home') }}" class="nav-links">Strona główna</a>
+                </li>
+                <li>
+                    <a href="#" class="nav-links">Kontakt</a>
+                </li>
+                {% if is_granted('ROLE_USER') %}
+                    <li>
+                        <a href="{{ path('logout') }}" class="nav-links">Wyloguj</a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-links">Profil</a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-links">{{ app.user.username }}</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{{ path('register') }}" class="nav-links">Rejestracja</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('login') }}" class="nav-links">Zaloguj</a>
+                    </li>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                <li>
+                    <a href="{{ path('admin.index') }}" class="nav-links">Panel administratora</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
     </header>
         {% block body %}{% endblock %}
 

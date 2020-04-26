@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panel administratora{% endblock %}
+
+{% block body %}
+<h1>Panel administratora</h1>
+    <div>
+        <a href="{{ path('admin.add_user') }}">Dodaj użytownika</a>
+    </div>
+{% endblock %}

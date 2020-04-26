@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin{% endblock %}
+
+{% block body %}
+    <h1>Dodaj użytkownika</h1>
+    {{ form_start(addUserForm) }}
+    {{ form_row(addUserForm.email) }}
+    {{ form_row(addUserForm.password) }}
+    {{ form_row(addUserForm.imie) }}
+    {{ form_row(addUserForm.nazwisko) }}
+
+
+    <button class="btn">Register</button>
+    {{ form_end(addUserForm) }}
+{% endblock %}
