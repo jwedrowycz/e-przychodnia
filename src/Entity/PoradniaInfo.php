@@ -5,10 +5,10 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * PoradniaInfo
+ * Poradnia
  *
- * @ORM\Table(name="poradnia_info", indexes={@ORM\Index(name="FK_poradnia_info_poradnia_id", columns={"id_poradni"}), @ORM\Index(name="FK_poradnia_info_lekarz_id_lekarza", columns={"id_lekarza"})})
- * @ORM\Entity
+ * @ORM\Table(name="poradnia")
+ * @ORM\Entity(repositoryClass="App\Repository\PoradniaInfoRepository")
  */
 class PoradniaInfo
 {
@@ -22,50 +22,25 @@ class PoradniaInfo
     private $id;
 
     /**
-     * @var \Lekarz
+     * @var string|null
      *
-     * @ORM\ManyToOne(targetEntity="Lekarz")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_lekarza", referencedColumnName="id_lekarza")
-     * })
+     * @ORM\Column(name="nazwa", type="string", length=255, nullable=true, options={"default"="NULL"})
      */
-    private $idLekarza;
-
-    /**
-     * @var \Poradnia
-     *
-     * @ORM\ManyToOne(targetEntity="Poradnia")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_poradni", referencedColumnName="id")
-     * })
-     */
-    private $idPoradni;
+    private $nazwa = 'NULL';
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdLekarza(): ?Lekarz
+    public function getNazwa(): ?string
     {
-        return $this->idLekarza;
+        return $this->nazwa;
     }
 
-    public function setIdLekarza(?Lekarz $idLekarza): self
+    public function setNazwa(?string $nazwa): self
     {
-        $this->idLekarza = $idLekarza;
-
-        return $this;
-    }
-
-    public function getIdPoradni(): ?Poradnia
-    {
-        return $this->idPoradni;
-    }
-
-    public function setIdPoradni(?Poradnia $idPoradni): self
-    {
-        $this->idPoradni = $idPoradni;
+        $this->nazwa = $nazwa;
 
         return $this;
     }
