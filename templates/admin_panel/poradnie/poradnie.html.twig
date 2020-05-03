@@ -5,11 +5,18 @@
 {% block content %}
 
     <h1>Poradnie</h1>
+    <table class="admin-table">
+        <tr>
+            <th>Id poradni</th>
+            <th>Nazwa</th>
+        </tr>
     {% for poradnia in poradnie %}
-        {{ poradnia.id }}
-        <a href="{{ path('admin.poradnia_show', {id: poradnia.id}) }}">{{ poradnia.nazwa }}</a>
+        <tr>
+        <td>{{ poradnia.id }}</td>
+        <td><a href="{{ path('admin.poradnia_show', {id: poradnia.id}) }}">{{ poradnia.nazwa }}</a></td>
+        </tr>
     {% endfor %}
-
+    </table>
     <a href="{{ path('admin.poradnia_add') }}">Dodaj poradnie</a>
 
 {% endblock content %}
