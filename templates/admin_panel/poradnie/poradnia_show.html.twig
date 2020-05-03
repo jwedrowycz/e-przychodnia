@@ -9,19 +9,21 @@
             <th>Numer PWZ</th>
             <th>Imie i nazwisko</th>
             <th>Specjalizacja</th>
-            <th></th>
+            <th>Akcja</th>
 
         </tr>
+        <tr>
     {% for lekarz in lekarze %}
         <td>{{ lekarz.id }}</td>
         <td>{{ lekarz.numerPWZ }}</td>
         <td>{{ lekarz.nazwisko ~ ' ' ~ lekarz.imie }}</td>
         <td>{{ lekarz.specjalizacja }}</td>
-        <td></td>
+        <td>
+            <a href="{{ path('admin.jednostka_delete', {idLekarza: lekarz.id, idPoradni: poradnia.id}) }}">Usuń</a>
+        </td>
         </tr>
     {% endfor %}
     </table>
-    {# {{ form_start(addJednostkaForm) }}
-    {{ form_end(addJednostkaForm) }} #}
-    <a href="{{ path('admin.jednostka_add') }}">Dodaj lekarza do poradni</a> 
+
+    <a href="{{ path('admin.jednostka_add', {id_poradni: poradnia.id}) }}">Dodaj lekarza do poradni</a>
 {% endblock content %}

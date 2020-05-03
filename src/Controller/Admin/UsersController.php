@@ -2,11 +2,11 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Pacjent;
+use App\Entity\User;
 use App\Entity\PoradniaInfo;
 use App\Form\AddUserType;
 use App\Repository\PoradniaInfoRepository;
-use App\Repository\PacjentRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -26,7 +26,7 @@ class UsersController extends AbstractController
    /**
      * @Route("/users", name="users")
      */
-    public function users(PacjentRepository $usersRepo)
+    public function users(UserRepository $usersRepo)
     {
         $users = $usersRepo->findAll();
 
@@ -41,7 +41,7 @@ class UsersController extends AbstractController
      */
     public function add_user(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
-        $user = new Pacjent();
+        $user = new User();
         $form = $this->createForm(AddUserType::class, $user);
         $form->handleRequest($request);
 

@@ -6,13 +6,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PacjentRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields={"email"}, message="Taki adres email jest już zarejestrowany")
  * @UniqueEntity(fields={"PESEL"}, message="Istnieje już pacjent z takim PESELem")
  * @UniqueEntity(fields={"telefon"}, message="Taki numer telefonu jest już zarejestrowany")
  */
-class Pacjent implements UserInterface
+class User implements UserInterface
 {
     /**
      * @ORM\Id()

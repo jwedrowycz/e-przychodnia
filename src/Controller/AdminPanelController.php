@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\PoradniaInfo;
@@ -33,5 +33,4 @@ class AdminPanelController extends AbstractController
 
         ]);
     }
-
 }

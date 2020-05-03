@@ -1,8 +1,24 @@
 {% extends 'admin_panel/index.html.twig' %}
 
 {% block content %}
-    {# <h1>{{ poradnia.nazwa }}</h1> #}
-    
-    {{ form_start(addJednostkaForm) }}
-    {{ form_end(addJednostkaForm) }}
+     <h1>{{ poradnia.nazwa }}</h1>
+     <h3>Dodaj lekarza do poradni</h3>
+     <table class="admin-table">
+          <tr>
+               <th>Numer PWZ</th>
+               <th>Imie i nazwisko</th>
+               <th>Specjalizacja</th>
+               <th></th>
+          </tr>
+          {% for lekarz in lekarze %}
+               <tr>
+                    <td>{{ lekarz.numerPWZ }}</td>
+                    <td>{{ lekarz.nazwisko ~ ' ' ~ lekarz.imie }}</td>
+                    <td>{{ lekarz.specjalizacja }}</td>
+                    <td>
+                         <a href="{{ path('admin.jednostka_create', {id_lekarza: lekarz.id, id_poradni: poradnia.id}) }}">Dodaj</a>
+                    </td>
+               </tr>
+          {% endfor %}
+     </table>
 {% endblock content %}

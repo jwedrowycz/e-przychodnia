@@ -5,6 +5,7 @@
     <h1>Lekarze</h1>
     <table class="admin-table">
         <tr>
+            <th>Id</th>
             <th>Numer PWZ</th>
             <th>Imie i nazwisko</th>
             <th>Specjalizacja</th>
@@ -12,9 +13,10 @@
         </tr>
     {% for lekarz in lekarze %}
         <tr>
-        <td>{{ lekarz.numerPWZ }}</td>
-        <td>{{ lekarz.nazwisko ~ ' ' ~ lekarz.imie }}</td>
-        <td>{{ lekarz.specjalizacja }}</td>
+            <td>{{ lekarz.id }}</td>
+            <td>{{ lekarz.numerPWZ }}</td>
+            <td>{{ lekarz.nazwisko ~ ' ' ~ lekarz.imie }}</td>
+            <td>{{ lekarz.specjalizacja }}</td>
         </tr>
     {% endfor %}
     </table>

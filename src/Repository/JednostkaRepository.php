@@ -23,7 +23,7 @@ class JednostkaRepository extends ServiceEntityRepository
     {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
-            'SELECT j.id, l.nazwisko, l.imie, l.numerPWZ, l.specjalizacja
+            'SELECT l.id, l.nazwisko, l.imie, l.numerPWZ, l.specjalizacja
             FROM App\Entity\Jednostka j
             INNER JOIN j.id_lekarza l
             INNER JOIN j.id_poradni p

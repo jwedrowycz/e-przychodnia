@@ -27,7 +27,7 @@ class LekarzeController extends AbstractController
     {   
         $lekarze = $lekarzRepo->findAll();
 
-        return $this->render('admin_panel/lekarze/index.html.twig', [
+        return $this->render('admin_panel/lekarze/lekarze.html.twig', [
             'lekarze' => $lekarze
         ]);
     }

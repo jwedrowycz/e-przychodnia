@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Pacjent;
+use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\CustomAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +22,7 @@ class RegistrationController extends AbstractController
         if ($this->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('home',['msg'=>'fail']);
         }
-        $user = new Pacjent();
+        $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
