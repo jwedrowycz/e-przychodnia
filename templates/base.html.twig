@@ -3,44 +3,40 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Index{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        {% endblock %}
     </head>
     <body>
     <header>
-        <nav class="navbar">
-            <a href="#" class="logo">logo</a>
-            <ul class="main-nav" id="js-menu">
-                <li>
-                    <a href="{{ path('home') }}" class="nav-links">Strona główna</a>
-                </li>
-                <li>
-                    <a href="#" class="nav-links">Kontakt</a>
-                </li>
-                {% if is_granted('ROLE_USER') %}
-                    <li>
-                        <a href="{{ path('logout') }}" class="nav-links">Wyloguj</a>
+            <ul class="navbar" id="">
+            {% if is_granted('ROLE_USER') %}
+                    <li class="navbar-li">
+                        <a href="{{ path('logout') }}" class="">Wyloguj</a>
                     </li>
-                    <li>
-                        <a href="#" class="nav-links">Profil</a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-links">{{ app.user.username }}</a>
+                    <li class="navbar-li">
+                        <a href="#" class="">{{ app.user.username }}</a>
                     </li>
                 {% else %}
-                    <li>
-                        <a href="{{ path('register') }}" class="nav-links">Rejestracja</a>
+                    <li class="navbar-li">
+                        <a href="{{ path('register') }}" class="">Rejestracja</a>
                     </li>
-                    <li>
-                        <a href="{{ path('login') }}" class="nav-links">Zaloguj</a>
+                    <li class="navbar-li">
+                        <a href="{{ path('login') }}" class="">Zaloguj</a>
                     </li>
                 {% endif %}
-                {% if is_granted('ROLE_ADMIN') %}
-                <li>
-                    <a href="{{ path('admin.index') }}" class="nav-links">Panel administratora</a>
+                  {% if is_granted('ROLE_ADMIN') %}
+                <li class="navbar-li">
+                    <a href="{{ path('admin.index') }}" class="">Panel administratora</a>
                 </li>
                 {% endif %}
+                <li class="navbar-li">
+                    <a href="#" class="">Kontakt</a>
+                </li>
+                <li class="navbar-li">
+                    <a href="{{ path('home') }}" class="">Strona główna</a>
+                </li>
             </ul>
-        </nav>
     </header>
         {% block body %}{% endblock %}
 

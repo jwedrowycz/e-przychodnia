@@ -1,12 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin_panel/index.html.twig' %}
 
-{% block title %}Poradnie{% endblock %}
 
-{% block body %}
+
+{% block content %}
+
     <h1>Poradnie</h1>
     {% for poradnia in poradnie %}
         {{ poradnia.id }}
         <a href="{{ path('admin.poradnia_show', {id: poradnia.id}) }}">{{ poradnia.nazwa }}</a>
     {% endfor %}
 
-{% endblock %}
+    <a href="{{ path('admin.poradnia_add') }}">Dodaj poradnie</a>
+
+{% endblock content %}

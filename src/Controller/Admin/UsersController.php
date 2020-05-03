@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Pacjent;
 use App\Entity\PoradniaInfo;
 use App\Form\AddUserType;
 use App\Repository\PoradniaInfoRepository;
+use App\Repository\PacjentRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -15,53 +16,29 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-/**
-  * @IsGranted("ROLE_ADMIN")
-  */
+
 
 /**
  * @Route("/admin", name="admin.")
  */
-class AdminPanelController extends AbstractController
+class UsersController extends AbstractController
 {
-    /**
-     * @Route("/", name="index")
+   /**
+     * @Route("/users", name="users")
      */
-    public function index()
+    public function users(PacjentRepository $usersRepo)
     {
-        return $this->render('admin_panel/index.html.twig', [
+        $users = $usersRepo->findAll();
 
+        return $this->render('admin_panel/users/users.html.twig', [
+            'users' => $users
         ]);
+
     }
-
-    /**
-     * @Route("/poradnie", name="poradnie")
-     */
-
-    public function poradnie(PoradniaInfoRepository $poradniaRepo)
-    {
-        $poradnie = $poradniaRepo->findAll();
-
-        return $this->render('admin_panel/poradnie.html.twig',[
-            'poradnie' => $poradnie
-        ]);
-    }
-
-    /**
-     * @Route("/poradnia/{id}", name="poradnia_show")
-     */
-
-    public function poradnia_show(PoradniaInfo $poradnia)
-    {
-        return $this->render('admin_panel/poradnia_show.html.twig',[
-            'poradnia' => $poradnia
-        ]);
-    }
-
+    
     /**
      * @Route("/add", name="add_user")
      */
-    // DODAWANIE UŻYTKOWNIKA-PRACOWNIKA
     public function add_user(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new Pacjent();
@@ -83,8 +60,9 @@ class AdminPanelController extends AbstractController
 
             return $this->redirectToRoute('admin.add_user', ['msg'=>'success']);
         }
-        return $this->render('admin_panel/add_user.html.twig', [
+        return $this->render('admin_panel/users/add_user.html.twig', [
             'addUserForm' => $form->createView(),
         ]);
     }
+
 }

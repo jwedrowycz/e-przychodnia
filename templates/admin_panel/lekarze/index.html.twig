@@ -1,0 +1,23 @@
+{% extends 'admin_panel/index.html.twig' %}
+
+{% block content %}
+
+    <h1>Lekarze</h1>
+    <table class="admin-table">
+        <tr>
+            <th>Numer PWZ</th>
+            <th>Imie i nazwisko</th>
+            <th>Specjalizacja</th>
+            <th></th>
+        </tr>
+    {% for lekarz in lekarze %}
+        <tr>
+        <td>{{ lekarz.numerPWZ }}</td>
+        <td>{{ lekarz.nazwisko ~ ' ' ~ lekarz.imie }}</td>
+        <td>{{ lekarz.specjalizacja }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+    <a href="{{ path('admin.lekarz_add') }}">Dodaj lekarza</a>
+
+{% endblock %}

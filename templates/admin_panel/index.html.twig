@@ -3,9 +3,31 @@
 {% block title %}Panel administratora{% endblock %}
 
 {% block body %}
-<h1>Panel administratora</h1>
-    <div>
-        <a href="{{ path('admin.add_user') }}">Dodaj użytownika</a>
-        <a href="{{ path('admin.poradnie') }}">Poradnie</a>
-    </div>
-{% endblock %}
+<div class="admin-grid-container">
+    {% block sidebar %}
+        <div class="sidebar">
+        <h3>Panel administratora</h3>
+            <a {% if app.request.attributes.get('_route') in [
+                'admin.users',
+                'admin.add_user',
+                ] %} 
+                class="active"{% endif %} href="{{ path('admin.users') }}">Użytkownicy</a>
+            <a {% if app.request.attributes.get('_route') in [
+                'admin.poradnie',
+                'admin.poradnia_show',
+                'admin.poradnia_add',
+                ] %} 
+                class="active"{% endif %}  href="{{ path('admin.poradnie') }}">Poradnie</a>
+            <a {% if app.request.attributes.get('_route') in [
+                'admin.lekarze',
+                'admin.lekarz_add',
+                ] %}
+                class="active"{% endif %}  href="{{ path('admin.lekarze') }}">Lekarze</a>
+        </div>
+    {% endblock sidebar %}
+    <div class="content">
+        {% block content %}
+        {% endblock content %}
+  </div>   
+</div>
+{% endblock body %}

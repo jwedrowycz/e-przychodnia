@@ -1,0 +1,14 @@
+{% extends 'admin_panel/index.html.twig' %}
+
+{% block content %}
+    <h1>Dodaj lekarza</h1>
+    {{ form_start(addLekarzForm) }}
+    {{ form_row(addLekarzForm.imie)}}
+    {{ form_row(addLekarzForm.nazwisko)}}
+    {{ form_row(addLekarzForm.numerPWZ)}}
+    {{ form_row(addLekarzForm.specjalizacja)}}
+    <button class="btn">Dodaj</button>
+    {{ form_end(addLekarzForm) }}
+
+
+{% endblock %}

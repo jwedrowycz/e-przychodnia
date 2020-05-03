@@ -2,56 +2,55 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Lekarz
- *
- * @ORM\Table(name="lekarz")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\LekarzRepository")
  */
 class Lekarz
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id_lekarza", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
-    private $idLekarza;
+    private $id;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="imie", type="string", length=255, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(type="string", length=255)
      */
-    private $imie = 'NULL';
+    private $imie;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="nazwisko", type="string", length=255, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(type="string", length=255)
      */
-    private $nazwisko = 'NULL';
+    private $nazwisko;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="numer_PWZ", type="string", length=7, nullable=true, options={"default"="NULL"})
+     * @ORM\Column(type="string", length=7)
      */
-    private $numerPwz = 'NULL';
+    private $numerPWZ;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="PESEL", type="string", length=11, nullable=true, options={"default"="NULL"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Jednostka", mappedBy="id_lekarza")
      */
-    private $pesel = 'NULL';
+    private $id_jednostki;
 
-    public function getIdLekarza(): ?int
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $specjalizacja;
+
+    public function __construct()
     {
-        return $this->idLekarza;
+        $this->id_jednostki = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 
     public function getImie(): ?string
@@ -59,7 +58,7 @@ class Lekarz
         return $this->imie;
     }
 
-    public function setImie(?string $imie): self
+    public function setImie(string $imie): self
     {
         $this->imie = $imie;
 
@@ -71,36 +70,65 @@ class Lekarz
         return $this->nazwisko;
     }
 
-    public function setNazwisko(?string $nazwisko): self
+    public function setNazwisko(string $nazwisko): self
     {
         $this->nazwisko = $nazwisko;
 
         return $this;
     }
 
-    public function getNumerPwz(): ?string
+    public function getNumerPWZ(): ?string
     {
-        return $this->numerPwz;
+        return $this->numerPWZ;
     }
 
-    public function setNumerPwz(?string $numerPwz): self
+    public function setNumerPWZ(string $numerPWZ): self
     {
-        $this->numerPwz = $numerPwz;
+        $this->numerPWZ = $numerPWZ;
 
         return $this;
     }
 
-    public function getPesel(): ?string
+    /**
+     * @return Collection|Jednostka[]
+     */
+    public function getIdJednostki(): Collection
     {
-        return $this->pesel;
+        return $this->id_jednostki;
     }
 
-    public function setPesel(?string $pesel): self
+    public function addIdJednostki(Jednostka $idJednostki): self
     {
-        $this->pesel = $pesel;
+        if (!$this->id_jednostki->contains($idJednostki)) {
+            $this->id_jednostki[] = $idJednostki;
+            $idJednostki->setIdLekarza($this);
+        }
 
         return $this;
     }
 
+    public function removeIdJednostki(Jednostka $idJednostki): self
+    {
+        if ($this->id_jednostki->contains($idJednostki)) {
+            $this->id_jednostki->removeElement($idJednostki);
+            // set the owning side to null (unless already changed)
+            if ($idJednostki->getIdLekarza() === $this) {
+                $idJednostki->setIdLekarza(null);
+            }
+        }
 
+        return $this;
+    }
+
+    public function getSpecjalizacja(): ?string
+    {
+        return $this->specjalizacja;
+    }
+
+    public function setSpecjalizacja(string $specjalizacja): self
+    {
+        $this->specjalizacja = $specjalizacja;
+
+        return $this;
+    }
 }

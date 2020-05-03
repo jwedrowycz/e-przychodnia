@@ -4,7 +4,7 @@
 namespace App\Repository;
 
 use App\Entity\PoradniaInfo;
-use App\Entity\Wizyta;
+use App\Entity\Lekarz;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -31,4 +31,6 @@ class PoradniaInfoRepository extends ServiceEntityRepository
             )
             ->getResult();
     }
+
+   
 }
