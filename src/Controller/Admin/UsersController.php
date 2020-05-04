@@ -53,16 +53,31 @@ class UsersController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
-            $user->setRoles(['ROLE_OPERATOR']);
+//            $user->setRoles(['ROLE_USER']);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-
-            return $this->redirectToRoute('admin.add_user', ['msg'=>'success']);
+            $this->addFlash(
+            'success',
+            'Pomyślnie dodano nowego użytkownika'
+            );
+            return $this->redirectToRoute('admin.users');
         }
-        return $this->render('admin_panel/users/add_user.html.twig', [
+        return $this->render('admin_panel/users/user_add.html.twig', [
             'addUserForm' => $form->createView(),
         ]);
     }
 
+
+     /**
+     * @Route("/users/profile/{id}", name="user_profile")
+     */
+    public function user_profile(User $user)
+    {
+
+        return $this->render('admin_panel/users/user_profile.html.twig', [
+            'user' => $user
+        ]);
+
+    }
 }

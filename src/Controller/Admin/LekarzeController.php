@@ -45,8 +45,11 @@ class LekarzeController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($lekarz);
             $entityManager->flush();
-
-            return $this->redirectToRoute('admin.lekarze', ['msg'=>'success']);
+            $this->addFlash(
+            'success',
+            'Pomyślnie dodano lekarza'
+            );
+            return $this->redirectToRoute('admin.lekarze');
             
         }
         return $this->render('admin_panel/lekarze/lekarz_add.html.twig', [

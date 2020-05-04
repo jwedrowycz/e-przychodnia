@@ -50,7 +50,10 @@ class JednostkaController extends AbstractController
         $jednostka->setIdPoradni($poradnia);
         $entityManager->persist($jednostka);
         $entityManager->flush();
-
+        $this->addFlash(
+            'success',
+            'Pomyślnie przypisano lekarza do poradni'
+        );
         return $this->redirectToRoute('admin.poradnia_show', ['id'=>$id_poradni]);
 
 
@@ -69,14 +72,10 @@ class JednostkaController extends AbstractController
             'id_poradni' => $idPoradni,
             'id_lekarza' => $idLekarza
         ]);
-//        $jednostka = $entityManager->getRepository('App:Jednostka')->find(3);
 
-//        $lek = $jednostka->getIdLekarza()->getImie();
         $entityManager->remove($jednostka);
         $entityManager->flush();
-//        return $this->render('admin_panel/poradnie/test.html.twig', [
-//            'jednostka' => $jednostka
-//        ]);
+
         return $this->redirectToRoute('admin.poradnia_show', ['id'=>$idPoradni]);
 
     }

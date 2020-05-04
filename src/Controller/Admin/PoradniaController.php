@@ -7,6 +7,7 @@ use App\Entity\Jednostka;
 use App\Entity\PoradniaInfo;
 use App\Repository\PoradniaInfoRepository;
 use App\Form\AddPoradniaFormType;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -48,27 +49,58 @@ class PoradniaController extends AdminPanelController
     }
 
     /**
-     * @Route("/poradnia/add", name="poradnia_add")
+     * @Route("/poradnia/dodaj", name="poradnia_add")
      */
-    public function poradnia_add(Request $request): Response
+    public function poradnia_add(Request $request)
     {
         $poradnia = new PoradniaInfo();
         $form = $this->createForm(AddPoradniaFormType::class, $poradnia);
-
-
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($poradnia);
             $entityManager->flush();
 
-            return $this->redirectToRoute('admin.poradnie', ['msg'=>'success']);
-            
+             $this->addFlash(
+            'success',
+            'Poradnia została pomyślnie dodana'
+        );
+            return $this->redirectToRoute('admin.poradnie');
+
         }
+
         return $this->render('admin_panel/poradnie/poradnia_add.html.twig', [
             'addPoradniaForm' => $form->createView(),
         ]);
        
     }
+
+//     /**
+//     * @Route("/poradnia/usun/{id}", name="poradnia_delete")
+//     */
+//    public function poradnia_delete(PoradniaInfo $poradniaInfo)
+//    {
+//        $entityManager = $this->getDoctrine()->getManager();
+//        try {
+//            $entityManager->remove($poradniaInfo);
+//            $entityManager->flush();
+//            $this->addFlash(
+//            'success',
+//            'Pomyślnie usunięto jednostkę'
+//        );
+//            return $this->redirectToRoute('admin.poradnie');
+//
+//        }
+//        catch (\PDOException $e) {
+//            $this->addFlash(
+//            'fail',
+//            'Nie możesz usunąć tej poradni, prawdopodobnie jest w użyciu'
+//        );
+//            return $this->redirectToRoute('admin.poradnie');
+//        }
+
+
+//    }
 
     
 }

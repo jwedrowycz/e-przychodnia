@@ -3,20 +3,63 @@
 {% block title %}Rejestracja{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <div class="registration-container">
+            <div class="registration-form">
+                <h1>Rejestracja</h1>
+                <h3>Dane logowania</h3>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.password) }}
-        {{ form_row(registrationForm.imie) }}
-        {{ form_row(registrationForm.nazwisko) }}
-        {{ form_row(registrationForm.PESEL) }}
-        {{ form_row(registrationForm.telefon) }}
-        {{ form_row(registrationForm.adres_zamieszkania) }}
-        {{ form_row(registrationForm.miasto) }}
-        {{ form_row(registrationForm.kod_pocztowy) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+                {{ form_start(registrationForm) }}
 
-        <button class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                {{ form_label(registrationForm.email) }}<i style="color:#fc0003;">*</i>
+                {{ form_widget(registrationForm.email) }}
+                {{ form_label(registrationForm.password.first) }}<i style="color:#fc0003;">*</i>
+                {{ form_widget(registrationForm.password.first) }}
+                {{ form_label(registrationForm.password.second) }}<i style="color:#fc0003;">*</i>
+                {{ form_widget(registrationForm.password.second) }}
+
+                <h3>Dane personalne</h3>
+                {{ form_label(registrationForm.imie) }}<i style="color:#fc0003;">*</i>
+                {{ form_widget(registrationForm.imie) }}
+
+                {{ form_label(registrationForm.nazwisko) }}<i style="color:#fc0003;">*</i>
+                {{ form_widget(registrationForm.nazwisko) }}
+
+                {{ form_label(registrationForm.PESEL, 'PESEL') }}<i style="color:#fc0003;">*</i>
+                {{ form_widget(registrationForm.PESEL) }}
+
+                {{ form_label(registrationForm.telefon) }}<i style="color:#fc0003;">*</i>
+                {{ form_widget(registrationForm.telefon) }}
+
+                {{ form_label(registrationForm.plec, 'Płeć') }}<i style="color:#fc0003;">*</i>
+                {{ form_widget(registrationForm.plec) }}
+
+                {{ form_label(registrationForm.data_urodzenia) }}<i style="color:#fc0003;">*</i>
+                {{ form_widget(registrationForm.data_urodzenia) }}
+                <h3>Adres zamieszkania</h3>
+                {{ form_label(registrationForm.adres_zamieszkania) }}<i style="color:#fc0003;">*</i>
+                {{ form_widget(registrationForm.adres_zamieszkania) }}
+
+                {{ form_label(registrationForm.miasto) }}<i style="color:#fc0003;">*</i>
+                {{ form_widget(registrationForm.miasto) }}
+
+                {{ form_label(registrationForm.kod_pocztowy) }}<i style="color:#fc0003;">*</i>
+                {{ form_widget(registrationForm.kod_pocztowy, { 'attr' : {'id' : 'tbNum', 'onkeyup' : 'addHyphen(this)'}} ) }}
+
+                {{ form_label(registrationForm.agreeTerms, 'Akceptuj warunki') }}<i style="color:#fc0003;">*</i>
+                {{ form_widget(registrationForm.agreeTerms) }}
+                {{ form_widget(registrationForm.submit) }}
+                {{ form_end(registrationForm) }}
+            </div>
+    </div>
+
+
+<script>
+	function addHyphen (element) {
+    	let ele = document.getElementById(element.id);
+        ele = ele.value.split('-').join('');    // Remove dash (-) if mistakenly entered.
+
+        let finalVal = ele.match(/.{0,2}/g).join('-');
+        document.getElementById(element.id).value = finalVal;
+    }
+</script>
 {% endblock %}

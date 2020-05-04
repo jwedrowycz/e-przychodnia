@@ -69,7 +69,7 @@ class User implements UserInterface
     private $miasto;
 
     /**
-     * @ORM\Column(type="string", length=5)
+     * @ORM\Column(type="string", length=6)
      */
     private $kod_pocztowy;
 
@@ -77,6 +77,16 @@ class User implements UserInterface
      * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
      */
     private $data_dolaczenia;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $data_urodzenia;
+
+    /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+     */
+    private $plec;
 
     public function getId(): ?int
     {
@@ -248,6 +258,30 @@ class User implements UserInterface
     public function setDataDolaczenia(\DateTimeInterface $data_dolaczenia): self
     {
         $this->data_dolaczenia = $data_dolaczenia;
+
+        return $this;
+    }
+
+    public function getDataUrodzenia(): ?\DateTimeInterface
+    {
+        return $this->data_urodzenia;
+    }
+
+    public function setDataUrodzenia(?\DateTimeInterface $data_urodzenia): self
+    {
+        $this->data_urodzenia = $data_urodzenia;
+
+        return $this;
+    }
+
+    public function getPlec(): ?string
+    {
+        return $this->plec;
+    }
+
+    public function setPlec(?string $plec): self
+    {
+        $this->plec = $plec;
 
         return $this;
     }

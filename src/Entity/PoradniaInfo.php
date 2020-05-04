@@ -5,12 +5,14 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Poradnia
  *
  * @ORM\Table(name="poradnia")
  * @ORM\Entity(repositoryClass="App\Repository\PoradniaInfoRepository")
+ * @UniqueEntity(fields={"nazwa"}, message="Taka poradnia już istnieje")
  */
 class PoradniaInfo
 {

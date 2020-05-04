@@ -4,8 +4,7 @@
     <h1>Dodaj poradnie</h1>
     {{ form_start(addPoradniaForm) }}
     {{ form_row(addPoradniaForm.nazwa)}}
-    <button class="btn">Dodaj</button>
+    {{ form_row(addPoradniaForm.zapisz) }}
     {{ form_end(addPoradniaForm) }}
-
 
 {% endblock %}

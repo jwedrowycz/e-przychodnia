@@ -1,7 +1,7 @@
 @font-face {
     font-family: "OpenSans";
-    src: url("fonts\\OpenSans\\OpenSans-Regular.ttf");
-  }
+    src: url("fonts/OpenSans/OpenSans-Regular.ttf");
+}
 
 body {
     font-family: "OpenSans";
@@ -10,7 +10,7 @@ body {
 
 /* --------- NAVBAR ------------ */
 @media screen and (min-width: 600px) {
-    .navbar{
+    .navbar {
         list-style-type: none;
         margin: 0;
         padding: 0;
@@ -18,11 +18,11 @@ body {
         background-color: #333;
         min-width: 100%;
     }
-    
+
     .navbar-li {
         float: right;
     }
-    
+
     .navbar-li a {
         display: block;
         color: white;
@@ -30,11 +30,11 @@ body {
         padding: 14px 16px;
         text-decoration: none;
     }
-    
+
     .navbar-li a:hover {
         background-color: #111;
     }
-    
+
 }
 
 /* ------------- ADMIN PANEL ------------ */
@@ -45,56 +45,207 @@ body {
     gap: 1em 1em;
     grid-template-areas: ". .";
     margin: 1em;
-    
-  }
 
-  .sidebar {
+}
+
+.sidebar {
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
     background-color: #C4C4C4; /* Black */
     overflow-x: hidden; /* Disable horizontal scroll */
     padding: 1em 0;
-    
-    
-  }
-  
-  /* The navigation menu links */
-  .sidebar a {
+
+
+}
+
+/* The navigation menu links */
+.sidebar a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     color: #333;
     display: block;
-  }
+}
 
-  .sidebar a:hover{
+.sidebar a:hover {
     background-color: grey;
-  }
-  
-  .active{
+}
+
+.active {
     background-color: grey;
-  }
+}
 
 /* ---------- TABLES ------------- */
 
-.admin-table{
+.admin-table {
     border-collapse: collapse;
     width: 100%;
 }
 
-.admin-table th{
+.admin-table th {
     padding: 1em;
     text-align: left;
-    
+
     border-bottom: 1px solid #ddd;
     background-color: #f5f5f5;
 }
 
-.admin-table tr:hover{
+.admin-table tr:hover {
     background-color: #f5f5f5;
+
 }
 
-.admin-table td{
+.admin-table td {
     padding: 1em;
     border-bottom: 1px solid #ddd;
+}
+
+.admin-table td a {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+/*.admin-table a:hover {*/
+/*    color: dodgerblue;*/
+/*}*/
+.admin-table .delete {
+    color: red;
+}
+
+.admin-table .add {
+    color: dodgerblue;
+}
+
+.admin-table .link-blue:hover {
+    color: dodgerblue;
+}
+
+/* ------------ FLASH MESSAGES ------------ */
+
+.flash-success {
+    padding: 20px;
+    background-color: rgba(8, 180, 0, 0.75); /* Red */
+    color: black;
+    margin-bottom: 15px;
+
+}
+
+.flash-fail {
+    padding: 20px;
+    background-color: rgb(215, 0, 0); /* Red */
+    color: black;
+    margin-bottom: 15px;
+
+}
+
+
+/* ---------------- REGISTRATION FORM ----------------- */
+.registration-container {
+    /*position: relative;*/
+    z-index: 1;
+    /*max-width: 300px;*/
+    margin: 0 auto;
+    padding-top: 3em;
+}
+
+.registration-form {
+    /*position: relative;*/
+    z-index: 1;
+    background: #b9bbbe;
+    width: 50%;
+    margin: 0 auto;
+    padding: 3em;
+    text-align: left;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.registration-form input {
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 3px solid #ccc;
+    height: 3em;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 1em;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+.registration-form select {
+    outline: 0;
+      width: 100%;
+      padding: 16px 20px;
+      border: none;
+      border-radius: 4px;
+      background-color: #f1f1f1;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+.registration-form input:focus {
+  border: 3px solid #555;
+}
+.registration-form button {
+    outline: 0;
+    background: #005cbf;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+/* -------------- LOGIN FORM -------------------- */
+
+.login-container {
+    /*position: relative;*/
+    z-index: 1;
+    /*max-width: 300px;*/
+    width: 50%;
+    margin: 0 auto;
+    padding-top: 3em;
+}
+
+.login-form {
+    /*position: relative;*/
+    z-index: 1;
+    background: #b9bbbe;
+    width: 50%;
+    margin: 0 auto;
+    padding: 3em;
+    text-align: left;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.login-form input {
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 3px solid #ccc;
+    height: 3em;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 1em;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+
+}
+.login-form input:focus {
+  border: 3px solid #555;
+}
+.login-form button {
+    outline: 0;
+    background: #005cbf;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 1em;
+    cursor: pointer;
 }

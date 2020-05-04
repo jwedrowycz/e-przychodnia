@@ -1,0 +1,26 @@
+{% extends 'admin_panel/index.html.twig' %}
+
+
+{% block content %}
+    {% for label, messages in app.flashes(['success', 'fail']) %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <h1>{{ user.imie ~ ' ' ~ user.nazwisko }}</h1>
+    {% if user.roles[0] == "ROLE_USER" %}
+        <p>Użytkownik</p>
+    {% elseif user.roles[0] == "ROLE_ADMIN" %}
+        <p>Administrator</p>
+    {% else %}
+        <p>Operator</p>
+    {% endif %}
+    <p>{{ user.pesel }}</p>
+    <p>{{ user.telefon }}</p>
+    <p>{{ user.adresZamieszkania }}</p>
+    <p>{{ user.miasto }}</p>
+    <p>{{ user.kodPocztowy }}</p>
+    <p>{{ user.dataDolaczenia }}</p>
+{% endblock %}

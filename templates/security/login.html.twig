@@ -3,6 +3,13 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
+      {% for label, messages in app.flashes(['success', 'fail']) %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -13,16 +20,22 @@
             Zalogowano jako {{ app.user.username }}, <a href="{{ path('logout') }}">Wyloguj</a>
         </div>
     {% endif %}
+ <div class="login-container">
+            <div class="login-form">
+            <h1>Zaloguj</h1>
+            <label for="inputEmail">Email</label>
+            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" required autofocus>
+            <label for="inputPassword">Password</label>
+            <input type="password" name="password" id="inputPassword"  required>
 
-    <h1 class="h3 mb-3 font-weight-normal">Zaloguj</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" required>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                 <button class="btn btn-lg btn-primary" type="submit">
+        Zarejestruj
+    </button>
+            </div>
 
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
+ </div>
+
 
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
@@ -35,8 +48,6 @@
         </div>
     #}
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Zarejestruj
-    </button>
+
 </form>
 {% endblock %}

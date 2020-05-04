@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0d559842e0620376475796eaa83c9ec6",
+    "content-hash": "2a05b67ba441429e5076ba46925fabd1",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -3107,7 +3107,7 @@
         },
         {
             "name": "symfony/error-handler",
-            "version": "v5.0.7",
+            "version": "v5.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/error-handler.git",

@@ -2,27 +2,36 @@
 
 
 {% block content %}
-<h1>Użytkownicy</h1>
-
-<table class="admin-table">
-    <tr>
-        <th>Id</th>
-        <th>Login</th>
-        <th>Imie</th>
-        <th>Nazwisko</th>
-        <th>Rola</th>
-    </tr>
-    {% for user in users %}
-    <tr>
-        <td>{{ user.id }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.imie }}</td>
-        <td>{{ user.nazwisko }}</td>
-        <td>{{ user.roles[0] }}</td>
-    </tr>
+    {% for label, messages in app.flashes(['success', 'fail']) %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
     {% endfor %}
-</table>
+    <h1>Użytkownicy</h1>
 
-<a href="{{ path('admin.add_user') }}">Dodaj użytkownika</a>
+    <table class="admin-table">
+        <tr>
+            <th>Id</th>
+            <th>Login</th>
+            <th>Imie</th>
+            <th>Nazwisko</th>
+            <th>Rola</th>
+            <th>Akcje</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.imie }}</td>
+            <td>{{ user.nazwisko }}</td>
+            <td>{{ user.roles[0] }}</td>
+            <td><a class="add" href="{{ path('admin.user_profile', {id:user.id}) }}">Edytuj</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="{{ path('admin.add_user') }}">Dodaj użytkownika</a>
 
 {% endblock %}

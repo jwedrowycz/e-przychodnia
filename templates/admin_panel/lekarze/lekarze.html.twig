@@ -1,7 +1,13 @@
 {% extends 'admin_panel/index.html.twig' %}
 
 {% block content %}
-
+    {% for label, messages in app.flashes(['success', 'fail']) %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
     <h1>Lekarze</h1>
     <table class="admin-table">
         <tr>
