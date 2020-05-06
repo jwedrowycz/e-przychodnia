@@ -5,11 +5,12 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(fields={"email"}, message="Taki adres email jest już zarejestrowany")
+ * @UniqueEntity(fields={"email"}, message="Taki adres e-mail jest już zarejestrowany")
  * @UniqueEntity(fields={"PESEL"}, message="Istnieje już pacjent z takim PESELem")
  * @UniqueEntity(fields={"telefon"}, message="Taki numer telefonu jest już zarejestrowany")
  */
@@ -23,6 +24,7 @@ class User implements UserInterface
     private $id;
 
     /**
+     * @Assert\NotBlank(message = "Podaj swój adres e-mail")
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
@@ -39,37 +41,86 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @Assert\NotBlank(message = "Wpisz swoje imię")
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Imie nie może zawierać cyfr"
+     * )
+     * @Assert\Length(min=3,
+     *                  max = 20,
+     *                  minMessage = "Imię musi się składać conajmniej z {{ limit }} znaków",
+     *                  maxMessage = "Limit znaków w polu imię to {{ limit }}" )
      * @ORM\Column(type="string", length=255)
      */
     private $imie;
 
     /**
+     * @Assert\NotBlank(message = "Wpisz swoje nazwisko")
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Nazwisko nie może zawierać cyfr"
+     * )
+     * 
+     *@Assert\Length(min=3,
+     *                  max = 30,
+     *                  minMessage = "Nazwisko musi się składać conajmniej z {{ limit }} znaków",
+     *                  maxMessage = "Limit znaków w polu nazwisko to {{ limit }}",
+     *                  charset = "iso-8859-2" )
      * @ORM\Column(type="string", length=255)
      */
     private $nazwisko;
 
     /**
+     * @Assert\NotBlank(message = "Wpisz swój numer PESEL")
+     * @Assert\Regex(
+     *     pattern="/[^0-9]/",
+     *     match=false,
+     *     message="Numer pesel nie może zawierać liter"
+     * )
+     * @Assert\Length(min=11,
+     *                  max=11,
+     *                  minMessage = "Pesel może się składać jedynie z {{ limit }} cyfr",
+     *                  maxMessage = "Pesel może się składać jedynie z {{ limit }} cyfr")
      * @ORM\Column(type="string", length=11)
      */
     private $PESEL;
 
     /**
+    * @Assert\Regex(
+     *     pattern="/[^0-9]/",
+     *     match=false,
+     *     message="Numer telefonu nie może zawierać liter"
+     * )
+     *  @Assert\Length(min=9,
+     *                  max=9,
+     *                  exactMessage = "Numer telefonu może się składać dokładnie z {{ limit }} cyfr"
+     *                 )
+     * @Assert\NotBlank(message = "Wpisz swój numer telefonu")
      * @ORM\Column(type="string", length=9)
      */
     private $telefon;
 
     /**
+     * @Assert\NotBlank(message = "Wpisz swój adres zamieszkania, ulica/nr domu")
      * @ORM\Column(type="string", length=255)
      */
     private $adres_zamieszkania;
 
     /**
+     * @Assert\NotBlank(message = "Wpisz w jakim mieście bądź miejscowości mieszkasz")
      * @ORM\Column(type="string", length=255)
      */
     private $miasto;
 
     /**
+    * @Assert\Regex(pattern = "/[0-9]/",
+     *               match = true,
+     *               message="Numer telefonu nie może zawierać liter")
+     * @Assert\NotBlank(message = "Wpisz kod pocztowy swojego miejsca zamieszkania")
      * @ORM\Column(type="string", length=6)
+     * 
      */
     private $kod_pocztowy;
 
@@ -79,14 +130,22 @@ class User implements UserInterface
     private $data_dolaczenia;
 
     /**
+     * @Assert\NotBlank(message = "Wybierz swoją date urodzenia")
      * @ORM\Column(type="date", nullable=true)
      */
     private $data_urodzenia;
 
     /**
+     * @Assert\NotBlank(message = "Wybierz swoją płeć")
      * @ORM\Column(type="string", length=30, nullable=true)
      */
     private $plec;
+
+    /**
+     * @Assert\NotBlank(message = "Wybierz województwo w którym mieszkasz")
+     * @ORM\Column(type="string", length=30, nullable=true)
+     */
+    private $wojewodztwo;
 
     public function getId(): ?int
     {
@@ -172,7 +231,9 @@ class User implements UserInterface
     }
 
     public function setImie(string $imie): self
-    {
+    {   
+        $imie = strtolower($imie);
+        $imie = ucfirst($imie);
         $this->imie = $imie;
 
         return $this;
@@ -185,6 +246,8 @@ class User implements UserInterface
 
     public function setNazwisko(string $nazwisko): self
     {
+        $nazwisko = strtolower($nazwisko);
+        $nazwisko = ucfirst($nazwisko);
         $this->nazwisko = $nazwisko;
 
         return $this;
@@ -282,6 +345,18 @@ class User implements UserInterface
     public function setPlec(?string $plec): self
     {
         $this->plec = $plec;
+
+        return $this;
+    }
+
+    public function getWojewodztwo(): ?string
+    {
+        return $this->wojewodztwo;
+    }
+
+    public function setWojewodztwo(?string $wojewodztwo): self
+    {
+        $this->wojewodztwo = $wojewodztwo;
 
         return $this;
     }

@@ -3,63 +3,160 @@
 {% block title %}Rejestracja{% endblock %}
 
 {% block body %}
-    <div class="registration-container">
-            <div class="registration-form">
-                <h1>Rejestracja</h1>
-                <h3>Dane logowania</h3>
-
-                {{ form_start(registrationForm) }}
-
-                {{ form_label(registrationForm.email) }}<i style="color:#fc0003;">*</i>
-                {{ form_widget(registrationForm.email) }}
-                {{ form_label(registrationForm.password.first) }}<i style="color:#fc0003;">*</i>
-                {{ form_widget(registrationForm.password.first) }}
-                {{ form_label(registrationForm.password.second) }}<i style="color:#fc0003;">*</i>
-                {{ form_widget(registrationForm.password.second) }}
-
-                <h3>Dane personalne</h3>
-                {{ form_label(registrationForm.imie) }}<i style="color:#fc0003;">*</i>
-                {{ form_widget(registrationForm.imie) }}
-
-                {{ form_label(registrationForm.nazwisko) }}<i style="color:#fc0003;">*</i>
-                {{ form_widget(registrationForm.nazwisko) }}
-
-                {{ form_label(registrationForm.PESEL, 'PESEL') }}<i style="color:#fc0003;">*</i>
-                {{ form_widget(registrationForm.PESEL) }}
-
-                {{ form_label(registrationForm.telefon) }}<i style="color:#fc0003;">*</i>
-                {{ form_widget(registrationForm.telefon) }}
-
-                {{ form_label(registrationForm.plec, 'Płeć') }}<i style="color:#fc0003;">*</i>
-                {{ form_widget(registrationForm.plec) }}
-
-                {{ form_label(registrationForm.data_urodzenia) }}<i style="color:#fc0003;">*</i>
-                {{ form_widget(registrationForm.data_urodzenia) }}
-                <h3>Adres zamieszkania</h3>
-                {{ form_label(registrationForm.adres_zamieszkania) }}<i style="color:#fc0003;">*</i>
-                {{ form_widget(registrationForm.adres_zamieszkania) }}
-
-                {{ form_label(registrationForm.miasto) }}<i style="color:#fc0003;">*</i>
-                {{ form_widget(registrationForm.miasto) }}
-
-                {{ form_label(registrationForm.kod_pocztowy) }}<i style="color:#fc0003;">*</i>
-                {{ form_widget(registrationForm.kod_pocztowy, { 'attr' : {'id' : 'tbNum', 'onkeyup' : 'addHyphen(this)'}} ) }}
-
-                {{ form_label(registrationForm.agreeTerms, 'Akceptuj warunki') }}<i style="color:#fc0003;">*</i>
-                {{ form_widget(registrationForm.agreeTerms) }}
-                {{ form_widget(registrationForm.submit) }}
-                {{ form_end(registrationForm) }}
+    <div class="container">
+            {{ form_start(registrationForm, {'attr': {'class': 'form', 'autocomplete':'off'}}) }}
+            <div class="form-title">Rejestracja</div>
+            <p class="form-desc">Zarejestruj się by móc rezerwować wizyty i otrzymywać powiadomienia o zbliżających się terminach.
+            </p>
+            <div class="form-subtitle">Dane logowania</div>
+            <div class="form-item-col">
+                {{ form_label(registrationForm.email, 'E-mail', {'attr': {'class' : 'form-label'}} ) }}
+                {% if form_errors(registrationForm.email) %}
+                    {{ form_widget(registrationForm.email, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+                {% else %}
+                    {{ form_widget(registrationForm.email, {'attr': {'class' : 'form-input'}} ) }}
+                {% endif %}
+                <span class="form-error">{{ form_errors(registrationForm.email) }}</span>
             </div>
-    </div>
-
+            <div class="form-item-col">
+                {{ form_label(registrationForm.password.first, 'Hasło', {'attr': {'class' : 'form-label'}} ) }}
+                {% if form_errors(registrationForm.password.first) %}
+                    {{ form_widget(registrationForm.password.first, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+                {% else %}
+                    {{ form_widget(registrationForm.password.first, {'attr': {'class' : 'form-input'}} ) }}
+                {% endif %}
+            </div>
+            <div class="form-item-col">
+                {{ form_label(registrationForm.password.second, 'Powtórz hasło', {'attr': {'class' : 'form-label'}} ) }}
+                {% if form_errors(registrationForm.password.first) %}
+                    {{ form_widget(registrationForm.password.second, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+                {% else %}
+                    {{ form_widget(registrationForm.password.second, {'attr': {'class' : 'form-input'}} ) }}
+                {% endif %}
+                <span class="form-error">{{ form_errors(registrationForm.password.first) }}</span>
+            </div>
+            <div class="form-subtitle">Dane personalne</div>
+            <div class="form-item-row">
+                <div class="form-item-col">
+                    {{ form_label(registrationForm.imie, 'Imię', {'attr': {'class' : 'form-label'}} ) }}
+                    {% if form_errors(registrationForm.imie) %}
+                        {{ form_widget(registrationForm.imie, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+                    {% else %}
+                        {{ form_widget(registrationForm.imie, {'attr': {'class' : 'form-input'}} ) }}
+                    {% endif %}
+                    <span class="form-error">{{ form_errors(registrationForm.imie) }}</span>
+                </div>
+                <div class="form-item-col">
+                    {{ form_label(registrationForm.nazwisko, 'Nazwisko', {'attr': {'class' : 'form-label'}} ) }}
+                    {% if form_errors(registrationForm.nazwisko) %}
+                        {{ form_widget(registrationForm.nazwisko, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+                    {% else %}
+                        {{ form_widget(registrationForm.nazwisko, {'attr': {'class' : 'form-input'}} ) }}
+                    {% endif %}
+                    <span class="form-error">{{ form_errors(registrationForm.nazwisko) }}</span>
+                </div>
+            </div>
+            <div class="form-item-col">
+                {{ form_label(registrationForm.PESEL, 'Numer PESEL', {'attr': {'class' : 'form-label'}} ) }}
+                {% if form_errors(registrationForm.PESEL) %}
+                    {{ form_widget(registrationForm.PESEL, {'attr': {'maxlength' : '11', 'class' : 'form-input form-input--small form-input--error'}} ) }}
+                {% else %}
+                    {{ form_widget(registrationForm.PESEL, {'attr': {'maxlength' : '11', 'class' : 'form-input form-input--small'}} ) }}
+                {% endif %}
+                <span class="form-error">{{ form_errors(registrationForm.PESEL) }}</span>
+            </div>
+            <div class="form-item-col">
+                {{ form_label(registrationForm.telefon, 'Numer telefonu', {'attr': {'class' : 'form-label'}} ) }}
+                {% if form_errors(registrationForm.telefon) %}
+                    {{ form_widget(registrationForm.telefon, {'attr': {'maxlength' : '9','class' : 'form-input form-input--error'}} ) }}
+                {% else %}
+                    {{ form_widget(registrationForm.telefon, {'attr': {'maxlength' : '9','class' : 'form-input'}} ) }}
+                {% endif %}
+                <span class="form-error">{{ form_errors(registrationForm.telefon) }}</span>
+            </div>
+            <div class="form-item-col">
+                {{ form_label(registrationForm.data_urodzenia, 'Data urodzenia', {'attr': {'class' : 'form-label'}} ) }}
+                {% if form_errors(registrationForm.data_urodzenia) %}
+                    {{ form_widget(registrationForm.data_urodzenia, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+                {% else %}
+                    {{ form_widget(registrationForm.data_urodzenia, {'attr': {'class' : 'form-input'}} ) }}
+                {% endif %}
+                <span class="form-error">{{ form_errors(registrationForm.data_urodzenia) }}</span>
+            </div>
+            <div class="form-subtitle">Miejsce zamieszkania</div>
+            <div class="form-item-col">
+                {{ form_label(registrationForm.adres_zamieszkania, 'Adres zamieszkania', {'attr': {'class' : 'form-label'}} ) }}
+                {% if form_errors(registrationForm.adres_zamieszkania) %}
+                    {{ form_widget(registrationForm.adres_zamieszkania, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+                {% else %}
+                    {{ form_widget(registrationForm.adres_zamieszkania, {'attr': {'class' : 'form-input'}} ) }}
+                {% endif %}
+                <span class="form-error">{{ form_errors(registrationForm.adres_zamieszkania) }}</span>
+            </div>
+            <div class="form-item-row">
+                <div class="form-item-col">
+                    {{ form_label(registrationForm.miasto, 'Miasto', {'attr': {'class' : 'form-label'}} ) }}
+                    {% if form_errors(registrationForm.miasto) %}
+                        {{ form_widget(registrationForm.miasto, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+                    {% else %}
+                        {{ form_widget(registrationForm.miasto, {'attr': {'class' : 'form-input'}} ) }}
+                    {% endif %}
+                    <span class="form-error">{{ form_errors(registrationForm.miasto) }}</span>
+                </div>
+                <div class="form-item-col">
+                    {{ form_label(registrationForm.kod_pocztowy, 'Kod pocztowy', {'attr': {'class' : 'form-label'}} ) }}
+                    {% if form_errors(registrationForm.kod_pocztowy) %}
+                        {{ form_widget(registrationForm.kod_pocztowy, {'attr': {'maxlength' : '6', 'class' : 'form-input form-input--error'}} ) }}
+                    {% else %}
+                        {{ form_widget(registrationForm.kod_pocztowy, {'attr': {'maxlength' : '6', 'class' : 'form-input'}} ) }}
+                    {% endif %}
+                    <span class="form-error">{{ form_errors(registrationForm.kod_pocztowy) }}</span>
+                </div>
+            </div>
+            <div class="form-item-col">
+                {{ form_label(registrationForm.wojewodztwo, 'Województwo', {'attr': {'class' : 'form-label'}} ) }}
+                {% if form_errors(registrationForm.wojewodztwo) %}
+                    {{ form_widget(registrationForm.wojewodztwo, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+                {% else %}
+                    {{ form_widget(registrationForm.wojewodztwo, {'attr': {'class' : 'form-input'}} ) }}
+                {% endif %}
+                <span class="form-error">{{ form_errors(registrationForm.wojewodztwo) }}</span>
+            </div>
+            <div class="form-item-col">
+                {{ form_label(registrationForm.plec, 'Płeć', {'attr': {'class' : 'form-label'}} ) }}
+                {% if form_errors(registrationForm.plec) %}
+                    {{ form_widget(registrationForm.plec, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+                {% else %}
+                    {{ form_widget(registrationForm.plec, {'attr': {'class' : 'form-input'}} ) }}
+                {% endif %}
+                <span class="form-error">{{ form_errors(registrationForm.plec) }}</span>
+            </div>
+            <div class="form-item-col">
+                {{ form_label(registrationForm.agreeTerms, 'Akceptuję warunki', {'attr': {'class' : 'form-label'}} ) }}
+                {{ form_widget(registrationForm.agreeTerms) }}
+                {{ form_widget(registrationForm.submit, {'attr': {'class' : 'form-btn'}} ) }}
+                <span class="form-error">{{ form_errors(registrationForm.agreeTerms) }}</span>
+            </div>
+                
+                {{ form_end(registrationForm) }}
+            <!-- TODO: POPRAWIĆ FLEXA > CHILDY -->
+     <!--- form -->
+    </div> <!--- container -->
 
 <script>
-	function addHyphen (element) {
-    	let ele = document.getElementById(element.id);
-        ele = ele.value.split('-').join('');    // Remove dash (-) if mistakenly entered.
-
-        let finalVal = ele.match(/.{0,2}/g).join('-');
-        document.getElementById(element.id).value = finalVal;
-    }
+$("#registration_form_kod_pocztowy").on("keydown", function(){
+        var key = event.keyCode || event.charCode;
+        if( key == 8 || key == 46 ){
+            if($(this).val().length == 4) {
+                $(this).val($(this).val().slice(0,-1));
+            }
+        }else{
+            if($(this).val().length == 2) {
+                $(this).val($(this).val() + '-');
+            }
+        }
+ 
+    });
 </script>
+
 {% endblock %}

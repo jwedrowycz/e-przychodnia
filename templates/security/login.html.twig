@@ -3,6 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
+<div class="container">
       {% for label, messages in app.flashes(['success', 'fail']) %}
         {% for message in messages %}
             <div class="flash-{{ label }}">
@@ -10,7 +11,8 @@
             </div>
         {% endfor %}
     {% endfor %}
-<form method="post">
+<form class="form" method="post">
+
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -20,18 +22,25 @@
             Zalogowano jako {{ app.user.username }}, <a href="{{ path('logout') }}">Wyloguj</a>
         </div>
     {% endif %}
- <div class="login-container">
-            <div class="login-form">
-            <h1>Zaloguj</h1>
-            <label for="inputEmail">Email</label>
-            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" required autofocus>
-            <label for="inputPassword">Password</label>
-            <input type="password" name="password" id="inputPassword"  required>
-
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                 <button class="btn btn-lg btn-primary" type="submit">
-        Zarejestruj
-    </button>
+ 
+            
+                <div class="form-title">Zaloguj</div>
+                <div class="form-item-col">
+                    <label class="form-label" for="inputEmail">Login</label>
+                    <input class="form-input input-login" type="text" value="{{ last_username }}" name="email" placeholder="Wpisz adres e-mail" id="inputEmail" required autofocus>
+                </div>
+                <div class="form-item-col">
+                    <label class="form-label" for="inputPassword">Hasło</label>
+                    <input class="form-input input-login" type="password" name="password" id="inputPassword" placeholder="Wpisz hasło"  required>
+                </div>
+                <div class="form-item-col">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                 <button class="form-btn" type="submit">Zaloguj</button>
+                </div>
+            </div>
+        
+    
+    
             </div>
 
  </div>

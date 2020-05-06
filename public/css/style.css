@@ -9,7 +9,7 @@ body {
 }
 
 /* --------- NAVBAR ------------ */
-@media screen and (min-width: 600px) {
+@media only screen and (min-width: 768px) {
     .navbar {
         list-style-type: none;
         margin: 0;
@@ -36,6 +36,31 @@ body {
     }
 
 }
+.navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    min-width: 100%;
+}
+
+.navbar-li {
+    float: right;
+}
+
+.navbar-li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbar-li a:hover {
+    background-color: #111;
+}
+
 
 /* ------------- ADMIN PANEL ------------ */
 .admin-grid-container {
@@ -139,113 +164,159 @@ body {
 
 }
 
+/* ---------------- MAIN CONTAINER ----------------- */
+@media only screen and (max-width: 768px) {
+    .container {
+        min-width: 95%;
+        padding: 5px 5px;
+        margin: 0 auto;
+        }
+    .form-btn {
+        min-width: 100%;
+    }
+
+}
+.container {
+    width: 60%;
+    padding: 10px 10px;
+    margin: 0 auto;
+    }
 
 /* ---------------- REGISTRATION FORM ----------------- */
-.registration-container {
-    /*position: relative;*/
-    z-index: 1;
-    /*max-width: 300px;*/
-    margin: 0 auto;
-    padding-top: 3em;
+
+.form {
+    font-size: 16px;
 }
 
-.registration-form {
-    /*position: relative;*/
-    z-index: 1;
-    background: #b9bbbe;
-    width: 50%;
-    margin: 0 auto;
-    padding: 3em;
-    text-align: left;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-}
-
-.registration-form input {
-    outline: 0;
-    background: #f2f2f2;
-    width: 100%;
-    border: 3px solid #ccc;
-    height: 3em;
-    margin: 0 0 15px;
-    padding: 15px;
+.form * {
     box-sizing: border-box;
-    font-size: 1em;
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
+    line-height: 1.5;
 }
 
-.registration-form select {
-    outline: 0;
-      width: 100%;
-      padding: 16px 20px;
-      border: none;
-      border-radius: 4px;
-      background-color: #f1f1f1;
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
+.form-title {
+    font-size: 3em;
+    font-weight: 600;
 }
-.registration-form input:focus {
-  border: 3px solid #555;
+.form-subtitle {
+    padding-top: 20px;
+    font-size: 1.7em;
+    margin-bottom: 20px;
+    font-weight: 500;
+    border-bottom: 1px solid #aaa;
 }
-.registration-form button {
-    outline: 0;
-    background: #005cbf;
+
+.form-item-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-item-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-item > * {
+    align-self: flex-start;
+}
+
+.form-label {
+    font-weight: 600;
+    padding: 1em 0;
+}
+
+.form-input {
+    -webkit-appearance: none;
     width: 100%;
-    border: 0;
-    margin: 0 0 15px;
-    padding: 15px;
-    box-sizing: border-box;
-    font-size: 1em;
+    max-width: 425px;
+
+    /* Fix for safari/ios */
+    min-height: calc(0.9em + (0.8em * 2) + 0.6em);
+
+    padding: 0.8em;
+    font-size: 0.9em;
+
+    outline: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #f9f9f9;
+    transition: background 0.5s, border-color 0.5s, color 0.5s;
+
+}
+
+.form-input:focus {
+    background: #ffffff;
+}
+
+.form-input::placeholder {
+    color: #bbbbbb;
+}
+
+.form-input--error {
+    color: #d50000;
+    background: #fff8f8;
+    border-color: #d50000;
+}
+
+.form-error > ul {
+    list-style-type: none;
+    margin: 0 0 20px;
+    padding: 0;
+}
+
+.form-input--error::placeholder {
+    color: #ffbfbf;
+}
+
+.form-item--checkbox{
+    
+}
+
+.form-error {
+    padding-top: 10px;
+    color: #d50000;
+    font-size: 0.9em;
+    visibility: hidden;
+}
+
+.form-input--error + .form-error{
+    visibility: visible;
+}
+
+.form-input--small {
+    max-width: 250px;
+}
+.form-input--supersmall {
+    max-width: 80px;
+}
+
+.form-btn {
+    font-weight: 600;
+    font-size: 1.1em;
+    padding: 10px 16px;
+    margin: 10px 0;
+    width: 200px;
+    color: white;
+    background: #1E90FF;
+    border: 2px solid #1873cc;
+    border-radius: 5px;
     cursor: pointer;
+    outline: none;
 }
+
+.form-btn:hover{
+    background: #1873cc;
+}
+
+<!-- TODO: POPRAWIĆ FLEXA > CHILDY -->
 
 /* -------------- LOGIN FORM -------------------- */
 
-.login-container {
-    /*position: relative;*/
-    z-index: 1;
-    /*max-width: 300px;*/
-    width: 50%;
-    margin: 0 auto;
-    padding-top: 3em;
-}
-
 .login-form {
-    /*position: relative;*/
-    z-index: 1;
-    background: #b9bbbe;
-    width: 50%;
+    border: 1px black solid;
+    max-width: 50%;
     margin: 0 auto;
-    padding: 3em;
-    text-align: left;
-    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-.login-form input {
-    outline: 0;
-    background: #f2f2f2;
-    width: 100%;
-    border: 3px solid #ccc;
-    height: 3em;
-    margin: 0 0 15px;
-    padding: 15px;
-    box-sizing: border-box;
-    font-size: 1em;
-    -webkit-transition: 0.5s;
-    transition: 0.5s;
-
-}
-.login-form input:focus {
-  border: 3px solid #555;
-}
-.login-form button {
-    outline: 0;
-    background: #005cbf;
-    width: 100%;
-    border: 0;
-    margin: 0 0 15px;
-    padding: 15px;
-    box-sizing: border-box;
-    font-size: 1em;
-    cursor: pointer;
+.login-item {
+    min-width: 100%;
 }
