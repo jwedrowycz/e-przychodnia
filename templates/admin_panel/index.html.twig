@@ -10,6 +10,7 @@
             <a {% if app.request.attributes.get('_route') in [
                 'admin.users',
                 'admin.add_user',
+                'admin.users_only',
                 ] %} 
                 class="active"{% endif %} href="{{ path('admin.users') }}">Użytkownicy</a>
             <a {% if app.request.attributes.get('_route') in [

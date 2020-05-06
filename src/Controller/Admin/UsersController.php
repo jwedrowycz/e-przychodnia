@@ -35,6 +35,19 @@ class UsersController extends AbstractController
         ]);
 
     }
+
+     /**
+     * @Route("/users-only", name="users_only")
+     */
+     public function users_only(UserRepository $usersRepo)
+     {
+         $users = $usersRepo->findAllUsers();
+        //  $users = $users->getResult();
+         return $this->render('admin_panel/users/users_only.html.twig', [
+             'users' => $users
+         ]);
+ 
+     }
     
     /**
      * @Route("/add", name="add_user")
