@@ -23,12 +23,26 @@ class JednostkaRepository extends ServiceEntityRepository
     {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
-            'SELECT l.id, l.nazwisko, l.imie, l.numerPWZ, l.specjalizacja
+            'SELECT j.id as jednostka, l.id, l.nazwisko, l.imie, l.numerPWZ, l.specjalizacja
             FROM App\Entity\Jednostka j
             INNER JOIN j.id_lekarza l
             INNER JOIN j.id_poradni p
             WHERE p.id = :id'
         )->setParameter('id', $poradniaId);
+
+        return $query->getResult();
+    }
+
+    public function findOneById($jednostkaId)
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT  l.nazwisko, l.imie, l.numerPWZ, l.specjalizacja, p.nazwa
+            FROM App\Entity\Jednostka j
+            INNER JOIN j.id_lekarza l
+            INNER JOIN j.id_poradni p
+            WHERE j.id = :id'
+        )->setParameter('id', $jednostkaId);
 
         return $query->getResult();
     }

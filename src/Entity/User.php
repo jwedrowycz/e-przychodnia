@@ -63,11 +63,7 @@ class User implements UserInterface
      *     message="Nazwisko nie może zawierać cyfr"
      * )
      * 
-     *@Assert\Length(min=3,
-     *                  max = 30,
-     *                  minMessage = "Nazwisko musi się składać conajmniej z {{ limit }} znaków",
-     *                  maxMessage = "Limit znaków w polu nazwisko to {{ limit }}",
-     *                  charset = "iso-8859-2" )
+     *
      * @ORM\Column(type="string", length=255)
      */
     private $nazwisko;
@@ -232,9 +228,8 @@ class User implements UserInterface
 
     public function setImie(string $imie): self
     {   
-        $imie = strtolower($imie);
-        $imie = ucfirst($imie);
-        $this->imie = $imie;
+   
+        $this->imie = ucfirst(mb_strtolower($imie,"UTF-8"));
 
         return $this;
     }
@@ -246,9 +241,8 @@ class User implements UserInterface
 
     public function setNazwisko(string $nazwisko): self
     {
-        $nazwisko = strtolower($nazwisko);
-        $nazwisko = ucfirst($nazwisko);
-        $this->nazwisko = $nazwisko;
+       
+        $this->nazwisko = ucfirst(mb_strtolower($nazwisko,"UTF-8"));
 
         return $this;
     }

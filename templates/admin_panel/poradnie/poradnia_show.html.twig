@@ -12,25 +12,30 @@
      <h1>Lekarze</h1>
     <table class="admin-table">
         <tr>
+            <th>Id jednostki</th>
             <th>Id lekarza</th>
             <th>Numer PWZ</th>
             <th>Imie i nazwisko</th>
             <th>Specjalizacja</th>
-            <th>Akcja</th>
+            <th colspan="2">Akcja</th>
 
         </tr>
         <tr>
     {% for lekarz in lekarze %}
+        <td>{{ lekarz.jednostka }}</td>
         <td>{{ lekarz.id }}</td>
         <td>{{ lekarz.numerPWZ }}</td>
         <td>{{ lekarz.nazwisko ~ ' ' ~ lekarz.imie }}</td>
         <td>{{ lekarz.specjalizacja }}</td>
         <td>
-            <a class="delete" href="{{ path('admin.jednostka_delete', {idLekarza: lekarz.id, idPoradni: poradnia.id}) }}">Usuń</a>
+            <a class="delete" href="{{ path('admin.jednostka_details', {jednostka: lekarz.jednostka}) }}">Szczegóły</a>
+        </td>
+        <td>
+            <a class="delete" href="{{ path('admin.jednostka_delete', {idLekarza: lekarz.id, idPoradni: poradnia.id}) }} onclick="return confirm('are u sure?')" ">Usuń</a>
         </td>
         </tr>
     {% endfor %}
     </table>
 
-    <a href="{{ path('admin.jednostka_add', {id_poradni: poradnia.id}) }} onclick="return confirm('are u sure?'" ">Dodaj lekarza do poradni</a>
+    <a href="{{ path('admin.jednostka_add', {id_poradni: poradnia.id}) }} ">Dodaj lekarza do poradni</a>
 {% endblock content %}

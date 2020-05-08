@@ -93,4 +93,18 @@ class UsersController extends AbstractController
         ]);
 
     }
+
+    /**
+     * @Route("/poradnia/users/delete/{id}", name="user_delete")
+     */
+    public function user_delete(User $user)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('admin.users');
+
+    }
 }

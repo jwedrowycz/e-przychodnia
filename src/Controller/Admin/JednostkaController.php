@@ -3,8 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Jednostka;
+use App\Entity\CzasPracy;
 use App\Form\AddJednostkaFormType;
 use App\Repository\LekarzRepository;
+use App\Repository\JednostkaRepository;
 use App\Repository\PoradniaInfoRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,15 +56,34 @@ class JednostkaController extends AbstractController
             'success',
             'Pomyślnie przypisano lekarza do poradni'
         );
-        return $this->redirectToRoute('admin.poradnia_show', ['id'=>$id_poradni]);
-
-
+        return $this->redirectToRoute('admin.poradnia_show', [
+            'id'=>$id_poradni
+            ]);
     }
+
+    /**
+     * @Route("/poradnia/jednostka/szczegoly/{jednostka}", name="jednostka_details")
+     */
+    public function jednostka_show_details($jednostka, JednostkaRepository $jednostkaRepo){
+
+        $entityManager = $this->getDoctrine()->getManager();
+        
+        $czas = $entityManager->getRepository('App:CzasPracy')->findAllByJednostkaId($jednostka);
+        $jednostkaInfo = $this->getDoctrine()
+            ->getRepository(Jednostka::class)
+            ->findOneById($jednostka);
+
+        return $this->render('admin_panel/jednostka/jednostka_details.html.twig', [
+            'czas' => $czas,
+            'jednostka' => $jednostkaInfo
+        ]);
+    }
+
 
     /**
      * @Route("/poradnia/jednostka/delete/{idLekarza}/{idPoradni}", name="jednostka_delete")
      */
-    public function jednostka_delete(Int $idLekarza, Int $idPoradni)
+    public function jednostka_delete($idLekarza, $idPoradni)
     {
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -76,7 +97,9 @@ class JednostkaController extends AbstractController
         $entityManager->remove($jednostka);
         $entityManager->flush();
 
-        return $this->redirectToRoute('admin.poradnia_show', ['id'=>$idPoradni]);
+        return $this->redirectToRoute('admin.poradnia_show', [
+            'id'=>$idPoradni
+            ]);
 
     }
 

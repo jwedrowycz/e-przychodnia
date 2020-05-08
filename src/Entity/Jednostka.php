@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,6 +30,16 @@ class Jednostka
      */
     private $id_poradni;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CzasPracy", mappedBy="jednostka")
+     */
+    private $czasPracy;
+
+    public function __construct()
+    {
+        $this->czasPracy = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -53,6 +65,37 @@ class Jednostka
     public function setIdPoradni(?PoradniaInfo $id_poradni): self
     {
         $this->id_poradni = $id_poradni;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CzasPracy[]
+     */
+    public function getCzasPracy(): Collection
+    {
+        return $this->czasPracy;
+    }
+
+    public function addCzasPracy(CzasPracy $czasPracy): self
+    {
+        if (!$this->czasPracy->contains($czasPracy)) {
+            $this->czasPracy[] = $czasPracy;
+            $czasPracy->setJednostka($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCzasPracy(CzasPracy $czasPracy): self
+    {
+        if ($this->czasPracy->contains($czasPracy)) {
+            $this->czasPracy->removeElement($czasPracy);
+            // set the owning side to null (unless already changed)
+            if ($czasPracy->getJednostka() === $this) {
+                $czasPracy->setJednostka(null);
+            }
+        }
 
         return $this;
     }

@@ -17,10 +17,15 @@
     {% else %}
         <p>Operator</p>
     {% endif %}
-    <p>{{ user.pesel }}</p>
+     <p>{{ user.id }}</p>
+    <p>{{ user.email }}</p>
+    <p>{{ user.imie ~ ' ' ~ user.nazwisko}}</p>
+    <p>{{ user.PESEL }}</p>
     <p>{{ user.telefon }}</p>
     <p>{{ user.adresZamieszkania }}</p>
-    <p>{{ user.miasto }}</p>
-    <p>{{ user.kodPocztowy }}</p>
-    <p>{{ user.dataDolaczenia }}</p>
+    <p>{{ user.miasto ~ ' ' ~ user.kodPocztowy }}</p>
+    <p>{{ user.wojewodztwo }}</p>
+    <p>{{ user.dataUrodzenia|date("d/m/Y") }}</p>
+    <p>{{ user.plec }}</p>
+    <p>{{ user.roles[0] }}</p>
 {% endblock %}
