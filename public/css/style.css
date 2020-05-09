@@ -141,9 +141,6 @@ body {
     color: black;
 }
 
-/*.admin-table a:hover {*/
-/*    color: dodgerblue;*/
-/*}*/
 .admin-table .delete {
     color: red;
 }
@@ -152,8 +149,10 @@ body {
     color: dodgerblue;
 }
 
-.admin-table .link-blue:hover {
+.admin-table tr:hover a.link-blue {
     color: dodgerblue;
+    transition: background 0.25s, border-color 0.5s, color 0.25s;
+}
 }
 
 /* ------------ FLASH MESSAGES ------------ */
@@ -330,3 +329,11 @@ body {
 .login-item {
     min-width: 100%;
 }
+
+
+/* ---------------- FORM - HIDDEN ---------- */
+
+.form.hidden {
+    display: none;
+}
+

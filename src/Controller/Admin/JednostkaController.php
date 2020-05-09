@@ -20,7 +20,7 @@ class JednostkaController extends AbstractController
 {
 
     /**
-     * @Route("/poradnia/jednostka/dodaj/{id_poradni}", name="jednostka_add")
+     * @Route("/jednostka/dodaj/{id_poradni}", name="jednostka_add")
      */
     public function jednostka_add($id_poradni, Request $request, LekarzRepository $lekarzRepo, PoradniaInfoRepository $poradniaRepo): Response
     {
@@ -37,7 +37,7 @@ class JednostkaController extends AbstractController
 
     }
     /**
-     * @Route("/poradnia/jednostka/create/{id_lekarza}/{id_poradni}", name="jednostka_create")
+     * @Route("/jednostka/create/{id_lekarza}/{id_poradni}", name="jednostka_create")
      */
     public function jednostka_create($id_lekarza, $id_poradni)
     {
@@ -61,27 +61,10 @@ class JednostkaController extends AbstractController
             ]);
     }
 
-    /**
-     * @Route("/poradnia/jednostka/szczegoly/{jednostka}", name="jednostka_details")
-     */
-    public function jednostka_show_details($jednostka, JednostkaRepository $jednostkaRepo){
-
-        $entityManager = $this->getDoctrine()->getManager();
-        
-        $czas = $entityManager->getRepository('App:CzasPracy')->findAllByJednostkaId($jednostka);
-        $jednostkaInfo = $this->getDoctrine()
-            ->getRepository(Jednostka::class)
-            ->findOneById($jednostka);
-
-        return $this->render('admin_panel/jednostka/jednostka_details.html.twig', [
-            'czas' => $czas,
-            'jednostka' => $jednostkaInfo
-        ]);
-    }
-
+   
 
     /**
-     * @Route("/poradnia/jednostka/delete/{idLekarza}/{idPoradni}", name="jednostka_delete")
+     * @Route("/jednostka/delete/{idLekarza}/{idPoradni}", name="jednostka_delete")
      */
     public function jednostka_delete($idLekarza, $idPoradni)
     {

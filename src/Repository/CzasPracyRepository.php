@@ -23,7 +23,7 @@ class CzasPracyRepository extends ServiceEntityRepository
     {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
-            'SELECT c.dzien, c.start, c.koniec
+            'SELECT c.id, c.dzien, c.start, c.koniec
             FROM App\Entity\CzasPracy c
             
             WHERE c.jednostka = :id'

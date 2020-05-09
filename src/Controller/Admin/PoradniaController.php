@@ -74,33 +74,5 @@ class PoradniaController extends AdminPanelController
         ]);
        
     }
-
-//     /**
-//     * @Route("/poradnia/usun/{id}", name="poradnia_delete")
-//     */
-//    public function poradnia_delete(PoradniaInfo $poradniaInfo)
-//    {
-//        $entityManager = $this->getDoctrine()->getManager();
-//        try {
-//            $entityManager->remove($poradniaInfo);
-//            $entityManager->flush();
-//            $this->addFlash(
-//            'success',
-//            'Pomyślnie usunięto jednostkę'
-//        );
-//            return $this->redirectToRoute('admin.poradnie');
-//
-//        }
-//        catch (\PDOException $e) {
-//            $this->addFlash(
-//            'fail',
-//            'Nie możesz usunąć tej poradni, prawdopodobnie jest w użyciu'
-//        );
-//            return $this->redirectToRoute('admin.poradnie');
-//        }
-
-
-//    }
-
     
 }

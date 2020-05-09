@@ -1,0 +1,53 @@
+
+{% extends 'admin_panel/index.html.twig' %}
+
+{% block content %}
+{% for label, messages in app.flashes(['success', 'fail']) %}
+{% for message in messages %}
+    <div class="flash-{{ label }}">
+        {{ message }}
+    </div>
+{% endfor %}
+{% endfor %}
+
+{% for j in jednostka %}
+     <h2>Lekarz: {{ j.nazwisko ~ ' ' ~ j.imie}}</h2>
+     <h2>{{ j.nazwa }} </h2>
+     {% endfor %}
+     <h3>Godziny pracy jednostki</h3>
+    <table class="admin-table">
+        <tr>
+            <th>Dzień tygodnia</th>
+            <th>Od</th>
+            <th>Do</th>
+            <th></th>
+        </tr>
+    {% for c in czas %}
+        <tr>
+            <td>{{ c.dzien }}</td>
+            <td>{{ c.start|date("H:i") }}</td>
+            <td>{{ c.koniec|date("H:i") }}</td>
+            <td><a class="delete" href="{{ path('admin.czas_pracy_delete', {id:c.id, id_jednostki: id}) }}">Usuń</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+    
+    <button class="form-btn" id="toggleBtn">Dodaj czas pracy</button>
+
+    
+{{ render(controller(
+    'App\\Controller\\Admin\\CzasPracyController::czas_pracy_add', {id: id}
+)) }}
+
+
+
+    <script>
+    $("#toggleBtn").click(function(){
+        $(".form.hidden").toggle();
+    });
+    </script>
+
+{% endblock content %}
+
+   
+
