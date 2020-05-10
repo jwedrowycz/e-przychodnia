@@ -73,7 +73,7 @@ class JednostkaController extends AbstractController
             'success',
             'Pomyślnie przypisano lekarza do poradni'
         );
-        return $this->redirectToRoute('admin.poradnia_show', [
+        return $this->redirectToRoute('admin.jednostka_show', [
             'id'=>$id_poradni
             ]);
     }

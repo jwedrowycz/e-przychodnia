@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Lekarz;
+use App\Entity\Jednostka;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -26,10 +27,10 @@ class LekarzRepository extends ServiceEntityRepository
         $query = $entityManager->createQuery(
             'SELECT  l.id, l.nazwisko, l.imie, l.numerPWZ, l.specjalizacja, l.status
             FROM App\Entity\Lekarz l
-            WHERE l.id IN 
-                (SELECT lekarz.id
-                FROM App\Entity\Lekarz lekarz
-                INNER JOIN App\Entity\Jednostka j
+            
+            WHERE l.id NOT IN 
+                (SELECT IDENTITY(j.id_lekarza)
+                FROM App\Entity\Jednostka j
                 WHERE j.id_poradni = :id)'
         )->setParameter('id', $poradniaId);
 

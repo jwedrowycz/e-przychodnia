@@ -31,7 +31,7 @@ class Jednostka
     private $id_poradni;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\CzasPracy", mappedBy="jednostka")
+     * @ORM\OneToMany(targetEntity="App\Entity\CzasPracy", mappedBy="jednostka", cascade={"persist", "remove"})
      */
     private $czasPracy;
 

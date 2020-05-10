@@ -14,8 +14,8 @@ class AddPoradniaFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nazwa', TextType::class, [
-                'attr' => ['pattern' => '[a-zA-Z ]*']])
+            ->add('nazwa', TextType::class, [])
+                // 'attr' => ['pattern' => '/[a-zA-Z]^/']])
             ->add('zapisz', SubmitType::class)
         ;
     }
