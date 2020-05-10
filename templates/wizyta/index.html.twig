@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello WizytaController!{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="container-poradnie">
+            {% for p in poradnie %}
+                <div class="poradnia-card">
+                    <div class="poradnie-item">
+                        <h3>{{ p.nazwa }}<a href="{{ path('wizyta_termin', {'id': p.id}) }}" hidden></a></h3>
+                        <ul>
+                        {% for j in jednostki %}
+                            
+                            {% if p.nazwa == j.nazwa %}
+                                <li>{{ j.imie ~ ' ' ~ j.nazwisko}}</li>
+                            {% endif %}
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+    </div>
+</div>
+
+<script>
+    $("ul:not(:has(li))").append($("<p>Aktualnie żaden lekarz nie przyjmuje w tej poradni.</p>"))
+
+    $('.poradnia-card').click(function() {
+   window.location.href = $(this).find('a').attr('href');
+});
+</script>
+{% endblock %}

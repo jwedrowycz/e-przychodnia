@@ -337,3 +337,26 @@ body {
     display: none;
 }
 
+/* ------------------ PORADNIE CONTAINER ---------- */
+
+.container-poradnie {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr;
+    gap: 2em 2em;
+    grid-template-areas: ".";
+    
+}
+
+.poradnia-card {
+    background-color: #EAEAEA;
+}
+.poradnia-card:hover {
+    background-color: gray;
+    cursor: pointer;
+    transition: background 0.5s, border-color 0.5s, color 0.5s;
+}
+
+.poradnie-item {
+    padding: 15px 15px
+}

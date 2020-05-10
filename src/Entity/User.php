@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -142,6 +144,11 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=30, nullable=true)
      */
     private $wojewodztwo;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Wizyta", mappedBy="pacjent")
+     */
+    private $wizyta;
 
     public function getId(): ?int
     {
@@ -357,6 +364,38 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->data_dolaczenia = new \DateTime(); 
+        $this->data_dolaczenia = new \DateTime();
+        $this->wizyta = new ArrayCollection(); 
+    }
+
+    /**
+     * @return Collection|Wizyta[]
+     */
+    public function getWizyta(): Collection
+    {
+        return $this->wizyta;
+    }
+
+    public function addWizytum(Wizyta $wizytum): self
+    {
+        if (!$this->wizyta->contains($wizytum)) {
+            $this->wizyta[] = $wizytum;
+            $wizytum->setPacjent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWizytum(Wizyta $wizytum): self
+    {
+        if ($this->wizyta->contains($wizytum)) {
+            $this->wizyta->removeElement($wizytum);
+            // set the owning side to null (unless already changed)
+            if ($wizytum->getPacjent() === $this) {
+                $wizytum->setPacjent(null);
+            }
+        }
+
+        return $this;
     }
 }

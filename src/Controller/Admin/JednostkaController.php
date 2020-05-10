@@ -21,6 +21,18 @@ class JednostkaController extends AbstractController
 {
 
     /**
+     * @Route("/", name="jednostka")
+     */
+    public function index(JednostkaRepository $jednostkaRepo)
+    {   
+        $jednostka = $jednostkaRepo->findAllJoined();
+        return $this->render('admin_panel/jednostka/index.html.twig',[
+            'jednostka' => $jednostka
+        ]);
+
+    }
+
+    /**
      * @Route("/{id}", name="jednostka_show")
      */
     public function show($id, PoradniaInfo $poradnia)

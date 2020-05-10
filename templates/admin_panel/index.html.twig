@@ -15,10 +15,15 @@
                 class="active"{% endif %} href="{{ path('admin.users') }}">Użytkownicy</a>
             <a {% if app.request.attributes.get('_route') in [
                 'admin.poradnie',
-                'admin.poradnia_show',
                 'admin.poradnia_add',
                 ] %} 
                 class="active"{% endif %}  href="{{ path('admin.poradnie') }}">Poradnie</a>
+                <a {% if app.request.attributes.get('_route') in [
+                'admin.jednostka',
+                'admin.jednostka_show',
+                'admin.jednostka_add',
+                ] %} 
+                class="active"{% endif %}  href="{{ path('admin.jednostka') }}">Jednostka</a>
             <a {% if app.request.attributes.get('_route') in [
                 'admin.lekarze',
                 'admin.lekarz_add',

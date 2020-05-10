@@ -35,9 +35,15 @@ class Jednostka
      */
     private $czasPracy;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Wizyta", mappedBy="jednostka")
+     */
+    private $wizyta;
+
     public function __construct()
     {
         $this->czasPracy = new ArrayCollection();
+        $this->wizyta = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -94,6 +100,37 @@ class Jednostka
             // set the owning side to null (unless already changed)
             if ($czasPracy->getJednostka() === $this) {
                 $czasPracy->setJednostka(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Wizyta[]
+     */
+    public function getWizyta(): Collection
+    {
+        return $this->wizyta;
+    }
+
+    public function addWizytum(Wizyta $wizytum): self
+    {
+        if (!$this->wizyta->contains($wizytum)) {
+            $this->wizyta[] = $wizytum;
+            $wizytum->setJednostka($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWizytum(Wizyta $wizytum): self
+    {
+        if ($this->wizyta->contains($wizytum)) {
+            $this->wizyta->removeElement($wizytum);
+            // set the owning side to null (unless already changed)
+            if ($wizytum->getJednostka() === $this) {
+                $wizytum->setJednostka(null);
             }
         }
 

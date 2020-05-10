@@ -47,6 +47,31 @@ class JednostkaRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    public function findAllJoined()
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT j.id as jednostka, l.id, l.nazwisko, l.imie, l.numerPWZ, l.specjalizacja, p.nazwa as poradniaNazwa, p.id as poradniaId
+            FROM App\Entity\Jednostka j
+            JOIN j.id_lekarza l
+            JOIN j.id_poradni p
+            ');
+        return $query->getResult();
+    }
+
+    public function findAllWithPoradniaAndLekarz()
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT l.imie, l.nazwisko, p.nazwa
+            FROM App\Entity\Jednostka j
+            JOIN j.id_lekarza l
+            JOIN j.id_poradni p'
+        );
+        return $query->getResult(); 
+           
+    }
+
  
 
     // /**
