@@ -15,41 +15,26 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
- * @Route("/admin", name="admin.")
+ * @Route("/admin/poradnie", name="admin.")
  */
 class PoradniaController extends AdminPanelController
 {
      /**
-     * @Route("/poradnie", name="poradnie")
+     * @Route("/", name="poradnie")
      */
     public function poradnie(PoradniaInfoRepository $poradniaRepo)
     {
         $poradnie = $poradniaRepo->findAll();
 
-        return $this->render('admin_panel/poradnie/poradnie.html.twig',[
+        return $this->render('admin_panel/poradnia/index.html.twig',[
             'poradnie' => $poradnie
         ]);
     }
 
-    /**
-     * @Route("/poradnie/{id}", name="poradnia_show")
-     */
-    public function poradnia_show($id, PoradniaInfo $poradnia)
-    {   
     
-        $jednostka = $this->getDoctrine()
-            ->getRepository(Jednostka::class)
-            ->findAllByJoinedId($id);
-        return $this->render('admin_panel/poradnie/poradnia_show.html.twig',[
-            'lekarze' => $jednostka,
-            'poradnia' => $poradnia,
-            
-        ]);
-
-    }
 
     /**
-     * @Route("/poradnia/dodaj", name="poradnia_add")
+     * @Route("/dodaj", name="poradnia_add")
      */
     public function poradnia_add(Request $request)
     {
@@ -69,7 +54,7 @@ class PoradniaController extends AdminPanelController
 
         }
 
-        return $this->render('admin_panel/poradnie/poradnia_add.html.twig', [
+        return $this->render('admin_panel/poradnia/add.html.twig', [
             'addPoradniaForm' => $form->createView(),
         ]);
        

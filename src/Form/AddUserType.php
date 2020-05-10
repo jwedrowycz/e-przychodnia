@@ -50,6 +50,7 @@ class AddUserType extends AbstractType
                 'multiple' => true,
 
             ])
+        
         ->add('submit', SubmitType::class, [
             'label' => 'Dodaj'
         ]);

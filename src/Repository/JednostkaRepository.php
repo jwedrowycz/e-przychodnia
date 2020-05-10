@@ -25,8 +25,8 @@ class JednostkaRepository extends ServiceEntityRepository
         $query = $entityManager->createQuery(
             'SELECT j.id as jednostka, l.id, l.nazwisko, l.imie, l.numerPWZ, l.specjalizacja
             FROM App\Entity\Jednostka j
-            INNER JOIN j.id_lekarza l
-            INNER JOIN j.id_poradni p
+            JOIN j.id_lekarza l
+            JOIN j.id_poradni p
             WHERE p.id = :id'
         )->setParameter('id', $poradniaId);
 
@@ -46,6 +46,8 @@ class JednostkaRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
+
+ 
 
     // /**
     //  * @return Jednostka[] Returns an array of Jednostka objects

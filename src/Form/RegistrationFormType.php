@@ -116,6 +116,7 @@ class RegistrationFormType extends AbstractType
         ->add('submit', SubmitType::class, [
             'label' => 'Rejestruj'
         ])
+        // ->add('data_dolaczenia')
         ;
     }
 

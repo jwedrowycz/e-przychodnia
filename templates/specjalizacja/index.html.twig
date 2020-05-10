@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Specjalizacja index{% endblock %}
+
+{% block body %}
+    <h1>Specjalizacja index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nazwa</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for specjalizacja in specjalizacjas %}
+            <tr>
+                <td>{{ specjalizacja.id }}</td>
+                <td>{{ specjalizacja.nazwa }}</td>
+                <td>
+                    <a href="{{ path('specjalizacja_show', {'id': specjalizacja.id}) }}">show</a>
+                    <a href="{{ path('specjalizacja_edit', {'id': specjalizacja.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('specjalizacja_new') }}">Create new</a>
+{% endblock %}

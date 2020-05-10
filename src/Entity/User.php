@@ -121,7 +121,7 @@ class User implements UserInterface
     private $kod_pocztowy;
 
     /**
-     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
+     * @ORM\Column(type="datetime")
      */
     private $data_dolaczenia;
 
@@ -353,5 +353,10 @@ class User implements UserInterface
         $this->wojewodztwo = $wojewodztwo;
 
         return $this;
+    }
+
+    public function __construct()
+    {
+        $this->data_dolaczenia = new \DateTime(); 
     }
 }

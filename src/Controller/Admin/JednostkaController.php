@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Jednostka;
+use App\Entity\PoradniaInfo;
 use App\Entity\CzasPracy;
 use App\Form\AddJednostkaFormType;
 use App\Repository\LekarzRepository;
@@ -14,32 +15,48 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin", name="admin.")
+ * @Route("/admin/jednostka", name="admin.")
  */
 class JednostkaController extends AbstractController
 {
 
     /**
-     * @Route("/jednostka/dodaj/{id_poradni}", name="jednostka_add")
+     * @Route("/{id}", name="jednostka_show")
      */
-    public function jednostka_add($id_poradni, Request $request, LekarzRepository $lekarzRepo, PoradniaInfoRepository $poradniaRepo): Response
+    public function show($id, PoradniaInfo $poradnia)
+    {   
+        $jednostka = $this->getDoctrine()
+            ->getRepository(Jednostka::class)
+            ->findAllByJoinedId($id);
+        return $this->render('admin_panel/jednostka/show.html.twig',[
+            'lekarze' => $jednostka,
+            'poradnia' => $poradnia,
+        ]);
+
+    }
+
+    /**
+     * @Route("/dodaj/{id_poradni}", name="jednostka_add")
+     */
+    public function add($id_poradni, Request $request, LekarzRepository $lekarzRepo, PoradniaInfoRepository $poradniaRepo): Response
     {
-        $lekarze = $lekarzRepo->findAll();
+        $lekarze = $lekarzRepo->findAllExceptAlreadyIn($id_poradni);
+        // $lekarze = $lekarzRepo->findAll();
         $poradnia = $poradniaRepo->find($id_poradni);
         $jednostka = new Jednostka();
         $form = $this->createForm(AddJednostkaFormType::class, $jednostka);
         $form->handleRequest($request);
 
-        return $this->render('admin_panel/poradnie/jednostka_add.html.twig', [
+        return $this->render('admin_panel/jednostka/add.html.twig', [
             'lekarze' => $lekarze,
             'poradnia' => $poradnia
         ]);
 
     }
     /**
-     * @Route("/jednostka/create/{id_lekarza}/{id_poradni}", name="jednostka_create")
+     * @Route("/utworz/{id_lekarza}/{id_poradni}", name="jednostka_create")
      */
-    public function jednostka_create($id_lekarza, $id_poradni)
+    public function create($id_lekarza, $id_poradni)
     {
         $jednostka = new Jednostka();
 
@@ -64,9 +81,9 @@ class JednostkaController extends AbstractController
    
 
     /**
-     * @Route("/jednostka/delete/{idLekarza}/{idPoradni}", name="jednostka_delete")
+     * @Route("/delete/{idLekarza}/{idPoradni}", name="jednostka_delete")
      */
-    public function jednostka_delete($idLekarza, $idPoradni)
+    public function delete($idLekarza, $idPoradni)
     {
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -80,7 +97,7 @@ class JednostkaController extends AbstractController
         $entityManager->remove($jednostka);
         $entityManager->flush();
 
-        return $this->redirectToRoute('admin.poradnia_show', [
+        return $this->redirectToRoute('admin.jednostka_show', [
             'id'=>$idPoradni
             ]);
 

@@ -28,7 +28,7 @@
         <td>{{ lekarz.nazwisko ~ ' ' ~ lekarz.imie }}</td>
         <td>{{ lekarz.specjalizacja }}</td>
         <td>
-            <a class="link-blue" href="{{ path('admin.czas_pracy_show', {id: lekarz.jednostka}) }}">Czas pracy</a>
+            <a class="link-blue" href="{{ path('admin.czas_pracy', {id: lekarz.jednostka}) }}">Czas pracy</a>
         </td>
         <td>
             <a class="delete" href="{{ path('admin.jednostka_delete', {idLekarza: lekarz.id, idPoradni: poradnia.id}) }} onclick="return confirm('are u sure?')" ">Usuń</a>

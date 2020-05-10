@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class CzasPracyController extends AbstractController
 {
 
-    public function czas_pracy_add($id, RequestStack $requestStack)
+    public function add($id, RequestStack $requestStack)
     {   
 
         $czas = new CzasPracy();
@@ -43,11 +43,7 @@ class CzasPracyController extends AbstractController
                 'success',
                 'Czas pracy dla jednostki został dodany'
                 );
-            unset($czas); 
-            unset($form);
-            $czas = new CzasPracy();
-            $form = $this->createForm(CzasPracyFormType::class, $czas);
-
+            ;
         }
         return $this->render('admin_panel/czas_pracy/_add.html.twig', [
             'form' => $form->createView(),
@@ -56,9 +52,9 @@ class CzasPracyController extends AbstractController
     }
 
     /**
-     * @Route("/czas_pracy/show/{id}", name="czas_pracy_show")
+     * @Route("/czas_pracy/{id}", name="czas_pracy", methods={"GET", "POST"})
      */
-    public function czas_pracy_show($id, JednostkaRepository $jednostkaRepo){
+    public function showAndAdd($id, JednostkaRepository $jednostkaRepo, Request $request){
 
         $entityManager = $this->getDoctrine()->getManager();
         
@@ -66,30 +62,49 @@ class CzasPracyController extends AbstractController
         $jednostka = $this->getDoctrine()
             ->getRepository(Jednostka::class)
             ->findOneById($id);
+        
+        $czasGet = new CzasPracy();
 
-        return $this->render('admin_panel/czas_pracy/show.html.twig', [
+        $form = $this->createForm(CzasPracyFormType::class, $czasGet);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            
+            $j_id = $entityManager->getRepository('App:Jednostka')->find($id);
+
+            $czasGet->setJednostka($j_id);
+            $entityManager->persist($czasGet);
+            $entityManager->flush();
+
+             
+            return $this->redirectToRoute('admin.czas_pracy', [
+                'id'=>$id
+                ]);
+        }
+    
+        return $this->render('admin_panel/czas_pracy/index.html.twig', [
+            'id' => $id,
             'czas' => $czas,
             'jednostka' => $jednostka,
-            'id' => $id
+            'form' => $form->createView(),
         ]);
     }
 
      /**
-     * @Route("/czas_pracy/delete/{id_jednostki}/{id}", name="czas_pracy_delete")
+     * @Route("/czas_pracy/delete/{id}/{id_jednostki}", name="czas_pracy_delete")
      */
-    public function czas_pracy_delete($id, $id_jednostki)
-    {
+    public function delete($id, $id_jednostki, CzasPracy $czas)
+    {   
+
+        
         $entityManager = $this->getDoctrine()->getManager();
-        $czas = $entityManager->getRepository('App:CzasPracy')->findOneBy([
-            'id' => $id
-        ]);
         $entityManager->remove($czas);
         $entityManager->flush();
         $this->addFlash(
             'success',
             'Czas pracy został pomyślnie usunięty'
             );
-        return $this->redirectToRoute('admin.czas_pracy_show', [
+        return $this->redirectToRoute('admin.czas_pracy', [
             'id'=>$id_jednostki
             ]);
 

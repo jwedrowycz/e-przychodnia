@@ -45,6 +45,11 @@ class Lekarz
      */
     private $specjalizacja;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $status;
+
     public function __construct()
     {
         $this->id_jednostki = new ArrayCollection();
@@ -130,6 +135,18 @@ class Lekarz
     public function setSpecjalizacja(string $specjalizacja): self
     {
         $this->specjalizacja = $specjalizacja;
+
+        return $this;
+    }
+
+    public function getStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(bool $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

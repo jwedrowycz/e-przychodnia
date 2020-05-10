@@ -21,7 +21,7 @@
     {% for poradnia in poradnie %}
         <tr>
             <td>{{ poradnia.id }}</td>
-            <td><a class="link-blue" href="{{ path('admin.poradnia_show', {id: poradnia.id}) }}">{{ poradnia.nazwa }}</a></td>
+            <td><a class="link-blue" href="{{ path('admin.jednostka_show', {id: poradnia.id}) }}">{{ poradnia.nazwa }}</a></td>
 {#            <td>#}
 {#                <a class="delete" href="{{ path('admin.poradnia_delete', {id: poradnia.id}) }}">Usuń</a>#}
 {#            </td>#}

@@ -15,7 +15,8 @@
             <th>Numer PWZ</th>
             <th>Imie i nazwisko</th>
             <th>Specjalizacja</th>
-            <th></th>
+            <th>Status</th>
+            <th colspan="2">Akcje</th>
         </tr>
     {% for lekarz in lekarze %}
         <tr>
@@ -23,6 +24,13 @@
             <td>{{ lekarz.numerPWZ }}</td>
             <td>{{ lekarz.nazwisko ~ ' ' ~ lekarz.imie }}</td>
             <td>{{ lekarz.specjalizacja }}</td>
+            {% if lekarz.status == 1 %}
+            <td>Aktywny</td>
+            {% else %}
+            <td>Nieaktywny</td>
+            {% endif %}
+            <td><a class="link-blue" href="{{ path('admin.lekarz_edit', {'id':lekarz.id}) }}">Edytuj</a></td>
+            <td><a class="delete" href="{{ path('admin.lekarz_delete', {'id':lekarz.id}) }}">Usuń</a></td>
         </tr>
     {% endfor %}
     </table>

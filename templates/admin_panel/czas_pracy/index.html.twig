@@ -27,19 +27,15 @@
             <td>{{ c.dzien }}</td>
             <td>{{ c.start|date("H:i") }}</td>
             <td>{{ c.koniec|date("H:i") }}</td>
-            <td><a class="delete" href="{{ path('admin.czas_pracy_delete', {id:c.id, id_jednostki: id}) }}">Usuń</a></td>
+            <td><a class="delete" href="{{ path('admin.czas_pracy_delete', {'id':c.id, 'id_jednostki': id}) }}">Usuń</a></td>
         </tr>
     {% endfor %}
+
     </table>
     
     <button class="form-btn" id="toggleBtn">Dodaj czas pracy</button>
 
-    
-{{ render(controller(
-    'App\\Controller\\Admin\\CzasPracyController::czas_pracy_add', {id: id}
-)) }}
-
-
+    {{ include('admin_panel/czas_pracy/_form.html.twig')}}
 
     <script>
     $("#toggleBtn").click(function(){

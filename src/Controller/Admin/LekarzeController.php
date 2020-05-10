@@ -16,27 +16,27 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
- * @Route("/admin", name="admin.")
+ * @Route("/admin/lekarze", name="admin.")
  */
 class LekarzeController extends AbstractController
 {
     /**
-     * @Route("/lekarze", name="lekarze")
+     * @Route("/", name="lekarze")
      */
     public function lekarze(LekarzRepository $lekarzRepo )
     {   
         $lekarze = $lekarzRepo->findAll();
 
-        return $this->render('admin_panel/lekarze/lekarze.html.twig', [
+        return $this->render('admin_panel/lekarz/index.html.twig', [
             'lekarze' => $lekarze
         ]);
     }
 
     /**
-     * @Route("/lekarze/add", name="lekarz_add")
+     * @Route("/add", name="lekarz_add")
      */
-    public function lekarz_add(Request $request)
-    {
+    public function add(Request $request)
+    {   
         $lekarz = new Lekarz();
         $form = $this->createForm(AddLekarzFormType::class, $lekarz);
         $form->handleRequest($request);
@@ -52,8 +52,55 @@ class LekarzeController extends AbstractController
             return $this->redirectToRoute('admin.lekarze');
             
         }
-        return $this->render('admin_panel/lekarze/lekarz_add.html.twig', [
-            'addLekarzForm' => $form->createView(),
+        return $this->render('admin_panel/lekarz/add.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
+    
+    
+    /**
+     * @Route("/delete/{id}", name="lekarz_delete")
+     */
+    public function delete(Request $request, Lekarz $lekarz)
+    {    
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($lekarz);
+        $entityManager->flush();   
+        
+        $this->addFlash(
+            'success',
+            'Pomyślnie usunięto lekarza'
+            );
+        return $this->render('admin_panel/lekarz/add.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+
+    /**
+     * @Route("/edit/{id}", name="lekarz_edit")
+     */
+    public function edit(Request $request, Lekarz $lekarz): Response
+    {
+        $form = $this->createForm(AddLekarzFormType::class, $lekarz);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash(
+                'success',
+                'Pomyślnie usunięto lekarza'
+                );
+            return $this->redirectToRoute('admin.lekarze');
+            
+        }
+
+        return $this->render('admin_panel/lekarz/edit.html.twig', [
+            'lekarz' => $lekarz,
+            'form' => $form->createView(),
+        ]);
+    }
+
 }
