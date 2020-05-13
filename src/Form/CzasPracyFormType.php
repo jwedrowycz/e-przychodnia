@@ -18,12 +18,11 @@ class CzasPracyFormType extends AbstractType
         $builder
         ->add('dzien', ChoiceType::class, [
             'choices' => [ 'Wybierz dzień tygodnia' => '',
-               'poniedziałek' => 'poniedziałek',
-               'wtorek' => 'wtorek',
-               'środa' => 'środa',
-               'czwartek' => 'czwartek',
-               'piątek' => 'piątek',
-              
+               'poniedziałek' => 1,
+               'wtorek' => 2,
+               'środa' => 3,
+               'czwartek' => 4,
+               'piątek' => 5,
             ],
             'required'   => false,
             ])

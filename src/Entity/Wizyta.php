@@ -16,15 +16,6 @@ class Wizyta
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="date")
-     */
-    private $data_wizyty;
-
-    /**
-     * @ORM\Column(type="time")
-     */
-    private $godzina_przyjecia;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Jednostka", inversedBy="wizyta")
@@ -38,33 +29,19 @@ class Wizyta
      */
     private $pacjent;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $rozpoczecie;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $zakonczenie;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getDataWizyty(): ?\DateTimeInterface
-    {
-        return $this->data_wizyty;
-    }
-
-    public function setDataWizyty(\DateTimeInterface $data_wizyty): self
-    {
-        $this->data_wizyty = $data_wizyty;
-
-        return $this;
-    }
-
-    public function getGodzinaPrzyjecia(): ?\DateTimeInterface
-    {
-        return $this->godzina_przyjecia;
-    }
-
-    public function setGodzinaPrzyjecia(\DateTimeInterface $godzina_przyjecia): self
-    {
-        $this->godzina_przyjecia = $godzina_przyjecia;
-
-        return $this;
     }
 
     public function getJednostka(): ?Jednostka
@@ -87,6 +64,31 @@ class Wizyta
     public function setPacjent(?User $pacjent): self
     {
         $this->pacjent = $pacjent;
+
+        return $this;
+    }
+
+
+    public function getRozpoczecie(): ?\DateTimeInterface
+    {
+        return $this->rozpoczecie;
+    }
+
+    public function setRozpoczecie(\DateTimeInterface $rozpoczecie): self
+    {
+        $this->rozpoczecie = $rozpoczecie;
+
+        return $this;
+    }
+
+    public function getZakonczenie(): ?\DateTimeInterface
+    {
+        return $this->zakonczenie;
+    }
+
+    public function setZakonczenie(\DateTimeInterface $zakonczenie): self
+    {
+        $this->zakonczenie = $zakonczenie;
 
         return $this;
     }

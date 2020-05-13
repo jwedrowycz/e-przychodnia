@@ -10,6 +10,8 @@
 {% endfor %}
 {% endfor %}
 
+
+
 {% for j in jednostka %}
      <h2>Lekarz: {{ j.nazwisko ~ ' ' ~ j.imie}}</h2>
      <h2>{{ j.nazwa }} </h2>
@@ -24,7 +26,7 @@
         </tr>
     {% for c in czas %}
         <tr>
-            <td>{{ c.dzien }}</td>
+            <td>{{ nameOfDay(c.dzien) }}</td>
             <td>{{ c.start|date("H:i") }}</td>
             <td>{{ c.koniec|date("H:i") }}</td>
             <td><a class="delete" href="{{ path('admin.czas_pracy_delete', {'id':c.id, 'id_jednostki': id}) }}">Usuń</a></td>

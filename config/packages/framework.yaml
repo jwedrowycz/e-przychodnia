@@ -16,3 +16,5 @@ framework:
         log: true
         
     fragments: { path: /_fragment }
+
+    validation: { enabled: true }

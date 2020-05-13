@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ poradnia.nazwa }} {% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <h1>{{ poradnia.nazwa }}</h1>
+    {% for j in jednostka %}
+    <div class="poradnia-card">
+            <a href="{{path('wizyta_terminy', {'id': j.jednostka})}}" hidden></a>
+            {{ j.imie ~ ' ' ~ j.nazwisko }} <br>
+            {{ render(controller('App\\Controller\\WizytaController::czas_pracy_show', {'idPoradni': poradnia.id, 'idJednostki':j.jednostka})) }}
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    
+    $('.poradnia-card').click(function() {
+   window.location.href = $(this).find('a').attr('href');
+});
+</script>
+{% endblock %}

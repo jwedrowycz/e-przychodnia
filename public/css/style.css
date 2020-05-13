@@ -159,7 +159,7 @@ body {
 
 .flash-success {
     padding: 20px;
-    background-color: rgba(8, 180, 0, 0.75); /* Red */
+    background-color: rgba(8, 180, 0, 0.75); 
     color: black;
     margin-bottom: 15px;
 
@@ -167,7 +167,7 @@ body {
 
 .flash-fail {
     padding: 20px;
-    background-color: rgb(215, 0, 0); /* Red */
+    background-color: rgb(215, 0, 0);
     color: black;
     margin-bottom: 15px;
 
@@ -276,9 +276,6 @@ body {
     color: #ffbfbf;
 }
 
-.form-item--checkbox{
-    
-}
 
 .form-error {
     padding-top: 10px;
@@ -350,6 +347,8 @@ body {
 
 .poradnia-card {
     background-color: #EAEAEA;
+    /* border-radius: 5px; */
+
 }
 .poradnia-card:hover {
     background-color: gray;
@@ -358,5 +357,14 @@ body {
 }
 
 .poradnie-item {
-    padding: 15px 15px
+    padding: 15px 15px;
 }
+
+/* -------------------- FULL CALENDAR -------------- */
+.fc-nonbusiness.fc-bgevent{
+    background-color: red;
+}
+
+/* .fc-content {
+    cursor: pointer;
+} */

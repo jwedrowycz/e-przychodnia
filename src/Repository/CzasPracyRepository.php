@@ -26,11 +26,31 @@ class CzasPracyRepository extends ServiceEntityRepository
             'SELECT c.id, c.dzien, c.start, c.koniec
             FROM App\Entity\CzasPracy c
             
-            WHERE c.jednostka = :id'
+            WHERE c.jednostka = :id 
+            ORDER BY c.dzien ASC'
+            
         )->setParameter('id', $jednostkaId);
 
         return $query->getResult();
     }
+
+    public function findAllWithLekarzData($jednostkaId)
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT c.id, c.dzien, c.start, c.koniec, l.imie, l.nazwisko
+            FROM App\Entity\CzasPracy c
+            JOIN c.jednostka j
+            JOIN j.id_lekarza l
+            
+            WHERE c.jednostka = :id
+            ORDER BY c.dzien ASC'
+        )->setParameter('id', $jednostkaId);
+
+        return $query->getResult();
+    }
+
+
 
     // /**
     //  * @return CzasPracy[] Returns an array of CzasPracy objects

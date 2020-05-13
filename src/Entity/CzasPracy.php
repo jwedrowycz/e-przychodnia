@@ -16,10 +16,6 @@ class CzasPracy
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=30)
-     */
-    private $dzien;
 
     /**
      * @ORM\Column(type="time")
@@ -36,22 +32,16 @@ class CzasPracy
      */
     private $jednostka;
 
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $dzien;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDzien(): ?string
-    {
-        return $this->dzien;
-    }
-
-    public function setDzien(string $dzien): self
-    {
-        $this->dzien = $dzien;
-
-        return $this;
-    }
 
     public function getStart(): ?\DateTimeInterface
     {
@@ -85,6 +75,18 @@ class CzasPracy
     public function setJednostka(?Jednostka $jednostka): self
     {
         $this->jednostka = $jednostka;
+
+        return $this;
+    }
+
+    public function getDzien(): ?int
+    {
+        return $this->dzien;
+    }
+
+    public function setDzien(int $dzien): self
+    {
+        $this->dzien = $dzien;
 
         return $this;
     }

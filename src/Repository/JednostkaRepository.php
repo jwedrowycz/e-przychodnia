@@ -72,6 +72,18 @@ class JednostkaRepository extends ServiceEntityRepository
            
     }
 
+    public function findAllByJoinedPoradniaOnlyIds($poradniaId)
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT j.id
+            FROM App\Entity\Jednostka j
+            JOIN j.id_poradni p
+            WHERE p.id = :id'
+        )->setParameter('id', $poradniaId);
+
+        return $query->getResult();
+    }
  
 
     // /**

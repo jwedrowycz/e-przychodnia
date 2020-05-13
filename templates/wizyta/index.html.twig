@@ -1,14 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello WizytaController!{% endblock %}
+{% block title %}Poradnie{% endblock %}
 
 {% block body %}
 <div class="container">
+
+    {% for label, messages in app.flashes(['success', 'fail']) %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    
     <div class="container-poradnie">
             {% for p in poradnie %}
                 <div class="poradnia-card">
                     <div class="poradnie-item">
-                        <h3>{{ p.nazwa }}<a href="{{ path('wizyta_termin', {'id': p.id}) }}" hidden></a></h3>
+                        <h3>{{ p.nazwa }}<a href="{{ path('wizyta_choose', {'id': p.id}) }}" hidden></a></h3>
                         <ul>
                         {% for j in jednostki %}
                             

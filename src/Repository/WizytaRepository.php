@@ -18,6 +18,26 @@ class WizytaRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Wizyta::class);
     }
+    
+
+    public function findAllWizyta($start,$end, $id)
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT w
+            FROM App\Entity\Wizyta w
+            WHERE (w.rozpoczecie BETWEEN :start AND :end OR w.zakonczenie BETWEEN :start and :end)
+            AND w.jednostka = :id
+            
+            ')
+        ->setParameter('start', $start->format('Y-m-d H:i:s'))
+        ->setParameter('end', $end->format('Y-m-d H:i:s'))
+        ->setParameter('id', $id);
+        
+        return $query->getResult();
+
+    }
+
 
     // /**
     //  * @return Wizyta[] Returns an array of Wizyta objects
