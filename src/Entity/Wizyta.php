@@ -39,10 +39,6 @@ class Wizyta
      */
     private $zakonczenie;
 
-    /**
-     * @ORM\Column(type="string", length=30, nullable=true)
-     */
-    private $status;
 
     public function getId(): ?int
     {
@@ -98,15 +94,4 @@ class Wizyta
         return $this;
     }
 
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    public function setStatus(?string $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
 }

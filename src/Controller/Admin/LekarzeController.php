@@ -50,7 +50,7 @@ class LekarzeController extends AbstractController
             'Pomyślnie dodano lekarza'
             );
             return $this->redirectToRoute('admin.lekarze');
-            
+
         }
         return $this->render('admin_panel/lekarz/add.html.twig', [
             'form' => $form->createView(),
@@ -71,9 +71,7 @@ class LekarzeController extends AbstractController
             'success',
             'Pomyślnie usunięto lekarza'
             );
-        return $this->render('admin_panel/lekarz/add.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        return $this->redirectToRoute('admin.lekarze');
     }
 
 

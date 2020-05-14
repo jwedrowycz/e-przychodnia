@@ -45,11 +45,11 @@
         businessHours: [ // specify an array instead
         {% for c in czasPracy %}
         {   
-            daysOfWeek: [ {{ c.dzien }} ],
+            daysOfWeek: [ {{ c.dzien }}],
             startTime: '{{c.start|date("H:i")}}', 
             endTime: '{{c.koniec|date("H:i")}}' 
         },
-        {% endfor %}
+       {% endfor %}
         ],   
         eventSources: [
             {

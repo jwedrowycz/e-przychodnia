@@ -38,6 +38,21 @@ class WizytaRepository extends ServiceEntityRepository
 
     }
 
+    public function findAllWithJoined()
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT w.id, w.rozpoczecie, w.zakonczenie, u.email, u.imie as u_imie, u.nazwisko as u_nazwisko, u.PESEL, p.nazwa, l.imie as l_imie, l.nazwisko as l_nazwisko
+            FROM App\Entity\Wizyta w
+            JOIN w.pacjent u      
+            JOIN w.jednostka j 
+            JOIN j.id_lekarza l    
+            JOIN j.id_poradni p  
+            ORDER BY w.rozpoczecie ASC'
+        );
+        return $query->getResult();
+    }
+
 
     // /**
     //  * @return Wizyta[] Returns an array of Wizyta objects

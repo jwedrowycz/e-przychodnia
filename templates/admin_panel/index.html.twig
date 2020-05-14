@@ -29,6 +29,10 @@
                 'admin.lekarz_add',
                 ] %}
                 class="active"{% endif %}  href="{{ path('admin.lekarze') }}">Lekarze</a>
+            <a {% if app.request.attributes.get('_route') in [
+                'admin.wizyta',
+                ] %}
+                class="active"{% endif %}  href="{{ path('admin.wizyta') }}">Wizyty</a>
         </div>
     {% endblock sidebar %}
     <div class="content">
