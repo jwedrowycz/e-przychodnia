@@ -39,6 +39,11 @@ class Wizyta
      */
     private $zakonczenie;
 
+    /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+     */
+    private $status;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +94,18 @@ class Wizyta
     public function setZakonczenie(\DateTimeInterface $zakonczenie): self
     {
         $this->zakonczenie = $zakonczenie;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

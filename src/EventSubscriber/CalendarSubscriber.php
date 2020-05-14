@@ -47,15 +47,16 @@ class CalendarSubscriber implements EventSubscriberInterface
         $id = $filters['id'];
 
         $wizyty = $this->wizytaRepo->findAllWizyta($start,$end, $id);
-        
+        $title = 'ZAJĘTY';
 
         // $err = 'Zajęta';
         foreach ($wizyty as $wizyta) {
             // this create the events with your data (here booking data) to fill calendar
             $wizytaEvent = new Event(
-                $wizyta->getId(),
+                
+                $title,
                 $wizyta->getRozpoczecie(),
-                $wizyta->getZakonczenie() // If the end date is null or not defined, a all day event is created.
+                $wizyta->getZakonczenie(),
             );
 
             /*
