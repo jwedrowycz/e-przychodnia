@@ -1,0 +1,41 @@
+{% extends 'admin_panel/index.html.twig' %}
+
+{% block content %}
+    {% for label, messages in app.flashes(['success', 'fail']) %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+    <h1>{{ clinic.nazwa }}</h1>
+     <h1>Lekarze</h1>
+    <table class="admin-table">
+        <tr>
+            <th>Id jednostki</th>
+            <th>Id lekarza</th>
+            <th>Numer PWZ</th>
+            <th>Imie i nazwisko</th>
+            <th>Specjalizacja</th>
+            <th colspan="2">Akcja</th>
+
+        </tr>
+        <tr>
+    {% for doctor in doctors %}
+        <td>{{ doctor.unit }}</td>
+        <td>{{ doctor.id }}</td>
+        <td>{{ doctor.numerPWZ }}</td>
+        <td>{{ doctor.nazwisko ~ ' ' ~ doctor.imie }}</td>
+        <td>{{ doctor.specjalizacja }}</td>
+        <td>
+            <a class="link-blue" href="{{ path('admin.work_time', {'id': doctor.unit}) }}">Czas pracy</a>
+        </td>
+        <td>
+            <a class="delete" href="{{ path('admin.unit_delete', {'idDoctor': doctor.id, idClinic: clinic.id}) }}">Usuń</a>
+        </td>
+        </tr>
+    {% endfor %}
+    </table>
+
+    <a href="{{ path('admin.unit_add', {'idPoradni': clinic.id}) }} ">Dodaj lekarza do poradni</a>
+{% endblock content %}

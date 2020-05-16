@@ -43,22 +43,22 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $qb->select('u')
         ->from('App\Entity\User', 'u')
         ->where('u.roles = :role')
-        ->orderBy('u.nazwisko', 'ASC')
+        ->orderBy('u.last_name', 'ASC')
         ->setParameter('role', '["ROLE_USER"]');
         $query = $qb->getQuery();
         return $query->execute();
     }   
 
-    public function findAllOperators($poradniaId)
+    public function findAllOperators($clinicId)
     {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
-            'SELECT l.id, l.nazwisko, l.imie, l.numerPWZ, l.specjalizacja
-            FROM App\Entity\Jednostka j
-            INNER JOIN j.id_lekarza l
-            INNER JOIN j.id_poradni p
-            WHERE p.id = :id'
-        )->setParameter('id', $poradniaId);
+            'SELECT d.id, d.last_name, d.name, d.num_pwz, d.spec
+            FROM App\Entity\Unit u
+            INNER JOIN u.doctor d
+            INNER JOIN u.clinic c
+            WHERE c.id = :id'
+        )->setParameter('id', $clinicId);
 
         return $query->getResult();
     }

@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\PoradniaInfo;
-use App\Form\AddUserType;
+use App\Form\UserType;
 use App\Repository\PoradniaInfoRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;

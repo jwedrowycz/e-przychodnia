@@ -33,7 +33,7 @@ class PoradniaInfo
     private $nazwa;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Jednostka", mappedBy="id_poradni")
+     * @ORM\OneToMany(targetEntity="Unit.php", mappedBy="id_poradni")
      */
     private $id_jednostki;
 
@@ -60,14 +60,14 @@ class PoradniaInfo
     }
 
     /**
-     * @return Collection|Jednostka[]
+     * @return Collection|Unit[]
      */
     public function getIdJednostki(): Collection
     {
         return $this->id_jednostki;
     }
 
-    public function addIdJednostki(Jednostka $idJednostki): self
+    public function addIdJednostki(Unit $idJednostki): self
     {
         if (!$this->id_jednostki->contains($idJednostki)) {
             $this->id_jednostki[] = $idJednostki;
@@ -77,7 +77,7 @@ class PoradniaInfo
         return $this;
     }
 
-    public function removeIdJednostki(Jednostka $idJednostki): self
+    public function removeIdJednostki(Unit $idJednostki): self
     {
         if ($this->id_jednostki->contains($idJednostki)) {
             $this->id_jednostki->removeElement($idJednostki);

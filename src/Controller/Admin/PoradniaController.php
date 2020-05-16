@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 
-use App\Entity\Jednostka;
+use App\Entity\Unit;
 use App\Entity\PoradniaInfo;
 use App\Repository\PoradniaInfoRepository;
 use App\Form\AddPoradniaFormType;

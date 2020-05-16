@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\Wizyta;
+use App\Entity\Visit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Wizyta|null find($id, $lockMode = null, $lockVersion = null)
- * @method Wizyta|null findOneBy(array $criteria, array $orderBy = null)
- * @method Wizyta[]    findAll()
- * @method Wizyta[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Visit|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Visit|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Visit[]    findAll()
+ * @method Visit[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class WizytaRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Wizyta::class);
+        parent::__construct($registry, Visit::class);
     }
     
 
@@ -25,9 +25,9 @@ class WizytaRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
             'SELECT w
-            FROM App\Entity\Wizyta w
+            FROM App\Entity\Visit w
             WHERE (w.rozpoczecie BETWEEN :start AND :end OR w.zakonczenie BETWEEN :start and :end)
-            AND w.jednostka = :id
+            AND w.unit = :id
             
             ')
         ->setParameter('start', $start->format('Y-m-d H:i:s'))
@@ -43,9 +43,9 @@ class WizytaRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
             'SELECT w.id, w.rozpoczecie, w.zakonczenie, u.email, u.imie as u_imie, u.nazwisko as u_nazwisko, u.PESEL, p.nazwa, l.imie as l_imie, l.nazwisko as l_nazwisko
-            FROM App\Entity\Wizyta w
+            FROM App\Entity\Visit w
             JOIN w.pacjent u      
-            JOIN w.jednostka j 
+            JOIN w.unit j 
             JOIN j.id_lekarza l    
             JOIN j.id_poradni p  
             ORDER BY w.rozpoczecie ASC'
@@ -55,7 +55,7 @@ class WizytaRepository extends ServiceEntityRepository
 
 
     // /**
-    //  * @return Wizyta[] Returns an array of Wizyta objects
+    //  * @return Visit[] Returns an array of Visit objects
     //  */
     /*
     public function findByExampleField($value)
@@ -72,7 +72,7 @@ class WizytaRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Wizyta
+    public function findOneBySomeField($value): ?Visit
     {
         return $this->createQueryBuilder('w')
             ->andWhere('w.exampleField = :val')

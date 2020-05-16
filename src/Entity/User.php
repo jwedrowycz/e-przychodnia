@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields={"email"}, message="Taki adres e-mail jest już zarejestrowany")
  * @UniqueEntity(fields={"PESEL"}, message="Istnieje już pacjent z takim PESELem")
- * @UniqueEntity(fields={"telefon"}, message="Taki numer telefonu jest już zarejestrowany")
+ * @UniqueEntity(fields={"num_phone"}, message="Taki numer telefonu jest już zarejestrowany")
  */
 class User implements UserInterface
 {
@@ -47,7 +47,7 @@ class User implements UserInterface
      * @Assert\Regex(
      *     pattern="/\d/",
      *     match=false,
-     *     message="Imie nie może zawierać cyfr"
+     *     message="Name nie może zawierać cyfr"
      * )
      * @Assert\Length(min=3,
      *                  max = 20,
@@ -55,20 +55,20 @@ class User implements UserInterface
      *                  maxMessage = "Limit znaków w polu imię to {{ limit }}" )
      * @ORM\Column(type="string", length=255)
      */
-    private $imie;
+    private $name;
 
     /**
-     * @Assert\NotBlank(message = "Wpisz swoje nazwisko")
+     * @Assert\NotBlank(message = "Wpisz swoje last_name")
      * @Assert\Regex(
      *     pattern="/\d/",
      *     match=false,
-     *     message="Nazwisko nie może zawierać cyfr"
+     *     message="LastName nie może zawierać cyfr"
      * )
      * 
      *
      * @ORM\Column(type="string", length=255)
      */
-    private $nazwisko;
+    private $last_name;
 
     /**
      * @Assert\NotBlank(message = "Wpisz swój numer PESEL")
@@ -98,19 +98,19 @@ class User implements UserInterface
      * @Assert\NotBlank(message = "Wpisz swój numer telefonu")
      * @ORM\Column(type="string", length=9)
      */
-    private $telefon;
+    private $num_phone;
 
     /**
      * @Assert\NotBlank(message = "Wpisz swój adres zamieszkania, ulica/nr domu")
      * @ORM\Column(type="string", length=255)
      */
-    private $adres_zamieszkania;
+    private $address;
 
     /**
      * @Assert\NotBlank(message = "Wpisz w jakim mieście bądź miejscowości mieszkasz")
      * @ORM\Column(type="string", length=255)
      */
-    private $miasto;
+    private $city;
 
     /**
     * @Assert\Regex(pattern = "/[0-9]/",
@@ -120,35 +120,35 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=6)
      * 
      */
-    private $kod_pocztowy;
+    private $post_code;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $data_dolaczenia;
+    private $created_at;
 
     /**
      * @Assert\NotBlank(message = "Wybierz swoją date urodzenia")
      * @ORM\Column(type="date", nullable=true)
      */
-    private $data_urodzenia;
+    private $birthday;
 
     /**
      * @Assert\NotBlank(message = "Wybierz swoją płeć")
      * @ORM\Column(type="string", length=30, nullable=true)
      */
-    private $plec;
+    private $gender;
 
     /**
      * @Assert\NotBlank(message = "Wybierz województwo w którym mieszkasz")
      * @ORM\Column(type="string", length=30, nullable=true)
      */
-    private $wojewodztwo;
+    private $voivodeship;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Wizyta", mappedBy="pacjent")
+     * @ORM\OneToMany(targetEntity="App\Entity\Visit", mappedBy="user)
      */
-    private $wizyta;
+    private $visit;
 
     public function getId(): ?int
     {
@@ -228,28 +228,28 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getImie(): ?string
+    public function getName(): ?string
     {
-        return $this->imie;
+        return $this->name;
     }
 
-    public function setImie(string $imie): self
+    public function setName(string $name): self
     {   
    
-        $this->imie = ucfirst(mb_strtolower($imie,"UTF-8"));
+        $this->name = ucfirst(mb_strtolower($name,"UTF-8"));
 
         return $this;
     }
 
-    public function getNazwisko(): ?string
+    public function getLastName(): ?string
     {
-        return $this->nazwisko;
+        return $this->last_name;
     }
 
-    public function setNazwisko(string $nazwisko): self
+    public function setLastName(string $last_name): self
     {
        
-        $this->nazwisko = ucfirst(mb_strtolower($nazwisko,"UTF-8"));
+        $this->last_name = ucfirst(mb_strtolower($last_name,"UTF-8"));
 
         return $this;
     }
@@ -266,133 +266,133 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getTelefon(): ?string
+    public function getNumPhone(): ?string
     {
-        return $this->telefon;
+        return $this->num_phone;
     }
 
-    public function setTelefon(string $telefon): self
+    public function setNumPhone(string $num_phone): self
     {
-        $this->telefon = $telefon;
+        $this->num_phone = $num_phone;
 
         return $this;
     }
 
-    public function getAdresZamieszkania(): ?string
+    public function getAddress(): ?string
     {
-        return $this->adres_zamieszkania;
+        return $this->address;
     }
 
-    public function setAdresZamieszkania(string $adres_zamieszkania): self
+    public function setAddress(string $address): self
     {
-        $this->adres_zamieszkania = $adres_zamieszkania;
+        $this->address = $address;
 
         return $this;
     }
 
-    public function getMiasto(): ?string
+    public function getCity(): ?string
     {
-        return $this->miasto;
+        return $this->city;
     }
 
-    public function setMiasto(string $miasto): self
+    public function setCity(string $city): self
     {
-        $this->miasto = $miasto;
+        $this->city = $city;
 
         return $this;
     }
 
-    public function getKodPocztowy(): ?string
+    public function getPostCode(): ?string
     {
-        return $this->kod_pocztowy;
+        return $this->post_code;
     }
 
-    public function setKodPocztowy(string $kod_pocztowy): self
+    public function setPostCode(string $post_code): self
     {
-        $this->kod_pocztowy = $kod_pocztowy;
+        $this->post_code = $post_code;
 
         return $this;
     }
 
-    public function getDataDolaczenia(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->data_dolaczenia;
+        return $this->created_at;
     }
 
-    public function setDataDolaczenia(\DateTimeInterface $data_dolaczenia): self
+    public function setCreatedAt(\DateTimeInterface $created_at): self
     {
-        $this->data_dolaczenia = $data_dolaczenia;
+        $this->created_at = $created_at;
 
         return $this;
     }
 
-    public function getDataUrodzenia(): ?\DateTimeInterface
+    public function getBirthday(): ?\DateTimeInterface
     {
-        return $this->data_urodzenia;
+        return $this->birthday;
     }
 
-    public function setDataUrodzenia(?\DateTimeInterface $data_urodzenia): self
+    public function setBirthday(?\DateTimeInterface $birthday): self
     {
-        $this->data_urodzenia = $data_urodzenia;
+        $this->birthday = $birthday;
 
         return $this;
     }
 
-    public function getPlec(): ?string
+    public function getgender(): ?string
     {
-        return $this->plec;
+        return $this->gender;
     }
 
-    public function setPlec(?string $plec): self
+    public function setgender(?string $gender): self
     {
-        $this->plec = $plec;
+        $this->gender = $gender;
 
         return $this;
     }
 
-    public function getWojewodztwo(): ?string
+    public function getVoivodeship(): ?string
     {
-        return $this->wojewodztwo;
+        return $this->voivodeship;
     }
 
-    public function setWojewodztwo(?string $wojewodztwo): self
+    public function setVoivodeship(?string $voivodeship): self
     {
-        $this->wojewodztwo = $wojewodztwo;
+        $this->voivodeship = $voivodeship;
 
         return $this;
     }
 
     public function __construct()
     {
-        $this->data_dolaczenia = new \DateTime();
-        $this->wizyta = new ArrayCollection(); 
+        $this->created_at = new \DateTime();
+        $this->visit = new ArrayCollection(); 
     }
 
     /**
-     * @return Collection|Wizyta[]
+     * @return Collection|Visit[]
      */
-    public function getWizyta(): Collection
+    public function getVisit(): Collection
     {
-        return $this->wizyta;
+        return $this->visit;
     }
 
-    public function addWizytum(Wizyta $wizytum): self
+    public function addVisit(Visit $visit): self
     {
-        if (!$this->wizyta->contains($wizytum)) {
-            $this->wizyta[] = $wizytum;
-            $wizytum->setPacjent($this);
+        if (!$this->visit->contains($visit)) {
+            $this->visit[] = $visit;
+            $visit->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeWizytum(Wizyta $wizytum): self
+    public function removeVisit(Visit $visit): self
     {
-        if ($this->wizyta->contains($wizytum)) {
-            $this->wizyta->removeElement($wizytum);
+        if ($this->visit->contains($visit)) {
+            $this->visit->removeElement($visit);
             // set the owning side to null (unless already changed)
-            if ($wizytum->getPacjent() === $this) {
-                $wizytum->setPacjent(null);
+            if ($visit->getUser() === $this) {
+                $visit->setUser(null);
             }
         }
 

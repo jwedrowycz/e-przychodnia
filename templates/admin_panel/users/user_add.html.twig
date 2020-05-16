@@ -3,67 +3,67 @@
 
 {% block content %}
     <div class="container">
-        {{ form_start(addUserForm, {'attr': {'class': 'form', 'autocomplete':'off'}}) }}
+        {{ form_start(form, {'attr': {'class': 'form', 'autocomplete':'off'}}) }}
         <div class="form-title">Dodaj użytkownika</div>
         
         <div class="form-item-col">
-            {{ form_label(addUserForm.email, 'E-mail', {'attr': {'class' : 'form-label'}} ) }}
-            {% if form_errors(addUserForm.email) %}
-                {{ form_widget(addUserForm.email, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+            {{ form_label(form.email, 'E-mail', {'attr': {'class' : 'form-label'}} ) }}
+            {% if form_errors(form.email) %}
+                {{ form_widget(form.email, {'attr': {'class' : 'form-input form-input--error'}} ) }}
             {% else %}
-                {{ form_widget(addUserForm.email, {'attr': {'class' : 'form-input'}} ) }}
+                {{ form_widget(form.email, {'attr': {'class' : 'form-input'}} ) }}
             {% endif %}
-            <span class="form-error">{{ form_errors(addUserForm.email) }}</span>
+            <span class="form-error">{{ form_errors(form.email) }}</span>
         </div>
         <div class="form-item-col">
-            {{ form_label(addUserForm.password.first, 'Hasło', {'attr': {'class' : 'form-label'}} ) }}
-            {% if form_errors(addUserForm.password.first) %}
-                {{ form_widget(addUserForm.password.first, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+            {{ form_label(form.password.first, 'Hasło', {'attr': {'class' : 'form-label'}} ) }}
+            {% if form_errors(form.password.first) %}
+                {{ form_widget(form.password.first, {'attr': {'class' : 'form-input form-input--error'}} ) }}
             {% else %}
-                {{ form_widget(addUserForm.password.first, {'attr': {'class' : 'form-input'}} ) }}
+                {{ form_widget(form.password.first, {'attr': {'class' : 'form-input'}} ) }}
             {% endif %}
         </div>
         <div class="form-item-col">
-            {{ form_label(addUserForm.password.second, 'Powtórz hasło', {'attr': {'class' : 'form-label'}} ) }}
-            {% if form_errors(addUserForm.password.first) %}
-                {{ form_widget(addUserForm.password.second, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+            {{ form_label(form.password.second, 'Powtórz hasło', {'attr': {'class' : 'form-label'}} ) }}
+            {% if form_errors(form.password.first) %}
+                {{ form_widget(form.password.second, {'attr': {'class' : 'form-input form-input--error'}} ) }}
             {% else %}
-                {{ form_widget(addUserForm.password.second, {'attr': {'class' : 'form-input'}} ) }}
+                {{ form_widget(form.password.second, {'attr': {'class' : 'form-input'}} ) }}
             {% endif %}
-            <span class="form-error">{{ form_errors(addUserForm.password.first) }}</span>
+            <span class="form-error">{{ form_errors(form.password.first) }}</span>
         </div>
         <div class="form-item-row">
             <div class="form-item-col">
-                {{ form_label(addUserForm.imie, 'Imię', {'attr': {'class' : 'form-label'}} ) }}
-                {% if form_errors(addUserForm.imie) %}
-                    {{ form_widget(addUserForm.imie, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+                {{ form_label(form.name, 'Imię', {'attr': {'class' : 'form-label'}} ) }}
+                {% if form_errors(form.name) %}
+                    {{ form_widget(form.name, {'attr': {'class' : 'form-input form-input--error'}} ) }}
                 {% else %}
-                    {{ form_widget(addUserForm.imie, {'attr': {'class' : 'form-input'}} ) }}
+                    {{ form_widget(form.name, {'attr': {'class' : 'form-input'}} ) }}
                 {% endif %}
-                <span class="form-error">{{ form_errors(addUserForm.imie) }}</span>
+                <span class="form-error">{{ form_errors(form.name) }}</span>
             </div>
             <div class="form-item-col">
-                {{ form_label(addUserForm.nazwisko, 'Nazwisko', {'attr': {'class' : 'form-label'}} ) }}
-                {% if form_errors(addUserForm.nazwisko) %}
-                    {{ form_widget(addUserForm.nazwisko, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+                {{ form_label(form.last_name, 'Nazwisko', {'attr': {'class' : 'form-label'}} ) }}
+                {% if form_errors(form.last_name) %}
+                    {{ form_widget(form.last_name, {'attr': {'class' : 'form-input form-input--error'}} ) }}
                 {% else %}
-                    {{ form_widget(addUserForm.nazwisko, {'attr': {'class' : 'form-input'}} ) }}
+                    {{ form_widget(form.last_name, {'attr': {'class' : 'form-input'}} ) }}
                 {% endif %}
-                <span class="form-error">{{ form_errors(addUserForm.nazwisko) }}</span>
+                <span class="form-error">{{ form_errors(form.last_name) }}</span>
             </div>
             <div class="form-item-col">
-                {{ form_label(addUserForm.roles, 'Nazwisko', {'attr': {'class' : 'form-label'}} ) }}
-                {% if form_errors(addUserForm.roles) %}
-                    {{ form_widget(addUserForm.roles, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+                {{ form_label(form.roles, 'Nazwisko', {'attr': {'class' : 'form-label'}} ) }}
+                {% if form_errors(form.roles) %}
+                    {{ form_widget(form.roles, {'attr': {'class' : 'form-input form-input--error'}} ) }}
                 {% else %}
-                    {{ form_widget(addUserForm.roles, {'attr': {'class' : 'form-input'}} ) }}
+                    {{ form_widget(form.roles, {'attr': {'class' : 'form-input'}} ) }}
                 {% endif %}
-                <span class="form-error">{{ form_errors(addUserForm.roles) }}</span>
+                <span class="form-error">{{ form_errors(form.roles) }}</span>
             </div>
         </div>
         <div class="form-item-col">
-            {{ form_widget(addUserForm.submit, {'attr': {'class' : 'form-btn'}} ) }}
+            {{ form_widget(form.submit, {'attr': {'class' : 'form-btn'}} ) }}
         </div>
             
-            {{ form_end(addUserForm) }}
+            {{ form_end(form) }}
 {% endblock %}

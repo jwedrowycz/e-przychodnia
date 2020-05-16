@@ -2,10 +2,10 @@
 
 namespace App\EventSubscriber;
 
-use App\Repository\CzasPracyRepository;
-use App\Repository\WizytaRepository;
-use CalendarBundle\Entity\CzasPracy;
-use CalendarBundle\Entity\Wizyta;
+use App\Repository\WorkTimeRepository;
+use App\Repository\VisitRepository;
+use CalendarBundle\Entity\WorkTime;
+use CalendarBundle\Entity\Visit;
 use CalendarBundle\CalendarEvents;
 use CalendarBundle\Entity\Event;
 use CalendarBundle\Event\CalendarEvent;
@@ -16,18 +16,18 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class CalendarSubscriber implements EventSubscriberInterface
 {
-    private $czasPracyRepo;
-    private $wizytaRepo;
+    private $workTimeRepo;
+    private $visitRepo;
     private $router;
     private $request;
 
     public function __construct(
-        WizytaRepository $wizytaRepo,
+        WizytaRepository $visitRepo,
         UrlGeneratorInterface $router,
         RequestStack $requestStack
         
     ) {
-        $this->wizytaRepo = $wizytaRepo;
+        $this->visitRepo = $visitRepo;
         $this->router = $router;
         $this->request = $requestStack->getCurrentRequest();
     }
@@ -46,17 +46,17 @@ class CalendarSubscriber implements EventSubscriberInterface
         $filters = $calendar->getFilters();
         $id = $filters['id'];
 
-        $wizyty = $this->wizytaRepo->findAllWizyta($start,$end, $id);
+        $visits = $this->visitRepo->findAllVisits($start,$end, $id);
         $title = 'ZAJĘTY';
 
         // $err = 'Zajęta';
-        foreach ($wizyty as $wizyta) {
+        foreach ($visits as $visit) {
             // this create the events with your data (here booking data) to fill calendar
-            $wizytaEvent = new Event(
+            $visitEvent = new Event(
                 
                 $title,
-                $wizyta->getRozpoczecie(),
-                $wizyta->getZakonczenie(),
+                $visit->getStart(),
+                $visit->getEnd(),
             );
 
             /*
@@ -78,7 +78,7 @@ class CalendarSubscriber implements EventSubscriberInterface
             // );
 
             // finally, add the event to the CalendarEvent to fill the calendar
-            $calendar->addEvent($wizytaEvent);
+            $calendar->addEvent($visitEvent);
         }
     }
 }

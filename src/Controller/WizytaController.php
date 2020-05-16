@@ -2,13 +2,13 @@
 
 namespace App\Controller;
 use App\Entity\PoradniaInfo;
-use App\Entity\Jednostka;
-use App\Entity\Wizyta;
+use App\Entity\Unit;
+use App\Entity\Visit;
 use App\Entity\CzasPracy;
 use App\Repository\PoradniaInfoRepository;
 use App\Repository\CzasPracyRepository;
 use App\Form\WizytaFormType;
-use App\Repository\JednostkaRepository;
+use App\Repository\UnitRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,7 +25,7 @@ class WizytaController extends AbstractController
     /**
      * @Route("/", name="wizyta")
      */
-    public function index(JednostkaRepository $jednostkaRepo, PoradniaInfoRepository $poradniaRepo)
+    public function index(UnitRepository $jednostkaRepo, PoradniaInfoRepository $poradniaRepo)
     {   
 
         $jednostki = $jednostkaRepo->findAllWithPoradniaAndLekarz();
@@ -41,14 +41,14 @@ class WizytaController extends AbstractController
     /**
      * @Route("/wybor/{id}", name="wizyta_choose")
      */
-    public function choose($id, Request $request, JednostkaRepository $jednostkaRepo, PoradniaInfoRepository $poradniaRepo, CzasPracyRepository $czasPracyRepo)
+    public function choose($id, Request $request, UnitRepository $jednostkaRepo, PoradniaInfoRepository $poradniaRepo, CzasPracyRepository $czasPracyRepo)
     {   
         $poradnia = $poradniaRepo->find($id);
         $jednostka = $jednostkaRepo->findAllByJoinedId($id);
         // $j = $jednostkaRepo->findOneById(16);
         return $this->render('wizyta/wybor.html.twig', [
             'poradnia' => $poradnia,
-            'jednostka' => $jednostka,
+            'unit' => $jednostka,
         ]);
     }
 
@@ -69,7 +69,7 @@ class WizytaController extends AbstractController
      */
     public function terminy_show($id, CzasPracyRepository $czasPracyRepo){
         $czasPracy = $czasPracyRepo->findBy([
-            'jednostka' => $id
+            'unit' => $id
         ]);
         return $this->render('wizyta/terminy.html.twig',[
             'id' => $id,
@@ -80,8 +80,8 @@ class WizytaController extends AbstractController
     /**
      * @Route("/terminy/rezerwuj/{id}/", name="wizyta_add")
      */
-    public function add($id, Request $request, JednostkaRepository $jednostkaRepo){
-        $wizyta = new Wizyta();
+    public function add($id, Request $request, UnitRepository $jednostkaRepo){
+        $wizyta = new Visit();
         
         $jednostka = $jednostkaRepo->find($id);
         $lekarz = $jednostka->getIdLekarza();
@@ -109,8 +109,8 @@ class WizytaController extends AbstractController
         }
         return $this->render('wizyta/rezerwuj.html.twig', [
             'poradnia' => $poradnia,
-            'lekarz' => $lekarz,
-            'jednostka' => $jednostka,
+            'doctor' => $lekarz,
+            'unit' => $jednostka,
             'start' => $start,
             'end' => $end,
             'form' => $form->createView()

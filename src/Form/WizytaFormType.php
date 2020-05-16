@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Wizyta;
+use App\Entity\Visit;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,7 +23,7 @@ class WizytaFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Wizyta::class,
+            'data_class' => Visit::class,
         ]);
     }
 }

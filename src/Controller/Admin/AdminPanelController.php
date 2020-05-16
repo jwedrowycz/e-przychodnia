@@ -2,10 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\User;
-use App\Entity\PoradniaInfo;
-use App\Form\AddUserType;
-use App\Repository\PoradniaInfoRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;

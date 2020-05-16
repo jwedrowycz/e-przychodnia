@@ -1,0 +1,14 @@
+
+    {{ form_start(form, {'attr': {'class':'form hidden'}})}}
+
+    {{ form_label(form.day, 'Dzień tygodnia')}}
+    {{ form_widget(form.day)}}
+    
+    {{ form_label(form.start, 'Początek pracy')}}
+    {{ form_widget(form.start)}}
+    
+    {{ form_label(form.end, 'Koniec pracy')}}
+    {{ form_widget(form.end)}}
+    
+    <button class="form-btn">Dodaj</button>
+    {{ form_end(form)}}

@@ -35,10 +35,10 @@
             "ref": "a9f2463b9f73efe74482f831f03a204a41328555"
         },
         "files": [
-            "./config/packages/doctrine.yaml",
-            "./config/packages/prod/doctrine.yaml",
-            "./src/Entity/.gitignore",
-            "./src/Repository/.gitignore"
+            "config/packages/doctrine.yaml",
+            "config/packages/prod/doctrine.yaml",
+            "src/Entity/.gitignore",
+            "src/Repository/.gitignore"
         ]
     },
     "doctrine/doctrine-migrations-bundle": {
@@ -50,8 +50,8 @@
             "ref": "c1431086fec31f17fbcfe6d6d7e92059458facc1"
         },
         "files": [
-            "./config/packages/doctrine_migrations.yaml",
-            "./src/Migrations/.gitignore"
+            "config/packages/doctrine_migrations.yaml",
+            "src/Migrations/.gitignore"
         ]
     },
     "doctrine/event-manager": {
@@ -215,7 +215,7 @@
         "version": "v5.0.7"
     },
     "symfony/doctrine-bridge": {
-        "version": "v5.0.7"
+        "version": "v5.0.8"
     },
     "symfony/dom-crawler": {
         "version": "v5.0.7"

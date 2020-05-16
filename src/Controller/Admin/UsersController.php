@@ -4,7 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Entity\PoradniaInfo;
-use App\Form\AddUserType;
+use App\Form\UserType;
 use App\Repository\PoradniaInfoRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
@@ -55,7 +55,7 @@ class UsersController extends AbstractController
     public function add_user(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
-        $form = $this->createForm(AddUserType::class, $user);
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -77,7 +77,7 @@ class UsersController extends AbstractController
             return $this->redirectToRoute('admin.users');
         }
         return $this->render('admin_panel/users/user_add.html.twig', [
-            'addUserForm' => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 
