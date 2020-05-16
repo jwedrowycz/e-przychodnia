@@ -4,7 +4,6 @@ namespace App\Controller\Admin;
 
 use App\Entity\Unit;
 use App\Entity\Clinic;
-use App\Entity\WorkTime;
 use App\Form\UnitType;
 use App\Repository\DoctorRepository;
 use App\Repository\UnitRepository;
@@ -53,7 +52,6 @@ class UnitController extends AbstractController
     public function add($idClinic, Request $request, DoctorRepository $doctorRepo, ClinicRepository $clinicRepo): Response
     {
         $doctors = $doctorRepo->findAllExceptAlreadyIn($idClinic);
-        // $doctore = $doctorRepo->findAll();
         $clinic = $clinicRepo->find($idClinic);
         $unit = new Unit();
         $form = $this->createForm(UnitType::class, $unit);
@@ -68,13 +66,13 @@ class UnitController extends AbstractController
     /**
      * @Route("/utworz/{idDoctor}/{idClinic}", name="unit_create")
      */
-    public function create($idDoctora, $idClinic)
+    public function create($idDoctor, $idClinic)
     {
         $unit = new Unit();
 
 
         $entityManager = $this->getDoctrine()->getManager();
-        $doctor = $entityManager->getRepository('App:Doctor')->find($idDoctora);
+        $doctor = $entityManager->getRepository('App:Doctor')->find($idDoctor);
         $clinic = $entityManager->getRepository('App:Clinic')->find($idClinic);
 
         $unit->setDoctor($doctor);
@@ -83,7 +81,7 @@ class UnitController extends AbstractController
         $entityManager->flush();
         $this->addFlash(
             'success',
-            'Pomyślnie przypisano doctora do poradni'
+            'Pomyślnie przypisano lekarza do poradni'
         );
         return $this->redirectToRoute('admin.unit_show', [
             'id'=>$idClinic
@@ -101,9 +99,9 @@ class UnitController extends AbstractController
 
 
 
-        $unit = $entityManager->getRepository('Unit')->findOneBy([
-            'idClinic' => $idClinic,
-            'idDoctor' => $idDoctor
+        $unit = $entityManager->getRepository('App:Unit')->findOneBy([
+            'clinic' => $idClinic,
+            'doctor' => $idDoctor
         ]);
 
         $entityManager->remove($unit);

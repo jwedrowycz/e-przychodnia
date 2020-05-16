@@ -12,7 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table(name="clinic")
  * @ORM\Entity(repositoryClass="App\Repository\ClinicRepository")
- * @UniqueEntity(fields={"name"}, message="Taka clinic już istnieje")
+ * @UniqueEntity(fields={"name"}, message="Taka poradnia już istnieje")
  */
 class Clinic
 {

@@ -28,7 +28,7 @@ class VisitController extends AbstractController
     public function index(UnitRepository $unitRepo, ClinicRepository $clinicRepo)
     {   
 
-        $units = $unitRepo->findAllWithPoradniaAndLekarz();
+        $units = $unitRepo->findAllWithClinicAndDoctor();
         $clinics = $clinicRepo->findAllOrderedByName();
         
         return $this->render('visit/index.html.twig', [
@@ -41,23 +41,23 @@ class VisitController extends AbstractController
     /**
      * @Route("/wybor/{id}", name="visit_choose")
      */
-    public function choose($id, Request $request, UnitRepository $unitRepo, ClinicRepository $clinicRepo, WorkTimeRepository $workTimeRepo)
+    public function choose($id, UnitRepository $unitRepo, ClinicRepository $clinicRepo, WorkTimeRepository $workTimeRepo)
     {   
         $clinic = $clinicRepo->find($id);
         $unit = $unitRepo->findAllByJoinedId($id);
         // $j = $unitRepo->findOneById(16);
-        return $this->render('visit/wybor.html.twig', [
+        return $this->render('visit/choice.html.twig', [
             'clinic' => $clinic,
             'unit' => $unit,
         ]);
     }
 
     
-    public function work_time_show($idClinic, $idUnit, Request $request, WorkTimeRepository $workTimeRepo, ClinicRepository $clinicRepo)
+    public function work_time_show($idClinic, $idUnit, WorkTimeRepository $workTimeRepo, ClinicRepository $clinicRepo)
     {   
         $clinic = $clinicRepo->find($idClinic);
         $time = $workTimeRepo->findAllWithLekarzData($idUnit);
-        return $this->render('visit/_time.html.twig', [
+        return $this->render('visit/_worktime.html.twig', [
             'clinic' => $clinic,
             'time' => $time
         ]);
@@ -65,13 +65,13 @@ class VisitController extends AbstractController
     
     
     /**
-     * @Route("/terminy/{id}", name="visit_terminy")
+     * @Route("/terminy/{id}", name="visit_terms")
      */
-    public function terminy_show($id, WorkTimeRepository $workTimeRepo){
+    public function terms_show($id, WorkTimeRepository $workTimeRepo){
         $workTime = $workTimeRepo->findBy([
             'unit' => $id
         ]);
-        return $this->render('visit/terminy.html.twig',[
+        return $this->render('visit/terms.html.twig',[
             'id' => $id,
             'workTime' => $workTime
         ]);
@@ -84,20 +84,20 @@ class VisitController extends AbstractController
         $visit = new Visit();
         
         $unit = $unitRepo->find($id);
-        $lekarz = $unit->getIdLekarza();
-        $clinic = $unit->getIdPoradni();
-        $start = $request->query->get('poczatek');
-        $end = $request->query->get('koniec');
+        $doctor = $unit->getDoctor();
+        $clinic = $unit->getClinic();
+        $start = $request->query->get('start');
+        $end = $request->query->get('end');
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $form = $this->createForm(VisitType::class, $visit);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
             $entityManager = $this->getDoctrine()->getManager();
-            $visit->setJednostka($unit);
-            $visit->setPacjent($user);
-            $visit->setRozpoczecie(new \DateTime($start));
-            $visit->setZakonczenie(new \DateTime($end));
+            $visit->setUnit($unit);
+            $visit->setUser($user);
+            $visit->setStart(new \DateTime($start));
+            $visit->setEnd(new \DateTime($end));
             $entityManager->persist($visit);
             $entityManager->flush();
             $this->addFlash(
@@ -107,9 +107,9 @@ class VisitController extends AbstractController
             return $this->redirectToRoute('visit');
             
         }
-        return $this->render('visit/rezerwuj.html.twig', [
+        return $this->render('visit/reservation.html.twig', [
             'clinic' => $clinic,
-            'doctor' => $lekarz,
+            'doctor' => $doctor,
             'unit' => $unit,
             'start' => $start,
             'end' => $end,

@@ -81,7 +81,7 @@ class WorkTime
 
     public function getDay(): ?int
     {
-        return $this->unit;
+        return $this->day;
     }
 
     public function setDay(int $day): self

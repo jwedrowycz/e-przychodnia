@@ -17,7 +17,7 @@
                 'admin.poradnie',
                 'admin.poradnia_add',
                 ] %} 
-                class="active"{% endif %}  href="{{ path('admin.poradnie') }}">Poradnie</a>
+                class="active"{% endif %}  href="{{ path('admin.clinics_show') }}">Poradnie</a>
                 <a {% if app.request.attributes.get('_route') in [
                 'admin.unit',
                 'admin.jednostka_show',
@@ -28,7 +28,7 @@
                 'admin.lekarze',
                 'admin.lekarz_add',
                 ] %}
-                class="active"{% endif %}  href="{{ path('admin.lekarze') }}">Lekarze</a>
+                class="active"{% endif %}  href="{{ path('admin.doctors') }}">Lekarze</a>
             <a {% if app.request.attributes.get('_route') in [
                 'admin.visit',
                 ] %}

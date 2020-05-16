@@ -38,13 +38,13 @@ class WorkTimeRepository extends ServiceEntityRepository
     {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
-            'SELECT c.id, c.day, c.start, c.end, l.name l.last_name
-            FROM App\Entity\WorkTime c
-            JOIN c.unit j
-            JOIN j.doctor
+            'SELECT w.id, w.day, w.start, w.end, d.name, d.last_name
+            FROM App\Entity\WorkTime w
+            JOIN w.unit u
+            JOIN u.doctor d
             
-            WHERE c.unit = :id
-            ORDER BY c.day ASC'
+            WHERE w.unit = :id
+            ORDER BY w.day ASC'
         )->setParameter('id', $unitId);
 
         return $query->getResult();

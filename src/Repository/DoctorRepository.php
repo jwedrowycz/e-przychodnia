@@ -31,7 +31,7 @@ class DoctorRepository extends ServiceEntityRepository
             WHERE d.id NOT IN 
                 (SELECT IDENTITY(u.doctor)
                 FROM App\Entity\Unit u
-                WHERE u.id_poradni = :id)'
+                WHERE u.clinic = :id)'
         )->setParameter('id', $clinicId);
 
         return $query->getResult();

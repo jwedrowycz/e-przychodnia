@@ -3,10 +3,11 @@
 namespace App\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Form\WorkTimeFormType;
+use App\Form\WorkTimeType;
 use App\Entity\WorkTime;
 use App\Entity\Unit;
 use App\Repository\UnitRepository;
+use App\Repository\WorkTimeRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,7 +24,7 @@ class WorkTimeController extends AbstractController
     {   
 
         $time = new WorkTime();
-        $form = $this->createForm(WorkTimeFormType::class, $time);
+        $form = $this->createForm(WorkTimeType::class, $time);
         $request = $requestStack->getMasterRequest();
         
         $form->handleRequest($request);
@@ -32,7 +33,7 @@ class WorkTimeController extends AbstractController
         
         if ($form->isSubmitted() && $form->isValid()) {
             
-            $unit = $entityManager->getRepository('Unit.php')->find($id);
+            $unit = $entityManager->getRepository('App:Unit')->find($id);
 
             $time->setUnits($unit);
             $entityManager->persist($time);
@@ -64,14 +65,14 @@ class WorkTimeController extends AbstractController
         
         $timeGet = new WorkTime();
 
-        $form = $this->createForm(WorkTimeFormType::class, $timeGet);
+        $form = $this->createForm(WorkTimeType::class, $timeGet);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             
-            $unitId = $entityManager->getRepository('Unit.php')->find($id);
+            $unitId = $entityManager->getRepository('App:Unit')->find($id);
 
-            $timeGet->setUnits($unitId);
+            $timeGet->setUnit($unitId);
             $entityManager->persist($timeGet);
             $entityManager->flush();
 
@@ -92,7 +93,7 @@ class WorkTimeController extends AbstractController
      /**
      * @Route("/work_time/delete/{id}/{idUnit}", name="work_time-delete")
      */
-    public function delete($id, $idUnit, WorkTime $time)
+    public function delete($idUnit, WorkTime $time)
     {   
 
         

@@ -1,39 +1,39 @@
     {{ form_start(form, {'attr': {'class': 'form', 'autocomplete':'off'}}) }}
         <div class="form-item-col">
-            {{ form_label(form.imie, 'Imię', {'attr': {'class' : 'form-label'}} ) }}
-            {% if form_errors(form.imie) %}
-                {{ form_widget(form.imie, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+            {{ form_label(form.name, 'Imię', {'attr': {'class' : 'form-label'}} ) }}
+            {% if form_errors(form.name) %}
+                {{ form_widget(form.name, {'attr': {'class' : 'form-input form-input--error'}} ) }}
             {% else %}
-                {{ form_widget(form.imie, {'attr': {'class' : 'form-input'}} ) }}
+                {{ form_widget(form.name, {'attr': {'class' : 'form-input'}} ) }}
             {% endif %}
-            <span class="form-error">{{ form_errors(form.imie) }}</span>
+            <span class="form-error">{{ form_errors(form.name) }}</span>
         </div>
         <div class="form-item-col">
-            {{ form_label(form.nazwisko, 'Nazwisko', {'attr': {'class' : 'form-label'}} ) }}
-            {% if form_errors(form.nazwisko) %}
-                {{ form_widget(form.nazwisko, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+            {{ form_label(form.lastName, 'Nazwisko', {'attr': {'class' : 'form-label'}} ) }}
+            {% if form_errors(form.lastName) %}
+                {{ form_widget(form.lastName, {'attr': {'class' : 'form-input form-input--error'}} ) }}
             {% else %}
-                {{ form_widget(form.nazwisko, {'attr': {'class' : 'form-input'}} ) }}
+                {{ form_widget(form.lastName, {'attr': {'class' : 'form-input'}} ) }}
             {% endif %}
-            <span class="form-error">{{ form_errors(form.nazwisko) }}</span>
+            <span class="form-error">{{ form_errors(form.lastName) }}</span>
         </div>
         <div class="form-item-col">
-            {{ form_label(form.numerPWZ, 'NumerPWZ', {'attr': {'class' : 'form-label'}} ) }}
-            {% if form_errors(form.numerPWZ) %}
-                {{ form_widget(form.numerPWZ, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+            {{ form_label(form.numPwz, 'NumerPWZ', {'attr': {'class' : 'form-label'}} ) }}
+            {% if form_errors(form.numPwz) %}
+                {{ form_widget(form.numPwz, {'attr': {'class' : 'form-input form-input--error'}} ) }}
             {% else %}
-                {{ form_widget(form.numerPWZ, {'attr': {'class' : 'form-input'}} ) }}
+                {{ form_widget(form.numPwz, {'attr': {'class' : 'form-input'}} ) }}
             {% endif %}
-            <span class="form-error">{{ form_errors(form.numerPWZ) }}</span>
+            <span class="form-error">{{ form_errors(form.numPwz) }}</span>
         </div>
         <div class="form-item-col">
-            {{ form_label(form.specjalizacja, 'Specjalizacja', {'attr': {'class' : 'form-label'}} ) }}
-            {% if form_errors(form.specjalizacja) %}
-                {{ form_widget(form.specjalizacja, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+            {{ form_label(form.spec, 'Specjalizacja', {'attr': {'class' : 'form-label'}} ) }}
+            {% if form_errors(form.spec) %}
+                {{ form_widget(form.spec, {'attr': {'class' : 'form-input form-input--error'}} ) }}
             {% else %}
-                {{ form_widget(form.specjalizacja, {'attr': {'class' : 'form-input'}} ) }}
+                {{ form_widget(form.spec, {'attr': {'class' : 'form-input'}} ) }}
             {% endif %}
-            <span class="form-error">{{ form_errors(form.specjalizacja) }}</span>
+            <span class="form-error">{{ form_errors(form.spec) }}</span>
         </div>
         <div class="form-item-col">
             {{ form_label(form.status, 'Status lekarza', {'attr': {'class' : 'form-label'}} ) }}

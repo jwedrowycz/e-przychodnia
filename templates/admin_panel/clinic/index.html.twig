@@ -21,14 +21,14 @@
     {% for c in clinics %}
         <tr>
             <td>{{ c.id }}</td>
-            <td><a class="link-blue" href="{{ path('admin.unit_show', {id: c.id}) }}">{{ c.nazwa }}</a></td>
+            <td><a class="link-blue" href="{{ path('admin.unit_show', {id: c.id}) }}">{{ c.name }}</a></td>
 {#            <td>#}
 {#                <a class="delete" href="{{ path('admin.poradnia_delete', {id: clinic.id}) }}">Usuń</a>#}
 {#            </td>#}
         </tr>
     {% endfor %}
     </table>
-    <a href="{{ path('admin.poradnia_add') }}">Dodaj poradnie</a>
+    <a href="{{ path('admin.clinic_add') }}">Dodaj poradnie</a>
 
 {% endblock content %}
 

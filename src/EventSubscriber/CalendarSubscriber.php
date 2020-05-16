@@ -66,7 +66,7 @@ class CalendarSubscriber implements EventSubscriberInterface
              * and: https://github.com/fullcalendar/fullcalendar/blob/master/src/core/options.ts
              */
 
-            $wizytaEvent->setOptions([
+            $visitEvent->setOptions([
                 'backgroundColor' => 'red',
                 'borderColor' => 'darkred',
             ]);

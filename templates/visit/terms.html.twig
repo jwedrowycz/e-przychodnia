@@ -43,11 +43,11 @@
         },
        
         businessHours: [ // specify an array instead
-        {% for c in czasPracy %}
+        {% for t in workTime %}
         {   
-            daysOfWeek: [ {{ c.dzien }}],
-            startTime: '{{c.start|date("H:i")}}', 
-            endTime: '{{c.koniec|date("H:i")}}' 
+            daysOfWeek: [ {{ t.day }}],
+            startTime: '{{t.start|date("H:i")}}',
+            endTime: '{{t.end|date("H:i")}}'
         },
        {% endfor %}
         ],   
@@ -84,8 +84,8 @@
             
             var start = moment(info.startStr).format('YYYY-MM-DD HH:mm');
             var end = moment(info.endStr).format('YYYY-MM-DD HH:mm');
-            var root_url="{{path('wizyta_add', {'id':id})}}";
-            window.location = root_url+'?poczatek='+start+'&koniec='+end; 
+            var root_url="{{path('visit_add', {'id':id})}}";
+            window.location = root_url+'?start='+start+'&end='+end;
     }
     });
     calendar.render();

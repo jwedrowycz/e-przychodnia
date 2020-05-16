@@ -24,14 +24,14 @@
     {% for doctor in doctors %}
         <td>{{ doctor.unit }}</td>
         <td>{{ doctor.id }}</td>
-        <td>{{ doctor.numPwz }}</td>
-        <td>{{ doctor.lastName ~ ' ' ~ doctor.name }}</td>
+        <td>{{ doctor.num_pwz }}</td>
+        <td>{{ doctor.last_name ~ ' ' ~ doctor.name }}</td>
         <td>{{ doctor.spec }}</td>
         <td>
             <a class="link-blue" href="{{ path('admin.work_time', {'id': doctor.unit}) }}">Czas pracy</a>
         </td>
         <td>
-            <a class="delete" href="{{ path('admin.unit_delete', {'idDoctor': doctor.id, idClinic: clinic.id}) }}">Usuń</a>
+            <a class="delete" href="{{ path('admin.unit_delete', {'idDoctor': doctor.id, 'idClinic': clinic.id}) }}">Usuń</a>
         </td>
         </tr>
     {% endfor %}

@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 <div class="container">
-    <h1>{{poradnia.nazwa}}</h12>
-    <h2>{{lekarz.imie ~ ' ' ~ lekarz.nazwisko}}</h2>
+    <h1>{{ clinic.name }}</h12>
+    <h2>{{doctor.name ~ ' ' ~ doctor.lastName}}</h2>
     <h2>Data</h2>
     <p>{{start|format_datetime('short', 'none',locale='pl')}}</p>
     <h2>Godzina rozpoczęcia</h2>

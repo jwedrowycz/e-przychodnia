@@ -14,7 +14,7 @@ class DoctorType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('last_name')
+            ->add('lastName')
             ->add('numPwz')
             ->add('spec')
             ->add('status', ChoiceType::class, [

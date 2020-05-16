@@ -146,7 +146,7 @@ class User implements UserInterface
     private $voivodeship;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Visit", mappedBy="user)
+     * @ORM\OneToMany(targetEntity="App\Entity\Visit", mappedBy="user")
      */
     private $visit;
 
@@ -338,12 +338,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getgender(): ?string
+    public function getGender(): ?string
     {
         return $this->gender;
     }
 
-    public function setgender(?string $gender): self
+    public function setGender(?string $gender): self
     {
         $this->gender = $gender;
 

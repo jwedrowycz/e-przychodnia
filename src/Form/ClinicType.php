@@ -15,8 +15,6 @@ class ClinicType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [])
-                // 'attr' => ['pattern' => '/[a-zA-Z]^/']])
-            ->add('submit', SubmitType::class)
         ;
     }
 

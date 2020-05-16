@@ -9,23 +9,26 @@
         <th>Nazwa jednostki</th>
         <th>Lekarz</th>
         <th>Pacjent</th>
+        <th>Email</th>
+        <th>Telefon</th>
         <th>Data wizyty</th>
         <th>Godzina rozpoczęcia</th>
         <th>Godzina zakończenia</th>
         
 
     </tr>
+    {% for v in visit %}
     <tr>
-{% for v in visit %}
-    <td>{{ v.id }}</td>
-    <td>{{ v.name }}</td> 
-    <td>{{ v.d_name ~ ' ' ~ v.d_lastName }}</td>
-    <td>{{ v.u_name ~ ' ' ~ v.u_lastName }}</td>
-    <td>{{ v.start|date('d-m-Y') }}</td>
-    <td>{{ v.start|date('H:i') }}</td>
-    <td>{{ v.end|date('H:i') }}</td>
-    
+        <td>{{ v.id }}</td>
+        <td>{{ v.c_name }}</td>
+        <td>{{ v.d_name ~ ' ' ~ v.d_lastName }}</td>
+        <td>{{ v.u_name ~ ' ' ~ v.u_lastName }}</td>
+        <td>{{ v.email }}</td>
+        <td>{{ v.num_phone }}</td>
+        <td>{{ v.start|date('d-m-Y') }}</td>
+        <td>{{ v.start|date('H:i') }}</td>
+        <td>{{ v.end|date('H:i') }}</td>
     </tr>
-{% endfor %}
+    {% endfor %}
 </table>
 {% endblock content %}

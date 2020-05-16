@@ -13,16 +13,16 @@
         {% endfor %}
     {% endfor %}
     
-    <div class="container-poradnie">
-            {% for p in poradnie %}
-                <div class="poradnia-card">
-                    <div class="poradnie-item">
-                        <h3>{{ p.nazwa }}<a href="{{ path('wizyta_choose', {'id': p.id}) }}" hidden></a></h3>
+    <div class="clinics-container">
+            {% for c in clinics %}
+                <div class="clinic-card">
+                    <div class="clinics-item">
+                        <h3>{{ c.name }}<a href="{{ path('visit_choose', {'id': c.id}) }}" hidden></a></h3>
                         <ul>
-                        {% for j in jednostki %}
+                        {% for u in units %}
                             
-                            {% if p.nazwa == j.nazwa %}
-                                <li>{{ j.imie ~ ' ' ~ j.nazwisko}}</li>
+                            {% if c.name == u.name %}
+                                <li>{{ u.d_name ~ ' ' ~ u.last_name}}</li>
                             {% endif %}
                         {% endfor %}
                         </ul>

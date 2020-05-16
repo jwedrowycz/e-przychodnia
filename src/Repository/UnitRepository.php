@@ -33,19 +33,19 @@ class UnitRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    public function findOneById($unitId)
-    {
-        $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery(
-            'SELECT  d.last_name, d.name, d.num_pwz, d.spec, c.name
-            FROM App\Entity\Unit j
-            INNER JOIN u.doctor d
-            INNER JOIN u.clinic c
-            WHERE u.id = :id'
-        )->setParameter('id', $unitId);
-
-        return $query->getResult();
-    }
+//    public function findOneById($unitId)
+//    {
+//        $entityManager = $this->getEntityManager();
+//        $query = $entityManager->createQuery(
+//            'SELECT  d.last_name, d.name, d.num_pwz, d.spec, c.name
+//            FROM App\Entity\Unit j
+//            INNER JOIN u.doctor d
+//            INNER JOIN u.clinic c
+//            WHERE u.id = :id'
+//        )->setParameter('id', $unitId);
+//
+//        return $query->getResult();
+//    }
 
     public function findAllJoined()
     {
@@ -63,7 +63,7 @@ class UnitRepository extends ServiceEntityRepository
     {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
-            'SELECT d.name, d.last_name, c.name
+            'SELECT d.name as d_name, d.last_name, c.name
             FROM App\Entity\Unit u
             JOIN u.doctor d
             JOIN u.clinic c'

@@ -1,7 +1,0 @@
-<ul>
-{% for c in czas %}
-<li>
-{{ nameOfDay(c.dzien) ~ ' ' ~ c.start|date("H:i") ~ ' ' ~ c.koniec|date("H:i")}}
-</li>
-{% endfor %}
-</ul>

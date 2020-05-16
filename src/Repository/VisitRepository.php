@@ -24,7 +24,7 @@ class VisitRepository extends ServiceEntityRepository
     {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
-            'SELECT w
+            'SELECT v
             FROM App\Entity\Visit v
             WHERE (v.start BETWEEN :start AND :end OR v.end BETWEEN :start and :end)
             AND v.unit = :id
@@ -42,7 +42,7 @@ class VisitRepository extends ServiceEntityRepository
     {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
-            'SELECT v.id, v.start, v.end, us.email, us.name as u_imie, us.last_name as u_nazwisko, us.PESEL, c.nazwa, d.name as d_imie, d.last_name as d_nazwisko
+            'SELECT v.id, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
             FROM App\Entity\Visit v
             JOIN v.user us      
             JOIN v.unit u 

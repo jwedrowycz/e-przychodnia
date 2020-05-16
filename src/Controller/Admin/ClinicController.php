@@ -50,7 +50,7 @@ class ClinicController extends AdminPanelController
             'success',
             'Poradnia została pomyślnie dodana'
         );
-            return $this->redirectToRoute('admin.show');
+            return $this->redirectToRoute('admin.clinics_show');
 
         }
 

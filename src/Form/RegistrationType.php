@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class RegistrationFormType extends AbstractType
+class RegistrationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -28,29 +28,29 @@ class RegistrationFormType extends AbstractType
                 'required' => false,
                 
             ])
-            ->add('imie', TextType::class, [
+            ->add('name', TextType::class, [
                 'required' => false,
                
             ])
-            ->add('nazwisko', TextType::class, [
+            ->add('lastName', TextType::class, [
                 'required' => false,
             ])
             ->add('PESEL', TextType::class, [
                 'required' => false,
             ])
-            ->add('telefon', TextType::class, [
+            ->add('numPhone', TextType::class, [
                 'required' => false,
             ])
-            ->add('adres_zamieszkania', TextType::class, [
+            ->add('address', TextType::class, [
                 'required' => false,
             ])
-            ->add('miasto', TextType::class, [
+            ->add('city', TextType::class, [
                 'required' => false,
             ])
-            ->add('kod_pocztowy', TextType::class, [
+            ->add('postCode', TextType::class, [
                 'required' => false,
             ])
-            ->add('wojewodztwo', ChoiceType::class, [
+            ->add('voivodeship', ChoiceType::class, [
                 'choices' => [ 'Wybierz województwo' => '',
                    'dolnośląskie' => 'dolnośląskie',
                    'kujawsko' => 'kujawsko-omorskie',
@@ -71,13 +71,13 @@ class RegistrationFormType extends AbstractType
                 ],
                 'required'   => false,
                 ])
-            ->add('data_urodzenia', DateType::class, [
+            ->add('birthday', DateType::class, [
                 'widget' => 'single_text',
                 'required' => false,
                 // 'format' => 'dd/mm/yyyy',
                 // 'html5' => false
             ])
-            ->add('plec', ChoiceType::class, [
+            ->add('gender', ChoiceType::class, [
                 'choices' => [
                             'Wybierz płeć' => '',
                             'Mężczyzna' => 'Mężczyzna',

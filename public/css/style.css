@@ -336,7 +336,7 @@ body {
 
 /* ------------------ PORADNIE CONTAINER ---------- */
 
-.container-poradnie {
+.clinics-container{
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 0.5fr;
@@ -345,18 +345,18 @@ body {
     
 }
 
-.poradnia-card {
+.clinic-card {
     background-color: #EAEAEA;
     /* border-radius: 5px; */
 
 }
-.poradnia-card:hover {
+.clinic-card:hover {
     background-color: gray;
     cursor: pointer;
     transition: background 0.5s, border-color 0.5s, color 0.5s;
 }
 
-.poradnie-item {
+.clinics-item {
     padding: 15px 15px;
 }
 

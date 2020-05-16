@@ -22,7 +22,7 @@ class UserType extends AbstractType
         $builder
             ->add('email')
             ->add('name')
-            ->add('lastName')
+            ->add('last_name')
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'mapped' => false,

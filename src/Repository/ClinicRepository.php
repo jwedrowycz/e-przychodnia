@@ -4,7 +4,6 @@
 namespace App\Repository;
 
 use App\Entity\Clinic;
-use App\Entity\Lekarz;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -27,7 +26,7 @@ class ClinicRepository extends ServiceEntityRepository
     {
         return $this->getEntityManager()
             ->createQuery(
-                'SELECT clinic FROM App:Clinic clinic ORDER BY clinic.nazwa ASC'
+                'SELECT clinic FROM App:Clinic clinic ORDER BY clinic.name ASC'
             )
             ->getResult();
     }
