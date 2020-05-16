@@ -24,15 +24,15 @@
     {% for u in unit %}
         <td>{{ u.unit }}</td>
         <td>{{ u.id }}</td>
-        <td>{{ u.numerPWZ }}</td>
-        <td>{{ u.nazwisko ~ ' ' ~ u.imie }}</td>
-        <td>{{ u.specjalizacja }}</td>
-        <td>{{ u.poradniaNazwa }}</td>
+        <td>{{ u.numPwz }}</td>
+        <td>{{ u.lastName ~ ' ' ~ u.name }}</td>
+        <td>{{ u.spec }}</td>
+        <td>{{ u.clinicName }}</td>
         <td>
             <a class="link-blue" href="{{ path('admin.work_time', {'id': u.unit}) }}">Czas pracy</a>
         </td>
         <td>
-            <a class="delete" href="{{ path('admin.unit_delete', {'idDoctor': u.id, 'idClinic': u.clinicId}) }}">Usuń</a>
+            <a class="delete" href="{{ path('admin.unit_delete', {'idDoctor': u.id, 'idClinic': u.idClinic}) }}">Usuń</a>
         </td>
         </tr>
     {% endfor %}

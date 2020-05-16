@@ -3,9 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
-use App\Entity\PoradniaInfo;
+use App\Entity\Clinic;
 use App\Form\UserType;
-use App\Repository\PoradniaInfoRepository;
+use App\Repository\ClinicRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -95,7 +95,7 @@ class UsersController extends AbstractController
     }
 
     /**
-     * @Route("/poradnia/users/delete/{id}", name="user_delete")
+     * @Route("/clinic/users/delete/{id}", name="user_delete")
      */
     public function user_delete(User $user)
     {

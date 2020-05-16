@@ -8,7 +8,7 @@
         </div>
     {% endfor %}
 {% endfor %}
-    <h1>{{ clinic.nazwa }}</h1>
+    <h1>{{ clinic.name }}</h1>
      <h1>Lekarze</h1>
     <table class="admin-table">
         <tr>
@@ -24,9 +24,9 @@
     {% for doctor in doctors %}
         <td>{{ doctor.unit }}</td>
         <td>{{ doctor.id }}</td>
-        <td>{{ doctor.numerPWZ }}</td>
-        <td>{{ doctor.nazwisko ~ ' ' ~ doctor.imie }}</td>
-        <td>{{ doctor.specjalizacja }}</td>
+        <td>{{ doctor.numPwz }}</td>
+        <td>{{ doctor.lastName ~ ' ' ~ doctor.name }}</td>
+        <td>{{ doctor.spec }}</td>
         <td>
             <a class="link-blue" href="{{ path('admin.work_time', {'id': doctor.unit}) }}">Czas pracy</a>
         </td>
@@ -37,5 +37,5 @@
     {% endfor %}
     </table>
 
-    <a href="{{ path('admin.unit_add', {'idPoradni': clinic.id}) }} ">Dodaj lekarza do poradni</a>
+    <a href="{{ path('admin.unit_add', {'idClinic': clinic.id}) }} ">Dodaj lekarza do poradni</a>
 {% endblock content %}

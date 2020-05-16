@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container">
+    <h1>{{poradnia.nazwa}}</h12>
+    <h2>{{lekarz.imie ~ ' ' ~ lekarz.nazwisko}}</h2>
+    <h2>Data</h2>
+    <p>{{start|format_datetime('short', 'none',locale='pl')}}</p>
+    <h2>Godzina rozpoczęcia</h2>
+    <p>{{start|format_datetime('none', 'short',locale='pl')}}</p>
+    <h2>Przewidywana godzina zakończenia</h2>
+    <p>{{end|format_datetime('none', 'short', locale='pl')}}</p>
+    {{ form_start(form) }}
+    {{ form_widget(form.submit, {'attr':{'class':'form-btn'}})}}
+    {{ form_end(form)}}
+</div>
+
+
+{% endblock %}

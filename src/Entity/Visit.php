@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\WizytaRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\VisitRepository")
  */
 class Visit
 {
@@ -18,26 +18,26 @@ class Visit
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="Unit.php", inversedBy="wizyta")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Unit", inversedBy="visit")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $jednostka;
+    private $unit;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="wizyta")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="visit")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $pacjent;
+    private $user;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $rozpoczecie;
+    private $start;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $zakonczenie;
+    private $end;
 
 
     public function getId(): ?int
@@ -45,51 +45,51 @@ class Visit
         return $this->id;
     }
 
-    public function getJednostka(): ?Unit
+    public function getUnit(): ?Unit
     {
-        return $this->jednostka;
+        return $this->unit;
     }
 
-    public function setJednostka(?Unit $jednostka): self
+    public function setUnit(?Unit $unit): self
     {
-        $this->jednostka = $jednostka;
+        $this->unit = $unit;
 
         return $this;
     }
 
-    public function getPacjent(): ?User
+    public function getUser(): ?User
     {
-        return $this->pacjent;
+        return $this->user;
     }
 
-    public function setPacjent(?User $pacjent): self
+    public function setUser(?User $user): self
     {
-        $this->pacjent = $pacjent;
+        $this->user = $user;
 
         return $this;
     }
 
 
-    public function getRozpoczecie(): ?\DateTimeInterface
+    public function getStart(): ?\DateTimeInterface
     {
-        return $this->rozpoczecie;
+        return $this->start;
     }
 
-    public function setRozpoczecie(\DateTimeInterface $rozpoczecie): self
+    public function setStart(\DateTimeInterface $start): self
     {
-        $this->rozpoczecie = $rozpoczecie;
+        $this->start = $start;
 
         return $this;
     }
 
-    public function getZakonczenie(): ?\DateTimeInterface
+    public function getEnd(): ?\DateTimeInterface
     {
-        return $this->zakonczenie;
+        return $this->end;
     }
 
-    public function setZakonczenie(\DateTimeInterface $zakonczenie): self
+    public function setEnd(\DateTimeInterface $end): self
     {
-        $this->zakonczenie = $zakonczenie;
+        $this->end = $end;
 
         return $this;
     }

@@ -22,7 +22,7 @@ class CalendarSubscriber implements EventSubscriberInterface
     private $request;
 
     public function __construct(
-        WizytaRepository $visitRepo,
+        VisitRepository $visitRepo,
         UrlGeneratorInterface $router,
         RequestStack $requestStack
         

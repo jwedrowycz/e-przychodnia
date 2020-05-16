@@ -41,7 +41,7 @@ class UnitController extends AbstractController
             ->getRepository(Unit::class)
             ->findAllByJoinedId($id);
         return $this->render('admin_panel/unit/show.html.twig',[
-            'doctore' => $unit,
+            'doctors' => $unit,
             'clinic' => $clinic,
         ]);
 
@@ -52,7 +52,7 @@ class UnitController extends AbstractController
      */
     public function add($idClinic, Request $request, DoctorRepository $doctorRepo, ClinicRepository $clinicRepo): Response
     {
-        $doctore = $doctorRepo->findAllExceptAlreadyIn($idClinic);
+        $doctors = $doctorRepo->findAllExceptAlreadyIn($idClinic);
         // $doctore = $doctorRepo->findAll();
         $clinic = $clinicRepo->find($idClinic);
         $unit = new Unit();
@@ -60,7 +60,7 @@ class UnitController extends AbstractController
         $form->handleRequest($request);
 
         return $this->render('admin_panel/unit/add.html.twig', [
-            'doctore' => $doctore,
+            'doctors' => $doctors,
             'clinic' => $clinic
         ]);
 
@@ -77,8 +77,8 @@ class UnitController extends AbstractController
         $doctor = $entityManager->getRepository('App:Doctor')->find($idDoctora);
         $clinic = $entityManager->getRepository('App:Clinic')->find($idClinic);
 
-        $unit->setIdLekarza($doctor);
-        $unit->setIdPoradni($clinic);
+        $unit->setDoctor($doctor);
+        $unit->setClinic($clinic);
         $entityManager->persist($unit);
         $entityManager->flush();
         $this->addFlash(
