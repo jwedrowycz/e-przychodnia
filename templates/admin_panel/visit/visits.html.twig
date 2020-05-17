@@ -2,7 +2,14 @@
 
 {% block title %} Wizyty {% endblock %}
 
-{% block content %} 
+{% block content %}
+    {% for label, messages in app.flashes(['success', 'fail']) %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
 <table class="admin-table">
     <tr>
         <th>Id wizyty</th>
@@ -14,7 +21,9 @@
         <th>Data wizyty</th>
         <th>Godzina rozpoczęcia</th>
         <th>Godzina zakończenia</th>
-        
+        <th>Data rejestracji</th>
+        <th>Akcje</th>
+
 
     </tr>
     {% for v in visit %}
@@ -28,6 +37,8 @@
         <td>{{ v.start|date('d-m-Y') }}</td>
         <td>{{ v.start|date('H:i') }}</td>
         <td>{{ v.end|date('H:i') }}</td>
+        <td>{{ v.submit_date|date('d-m-Y H:i:s') }}</td>
+        <td><a class="delete" href="{{ path('admin.visit_delete', {'id': v.id} ) }}">Usuń</a></td>
     </tr>
     {% endfor %}
 </table>

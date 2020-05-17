@@ -1,6 +1,13 @@
 {% extends 'admin_panel/index.html.twig' %}
 
 {% block content %}
+     {% for label, messages in app.flashes(['success', 'fail']) %}
+          {% for message in messages %}
+               <div class="flash-{{ label }}">
+                    {{ message }}
+               </div>
+          {% endfor %}
+     {% endfor %}
      <h1>{{ clinic.name }}</h1>
      <h3>Dodaj lekarza do poradni</h3>
      <table class="admin-table">
@@ -21,4 +28,5 @@
                </tr>
           {% endfor %}
      </table>
+     <a href="{{ path('admin.doctor_add') }}">Dodaj nowego lekarza</a>
 {% endblock content %}

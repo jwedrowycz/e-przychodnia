@@ -42,7 +42,7 @@ class VisitRepository extends ServiceEntityRepository
     {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
-            'SELECT v.id, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
+            'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
             FROM App\Entity\Visit v
             JOIN v.user us      
             JOIN v.unit u 
@@ -53,6 +53,19 @@ class VisitRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    public function findOverlapping($start, $end)
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT v 
+             FROM App\Entity\Visit v 
+             WHERE v.start < :end AND v.end > :start'
+        )
+            ->setParameter('start',$start)
+            ->setParameter('end', $end);
+        return $query->getResult();
+
+    }
 
     // /**
     //  * @return Visit[] Returns an array of Visit objects

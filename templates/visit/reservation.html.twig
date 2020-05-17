@@ -1,17 +1,35 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 <div class="container">
-    <h1>{{ clinic.name }}</h12>
+    {% for label, messages in app.flashes(['success', 'fail']) %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <h1>{{ clinic.name }}</h1>
     <h2>{{doctor.name ~ ' ' ~ doctor.lastName}}</h2>
-    <h2>Data</h2>
-    <p>{{start|format_datetime('short', 'none',locale='pl')}}</p>
-    <h2>Godzina rozpoczęcia</h2>
-    <p>{{start|format_datetime('none', 'short',locale='pl')}}</p>
-    <h2>Przewidywana godzina zakończenia</h2>
-    <p>{{end|format_datetime('none', 'short', locale='pl')}}</p>
+{#    <h2>Data</h2>#}
+{#    <p>{{start|format_datetime('short', 'none',locale='pl')}}</p>#}
+{#    <h2>Godzina rozpoczęcia</h2>#}
+{#    <p>{{start|format_datetime('none', 'short',locale='pl')}}</p>#}
+{#    <h2>Przewidywana godzina zakończenia</h2>#}
+{#    <p>{{end|format_datetime('none', 'short', locale='pl')}}</p>#}
     {{ form_start(form) }}
+    {{ form_errors(form) }}
+    {{ form_label(form.start, 'Planowana data wizyty') }}
+    {{ form_widget(form.start, { 'attr':{'disabled':'true'} }) }}
+{#    {{ form_label(form.start, 'Planowana godzina rozpoczęcia') }}#}
+{#    {{ form_widget(form.start, { 'attr':{'disabled':'disabled'} }) }}#}
+    {{ form_label(form.end, 'Planowana data zakończenia wizyty') }}
+    {{ form_widget(form.end, { 'attr':{'disabled':'true'} }) }}
     {{ form_widget(form.submit, {'attr':{'class':'form-btn'}})}}
+
     {{ form_end(form)}}
+
+    {{ dump(test) }}
 </div>
 
 

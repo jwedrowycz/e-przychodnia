@@ -1,6 +1,14 @@
 {% extends 'admin_panel/index.html.twig' %}
 
 {% block content %}
+    {% for label, messages in app.flashes(['success', 'fail']) %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
     <h1>Dodaj lekarza</h1>
     {{include('admin_panel/doctor/_form.html.twig')}}
     

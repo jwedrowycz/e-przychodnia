@@ -40,7 +40,6 @@ class DoctorController extends AbstractController
         $doctor = new Doctor();
         $form = $this->createForm(DoctorType::class, $doctor);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($doctor);
@@ -48,7 +47,8 @@ class DoctorController extends AbstractController
             $this->addFlash(
             'success',
             'Pomyślnie dodano doctora'
-            );
+        );
+
             return $this->redirectToRoute('admin.doctors');
 
         }

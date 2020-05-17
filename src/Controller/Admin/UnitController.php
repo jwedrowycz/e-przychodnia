@@ -47,7 +47,7 @@ class UnitController extends AbstractController
     }
 
     /**
-     * @Route("/dodaj/{idClinic}", name="unit_add")
+     * @Route("/add/{idClinic}", name="unit_add")
      */
     public function add($idClinic, Request $request, DoctorRepository $doctorRepo, ClinicRepository $clinicRepo): Response
     {
@@ -64,7 +64,7 @@ class UnitController extends AbstractController
 
     }
     /**
-     * @Route("/utworz/{idDoctor}/{idClinic}", name="unit_create")
+     * @Route("/create/{idDoctor}/{idClinic}", name="unit_create")
      */
     public function create($idDoctor, $idClinic)
     {

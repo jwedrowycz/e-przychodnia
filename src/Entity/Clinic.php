@@ -33,7 +33,7 @@ class Clinic
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Clinic", mappedBy="clinic")
+     * @ORM\OneToMany(targetEntity="App\Entity\Unit", mappedBy="clinic")
      */
     private $unit;
 

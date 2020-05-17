@@ -80,14 +80,19 @@ class VisitController extends AbstractController
     /**
      * @Route("/terminy/rezerwuj/{id}/", name="visit_add")
      */
-    public function add($id, Request $request, UnitRepository $unitRepo){
+    public function add($id, Request $request, UnitRepository $unitRepo, WorkTimeRepository $workTimeRepo){
         $visit = new Visit();
         
         $unit = $unitRepo->find($id);
+        $workTime = $workTimeRepo->findAllByUnitId($id);
         $doctor = $unit->getDoctor();
         $clinic = $unit->getClinic();
         $start = $request->query->get('start');
         $end = $request->query->get('end');
+        $start = new \DateTime($start);
+        $end = new \DateTime($end);
+        $visit->setStart($start);
+        $visit->setEnd($end);
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $form = $this->createForm(VisitType::class, $visit);
         $form->handleRequest($request);
@@ -113,6 +118,7 @@ class VisitController extends AbstractController
             'unit' => $unit,
             'start' => $start,
             'end' => $end,
+            'test' => $workTime,
             'form' => $form->createView()
         ]);
 

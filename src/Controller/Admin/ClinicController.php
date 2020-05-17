@@ -34,7 +34,7 @@ class ClinicController extends AdminPanelController
     
 
     /**
-     * @Route("/dodaj", name="clinic_add")
+     * @Route("/add", name="clinic_add")
      */
     public function clinic_add(Request $request)
     {
