@@ -20,28 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5438e20c-6ad0-4533-b32d-06fb92bf2958" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/js/calendar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/translation.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/translation.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Admin/AdminPanelController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Admin/AdminPanelController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Admin/ClinicController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Admin/ClinicController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Admin/DoctorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Admin/DoctorController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Admin/UnitController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Admin/UnitController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Admin/VisitController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Admin/VisitController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/VisitController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/VisitController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Clinic.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Clinic.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Visit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Visit.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Form/VisitType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/VisitType.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repository/VisitRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/VisitRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repository/WorkTimeRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/WorkTimeRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin_panel/doctor/add.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin_panel/doctor/add.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin_panel/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin_panel/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin_panel/unit/add.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin_panel/unit/add.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin_panel/visit/visit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin_panel/visit/visits.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Validator/VisitOverlapping.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Validator/VisitOverlapping.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Validator/VisitOverlappingValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Validator/VisitOverlappingValidator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Validator/WorkTimeCorrect.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Validator/WorkTimeCorrectValidator.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/visit/reservation.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/visit/reservation.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/visit/terms.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/visit/terms.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,7 +220,8 @@
       <workItem from="1589584861239" duration="6793000" />
       <workItem from="1589627149855" duration="5534000" />
       <workItem from="1589663127879" duration="11484000" />
-      <workItem from="1589713005586" duration="30545000" />
+      <workItem from="1589713005586" duration="31212000" />
+      <workItem from="1589809976643" duration="26288000" />
     </task>
     <servers />
   </component>
@@ -278,12 +269,12 @@
       <screen x="50" y="27" width="1870" height="1053" />
     </state>
     <state x="780" y="479" width="399" height="156" key="NewPhpFileDialog/50.27.1870.1053@50.27.1870.1053" timestamp="1589721266067" />
-    <state x="503" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1589746448312">
+    <state x="503" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1589832947620">
       <screen x="50" y="27" width="3310" height="1053" />
     </state>
     <state x="580" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2/50.27.1870.1053/1920.0.1440.900@50.27.1870.1053" timestamp="1589591526914" />
-    <state x="580" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2/50.27.1870.1053@50.27.1870.1053" timestamp="1589721995497" />
-    <state x="503" y="289" key="Vcs.Push.Dialog.v2/50.27.3310.1053@50.27.3310.1053" timestamp="1589746448312" />
+    <state x="580" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2/50.27.1870.1053@50.27.1870.1053" timestamp="1589827075349" />
+    <state x="503" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2/50.27.3310.1053@50.27.3310.1053" timestamp="1589832947620" />
     <state x="150" y="127" width="1670" height="853" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1589677534953">
       <screen x="50" y="27" width="1870" height="1053" />
     </state>
@@ -292,9 +283,9 @@
       <screen x="50" y="27" width="1870" height="1053" />
     </state>
     <state x="756" y="468" width="448" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/50.27.1870.1053@50.27.1870.1053" timestamp="1589753671274" />
-    <state x="648" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1589726677495">
+    <state x="648" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1589812917159">
       <screen x="50" y="27" width="1870" height="1053" />
     </state>
-    <state x="648" y="259" width="672" height="678" key="search.everywhere.popup/50.27.1870.1053@50.27.1870.1053" timestamp="1589726677495" />
+    <state x="648" y="259" width="672" height="678" key="search.everywhere.popup/50.27.1870.1053@50.27.1870.1053" timestamp="1589812917159" />
   </component>
 </project>

@@ -104,12 +104,7 @@ class VisitController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $entityManager = $this->getDoctrine()->getManager();
-            $visit->setUnit($unit);
             $visit->setUser($user);
-            $start = $start->format('Y-m-d H:i');
-            $end = $end->format('Y-m-d H:i');
-            $visit->setStart(new \DateTime($start));
-            $visit->setEnd(new \DateTime($end));
             $entityManager->persist($visit);
             $entityManager->flush();
             $this->addFlash(
@@ -117,15 +112,19 @@ class VisitController extends AbstractController
                 'Pomyślnie zarejestrowałeś się na badanie, przejdź na swój profil aby zobaczyć szczegóły'
                 );
             return $this->redirectToRoute('visit');
-            
+
         }
+        $diff = $start->diff($end);
+
+        $test = $workTimeRepo->checkWorkDay($start->format('H:i:s'), $end->format('H:i:s'), $unit->getId(), $start->format('w'));
         return $this->render('visit/reservation.html.twig', [
             'clinic' => $clinic,
             'doctor' => $doctor,
             'unit' => $unit,
             'start' => $start,
             'end' => $end,
-            'test' => $v,
+//            'test' => $test,
+//            'w' => $start->format('w'),
             'form' => $form->createView()
         ]);
 

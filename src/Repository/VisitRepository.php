@@ -60,7 +60,7 @@ class VisitRepository extends ServiceEntityRepository
             'SELECT v 
              FROM App\Entity\Visit v 
              WHERE v.start < :end AND v.end > :start
-             AND v.id = :unit'
+             AND v.unit = :unit'
         )
             ->setParameter('start',$start)
             ->setParameter('end', $end)

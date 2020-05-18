@@ -6,7 +6,6 @@ use Symfony\Component\Validator\Constraint;
 
 /**
  * @Annotation
- * 
  */
 class VisitOverlapping extends Constraint
 {   
@@ -22,5 +21,5 @@ class VisitOverlapping extends Constraint
      * Any public properties become valid options for the annotation.
      * Then, use these in your validator class.
      */
-    public $message = 'Wizyta koliduję z inną wizytą w wybranej jednostce.';
+    public $message = 'Wprowadź poprawną datę wizyty.';
 }

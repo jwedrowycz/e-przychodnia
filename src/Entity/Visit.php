@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Validator\VisitOverlapping;
@@ -147,17 +148,55 @@ class Visit
      */
     public function isDatePast()
     {
-        $ttomorrowDate = new \DateTime('tomorrow');
-        if($this->start >= $ttomorrowDate) {
+        $tomorrowDate = new \DateTime('tomorrow');
+        if($this->start >= $tomorrowDate) {
             return True;
         }
-        else if($this->end >= $ttomorrowDate){
+        else if($this->end >= $tomorrowDate){
             return True;
         }
         else {
             return False;
         }
     }
-//TODO: ZROBIĆ CONTRAINT VALIDATION Z DEPENDENCY KURWA
+
+    /**
+     * @Assert\IsTrue(message="Zła data - zły czas wizyty")
+     */
+    public function isVisitRightTimeEnd()
+    {
+        $tw = new \DateTime('00:20:00');
+        $tw = $tw->format('i:s');
+
+        $ft = new \DateTime('00:40:00');
+        $ft =$ft->format('i:s');
+
+        $zero = new \DateTime('00:00:00');
+        $zero = $zero->format('i:s');
+        $times = [$tw, $ft, $zero];
+        if(in_array($this->start->format('i:s'), $times) and in_array($this->end->format('i:s'), $times))
+        {
+            return True;
+        }
+        else
+        {
+            return False;
+        }
+    }
+
+    /**
+     * @Assert\IsTrue(message="Zła data - czas wizyt nie może być dłuższy niż 20 minut")
+     */
+    public function isVisitRightTime()
+    {
+        $diff = $this->start->diff($this->end);
+        if( $diff->format('%i') == 20 )
+        {
+            return True;
+        }
+        else {
+            return False;
+        }
+    }
 
 }

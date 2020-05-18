@@ -50,6 +50,22 @@ class WorkTimeRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    public function checkWorkDay($start, $end, $unitId, $day)
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT w.id, w.day, w.start, w.end
+            FROM App\Entity\WorkTime w            
+            WHERE w.unit = :id AND w.start < :end AND w.end > :start AND w.day = :day')
+            ->setParameter('id', $unitId)
+            ->setParameter('start', $start)
+            ->setParameter('end', $end)
+            ->setParameter('day', $day);
+
+        return $query->getResult();
+    }
+
+
 
 
 
