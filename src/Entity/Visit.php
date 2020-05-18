@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Validator\Constraints\IsWorkDayValid;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator\VisitOverlapping;
 
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\VisitRepository")
- * @IsWorkDayValid()
+ * @VisitOverlapping()
  */
 class Visit
 {
@@ -36,6 +36,7 @@ class Visit
 
     /**
      * @ORM\Column(type="datetime")
+     * 
      */
     private $start;
 
@@ -119,6 +120,11 @@ class Visit
 
         return $this;
     }
+
+    public function __toString() {
+        return $this->unit;
+    }
+
     /**
      * @Assert\IsTrue(message="Zła data - data rozpoczęcia i zakończenia wizyty musi być tego samego dnia.")
      */

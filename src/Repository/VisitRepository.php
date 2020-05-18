@@ -53,16 +53,18 @@ class VisitRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    public function findOverlapping($start, $end)
+    public function findOverlapping($start, $end, $id)
     {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
             'SELECT v 
              FROM App\Entity\Visit v 
-             WHERE v.start < :end AND v.end > :start'
+             WHERE v.start < :end AND v.end > :start
+             AND v.id = :unit'
         )
             ->setParameter('start',$start)
-            ->setParameter('end', $end);
+            ->setParameter('end', $end)
+            ->setParameter('unit', $id);
         return $query->getResult();
 
     }

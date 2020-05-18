@@ -7,6 +7,7 @@ use App\Entity\Visit;
 use App\Entity\WorkTime;
 use App\Repository\ClinicRepository;
 use App\Repository\WorkTimeRepository;
+use App\Repository\VisitRepository;
 use App\Form\VisitType;
 use App\Repository\UnitRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -80,7 +81,7 @@ class VisitController extends AbstractController
     /**
      * @Route("/terminy/rezerwuj/{id}/", name="visit_add")
      */
-    public function add($id, Request $request, UnitRepository $unitRepo, WorkTimeRepository $workTimeRepo){
+    public function add($id, Request $request, UnitRepository $unitRepo, WorkTimeRepository $workTimeRepo, VisitRepository $visitRepo){
         $visit = new Visit();
         
         $unit = $unitRepo->find($id);
@@ -93,14 +94,20 @@ class VisitController extends AbstractController
         $end = new \DateTime($end);
         $visit->setStart($start);
         $visit->setEnd($end);
+        $visit->setUnit($unit);
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $form = $this->createForm(VisitType::class, $visit);
         $form->handleRequest($request);
+        // echo $start->format('Y-m-d H:i:s');
+        // echo $end->format('Y-m-d H:i:s');
+        $v = $visitRepo->findOverlapping($start,$end, $unit->getId());
         if ($form->isSubmitted() && $form->isValid()) {
 
             $entityManager = $this->getDoctrine()->getManager();
             $visit->setUnit($unit);
             $visit->setUser($user);
+            $start = $start->format('Y-m-d H:i');
+            $end = $end->format('Y-m-d H:i');
             $visit->setStart(new \DateTime($start));
             $visit->setEnd(new \DateTime($end));
             $entityManager->persist($visit);
@@ -118,7 +125,7 @@ class VisitController extends AbstractController
             'unit' => $unit,
             'start' => $start,
             'end' => $end,
-            'test' => $workTime,
+            'test' => $v,
             'form' => $form->createView()
         ]);
 
