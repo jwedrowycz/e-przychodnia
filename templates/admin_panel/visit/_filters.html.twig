@@ -1,0 +1,7 @@
+{{ form_start(form) }}
+    <h2>{{ form_label(form, 'Filtry') }}</h2>
+    {{ form_label(form.clinic, 'Poradnie: ') }}
+    {{ form_widget(form.clinic) }}
+    {{ form_label(form.doctor, 'Lekarze: ') }}
+    {{ form_widget(form.doctor) }}
+{{ form_end(form) }}

@@ -22,8 +22,8 @@ class DoctorType extends AbstractType
                     'Aktywny' => '1',
                     'Nieaktywny' => '0',
                     ],
-                'multiple'=>false,
-                'expanded'=>true
+                'multiple'=>true,
+                'expanded'=>false
                 ])
         ;
     }

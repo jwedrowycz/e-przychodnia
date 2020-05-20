@@ -38,18 +38,36 @@ class VisitRepository extends ServiceEntityRepository
 
     }
 
-    public function findAllWithJoined()
+    public function findAllWithJoined($clinic = '', $doctor = '')
     {
         $entityManager = $this->getEntityManager();
-        $query = $entityManager->createQuery(
-            'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
-            FROM App\Entity\Visit v
-            JOIN v.user us      
-            JOIN v.unit u 
-            JOIN u.doctor d  
-            JOIN u.clinic c  
-            ORDER BY v.start ASC'
-        );
+        if($clinic or $doctor)
+        {
+            $query = $entityManager->createQuery(
+                'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
+                FROM App\Entity\Visit v
+                JOIN v.user us      
+                JOIN v.unit u 
+                JOIN u.doctor d  
+                JOIN u.clinic c 
+                WHERE c.name LIKE :clinic AND d.id LIKE :doctor
+                ORDER BY v.start ASC'
+            )
+                ->setParameter('clinic', '%'.$clinic.'%')
+                ->setParameter('doctor', '%'.$doctor.'%');
+        }
+        else
+            {
+                $query = $entityManager->createQuery(
+                    'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
+                FROM App\Entity\Visit v
+                JOIN v.user us      
+                JOIN v.unit u 
+                JOIN u.doctor d  
+                JOIN u.clinic c 
+                ORDER BY v.start ASC'
+                );
+            }
         return $query->getResult();
     }
 

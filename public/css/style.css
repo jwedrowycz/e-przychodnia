@@ -65,25 +65,27 @@ body {
 
 
 /* ------------- ADMIN PANEL ------------ */
-.admin-grid-container {
-    display: grid;
-    grid-template-columns: 0.3fr 1.7fr;
-    grid-template-rows: 1fr;
-    gap: 1em 1em;
-    grid-template-areas: "sidebar content";
-    margin: 1em;
+/*.admin-grid-container {*/
+/*    display: grid;*/
+/*    grid-template-columns: 0.3fr 1.7fr;*/
+/*    grid-template-rows: 1fr;*/
+/*    gap: 1em 1em;*/
+/*    grid-template-areas: "sidebar content";*/
+/*    margin: 1em;*/
 
-}
+/*}*/
 
 .sidebar {
-    grid-area: sidebar;
     height: 100%;
     position: fixed;
+    width: 250px;
     top: 0;
     left: 0;
+    z-index: 1;
     background-color: #111;
     overflow-x: hidden;
     padding-top: 20px;
+    transition: 0.7s;
   }
 
 /* The navigation menu links */
@@ -100,16 +102,29 @@ body {
     transition: background 0.5s, border-color 0.5s, color 0.5s;
 }
 
+.sidebar .close {
+    position: absolute;
+    top: 0;
+    right: 22px;
+}
+
 .active {
     background-color: grey;
 }
 
-.content { 
-    grid-area: content; 
-    
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    transition: margin-left .7s;
+
 }
 
 /* ---------- TABLES ------------- */
+
+.table-div {
+    overflow-x:auto;
+
+}
 
 .admin-table {
     border-collapse: collapse;
@@ -204,7 +219,7 @@ body {
 
 .form-title {
     font-size: 3em;
-    font-weight: 600Nie t;
+    font-weight: 600;
 }
 .form-subtitle {
     padding-top: 20px;

@@ -37,7 +37,6 @@ class Visit
 
     /**
      * @ORM\Column(type="datetime")
-     * 
      */
     private $start;
 

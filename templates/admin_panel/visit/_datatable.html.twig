@@ -1,0 +1,32 @@
+<table class="admin-table">
+    <tr>
+        <th>Id wizyty</th>
+        <th>Nazwa jednostki</th>
+        <th>Lekarz</th>
+        <th>Pacjent</th>
+        <th>Email</th>
+        <th>Telefon</th>
+        <th>Data wizyty</th>
+        <th>Godzina rozpoczęcia</th>
+        <th>Godzina zakończenia</th>
+        <th>Data rejestracji</th>
+        <th>Akcje</th>
+
+
+    </tr>
+    {% for v in visits %}
+        <tr>
+            <td>{{ v.id }}</td>
+            <td>{{ v.c_name }}</td>
+            <td>{{ v.d_name ~ ' ' ~ v.d_lastName }}</td>
+            <td>{{ v.u_name ~ ' ' ~ v.u_lastName }}</td>
+            <td>{{ v.email }}</td>
+            <td>{{ v.num_phone }}</td>
+            <td>{{ v.start|date('d-m-Y') }}</td>
+            <td>{{ v.start|date('H:i') }}</td>
+            <td>{{ v.end|date('H:i') }}</td>
+            <td>{{ v.submit_date|date('d-m-Y H:i:s') }}</td>
+            <td><a class="delete" href="{{ path('admin.visit_delete', {'id': v.id} ) }}">Usuń</a></td>
+        </tr>
+    {% endfor %}
+</table>
