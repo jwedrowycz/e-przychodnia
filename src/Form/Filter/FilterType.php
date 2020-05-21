@@ -15,8 +15,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class FilterType extends AbstractType
 {
+    private $doctorRepo;
+    public function __construct(DoctorRepository $doctorRepo)
+    {
+        $this->doctorRepo = $doctorRepo;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
+
         $builder
             ->add('clinic', EntityType::class, [
                 'class' => Clinic::class,
@@ -35,19 +43,32 @@ class FilterType extends AbstractType
             ])
             ->add('doctor', EntityType::class, [
                 'class' => Doctor::class,
-                'query_builder' => function (DoctorRepository $er) {
-                    return $er->createQueryBuilder('d') ->orderBy('d.last_name', 'ASC');
-                },
-                'choice_label' => 'last_name',
-                'choice_value' => function (?Doctor $entity) {
-                    return $entity ? $entity->getId() : '';
+                'choice_label' => function(Doctor $doctor) {
+                    return sprintf('%s %s', $doctor->getName(), $doctor->getLastName());
                 },
                 'label' => 'Filtr lekarza: ',
                 'attr' => [
                     'onchange' => 'this.form.submit()'
                 ],
-                'placeholder' => 'Wszystkie',
+                'placeholder' => 'Wszyscy',
+                'choices' => $this->doctorRepo->findAllAlphabetical()
             ])
+//            ->add('doctor', EntityType::class, [
+//                'class' => Doctor::class,
+//                'query_builder' => function (DoctorRepository $er) {
+//                    return $er->createQueryBuilder('d')
+//                        ->orderBy('d.last_name', 'ASC');
+//                },
+//                'choice_label' => 'last_name',
+//                'choice_value' => function (?Doctor $entity) {
+//                    return $entity ? $entity->getId() : '';
+//                },
+//                'label' => 'Filtr lekarza: ',
+//                'attr' => [
+//                    'onchange' => 'this.form.submit()'
+//                ],
+//                'placeholder' => 'Wszystkie',
+//            ])
             ->setMethod('GET')
         ;
     }

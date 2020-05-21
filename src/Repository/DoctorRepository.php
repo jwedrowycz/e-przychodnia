@@ -36,6 +36,18 @@ class DoctorRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
+
+    public function findAllAlphabetical()
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT d
+            FROM App\Entity\Doctor d
+            ORDER BY d.last_name ASC
+            '
+        );
+        return $query->getResult();
+    }
     // /**
     //  * @return Doctor[] Returns an array of Doctor objects
     //  */
