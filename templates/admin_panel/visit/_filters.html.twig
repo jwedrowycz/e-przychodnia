@@ -1,5 +1,5 @@
 {{ form_start(form) }}
-    <h2>{{ form_label(form, 'Filtry') }}</h2>
+    <h2>{{ form_label(form, 'Filtry',  {'attr': {'novalidate': 'novalidate'}}) }}</h2>
     {{ form_label(form.clinic) }}
     {{ form_widget(form.clinic) }}
 {#    {{ form_label(form.doctor, 'Lekarze: ') }}#}

@@ -44,9 +44,9 @@ class FilterType extends AbstractType
                 ],
                 'placeholder' => 'Wszystkie',
                 'mapped' => false,
-                'label' => 'Poradnie: '
+                'label' => 'Poradnie: ',
 
-            ])->setMethod('GET');
+            ]);
 
         $builder->get('clinic')->addEventListener(
             FormEvents::POST_SUBMIT,
@@ -54,7 +54,7 @@ class FilterType extends AbstractType
             {
                 $form = $event->getForm();
 
-//                dump($form->getData()->getUnit());
+                dump($form);
                 $form->getParent()->add('doctor', EntityType::class, [
                     'class' => 'App\Entity\Unit',
                     'placeholder' => 'Wszyscy',
@@ -62,29 +62,30 @@ class FilterType extends AbstractType
                     'attr' => [
                         'onchange' => 'this.form.submit()'
                     ],
-                    'label' => 'Lekarze: '
+                    'label' => 'Lekarze: ',
+                    'empty_data' => '',
+                    'required' => false,
+
                 ]);
             }
         );
+        $builder->addEventListener(
+            FormEvents::POST_SET_DATA,
+            function (FormEvent $event)
+            {
+                $form = $event->getForm();
+                $data = $event->getData();
 
-//        $builder->addEventListener(
-//            FormEvents::PRE_SET_DATA,
-//            function(FormEvent $event)
-//            {
-//                $form = $event->getForm();
-//                $data = $event->getData();
-//                $doctors = $data->getUnit();
-//
-//                $form->get('clinic')->setData($doctors->)
-//            }
-//        );
 
+            }
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'csrf_protection' => false,
+            'validation' => false,
             // Configure your form options here
 //            'data_class' =>
         ]);
