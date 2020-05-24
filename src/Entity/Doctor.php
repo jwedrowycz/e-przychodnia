@@ -6,6 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DoctorRepository")
@@ -21,16 +23,28 @@ class Doctor
     private $id;
 
     /**
+     * @Assert\NotBlank(message = "Wpisz imię lekarza")
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
+     * @Assert\NotBlank(message = "Wpisz nazwisko lekarza")
      * @ORM\Column(type="string", length=255)
      */
     private $last_name;
 
     /**
+     * @Assert\NotBlank(message = "Wpisz numer PWZ")
+     * @Assert\Regex(
+     *     pattern="/[^0-9]/",
+     *     match=false,
+     *     message="Numer PWZ nie może zawierać liter"
+     * )
+     * @Assert\Length(min=7,
+     *                  max=7,
+     *                  minMessage = "Numer PWZ może się składać jedynie z {{ limit }} cyfr",
+     *                  maxMessage = "Numer PWZ może się składać jedynie z {{ limit }} cyfr")
      * @ORM\Column(type="string", length=7)
      */
     private $num_pwz;

@@ -58,7 +58,7 @@ class User implements UserInterface
     private $name;
 
     /**
-     * @Assert\NotBlank(message = "Wpisz swoje last_name")
+     * @Assert\NotBlank(message = "Wpisz swoje nazwisko")
      * @Assert\Regex(
      *     pattern="/\d/",
      *     match=false,
