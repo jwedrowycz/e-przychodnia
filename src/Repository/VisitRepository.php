@@ -50,11 +50,11 @@ class VisitRepository extends ServiceEntityRepository
                 JOIN v.unit u 
                 JOIN u.doctor d  
                 JOIN u.clinic c 
-                WHERE c.name LIKE :clinic AND d.id LIKE :doctor
+                WHERE c.id = :clinic AND u.doctor = :doctor
                 ORDER BY v.start ASC'
             )
-                ->setParameter('clinic', '%'.$clinic.'%')
-                ->setParameter('doctor', '%'.$doctor.'%');
+                ->setParameter('clinic', $clinic)
+                ->setParameter('doctor', $doctor);
         }
         else
             {

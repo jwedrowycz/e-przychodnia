@@ -32,14 +32,13 @@ class VisitController extends AbstractController
         $visits = $visitRepo->findAllWithJoined('','');
         $form = $this->createForm(FilterType::class);
         $form->handleRequest($request);
-        $t1 = 0;
-        $t2 = 0;
+
         if($form->isSubmitted()) {
             $clinic = $form->get('clinic')->getData();
-            $clinic = empty($clinic) ? '' : $clinic->getName();
+            $clinic = empty($clinic) ? '' : $clinic->getId();
 
             $doctor = $form->get('doctor')->getData();
-            $doctor = empty($doctor) ? '' : $doctor->getId();
+            $doctor = empty($doctor) ? '' : $doctor->getDoctor()->getId();
 
             $visits = $visitRepo->findAllWithJoined($clinic, $doctor);
         }

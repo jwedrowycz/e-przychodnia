@@ -21,8 +21,12 @@
   <component name="ChangeListManager">
     <list default="true" id="5438e20c-6ad0-4533-b32d-06fb92bf2958" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Admin/VisitController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Admin/VisitController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Clinic.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Clinic.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Unit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Unit.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Form/Filter/FilterType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/Filter/FilterType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/DoctorRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/DoctorRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/VisitRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/VisitRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin_panel/visit/_filters.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin_panel/visit/_filters.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,6 +226,7 @@
       <workItem from="1589924865893" duration="8123000" />
       <workItem from="1589974034804" duration="11991000" />
       <workItem from="1589996383119" duration="18268000" />
+      <workItem from="1590317197917" duration="17534000" />
     </task>
     <servers />
   </component>
@@ -285,10 +290,11 @@
       <screen x="50" y="27" width="1870" height="1053" />
     </state>
     <state x="756" y="468" width="448" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/50.27.1870.1053@50.27.1870.1053" timestamp="1589753671274" />
-    <state x="649" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1589977786308">
+    <state x="649" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1590334379302">
       <screen x="52" y="27" width="1868" height="1053" />
     </state>
     <state x="648" y="259" width="672" height="678" key="search.everywhere.popup/50.27.1870.1053@50.27.1870.1053" timestamp="1589812917159" />
     <state x="649" y="259" width="672" height="678" key="search.everywhere.popup/52.27.1868.1053/1920.107.1440.900@52.27.1868.1053" timestamp="1589977786308" />
+    <state x="649" y="259" width="672" height="678" key="search.everywhere.popup/52.27.1868.1053@52.27.1868.1053" timestamp="1590334379302" />
   </component>
 </project>

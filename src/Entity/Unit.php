@@ -137,4 +137,7 @@ class Unit
         return $this;
     }
 
+    public function __toString() {
+        return $this->getDoctor()->getName() . ' ' . $this->getDoctor()->getLastName();
+    }
 }

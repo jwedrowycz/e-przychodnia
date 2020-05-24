@@ -1,7 +1,24 @@
 {{ form_start(form) }}
     <h2>{{ form_label(form, 'Filtry') }}</h2>
-    {{ form_label(form.clinic, 'Poradnie: ') }}
+    {{ form_label(form.clinic) }}
     {{ form_widget(form.clinic) }}
-    {{ form_label(form.doctor, 'Lekarze: ') }}
-    {{ form_widget(form.doctor) }}
+{#    {{ form_label(form.doctor, 'Lekarze: ') }}#}
+{#    {{ form_widget(form.doctor) }}#}
 {{ form_end(form) }}
+
+<script>
+    var $doctor = $('#filter_doctor');
+    $doctor.change(function() {
+        // ... retrieve the corresponding form.
+        var $form = $(this).closest('form');
+        // Simulate form data, but only include the selected sport value.
+        var data = {};
+        data[$doctor.attr('name')] = $doctor.val();
+        // Submit data via AJAX to the form's action path.
+        $.post($form.attr('action'), data).then(function (response)
+        {
+            $('#')
+        })
+
+    });
+</script>

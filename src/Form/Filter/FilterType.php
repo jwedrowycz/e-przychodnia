@@ -4,13 +4,18 @@ namespace App\Form\Filter;
 
 use App\Entity\Clinic;
 use App\Entity\Doctor;
+use App\Entity\Unit;
 use App\Repository\ClinicRepository;
 use App\Repository\DoctorRepository;
+use App\Repository\UnitRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class FilterType extends AbstractType
@@ -27,50 +32,53 @@ class FilterType extends AbstractType
 
         $builder
             ->add('clinic', EntityType::class, [
-                'class' => Clinic::class,
-                'query_builder' => function (ClinicRepository $er) {
-                    return $er->createQueryBuilder('c')->orderBy('c.name', 'ASC');
+                'class' => 'App\Entity\Clinic',
+                'choice_label' => function ($clinic) {
+                    return $clinic->getName();
                 },
-                'choice_label' => 'name',
                 'choice_value' => function (?Clinic $entity) {
-                    return $entity ? $entity->getName() : '';
+                    return $entity ? $entity->getId() : '';
                 },
-                'label' => 'Filtr poradni: ',
                 'attr' => [
                     'onchange' => 'this.form.submit()'
                 ],
                 'placeholder' => 'Wszystkie',
-            ])
-            ->add('doctor', EntityType::class, [
-                'class' => Doctor::class,
-                'choice_label' => function(Doctor $doctor) {
-                    return sprintf('%s %s', $doctor->getName(), $doctor->getLastName());
-                },
-                'label' => 'Filtr lekarza: ',
-                'attr' => [
-                    'onchange' => 'this.form.submit()'
-                ],
-                'placeholder' => 'Wszyscy',
-                'choices' => $this->doctorRepo->findAllAlphabetical()
-            ])
-//            ->add('doctor', EntityType::class, [
-//                'class' => Doctor::class,
-//                'query_builder' => function (DoctorRepository $er) {
-//                    return $er->createQueryBuilder('d')
-//                        ->orderBy('d.last_name', 'ASC');
-//                },
-//                'choice_label' => 'last_name',
-//                'choice_value' => function (?Doctor $entity) {
-//                    return $entity ? $entity->getId() : '';
-//                },
-//                'label' => 'Filtr lekarza: ',
-//                'attr' => [
-//                    'onchange' => 'this.form.submit()'
-//                ],
-//                'placeholder' => 'Wszystkie',
-//            ])
-            ->setMethod('GET')
-        ;
+                'mapped' => false,
+                'label' => 'Poradnie: '
+
+            ])->setMethod('GET');
+
+        $builder->get('clinic')->addEventListener(
+            FormEvents::POST_SUBMIT,
+            function(FormEvent $event)
+            {
+                $form = $event->getForm();
+
+//                dump($form->getData()->getUnit());
+                $form->getParent()->add('doctor', EntityType::class, [
+                    'class' => 'App\Entity\Unit',
+                    'placeholder' => 'Wszyscy',
+                    'choices' => $form->getData() === null ? [] : $form->getData()->getUnit(),
+                    'attr' => [
+                        'onchange' => 'this.form.submit()'
+                    ],
+                    'label' => 'Lekarze: '
+                ]);
+            }
+        );
+
+//        $builder->addEventListener(
+//            FormEvents::PRE_SET_DATA,
+//            function(FormEvent $event)
+//            {
+//                $form = $event->getForm();
+//                $data = $event->getData();
+//                $doctors = $data->getUnit();
+//
+//                $form->get('clinic')->setData($doctors->)
+//            }
+//        );
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -78,6 +86,7 @@ class FilterType extends AbstractType
         $resolver->setDefaults([
             'csrf_protection' => false,
             // Configure your form options here
+//            'data_class' =>
         ]);
     }
 }
