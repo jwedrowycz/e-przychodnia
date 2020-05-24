@@ -29,7 +29,7 @@ class VisitController extends AbstractController
      */
     public function index(Request $request, VisitRepository $visitRepo): Response
     {
-        $visits = $visitRepo->findAllWithJoined('','');
+        $visits = $visitRepo->findAllWithJoined('','', 0);
         $form = $this->createForm(FilterType::class);
         $form->handleRequest($request);
 
@@ -40,7 +40,9 @@ class VisitController extends AbstractController
             $doctor = $form->get('doctor')->getData();
             $doctor = empty($doctor) ? '' : $doctor->getDoctor()->getId();
 
-            $visits = $visitRepo->findAllWithJoined($clinic, $doctor);
+            $visitType = $form->get('type')->getData();
+
+            $visits = $visitRepo->findAllWithJoined($clinic, $doctor, $visitType);
         }
 
         return $this->render('admin_panel/visit/visits.html.twig', [

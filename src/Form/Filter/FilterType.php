@@ -46,7 +46,9 @@ class FilterType extends AbstractType
                 'mapped' => false,
                 'label' => 'Poradnie: ',
 
-            ]);
+            ])
+            ->setMethod('GET');
+
 
         $builder->get('clinic')->addEventListener(
             FormEvents::POST_SUBMIT,
@@ -54,7 +56,6 @@ class FilterType extends AbstractType
             {
                 $form = $event->getForm();
 
-                dump($form);
                 $form->getParent()->add('doctor', EntityType::class, [
                     'class' => 'App\Entity\Unit',
                     'placeholder' => 'Wszyscy',
@@ -63,22 +64,25 @@ class FilterType extends AbstractType
                         'onchange' => 'this.form.submit()'
                     ],
                     'label' => 'Lekarze: ',
-                    'empty_data' => '',
-                    'required' => false,
 
                 ]);
             }
         );
-        $builder->addEventListener(
-            FormEvents::POST_SET_DATA,
-            function (FormEvent $event)
-            {
-                $form = $event->getForm();
-                $data = $event->getData();
+        $builder->add('type', ChoiceType::class, [
+//            'multiple' => false,
+//            'expanded' => true,
+            'choices' => [
+                'Nadchodzące' => 0,
+                'Archwialne' => 1,
+                'Dzisiaj' => 2,
+                'Wszystkie' => 3,
+            ],
+            'label' => 'Wizyty: ',
+            'attr' => [
+                'onchange' => 'this.form.submit()'
+            ],
 
-
-            }
-        );
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
