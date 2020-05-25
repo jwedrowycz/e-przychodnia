@@ -17,6 +17,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Choice;
 
 class FilterType extends AbstractType
 {
@@ -47,6 +48,19 @@ class FilterType extends AbstractType
                 'label' => 'Poradnie: ',
 
             ])
+//            ->add('doctor', EntityType::class, [
+//                'class' => 'App\Entity\Doctor',
+//
+//                'choice_label' => function ($doctor) {
+//                    return $doctor->getName() . ' ' . $doctor->getLastName();
+//                },
+//                'choice_value' => function (?Doctor $entity) {
+//                    return $entity ? $entity->getId() : '';
+//                },
+//                'attr' => [
+//                    'onchange' => 'this.form.submit()'
+//                ],
+//            ])
             ->setMethod('GET');
 
 
@@ -68,6 +82,7 @@ class FilterType extends AbstractType
                 ]);
             }
         );
+
         $builder->add('type', ChoiceType::class, [
 //            'multiple' => false,
 //            'expanded' => true,

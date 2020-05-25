@@ -42,119 +42,56 @@ class VisitRepository extends ServiceEntityRepository
 
     public function findAllWithJoined($clinic = '', $doctor = '', $type = '')
     {
+        $dateStart = new \DateTime();
+        $currDateStart = $dateStart->setTime(0,0,0);
+        $currDateStart = $currDateStart->format('Y-m-d H:i:s');
 
-        $entityManager = $this->getEntityManager();
+        $dateEnd = new \DateTime();
+        $currDateEnd = $dateEnd->setTime(23,59,59);
+        $currDateEnd = $currDateEnd->format('Y-m-d H:i:s');
 
-        if ($type == 0) { // INCOMING VISITS
-            if ($doctor == '' and $clinic) { // IF DOCTOR IS NOT CHOSEN AND CLINIC IS CHOSEN
-                $query = $entityManager->createQuery(
-                    'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
-                FROM App\Entity\Visit v
-                JOIN v.user us      
-                JOIN v.unit u 
-                JOIN u.doctor d  
-                JOIN u.clinic c 
-                WHERE c.id = :clinic AND v.start >= current_date() 
-                ORDER BY v.start ASC'
-                )
-                    ->setParameter('clinic', $clinic);
-                return $query->getResult();
-            } else if ($clinic and $doctor) { // IF CLINIC IS CHOSEN AND DOCTOR IS  CHOSEN
-                $query = $entityManager->createQuery(
-                    'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
-                        FROM App\Entity\Visit v
-                        JOIN v.user us      
-                        JOIN v.unit u 
-                        JOIN u.doctor d  
-                        JOIN u.clinic c 
-                        WHERE c.id = :clinic AND u.doctor = :doctor AND v.start >= current_date() 
-                        ORDER BY v.start ASC'
-                )
-                    ->setParameter('clinic', $clinic)
-                    ->setParameter('doctor', $doctor);
-                return $query->getResult();
-            }
-            else { // IF ALL DEFAULT -> ALL CLINICS AND ALL DOCTORS
-                $query = $entityManager->createQuery(
-                    'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
-                        FROM App\Entity\Visit v
-                        JOIN v.user us      
-                        JOIN v.unit u 
-                        JOIN u.doctor d  
-                        JOIN u.clinic c 
-                        WHERE v.start >= current_date() 
-                        ORDER BY v.start ASC'
-                );
-                return $query->getResult();
+        dump($doctor);
+        dump($clinic);
+        dump($type);
+        // INCOMING VISITS
+        $qb = $this->createQueryBuilder('v') //MAIN QUERY
+            ->addSelect('v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName')
+            ->join('v.user', 'us')
+            ->join('v.unit', 'u')
+            ->join('u.doctor', 'd')
+            ->join('u.clinic', 'c')
+            ->orderBy('v.start', 'ASC');
+
+            if ($doctor == '' and $clinic) // IF DOCTOR IS NOT CHOSEN BUT CLINIC IS CHOSEN
+            {
+                $qb->andWhere('c.id = :clinic');
+                $qb->setParameter('clinic', $clinic);
+
+            } else if ($clinic and $doctor) // IF CLINIC AND DOCTOR ARE CHOSEN
+            {
+                $qb->andWhere('c.id = :clinic');
+                $qb->andWhere('u.doctor = :doctor');
+                $qb->setParameter('clinic', $clinic);
+                $qb->setParameter('doctor', $doctor);
+
             }
 
-     // INCOMING VISITS
-            // if ($doctor == '' and $clinic) { // IF DOCTOR IS NOT CHOSEN AND CLINIC IS CHOSEN
-                $qb = $this->createQueryBuilder('v')
-                ->addSelect('v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName')
-                ->join('v.user', 'us')
-                ->join('v.unit', 'u')   
-                ->join('u.doctor', 'd')   
-                ->join('u.clinic', 'c')   
-                ->orderBy('v.start', 'ASC');
-
-                if($type==0){ // INCOMING VISITS - DEFAULT VIEW
-                    $qb->andWhere('v.start >= current_date()');
-                } else if($type==1) { // PAST VISITS - DEFAULT VIEW
-                    $qb->andWhere('v.start < current_date()'); 
-                } else if($type==2) { // TODAY'S VISITS - DEFAULT VIEW
-                    $qb->andWhere('v.start = current_date()');
-                } else if($type==3) { // ALL VISITS - DEFAULT VIEW
-                    $query = $qb->getQuery(); 
-                } else {
-                    if ($doctor == '' and $clinic)
-                    {
-                        $qb->andWhere('c.id = :clinic');
-                        $qb->setParameter('clinic', $clinic);
-                        if($type==0){ // INCOMING VISITS
-                            $qb->andWhere('v.start >= current_date()');
-                        } else if($type==1) { // PAST VISITS
-                            $qb->andWhere('v.start < current_date()'); 
-                        } else if($type==2) { // TODAY'S VISITS
-                            $qb->andWhere('v.start = current_date()');
-                        } else { // ALL VISITS
-                            $query = $qb->getQuery();
-                        }
-                    } else if ($clinic and $doctor)
-                    {   
-                        $qb->andWhere('c.id = :clinic');
-                        $qb->andWhere('u.doctor = :doctor');
-                        $qb->setParameter('clinic', $clinic);
-                        $qb->setParameter('doctor', $doctor);
-                        if($type==0){ // INCOMING VISITS
-                            $qb->andWhere('v.start >= current_date()');
-                        } else if($type==1) { // PAST VISITS
-                            $qb->andWhere('v.start < current_date()'); 
-                        } else if($type==2) { // TODAY'S VISITS
-                            $qb->andWhere('v.start = current_date()');
-                        } else { // ALL VISITS
-                            $query = $qb->getQuery();
-                        }
-                    } else {
-                        $qb->andWhere('v.start >= current_date()');
-                        if($type==0){ // INCOMING VISITS
-                            $qb->andWhere('v.start >= current_date()');
-                        } else if($type==1) { // PAST VISITS
-                            $qb->andWhere('v.start < current_date()'); 
-                        } else if($type==2) { // TODAY'S VISITS
-                            $qb->andWhere('v.start = current_date()');
-                        } else { // ALL VISITS
-                            $query = $qb->getQuery();
-                        }
-                    }
-                }
-               
-                
-                $query = $qb->getQuery();
-
-
-                return $query->getResult();
+            if($type==0){ // INCOMING VISITS
+                $qb->andWhere('v.start >= current_date()');
+            } else if($type==1) { // PAST VISITS
+                $qb->andWhere('v.start < current_date()');
+            } else if($type==2) { // TODAY'S VISITS
+                $qb->andWhere('v.start > :dateStart');
+                $qb->andwhere('v.end < :dateEnd');
+                $qb->setParameter('dateStart' ,$currDateStart);
+                $qb->setParameter('dateEnd' ,$currDateEnd);
+            } else { // ALL VISITS
+                return $qb->getQuery()->getResult();
             }
+
+
+        return $qb->getQuery()->getResult();
+    }
 
     public function findOverlapping($start, $end, $id)
     {
