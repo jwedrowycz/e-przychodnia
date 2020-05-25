@@ -44,9 +44,227 @@ class VisitRepository extends ServiceEntityRepository
     {
 
         $entityManager = $this->getEntityManager();
-        dump($type);
-        if ($type == 0) { // INCOMING VISITS
-            if ($doctor == '' and $clinic) { // IF DOCTOR IS NOT CHOSEN AND CLINIC IS CHOSEN
+     // INCOMING VISITS
+            // if ($doctor == '' and $clinic) { // IF DOCTOR IS NOT CHOSEN AND CLINIC IS CHOSEN
+                $qb = $this->createQueryBuilder('v')
+                ->addSelect('v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName')
+                ->join('v.user', 'us')
+                ->join('v.unit', 'u')   
+                ->join('u.doctor', 'd')   
+                ->join('u.clinic', 'c')   
+                ->orderBy('v.start', 'ASC');
+                dump($type);
+                if($type==3) // ALL VISITS - DEFAULT VIEW
+                {
+                    $query = $qb->getQuery();
+                } else {
+                    if ($doctor == '' and $clinic)
+                    {
+                        $qb->andWhere('c.id = :clinic');
+                        $qb->setParameter('clinic', $clinic);
+                        if($type==0){ // INCOMING VISITS
+                            $qb->andWhere('v.start >= current_date()');
+                        } else if($type==1) { // PAST VISITS
+                            $qb->andWhere('v.start < current_date()'); 
+                        } else if($type==2) { // TODAY'S VISITS
+                            $qb->andWhere('v.start = current_date()');
+                        } else { // ALL VISITS
+                            $query = $qb->getQuery();
+                        }
+                    } else if ($clinic and $doctor)
+                    {   
+                        $qb->andWhere('c.id = :clinic');
+                        $qb->andWhere('u.doctor = :doctor');
+                        $qb->setParameter('clinic', $clinic);
+                        $qb->setParameter('doctor', $doctor);
+                        if($type==0){ // INCOMING VISITS
+                            $qb->andWhere('v.start >= current_date()');
+                        } else if($type==1) { // PAST VISITS
+                            $qb->andWhere('v.start < current_date()'); 
+                        } else if($type==2) { // TODAY'S VISITS
+                            $qb->andWhere('v.start = current_date()');
+                        } else { // ALL VISITS
+                            $query = $qb->getQuery();
+                        }
+                    } else {
+                        $qb->andWhere('v.start >= current_date()');
+                        if($type==0){ // INCOMING VISITS
+                            $qb->andWhere('v.start >= current_date()');
+                        } else if($type==1) { // PAST VISITS
+                            $qb->andWhere('v.start < current_date()'); 
+                        } else if($type==2) { // TODAY'S VISITS
+                            $qb->andWhere('v.start = current_date()');
+                        } else { // ALL VISITS
+                            $query = $qb->getQuery();
+                        }
+                    }
+                }
+               
+                
+                $query = $qb->getQuery();
+
+
+                return $query->getResult();
+            // }
+            // } else if ($clinic and $doctor) { // IF CLINIC IS CHOSEN AND DOCTOR IS  CHOSEN
+            //     $qb = $this->createQueryBuilder()
+            //         ->select('v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName')
+            //         ->from('App\Entity\Visit', 'v')
+            //         ->join('v.user us')
+            //         ->join('v.unit u')   
+            //         ->join('u.doctor d')   
+            //         ->join('u.clinic c')   
+            //         ->where('c.id = :clinic')
+            //         ->andWhere('u.doctor = :doctor')
+            //         ->andWhere('v.start >= current_date()')
+            //         ->order_by('v.start', 'ASC')
+            //         ->setParameter('clinic', $clinic)
+            //         ->setParameter('doctor', $doctor);
+            //         $query = $qb->getQuery();
+
+            //         return $query->execute();
+            // }
+            // else { // IF ALL DEFAULT -> ALL CLINICS AND ALL DOCTORS
+            //     $qb = $this->createQueryBuilder()
+            //         ->select('v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName')
+            //         ->from('App\Entity\Visit', 'v')
+            //         ->join('v.user', 'us')
+            //         ->join('v.unit', 'u')   
+            //         ->join('u.doctor', 'd')   
+            //         ->join('u.clinic', 'c')   
+            //         ->where('v.start >= current_date()')
+            //         ->order_by('v.start', 'ASC');
+            //         $query = $qb->getQuery();
+            //     return $query->execute();
+            // }
+
+
+        // } else if ($type == 1) { // PAST VISITS
+        //     if ($doctor == '' and $clinic) { // IF DOCTOR IS NOT CHOSEN AND CLINIC IS CHOSEN
+        //         $query = $entityManager->createQuery(
+        //             'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
+        //         FROM App\Entity\Visit v
+        //         JOIN v.user us      
+        //         JOIN v.unit u 
+        //         JOIN u.doctor d  
+        //         JOIN u.clinic c 
+        //         WHERE c.id = :clinic AND v.start < current_date() 
+        //         ORDER BY v.start ASC'
+        //         )
+        //             ->setParameter('clinic', $clinic);
+        //         return $query->getResult();
+        //     } else if ($clinic and $doctor) { // IF CLINIC IS CHOSEN AND DOCTOR IS  CHOSEN
+        //         $query = $entityManager->createQuery(
+        //             'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
+        //                 FROM App\Entity\Visit v
+        //                 JOIN v.user us      
+        //                 JOIN v.unit u 
+        //                 JOIN u.doctor d  
+        //                 JOIN u.clinic c 
+        //                 WHERE c.id = :clinic AND u.doctor = :doctor AND v.start < current_date() 
+        //                 ORDER BY v.start ASC'
+        //         )
+        //             ->setParameter('clinic', $clinic)
+        //             ->setParameter('doctor', $doctor);
+        //         return $query->getResult();
+        //     } else { // IF ALL DEFAULT -> ALL CLINICS AND ALL DOCTORS
+        //         $query = $entityManager->createQuery(
+        //             'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
+        //                 FROM App\Entity\Visit v
+        //                 JOIN v.user us      
+        //                 JOIN v.unit u 
+        //                 JOIN u.doctor d  
+        //                 JOIN u.clinic c 
+        //                 WHERE v.start < current_date() 
+        //                 ORDER BY v.start ASC'
+        //         );
+        //         return $query->getResult();
+        //     }
+
+        // } else if ($type == 2) { // TODAY'S VISITS
+        //     if ($doctor == '' and $clinic) { // IF DOCTOR IS NOT CHOSEN AND CLINIC IS CHOSEN
+        //         $query = $entityManager->createQuery(
+        //             'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
+        //                 FROM App\Entity\Visit v
+        //                 JOIN v.user us      
+        //                 JOIN v.unit u 
+        //                 JOIN u.doctor d  
+        //                 JOIN u.clinic c 
+        //                 WHERE c.id = :clinic AND v.start = current_date() 
+        //                 ORDER BY v.start ASC'
+        //         )
+        //             ->setParameter('clinic', $clinic);
+        //         return $query->getResult();
+        //     } else if ($clinic and $doctor) { // IF CLINIC IS CHOSEN AND DOCTOR IS  CHOSEN
+        //         $query = $entityManager->createQuery(
+        //             'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
+        //                 FROM App\Entity\Visit v
+        //                 JOIN v.user us      
+        //                 JOIN v.unit u 
+        //                 JOIN u.doctor d  
+        //                 JOIN u.clinic c 
+        //                 WHERE c.id = :clinic AND u.doctor = :doctor AND v.start = current_date() 
+        //                 ORDER BY v.start ASC'
+        //         )
+        //             ->setParameter('clinic', $clinic)
+        //             ->setParameter('doctor', $doctor);
+        //         return $query->getResult();
+        //     }  else { // IF ALL DEFAULT -> ALL CLINICS AND ALL DOCTORS
+        //         $query = $entityManager->createQuery(
+        //             'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
+        //                 FROM App\Entity\Visit v
+        //                 JOIN v.user us      
+        //                 JOIN v.unit u 
+        //                 JOIN u.doctor d  
+        //                 JOIN u.clinic c 
+        //                 WHERE v.start = current_date() 
+        //                 ORDER BY v.start ASC'
+        //         );
+        //         return $query->getResult();
+        //     }
+        // } else if ($type == 3) { // ALL VISITS
+        //     if ($doctor == '' and $clinic) { // IF DOCTOR IS NOT CHOSEN AND CLINIC IS CHOSEN
+        //         $query = $entityManager->createQuery(
+        //             'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
+        //                 FROM App\Entity\Visit v
+        //                 JOIN v.user us      
+        //                 JOIN v.unit u 
+        //                 JOIN u.doctor d  
+        //                 JOIN u.clinic c 
+        //                 WHERE c.id = :clinic
+        //                 ORDER BY v.start ASC'
+        //         )
+        //             ->setParameter('clinic', $clinic);
+        //         return $query->getResult();
+        //     } else if ($clinic and $doctor) { // IF CLINIC IS CHOSEN AND DOCTOR IS  CHOSEN
+        //         $query = $entityManager->createQuery(
+        //             'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
+        //                 FROM App\Entity\Visit v
+        //                 JOIN v.user us      
+        //                 JOIN v.unit u 
+        //                 JOIN u.doctor d  
+        //                 JOIN u.clinic c 
+        //                 WHERE c.id = :clinic AND u.doctor = :doctor 
+        //                 ORDER BY v.start ASC'
+        //         )
+        //             ->setParameter('clinic', $clinic)
+        //             ->setParameter('doctor', $doctor);
+        //         return $query->getResult();
+        //     }
+        //     else { // IF ALL DEFAULT -> ALL CLINICS AND ALL DOCTORS
+        //         $query = $entityManager->createQuery(
+        //             'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
+        //                 FROM App\Entity\Visit v
+        //                 JOIN v.user us      
+        //                 JOIN v.unit u 
+        //                 JOIN u.doctor d  
+        //                 JOIN u.clinic c 
+        //                 ORDER BY v.start ASC'
+        //         );
+        //         return $query->getResult();
+        //     }
+        
+                // DEFAULT VIEW 
                 $query = $entityManager->createQuery(
                     'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
                 FROM App\Entity\Visit v
@@ -54,180 +272,10 @@ class VisitRepository extends ServiceEntityRepository
                 JOIN v.unit u 
                 JOIN u.doctor d  
                 JOIN u.clinic c 
-                WHERE c.id = :clinic AND v.start >= current_date() 
-                ORDER BY v.start ASC'
-                )
-                    ->setParameter('clinic', $clinic);
-                return $query->getResult();
-            } else if ($clinic and $doctor) { // IF CLINIC IS CHOSEN AND DOCTOR IS  CHOSEN
-                $query = $entityManager->createQuery(
-                    'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
-                        FROM App\Entity\Visit v
-                        JOIN v.user us      
-                        JOIN v.unit u 
-                        JOIN u.doctor d  
-                        JOIN u.clinic c 
-                        WHERE c.id = :clinic AND u.doctor = :doctor AND v.start >= current_date() 
-                        ORDER BY v.start ASC'
-                )
-                    ->setParameter('clinic', $clinic)
-                    ->setParameter('doctor', $doctor);
-                return $query->getResult();
-            }
-            else { // IF ALL DEFAULT -> ALL CLINICS AND ALL DOCTORS
-                $query = $entityManager->createQuery(
-                    'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
-                        FROM App\Entity\Visit v
-                        JOIN v.user us      
-                        JOIN v.unit u 
-                        JOIN u.doctor d  
-                        JOIN u.clinic c 
-                        WHERE v.start >= current_date() 
-                        ORDER BY v.start ASC'
-                );
-                return $query->getResult();
-            }
-
-
-        } else if ($type == 1) { // PAST VISITS
-            if ($doctor == '' and $clinic) { // IF DOCTOR IS NOT CHOSEN AND CLINIC IS CHOSEN
-                $query = $entityManager->createQuery(
-                    'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
-                FROM App\Entity\Visit v
-                JOIN v.user us      
-                JOIN v.unit u 
-                JOIN u.doctor d  
-                JOIN u.clinic c 
-                WHERE c.id = :clinic AND v.start < current_date() 
-                ORDER BY v.start ASC'
-                )
-                    ->setParameter('clinic', $clinic);
-                return $query->getResult();
-            } else if ($clinic and $doctor) { // IF CLINIC IS CHOSEN AND DOCTOR IS  CHOSEN
-                $query = $entityManager->createQuery(
-                    'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
-                        FROM App\Entity\Visit v
-                        JOIN v.user us      
-                        JOIN v.unit u 
-                        JOIN u.doctor d  
-                        JOIN u.clinic c 
-                        WHERE c.id = :clinic AND u.doctor = :doctor AND v.start < current_date() 
-                        ORDER BY v.start ASC'
-                )
-                    ->setParameter('clinic', $clinic)
-                    ->setParameter('doctor', $doctor);
-                return $query->getResult();
-            } else { // IF ALL DEFAULT -> ALL CLINICS AND ALL DOCTORS
-                $query = $entityManager->createQuery(
-                    'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
-                        FROM App\Entity\Visit v
-                        JOIN v.user us      
-                        JOIN v.unit u 
-                        JOIN u.doctor d  
-                        JOIN u.clinic c 
-                        WHERE v.start < current_date() 
-                        ORDER BY v.start ASC'
-                );
-                return $query->getResult();
-            }
-
-        } else if ($type == 2) { // TODAY'S VISITS
-            if ($doctor == '' and $clinic) { // IF DOCTOR IS NOT CHOSEN AND CLINIC IS CHOSEN
-                $query = $entityManager->createQuery(
-                    'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
-                        FROM App\Entity\Visit v
-                        JOIN v.user us      
-                        JOIN v.unit u 
-                        JOIN u.doctor d  
-                        JOIN u.clinic c 
-                        WHERE c.id = :clinic AND v.start = current_date() 
-                        ORDER BY v.start ASC'
-                )
-                    ->setParameter('clinic', $clinic);
-                return $query->getResult();
-            } else if ($clinic and $doctor) { // IF CLINIC IS CHOSEN AND DOCTOR IS  CHOSEN
-                $query = $entityManager->createQuery(
-                    'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
-                        FROM App\Entity\Visit v
-                        JOIN v.user us      
-                        JOIN v.unit u 
-                        JOIN u.doctor d  
-                        JOIN u.clinic c 
-                        WHERE c.id = :clinic AND u.doctor = :doctor AND v.start = current_date() 
-                        ORDER BY v.start ASC'
-                )
-                    ->setParameter('clinic', $clinic)
-                    ->setParameter('doctor', $doctor);
-                return $query->getResult();
-            }  else { // IF ALL DEFAULT -> ALL CLINICS AND ALL DOCTORS
-                $query = $entityManager->createQuery(
-                    'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
-                        FROM App\Entity\Visit v
-                        JOIN v.user us      
-                        JOIN v.unit u 
-                        JOIN u.doctor d  
-                        JOIN u.clinic c 
-                        WHERE v.start = current_date() 
-                        ORDER BY v.start ASC'
-                );
-                return $query->getResult();
-            }
-        } else if ($type == 3) { // ALL VISITS
-            if ($doctor == '' and $clinic) { // IF DOCTOR IS NOT CHOSEN AND CLINIC IS CHOSEN
-                $query = $entityManager->createQuery(
-                    'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
-                        FROM App\Entity\Visit v
-                        JOIN v.user us      
-                        JOIN v.unit u 
-                        JOIN u.doctor d  
-                        JOIN u.clinic c 
-                        WHERE c.id = :clinic
-                        ORDER BY v.start ASC'
-                )
-                    ->setParameter('clinic', $clinic);
-                return $query->getResult();
-            } else if ($clinic and $doctor) { // IF CLINIC IS CHOSEN AND DOCTOR IS  CHOSEN
-                $query = $entityManager->createQuery(
-                    'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
-                        FROM App\Entity\Visit v
-                        JOIN v.user us      
-                        JOIN v.unit u 
-                        JOIN u.doctor d  
-                        JOIN u.clinic c 
-                        WHERE c.id = :clinic AND u.doctor = :doctor 
-                        ORDER BY v.start ASC'
-                )
-                    ->setParameter('clinic', $clinic)
-                    ->setParameter('doctor', $doctor);
-                return $query->getResult();
-            }
-            else { // IF ALL DEFAULT -> ALL CLINICS AND ALL DOCTORS
-                $query = $entityManager->createQuery(
-                    'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
-                        FROM App\Entity\Visit v
-                        JOIN v.user us      
-                        JOIN v.unit u 
-                        JOIN u.doctor d  
-                        JOIN u.clinic c 
-                        ORDER BY v.start ASC'
-                );
-                return $query->getResult();
-            }
-        }
-                // DEFAULT VIEW - INCOMING VISITS
-                $query = $entityManager->createQuery(
-                    'SELECT v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName
-                FROM App\Entity\Visit v
-                JOIN v.user us      
-                JOIN v.unit u 
-                JOIN u.doctor d  
-                JOIN u.clinic c 
-                WHERE v.start >= current_date() 
                 ORDER BY v.start ASC'
                 );
                 return $query->getResult();
             }
-
 
     public function findOverlapping($start, $end, $id)
     {

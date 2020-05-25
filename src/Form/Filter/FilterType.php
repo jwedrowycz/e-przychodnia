@@ -73,7 +73,7 @@ class FilterType extends AbstractType
 //            'expanded' => true,
             'choices' => [
                 'Nadchodzące' => 0,
-                'Archwialne' => 1,
+                'Archiwalne' => 1,
                 'Dzisiaj' => 2,
                 'Wszystkie' => 3,
             ],
