@@ -44,7 +44,6 @@ class VisitRepository extends ServiceEntityRepository
     {
 
         $entityManager = $this->getEntityManager();
-        dump($type);
         if ($type == 0) { // INCOMING VISITS
             if ($doctor == '' and $clinic) { // IF DOCTOR IS NOT CHOSEN AND CLINIC IS CHOSEN
                 $query = $entityManager->createQuery(
