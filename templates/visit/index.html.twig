@@ -20,9 +20,10 @@
                         <h3>{{ c.name }}<a href="{{ path('visit_choose', {'id': c.id}) }}" hidden></a></h3>
                         <ul>
                         {% for u in units %}
-                            
-                            {% if c.name == u.name %}
-                                <li>{{ u.d_name ~ ' ' ~ u.last_name}}</li>
+                            {% if u.status == 1 %}
+                                {% if c.name == u.name %}
+                                    <li>{{ u.d_name ~ ' ' ~ u.last_name}}</li>
+                                {% endif %}
                             {% endif %}
                         {% endfor %}
                         </ul>
@@ -33,7 +34,7 @@
 </div>
 
 <script>
-    $("ul:not(:has(li))").append($("<p>Aktualnie żaden doctor nie przyjmuje w tej poradni.</p>"))
+    $("ul:not(:has(li))").append($("<p>Aktualnie żaden lekarz nie przyjmuje w tej poradni.</p>"))
 
     $('.clinic-card').click(function() {
    window.location.href = $(this).find('a').attr('href');

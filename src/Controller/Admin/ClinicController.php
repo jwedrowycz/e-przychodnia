@@ -20,24 +20,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class ClinicController extends AdminPanelController
 {
      /**
-     * @Route("/", name="clinics_show")
+     * @Route("/", name="clinics")
      */
-    public function show(ClinicRepository $clinicRepo)
+    public function clinics(Request $request, ClinicRepository $clinicRepo)
     {
         $clinics = $clinicRepo->findAll();
 
-        return $this->render('admin_panel/clinic/index.html.twig',[
-            'clinics' => $clinics
-        ]);
-    }
-
-    
-
-    /**
-     * @Route("/add", name="clinic_add")
-     */
-    public function clinic_add(Request $request)
-    {
         $clinic = new Clinic();
         $form = $this->createForm(ClinicType::class, $clinic);
         $form->handleRequest($request);
@@ -46,17 +34,35 @@ class ClinicController extends AdminPanelController
             $entityManager->persist($clinic);
             $entityManager->flush();
 
-             $this->addFlash(
-            'success',
-            'Poradnia została pomyślnie dodana'
-        );
-            return $this->redirectToRoute('admin.clinics_show');
+            $this->addFlash(
+                'success',
+                'Poradnia została pomyślnie dodana'
+            );
+            return $this->redirectToRoute('admin.clinics');
 
         }
-
-        return $this->render('admin_panel/clinic/add.html.twig', [
+        return $this->render('admin_panel/clinic/index.html.twig',[
+            'clinics' => $clinics,
             'form' => $form->createView(),
         ]);
+    }
+
+    
+
+    /**
+     * @Route("/delete/{id}", name="clinic_delete")
+     */
+    public function delete($id, Clinic $clinic)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($clinic);
+        $entityManager->flush();
+        $this->addFlash(
+            'success',
+            'Poradnia została pomyślnie usunięta'
+        );
+        return $this->redirectToRoute('admin.clinics');
+
        
     }
     

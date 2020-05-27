@@ -1,0 +1,60 @@
+    {{ form_start(form, {'attr': {'class': 'form', 'autocomplete':'off'}}) }}
+
+    <div class="form-item-col">
+        {{ form_label(form.email, 'E-mail', {'attr': {'class' : 'form-label'}} ) }}
+        {% if form_errors(form.email) %}
+            {{ form_widget(form.email, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+        {% else %}
+            {{ form_widget(form.email, {'attr': {'class' : 'form-input'}} ) }}
+        {% endif %}
+        <span class="form-error">{{ form_errors(form.email) }}</span>
+    </div>
+{#    <div class="form-item-col">#}
+{#        {{ form_label(form.password.first, 'Hasło', {'attr': {'class' : 'form-label'}} ) }}#}
+{#        {% if form_errors(form.password.first) %}#}
+{#            {{ form_widget(form.password.first, {'attr': {'class' : 'form-input form-input--error'}} ) }}#}
+{#        {% else %}#}
+{#            {{ form_widget(form.password.first, {'attr': {'class' : 'form-input'}} ) }}#}
+{#        {% endif %}#}
+{#    </div>#}
+{#    <div class="form-item-col">#}
+{#        {{ form_label(form.password.second, 'Powtórz hasło', {'attr': {'class' : 'form-label'}} ) }}#}
+{#        {% if form_errors(form.password.first) %}#}
+{#            {{ form_widget(form.password.second, {'attr': {'class' : 'form-input form-input--error'}} ) }}#}
+{#        {% else %}#}
+{#            {{ form_widget(form.password.second, {'attr': {'class' : 'form-input'}} ) }}#}
+{#        {% endif %}#}
+{#        <span class="form-error">{{ form_errors(form.password.first) }}</span>#}
+{#    </div>#}
+    <div class="form-item-row">
+        <div class="form-item-col">
+            {{ form_label(form.name, 'Imię', {'attr': {'class' : 'form-label'}} ) }}
+            {% if form_errors(form.name) %}
+                {{ form_widget(form.name, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+            {% else %}
+                {{ form_widget(form.name, {'attr': {'class' : 'form-input'}} ) }}
+            {% endif %}
+            <span class="form-error">{{ form_errors(form.name) }}</span>
+        </div>
+        <div class="form-item-col">
+            {{ form_label(form.last_name, 'Nazwisko', {'attr': {'class' : 'form-label'}} ) }}
+            {% if form_errors(form.last_name) %}
+                {{ form_widget(form.last_name, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+            {% else %}
+                {{ form_widget(form.last_name, {'attr': {'class' : 'form-input'}} ) }}
+            {% endif %}
+            <span class="form-error">{{ form_errors(form.last_name) }}</span>
+        </div>
+        <div class="form-item-col">
+            {{ form_label(form.roles, 'Rola', {'attr': {'class' : 'form-label'}} ) }}
+            {% if form_errors(form.roles) %}
+                {{ form_widget(form.roles, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+            {% else %}
+                {{ form_widget(form.roles, {'attr': {'class' : 'form-input'}} ) }}
+            {% endif %}
+            <span class="form-error">{{ form_errors(form.roles) }}</span>
+        </div>
+    </div>
+
+    <button class="form-btn">Edytuj</button>
+    {{ form_end(form) }}

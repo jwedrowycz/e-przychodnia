@@ -49,11 +49,9 @@ class UserType extends AbstractType
                 'expanded' => false,
                 'multiple' => true,
 
-            ])
+            ]);
         
-        ->add('submit', SubmitType::class, [
-            'label' => 'Dodaj'
-        ]);
+
 
     }
 

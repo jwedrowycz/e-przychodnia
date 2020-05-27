@@ -8,6 +8,7 @@ use App\Entity\Unit;
 use App\Repository\ClinicRepository;
 use App\Repository\DoctorRepository;
 use App\Repository\UnitRepository;
+use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -44,26 +45,10 @@ class FilterType extends AbstractType
                     'onchange' => 'this.form.submit()'
                 ],
                 'placeholder' => 'Wszystkie',
-                'mapped' => false,
                 'label' => 'Poradnie: ',
-
             ])
-//            ->add('doctor', EntityType::class, [
-//                'class' => 'App\Entity\Doctor',
-//
-//                'choice_label' => function ($doctor) {
-//                    return $doctor->getName() . ' ' . $doctor->getLastName();
-//                },
-//                'choice_value' => function (?Doctor $entity) {
-//                    return $entity ? $entity->getId() : '';
-//                },
-//                'attr' => [
-//                    'onchange' => 'this.form.submit()'
-//                ],
-//            ])
+
             ->setMethod('GET');
-
-
         $builder->get('clinic')->addEventListener(
             FormEvents::POST_SUBMIT,
             function(FormEvent $event)
@@ -83,6 +68,51 @@ class FilterType extends AbstractType
             }
         );
 
+        $builder->addEventListener(
+            FormEvents::POST_SET_DATA,
+            function(FormEvent $event)
+            {
+                $form = $event->getForm();
+                $data = $event->getData();
+                $doctors = null;
+
+                if($doctors)
+                {
+                    $form->get('clinic')->setData($doctors->getDoctor());
+
+                    $form->add('doctor', EntityType::class, [
+                        'class' => 'App\Entity\Unit',
+                        'placeholder' => 'Wszyscy',
+                        'choices' => $doctors->getUnit()->getDoctor(),
+                        'attr' => [
+                            'onchange' => 'this.form.submit()'
+                        ],
+                        'label' => 'Lekarzed: ',
+
+                    ]);
+                }
+                else {
+                    $form->add('doctor', EntityType::class, [
+                        'class' => 'App\Entity\Doctor',
+                        'placeholder' => 'Wszyscy',
+//                        'choice_label' => function ($doctor) {
+//                            return $doctor->getName() . ' ' . $doctor->getLastName();
+//                        },
+//                        'choice_value' => function (?Doctor $entity) {
+//                            return $entity ? $entity->getId() : '';
+//                        },
+                        'choices' => [],
+                        'attr' => [
+                            'onchange' => 'this.form.submit()'
+                        ],
+                        'label' => 'Lekarze: ',
+                    #TODO: DO POPRAWKI W PRZYSZŁOŚCI
+                    ]);
+                }
+            }
+        );
+
+//
         $builder->add('type', ChoiceType::class, [
 //            'multiple' => false,
 //            'expanded' => true,

@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Entity\Clinic;
+use App\Form\UserEditType;
 use App\Form\UserType;
 use App\Repository\ClinicRepository;
 use App\Repository\UserRepository;
@@ -36,19 +37,6 @@ class UsersController extends AbstractController
 
     }
 
-     /**
-     * @Route("/users-only", name="users_only")
-     */
-     public function users_only(UserRepository $usersRepo)
-     {
-         $users = $usersRepo->findAllUsers();
-        //  $users = $users->getResult();
-         return $this->render('admin_panel/users/users_only.html.twig', [
-             'users' => $users
-         ]);
- 
-     }
-    
     /**
      * @Route("/add", name="add_user")
      */
@@ -97,7 +85,7 @@ class UsersController extends AbstractController
     /**
      * @Route("/clinic/users/delete/{id}", name="user_delete")
      */
-    public function user_delete(User $user)
+    public function delete(User $user)
     {
         $entityManager = $this->getDoctrine()->getManager();
 
@@ -106,5 +94,31 @@ class UsersController extends AbstractController
 
         return $this->redirectToRoute('admin.users');
 
+    }
+
+
+    /**
+     * @Route("/edit/{id}", name="user_edit")
+     */
+    public function edit(Request $request, User $user): Response
+    {
+        $form = $this->createForm(UserEditType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash(
+                'success',
+                'Pomyślnie usunięto użytkownika'
+            );
+            return $this->redirectToRoute('admin.users');
+
+        }
+
+        return $this->render('admin_panel/users/edit.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
     }
 }

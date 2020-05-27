@@ -40,7 +40,7 @@ class VisitController extends AbstractController
 
 
     /**
-     * @Route("/wybor/{id}", name="visit_choose")
+     * @Route("/choice/{id}", name="visit_choose")
      */
     public function choose($id, UnitRepository $unitRepo, ClinicRepository $clinicRepo, WorkTimeRepository $workTimeRepo)
     {   
@@ -66,7 +66,7 @@ class VisitController extends AbstractController
     
     
     /**
-     * @Route("/terminy/{id}", name="visit_terms")
+     * @Route("/terms/{id}", name="visit_terms")
      */
     public function terms_show($id, WorkTimeRepository $workTimeRepo){
         $workTime = $workTimeRepo->findBy([
@@ -79,7 +79,7 @@ class VisitController extends AbstractController
     }
 
     /**
-     * @Route("/terminy/rezerwuj/{id}/", name="visit_add")
+     * @Route("/terms/reservation/{id}/", name="visit_add")
      */
     public function add($id, Request $request, UnitRepository $unitRepo, WorkTimeRepository $workTimeRepo, VisitRepository $visitRepo){
         $visit = new Visit();

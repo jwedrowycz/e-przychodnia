@@ -10,6 +10,8 @@
             </div>
         {% endfor %}
     {% endfor %}
+    <div class="container-select">
     {{ include('admin_panel/visit/_filters.html.twig') }}
+    </div>
     {{ include('admin_panel/visit/_datatable.html.twig') }}
 {% endblock content %}

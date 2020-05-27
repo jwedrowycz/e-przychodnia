@@ -89,7 +89,7 @@ class DoctorController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Pomyślnie usunięto doctora'
+                'Pomyślnie edytowano dane lekarza'
                 );
             return $this->redirectToRoute('admin.doctors');
             

@@ -50,9 +50,6 @@ class VisitRepository extends ServiceEntityRepository
         $currDateEnd = $dateEnd->setTime(23,59,59);
         $currDateEnd = $currDateEnd->format('Y-m-d H:i:s');
 
-        dump($doctor);
-        dump($clinic);
-        dump($type);
         // INCOMING VISITS
         $qb = $this->createQueryBuilder('v') //MAIN QUERY
             ->addSelect('v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName')

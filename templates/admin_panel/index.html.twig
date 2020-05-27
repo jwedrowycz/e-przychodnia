@@ -16,7 +16,7 @@
                 'admin.clinics_show',
                 'admin.clinic_add',
                 ] %} 
-                class="active"{% endif %}  href="{{ path('admin.clinics_show') }}">Poradnie</a>
+                class="active"{% endif %}  href="{{ path('admin.clinics') }}">Poradnie</a>
                 <a {% if app.request.attributes.get('_route') in [
                 'admin.unit',
                 'admin.unit_show',

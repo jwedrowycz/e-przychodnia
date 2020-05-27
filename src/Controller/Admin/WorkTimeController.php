@@ -35,7 +35,7 @@ class WorkTimeController extends AbstractController
             
             $unit = $entityManager->getRepository('App:Unit')->find($id);
 
-            $time->setUnits($unit);
+            $time->setUnit($unit);
             $entityManager->persist($time);
             $entityManager->flush();
 
@@ -52,7 +52,7 @@ class WorkTimeController extends AbstractController
     }
 
     /**
-     * @Route("/work_time/{id}", name="work_time", methods={"GET", "POST"})
+     * @Route("/work-time/{id}", name="work_time", methods={"GET", "POST"})
      */
     public function showAndAdd($id, unitRepository $unitRepo, Request $request){
 
@@ -61,7 +61,7 @@ class WorkTimeController extends AbstractController
         $time = $entityManager->getRepository('App:WorkTime')->findAllByUnitId($id);
         $unit = $this->getDoctrine()
             ->getRepository(Unit::class)
-            ->findOneById($id);
+            ->findOneBy(['id'=>$id]);
         
         $timeGet = new WorkTime();
 

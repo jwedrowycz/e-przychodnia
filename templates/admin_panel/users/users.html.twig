@@ -27,7 +27,7 @@
             <td>{{ user.name }}</td>
             <td>{{ user.lastName }}</td>
             <td>{{ user.roles[0] }}</td>
-            <td><a class="add" href="{{ path('admin.user_profile', {id:user.id}) }}">Edytuj</a></td>
+            <td><a class="add" href="{{ path('admin.user_edit', {id:user.id}) }}">Edytuj</a></td>
             <td><a class="delete" href="{{ path('admin.user_delete', {id:user.id}) }}">Usuń</a></td>
         </tr>
         {% endfor %}

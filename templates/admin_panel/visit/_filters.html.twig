@@ -1,26 +1,30 @@
 {{ form_start(form) }}
     <h2>{{ form_label(form, 'Filtry',  {'attr': {'novalidate': 'novalidate'}}) }}</h2>
     {{ form_label(form.clinic) }}
-    {{ form_widget(form.clinic) }}
-{#    {{ form_label(form.doctor, 'Lekarze: ') }}#}
-{#    {{ form_widget(form.doctor) }}#}
-    {{ form_label(form.type, 'Wizyty: ') }}
-    {{ form_widget(form.type) }}
+    {{ form_widget(form.clinic, {'attr': {'class': 'form-select form-select--small'}}) }}
+    {{ form_label(form.doctor) }}
+    {{ form_widget(form.doctor, {'attr': {'class': 'form-select form-select--small'}}) }}
+    {{ form_label(form.type) }}
+    {{ form_widget(form.type, {'attr': {'class': 'form-select form-select--small'}}) }}
 {{ form_end(form) }}
 
 <script>
-    var $doctor = $('#filter_doctor');
-    $doctor.change(function() {
-        // ... retrieve the corresponding form.
-        var $form = $(this).closest('form');
-        // Simulate form data, but only include the selected sport value.
-        var data = {};
-        data[$doctor.attr('name')] = $doctor.val();
-        // Submit data via AJAX to the form's action path.
-        $.post($form.attr('action'), data).then(function (response)
-        {
-            $('#')
-        })
-
-    });
+    // var $clinic = $("#filter_clinic")
+    //
+    // $clinic.change(function ()
+    //     {
+    //         var $form = $(this).closest('form')
+    //
+    //         var data = {}
+    //
+    //         data[$clinic.attr('name')] = $clinic.val()
+    //
+    //         $.post($form.attr('action'), data).then(function (response)
+    //         {
+    //             $("#filter_doctor").replaceWith(
+    //                 $(response).find("#filter_doctor")
+    //             )
+    //         })
+    //     }
+    // )
 </script>

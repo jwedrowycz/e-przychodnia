@@ -31,20 +31,7 @@ class VisitOverlappingValidator extends ConstraintValidator
         $start = $value->getStart();
         $end = $value->getEnd();
         $unit = $value->getUnit();
-        
-      
-        // $u = $unit->getId();
-//         if (!is_string($value)) {
-//             // throw this exception if your validator cannot handle the passed type so that it can be marked as invalid
-//             throw new UnexpectedValueException($value->getStart(), 'string');
-//
-//             // separate multiple types using pipes
-//             // throw new UnexpectedValueException($value, 'string|int');
-//         }
 
-
-        // TODO: implement the validation here
-        // $existingVisit = $this->visitRepo->findOverlapping($value->getStart(), $value->getEnd(), $value->getUnit()->getId());
         $existingVisit = $this->visitRepo->findOverlapping($start, $end, $unit);
         $workTimeValid = $this->workTimeRepo->checkWorkDay($start->format('H:i:s'), $end->format('H:i:s'), $unit->getId(), $start->format('w'));
 
