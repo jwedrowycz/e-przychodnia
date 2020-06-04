@@ -21,6 +21,8 @@ class UnitController extends AbstractController
 
     /**
      * @Route("/", name="unit")
+     * @param UnitRepository $unitRepo
+     * @return Response
      */
     public function index(UnitRepository $unitRepo)
     {   
@@ -48,6 +50,11 @@ class UnitController extends AbstractController
 
     /**
      * @Route("/add/{idClinic}", name="unit_add")
+     * @param $idClinic
+     * @param Request $request
+     * @param DoctorRepository $doctorRepo
+     * @param ClinicRepository $clinicRepo
+     * @return Response
      */
     public function add($idClinic, Request $request, DoctorRepository $doctorRepo, ClinicRepository $clinicRepo): Response
     {
@@ -57,14 +64,18 @@ class UnitController extends AbstractController
         $form = $this->createForm(UnitType::class, $unit);
         $form->handleRequest($request);
 
-        return $this->render('admin_panel/unit/add.html.twig', [
+        return $this->render('admin_panel/unit/_add.html.twig', [
             'doctors' => $doctors,
             'clinic' => $clinic
         ]);
 
     }
+
     /**
      * @Route("/create/{idDoctor}/{idClinic}", name="unit_create")
+     * @param $idDoctor
+     * @param $idClinic
+     * @return Response
      */
     public function create($idDoctor, $idClinic)
     {

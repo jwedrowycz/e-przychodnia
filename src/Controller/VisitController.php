@@ -131,8 +131,7 @@ class VisitController extends AbstractController
             'unit' => $unit,
             'start' => $start,
             'end' => $end,
-//            'test' => $test,
-//            'w' => $start->format('w'),
+            'id' => $id,
             'form' => $form->createView()
         ]);
 

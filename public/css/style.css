@@ -98,7 +98,7 @@ body {
   }
   
 .sidebar a:hover {
-    background-color: grey;
+    background-color: dodgerblue;
     transition: background 0.5s, border-color 0.5s, color 0.5s;
 }
 
@@ -109,7 +109,7 @@ body {
 }
 
 .active {
-    background-color: grey;
+    background-color: dodgerblue;
 }
 
 .content {
@@ -435,3 +435,37 @@ body {
 /* .fc-content {
     cursor: pointer;
 } */
+
+
+.link {
+    text-decoration: none;
+    color: dodgerblue;
+}
+.link:hover {
+    transition: 0.5s;
+    color: darkblue;
+}
+
+.link-btn {
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 10px 16px;
+    margin: 10px 0;
+    width: 200px;
+    color: white;
+    background: #1E90FF;
+    border: 2px solid #1873cc;
+    cursor: pointer;
+    outline: none;
+}
+
+.link-btn:hover{
+    background: #1873cc;
+    transition: background 0.5s, border-color 0.5s, color 0.5s;
+}
+
+.info-container{
+    padding: 5px 15px;
+    background: #beddff;
+}

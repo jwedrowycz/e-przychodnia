@@ -8,7 +8,10 @@
             </div>
         {% endfor %}
     {% endfor %}
-
+    <div class="info-container">
+        <p>Upewnij się, że podana data i godzina wizyty są prawidłowe. W razie konieczności, możesz dokonać <a class="link" href="{{ path('visit_terms', {'id': id }) }}">wyboru </a>jeszcze raz.
+        </p>
+    </div>
     <h1>{{ clinic.name }}</h1>
     <h2>{{doctor.name ~ ' ' ~ doctor.lastName}}</h2>
     <h2>Data</h2>

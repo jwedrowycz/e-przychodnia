@@ -14,7 +14,7 @@
             <th>Id jednostki</th>
             <th>Id lekarza</th>
             <th>Numer PWZ</th>
-            <th>Imie i nazwisko</th>
+            <th>Lekarz</th>
             <th>Specjalizacja</th>
             <th>Poradnia</th>
             <th colspan="2">Akcja</th>
@@ -37,5 +37,6 @@
         </tr>
     {% endfor %}
     </table>
+    <p>Jeśli chcesz przypisać lekarza do poradni, przejdź do zakładki <a class="link" href="{{ path('admin.clinics') }}"><b>poradnie</b></a>.</p>
 
 {% endblock content %}
