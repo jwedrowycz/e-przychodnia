@@ -174,9 +174,10 @@ body {
 
 .flash-success {
     padding: 20px;
-    background-color: rgba(8, 180, 0, 0.75); 
+    background-color: rgba(138, 255, 136, 0.68);
     color: black;
     margin-bottom: 15px;
+    /*border-radius: 20px;*/
 
 }
 
@@ -325,6 +326,8 @@ body {
 
 .form-btn:hover{
     background: #1873cc;
+    transition: background 0.5s, border-color 0.5s, color 0.5s;
+
 }
 
 /*-- TODO: POPRAWIĆ FLEXA > CHILDY */
@@ -391,7 +394,7 @@ body {
     display: none;
 }
 
-/* ------------------ PORADNIE CONTAINER ---------- */
+/* ------------------ CLINICS CONTAINER ---------- */
 
 .clinics-container{
     display: grid;
@@ -404,18 +407,25 @@ body {
 
 .clinic-card {
     background-color: #EAEAEA;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     /* border-radius: 5px; */
 
 }
 .clinic-card:hover {
-    background-color: gray;
+    background-color: #c9c9c9;
     cursor: pointer;
     transition: background 0.5s, border-color 0.5s, color 0.5s;
 }
 
-.clinics-item {
+/*.clinic-item--title {*/
+/*    font*/
+/*}*/
+
+.clinic-item {
     padding: 15px 15px;
 }
+
+/* -------------------- DOCTOR CHOICE --------------- */
 
 /* -------------------- FULL CALENDAR -------------- */
 .fc-nonbusiness.fc-bgevent{

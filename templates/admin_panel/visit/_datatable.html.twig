@@ -14,6 +14,7 @@
 
 
     </tr>
+
     {% for v in visits %}
         <tr>
             <td>{{ v.id }}</td>
@@ -30,3 +31,6 @@
         </tr>
     {% endfor %}
 </table>
+{% if visits|length == 0 %}
+    <p>Brak wizyt</p>
+{% endif %}

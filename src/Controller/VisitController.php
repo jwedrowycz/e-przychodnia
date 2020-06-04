@@ -25,6 +25,9 @@ class VisitController extends AbstractController
 {
     /**
      * @Route("/", name="visit")
+     * @param UnitRepository $unitRepo
+     * @param ClinicRepository $clinicRepo
+     * @return Response
      */
     public function index(UnitRepository $unitRepo, ClinicRepository $clinicRepo)
     {   
@@ -41,6 +44,11 @@ class VisitController extends AbstractController
 
     /**
      * @Route("/choice/{id}", name="visit_choose")
+     * @param $id
+     * @param UnitRepository $unitRepo
+     * @param ClinicRepository $clinicRepo
+     * @param WorkTimeRepository $workTimeRepo
+     * @return Response
      */
     public function choose($id, UnitRepository $unitRepo, ClinicRepository $clinicRepo, WorkTimeRepository $workTimeRepo)
     {   

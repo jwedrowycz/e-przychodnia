@@ -28,7 +28,7 @@
                         <a href="{{ path('logout') }}" class="">Wyloguj</a>
                     </li>
                     <li class="navbar-li">
-                        <a href="#" class="">{{ app.user.username }}</a>
+                        <a href="{{ path('profile') }}" class="">{{ app.user.username }}</a>
                     </li>
                 {% else %}
                     <li class="navbar-li">

@@ -5,17 +5,20 @@
 {% block body %}
 
 <div class="container">
-    <h1>{{ clinic.name }}</h1>
-    {% for u in unit %}
-    <div class="clinic-card">
-        {% if u.status == 1 %}
-            <a href="{{path('visit_terms', {'id': u.unit})}}" hidden></a>
-            {{ u.name ~ ' ' ~ u.last_name }} <br>
-            {{ render(controller('App\\Controller\\VisitController::work_time_show', {'idClinic': clinic.id, 'idUnit':u.unit})) }}
-        {% endif %}
+    <div class="clinics-container">
+        <h1>{{ clinic.name }}</h1>
+        {% for u in unit %}
+        <div class="clinic-card">
+            {% if u.status == 1 %}
+                <div class="clinic-item"><a href="{{path('visit_terms', {'id': u.unit})}}" hidden></a>
+                <h3>{{ u.name ~ ' ' ~ u.last_name }} <br></h3>
+                {{ render(controller('App\\Controller\\VisitController::work_time_show', {'idClinic': clinic.id, 'idUnit':u.unit})) }}
+                </div>
+            {% endif %}
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
+    </div>
 
 <script>
     

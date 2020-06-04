@@ -25,6 +25,8 @@ class AppExtension extends AbstractExtension
         ];
     }
 
+    //TODO: ZROBIĆ FILTR FORMATU TELEFONU
+
     public function nameOfDay($num)
     {        
         if($num===1){
@@ -42,6 +44,6 @@ class AppExtension extends AbstractExtension
         elseif($num===5){
             return 'Piątek';
         }
-
+        return False;
     }
 }

@@ -12,8 +12,10 @@ class ProfileController extends AbstractController
      */
     public function index()
     {
-        return $this->render('profile/index.html.twig', [
+        $user = $this->get('security.token_storage')->getToken()->getUser();
 
+        return $this->render('profile/index.html.twig', [
+            'user' => $user
         ]);
     }
 }

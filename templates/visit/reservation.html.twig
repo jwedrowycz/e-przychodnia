@@ -12,11 +12,11 @@
     <h1>{{ clinic.name }}</h1>
     <h2>{{doctor.name ~ ' ' ~ doctor.lastName}}</h2>
     <h2>Data</h2>
-    <p>{{start|date("Y-m-d") ~ ' ' ~ nameOfDay(start|date('w'))}}</p>
+    <p>{{ start|date('d-m-Y') ~ ' ' ~ nameOfDay(start|date('w')) }}</p> <!-- TODO: POPRAWIĆ FORMAT DATY- LOCALIZEDDATE-->
     <h2>Przewidywana godzina rozpoczęcia</h2>
-    <p>{{start|date("H:i")}}</p>
+    <p>{{ start|date("H:i") }}</p>
     <h2>Przewidywana godzina zakończenia</h2>
-    <p>{{end|date("H:i")}}</p>
+    <p>{{ end|date("H:i") }}</p>
 
     {{ form_start(form) }}
     {{ form_errors(form) }}
