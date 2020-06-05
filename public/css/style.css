@@ -429,6 +429,13 @@ body {
 .clinic-item {
     padding: 15px 15px;
 }
+.clinic-item > ul {
+    list-style-type: none;
+}
+.clinic-item:hover > h3{
+    color: darkblue;
+    transition: 0.5s;
+}
 
 /* -------------------- DOCTOR CHOICE --------------- */
 

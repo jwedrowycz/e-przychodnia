@@ -21,16 +21,16 @@
             {% for c in clinics %}
                 <div class="clinic-card">
                     <div class="clinic-item">
-                        <h3>{{ c.name }}<a href="{{ path('visit_choose', {'id': c.id}) }}" hidden></a></h3>
-                        <ul>
+                        <h3 class="link">{{ c.name }}<a  href="{{ path('visit_choose', {'id': c.id}) }}" hidden></a></h3>
+
                             {% for u in units %}
                                 {% if u.status == 1 %}
                                     {% if c.name == u.name %}
-                                        <li>{{ u.d_name ~ ' ' ~ u.last_name }} &ndash; {{ '  lekarz ' ~ u.spec|lower }}</li>
+                                        <p>{{ u.d_name ~ ' ' ~ u.last_name }} &ndash; {{ '  lekarz ' ~ u.spec|lower }}</p>
                                     {% endif %}
                                 {% endif %}
                         {% endfor %}
-                        </ul>
+
                     </div>
                 </div>
             {% endfor %}
@@ -39,7 +39,7 @@
 
 
 <script>
-    $("ul:not(:has(li))").append($("<p><b>Aktualnie żaden lekarz nie przyjmuje w tej poradni.</b></p>"))
+    $("div.clinic-item:not(:has(p))").append($("<p><b>Aktualnie żaden lekarz nie przyjmuje w tej poradni.</b></p>"))
 
     $('.clinic-card').click(function() {
    window.location.href = $(this).find('a').attr('href');
