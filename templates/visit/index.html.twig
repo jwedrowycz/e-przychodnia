@@ -8,7 +8,11 @@
     {% for label, messages in app.flashes(['success', 'fail']) %}
         {% for message in messages %}
             <div class="flash-{{ label }}">
-                {{ message }}
+                {% if label=='success' %}
+                    Pomyślnie zarejestrowałeś się na badanie. Przejdź na swój <a class="link-green" href="{{ path('profile') }}">{{ message }}</a> aby zobaczyć szczegóły.
+                {% else %}
+                    {{ message }}
+                {% endif %}
             </div>
         {% endfor %}
     {% endfor %}

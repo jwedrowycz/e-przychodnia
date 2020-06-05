@@ -117,7 +117,7 @@ class VisitController extends AbstractController
             $entityManager->flush();
             $this->addFlash(
                 'success',
-                'Pomyślnie zarejestrowałeś się na badanie, przejdź na swój profil aby zobaczyć szczegóły'
+                'profil'
                 );
             return $this->redirectToRoute('visit');
 
