@@ -11,7 +11,6 @@
     <p><b>PESEL: </b> {{ app.user.PESEL }}</p>
     <p><b>Numer telefonu: </b> {{ app.user.numPhone }}</p>
     <p><b>Adres zamieszkania: </b> {{ app.user.address ~ ', ' ~ app.user.city ~ ' ' ~ app.user.postCode }}</p>
-{#    <p><b>Wiek: </b></p>#}
-    <p></p>
+    <p><b>Łączna liczba wizyt: </b>{{ countVisits }}</p>
 </div>
 {% endblock %}

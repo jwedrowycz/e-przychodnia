@@ -106,6 +106,16 @@ class VisitRepository extends ServiceEntityRepository
 
     }
 
+    public function countAllUserVisits($user)
+    {
+        $qb = $this->createQueryBuilder('v') //MAIN QUERY
+            ->andWhere('v.user = :user')
+            ->setParameter('user', $user)
+            ->select('COUNT(v.id)');
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
     // /**
     //  * @return Visit[] Returns an array of Visit objects
     //  */

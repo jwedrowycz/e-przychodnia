@@ -9,13 +9,14 @@
         {% endfor %}
     {% endfor %}
     <div class="info-container">
-        <p>Upewnij się, że podana data i godzina wizyty są prawidłowe. W razie konieczności, możesz dokonać <a class="link" href="{{ path('visit_terms', {'id': id }) }}">wyboru </a>jeszcze raz.
+        <p>
+            Upewnij się, że podana data i godzina wizyty są prawidłowe. W razie konieczności, możesz dokonać <a class="link" href="{{ path('visit_terms', {'id': id }) }}">wyboru </a>jeszcze raz.
         </p>
     </div>
     <h1>{{ clinic.name }}</h1>
     <h2>{{doctor.name ~ ' ' ~ doctor.lastName}}</h2>
     <h2>Data</h2>
-    <p>{{ start|date('d-m-Y') ~ ' ' ~ nameOfDay(start|date('w')) }}</p> <!-- TODO: POPRAWIĆ FORMAT DATY- LOCALIZEDDATE-->
+    <p>{{ start|format_datetime(pattern='dd MMMM Y', locale='pl') ~ ' ' ~ nameOfDay(start|date('w')) }}</p> <!-- TODO: POPRAWIĆ FORMAT DATY- LOCALIZEDDATE-->
     <h2>Przewidywana godzina rozpoczęcia</h2>
     <p>{{ start|date("H:i") }}</p>
     <h2>Przewidywana godzina zakończenia</h2>

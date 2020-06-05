@@ -19,9 +19,6 @@
                     <div class="clinic-item">
                         <h3>{{ c.name }}<a href="{{ path('visit_choose', {'id': c.id}) }}" hidden></a></h3>
                         <ul>
-                            {% if units|length == 0 %}
-                                <p><b>Aktualnie żaden lekarz nie przyjmuje w tej poradni</b></p>
-                            {% endif %}
                             {% for u in units %}
                                 {% if u.status == 1 %}
                                     {% if c.name == u.name %}
@@ -38,7 +35,7 @@
 
 
 <script>
-    $("ul:not(:has(li))").append($("<p>Aktualnie żaden lekarz nie przyjmuje w tej poradni.</p>"))
+    $("ul:not(:has(li))").append($("<p><b>Aktualnie żaden lekarz nie przyjmuje w tej poradni.</b></p>"))
 
     $('.clinic-card').click(function() {
    window.location.href = $(this).find('a').attr('href');
