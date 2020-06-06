@@ -127,10 +127,10 @@ class UsersController extends AbstractController
     {
         $form = $this->createForm(UserEditType::class, $user);
         $form->handleRequest($request);
+        // TODO: OGARNĄĆ KURWA TE ROLE BO COŚ NIE BANGLA
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
             $this->addFlash(
                 'success',
                 'Pomyślnie edytowano użytkownika'

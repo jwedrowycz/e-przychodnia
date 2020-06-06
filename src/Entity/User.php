@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @UniqueEntity(fields={"PESEL"}, message="Istnieje już pacjent z takim PESELem")
  * @UniqueEntity(fields={"num_phone"}, message="Taki numer telefonu jest już zarejestrowany")
  */
+//TODO: COŚ KURWA Z TYM TELEFONEM ZASTANYM NIE DZIAŁA
 class User implements UserInterface
 {
     /**
@@ -64,7 +65,7 @@ class User implements UserInterface
      *     match=false,
      *     message="LastName nie może zawierać cyfr"
      * )
-     * 
+     *
      *
      * @ORM\Column(type="string", length=255)
      */
@@ -93,7 +94,7 @@ class User implements UserInterface
      * )
      *  @Assert\Length(min=9,
      *                  max=9,
-     *                  exactMessage = "Numer telefonu może się składać dokładnie z {{ limit }} cyfr"
+     *                  exactMessage = "Numer telefonu musi się składać dokładnie z {{ limit }} cyfr"
      *                 )
      * @Assert\NotBlank(message = "Wpisz swój numer telefonu")
      * @ORM\Column(type="string", length=9)
@@ -118,7 +119,7 @@ class User implements UserInterface
      *               message="Numer telefonu nie może zawierać liter")
      * @Assert\NotBlank(message = "Wpisz kod pocztowy swojego miejsca zamieszkania")
      * @ORM\Column(type="string", length=6)
-     * 
+     *
      */
     private $post_code;
 
@@ -234,8 +235,8 @@ class User implements UserInterface
     }
 
     public function setName(string $name): self
-    {   
-   
+    {
+
         $this->name = ucfirst(mb_strtolower($name,"UTF-8"));
 
         return $this;
@@ -248,7 +249,7 @@ class User implements UserInterface
 
     public function setLastName(string $last_name): self
     {
-       
+
         $this->last_name = ucfirst(mb_strtolower($last_name,"UTF-8"));
 
         return $this;
@@ -365,7 +366,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->created_at = new \DateTime();
-        $this->visit = new ArrayCollection(); 
+        $this->visit = new ArrayCollection();
     }
 
     /**

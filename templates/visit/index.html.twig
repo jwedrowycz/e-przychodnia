@@ -26,7 +26,7 @@
                             {% for u in units %}
                                 {% if u.status == 1 %}
                                     {% if c.name == u.name %}
-                                        <p>{{ u.d_name ~ ' ' ~ u.last_name }} &ndash; {{ '  lekarz ' ~ u.spec|lower }}</p>
+                                        <p><b>{{ u.d_name ~ ' ' ~ u.last_name }}</b> &ndash; {{ '  lekarz ' ~ u.spec|lower }}</p>
                                     {% endif %}
                                 {% endif %}
                         {% endfor %}

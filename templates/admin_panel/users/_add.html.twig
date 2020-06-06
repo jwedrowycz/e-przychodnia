@@ -47,15 +47,15 @@
             {% endif %}
             <span class="form-error">{{ form_errors(form.last_name) }}</span>
         </div>
-        <div class="form-item-col">
-            {{ form_label(form.roles, 'Nazwisko', {'attr': {'class' : 'form-label'}} ) }}
-            {% if form_errors(form.roles) %}
-                {{ form_widget(form.roles, {'attr': {'class' : 'form-input form-input--error'}} ) }}
-            {% else %}
-                {{ form_widget(form.roles, {'attr': {'class' : 'form-input'}} ) }}
-            {% endif %}
-            <span class="form-error">{{ form_errors(form.roles) }}</span>
-        </div>
+    </div>
+    <div class="form-item-col">
+        {{ form_label(form.roles, 'Nazwisko', {'attr': {'class' : 'form-label'}} ) }}
+        {% if form_errors(form.roles) %}
+            {{ form_widget(form.roles, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+        {% else %}
+            {{ form_widget(form.roles, {'attr': {'class' : 'form-input'}} ) }}
+        {% endif %}
+        <span class="form-error">{{ form_errors(form.roles) }}</span>
     </div>
     <div class="form-item-col">
         <button class="form-btn">Dodaj</button>

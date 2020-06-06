@@ -4,6 +4,13 @@
 
 {% block body %}
     <div class="container">
+        {% for label, messages in app.flashes(['success', 'fail']) %}
+            {% for message in messages %}
+                <div class="flash-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
             {{ form_start(form, {'attr': {'class': 'form', 'autocomplete':'off'}}) }}
             <div class="form-title">Rejestracja</div>
             <p class="form-desc">Zarejestruj się by móc rezerwować wizyty i otrzymywać powiadomienia o zbliżających się terminach.

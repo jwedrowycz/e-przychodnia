@@ -26,4 +26,5 @@ class ProfileController extends AbstractController
             'countVisits' => $countVisits
         ]);
     }
+    //TODO: ZROBIĆ EDYCJE DANYCH, ZMIANE HASŁA, PRZEGLĄD WIZYT -- W PRZYSZŁOŚCI DORZUCIĆ HISTORIE CHOROBY
 }
