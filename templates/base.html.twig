@@ -28,29 +28,38 @@
                         <a href="{{ path('logout') }}" class="">Wyloguj</a>
                     </li>
                     <li class="navbar-li">
-                        <a href="{{ path('profile') }}" class="">{{ app.user.username }}</a>
+                       <a
+                        {% if app.request.attributes.get('_route') starts with 'profile'%}
+                            class="active" {% endif %} href="{{ path('profile') }}" class="">{{ app.user.username }}</a>
                     </li>
                 {% else %}
                     <li class="navbar-li">
-                        <a href="{{ path('register') }}" class="">Rejestracja</a>
+                        <a
+                            {% if app.request.attributes.get('_route') starts with 'register'%}
+                            class="active" {% endif %} href="{{ path('register') }}" class="">Rejestracja</a>
                     </li>
                     <li class="navbar-li">
-                        <a href="{{ path('login') }}" class="">Zaloguj</a>
+                        <a
+                            {% if app.request.attributes.get('_route') starts with 'login'%}
+                            class="active" {% endif %} href="{{ path('login') }}" class="">Zaloguj</a>
                     </li>
                 {% endif %}
                   {% if is_granted('ROLE_ADMIN') %}
                 <li class="navbar-li">
-                    <a href="{{ path('admin.index') }}" class="">Panel administratora</a>
+                    <a
+                        {% if app.request.attributes.get('_route') starts with 'admin'%}
+                        class="active" {% endif %} href="{{ path('admin.index') }}" class="">Panel administratora</a>
                 </li>
                 {% endif %}
                 <li class="navbar-li">
-                    <a href="{{ path('visit') }}" class="">Umów się na wizytę</a>
+                    <a
+                        {% if app.request.attributes.get('_route') starts with 'visit'%}
+                        class="active" {% endif %} href="{{ path('visit') }}" class="">Umów się na wizytę</a>
                 </li>
                 <li class="navbar-li">
-                    <a href="#" class="">Kontakt</a>
-                </li>
-                <li class="navbar-li">
-                    <a href="{{ path('home') }}" class="">Strona główna</a>
+                    <a
+                        {% if app.request.attributes.get('_route') starts with 'home'%}
+                        class="active" {% endif %} href="{{ path('home') }}" class="">Strona główna</a>
                 </li>
             </ul>
     </header>

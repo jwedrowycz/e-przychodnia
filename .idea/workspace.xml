@@ -20,8 +20,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5438e20c-6ad0-4533-b32d-06fb92bf2958" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Form/Filter/UsersFilterType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin_panel/users/_filters.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/visit/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/visit/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Admin/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Admin/UsersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Admin/VisitController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Admin/VisitController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/Filter/FilterType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/Filter/VisitsFilterType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Twig/AppExtension.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Twig/AppExtension.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin_panel/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin_panel/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin_panel/users/users.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin_panel/users/users.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/visit/_worktime.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/visit/_worktime.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/visit/choice.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/visit/choice.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,7 +244,10 @@
       <workItem from="1590759474115" duration="29000" />
       <workItem from="1591189736070" duration="1257000" />
       <workItem from="1591257280822" duration="669000" />
-      <workItem from="1591306961848" duration="9792000" />
+      <workItem from="1591306961848" duration="10148000" />
+      <workItem from="1591366430423" duration="1987000" />
+      <workItem from="1591398250221" duration="1119000" />
+      <workItem from="1591399389478" duration="3064000" />
     </task>
     <servers />
   </component>
@@ -257,22 +272,23 @@
     </state>
     <state x="774" y="234" width="412" height="645" key="#com.intellij.ide.util.MemberChooser/50.27.1870.1053@50.27.1870.1053" timestamp="1589723537464" />
     <state x="1190" y="234" key="#com.intellij.ide.util.MemberChooser/50.27.3310.1053@50.27.3310.1053" timestamp="1589747767568" />
-    <state x="50" y="27" width="1070" height="1053" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1589646347395">
-      <screen x="50" y="27" width="1870" height="1053" />
+    <state x="52" y="27" width="821" height="1053" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1591399789308">
+      <screen x="52" y="27" width="1868" height="1053" />
     </state>
     <state x="0" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1589631812790" />
     <state x="50" y="27" width="781" height="1053" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/50.27.1870.1053/1920.0.1440.900@50.27.1870.1053" timestamp="1589591633660" />
     <state x="50" y="27" width="1070" height="1053" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/50.27.1870.1053@50.27.1870.1053" timestamp="1589646347395" />
+    <state x="52" y="27" width="821" height="1053" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/52.27.1868.1053@52.27.1868.1053" timestamp="1591399789308" />
     <state x="719" y="302" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1590529338606">
       <screen x="52" y="27" width="1868" height="1053" />
     </state>
     <state x="719" y="302" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/52.27.1868.1053@52.27.1868.1053" timestamp="1590529338606" />
-    <state x="719" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1591314596356">
+    <state x="719" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1591399696120">
       <screen x="52" y="27" width="1868" height="1053" />
     </state>
     <state x="718" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/50.27.1870.1053@50.27.1870.1053" timestamp="1589737893924" />
     <state x="719" y="311" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/52.27.1868.1053/1920.107.1440.900@52.27.1868.1053" timestamp="1589975715109" />
-    <state x="719" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/52.27.1868.1053@52.27.1868.1053" timestamp="1591314596356" />
+    <state x="719" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/52.27.1868.1053@52.27.1868.1053" timestamp="1591399696120" />
     <state x="721" y="395" width="518" height="324" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1589721237728">
       <screen x="50" y="27" width="1870" height="1053" />
     </state>
@@ -287,10 +303,11 @@
     <state x="643" y="273" width="721" height="575" key="NewPhpClassDialog/50.27.1870.1053@50.27.1870.1053" timestamp="1589755389779" />
     <state x="728" y="273" key="NewPhpClassDialog/50.27.3310.1053@50.27.3310.1053" timestamp="1589747728784" />
     <state x="644" y="273" key="NewPhpClassDialog/52.27.1868.1053@52.27.1868.1053" timestamp="1591314273581" />
-    <state x="780" y="479" width="399" height="156" key="NewPhpFileDialog" timestamp="1589721266067">
-      <screen x="50" y="27" width="1870" height="1053" />
+    <state x="781" y="479" width="399" height="156" key="NewPhpFileDialog" timestamp="1591399124988">
+      <screen x="52" y="27" width="1868" height="1053" />
     </state>
     <state x="780" y="479" width="399" height="156" key="NewPhpFileDialog/50.27.1870.1053@50.27.1870.1053" timestamp="1589721266067" />
+    <state x="781" y="479" key="NewPhpFileDialog/52.27.1868.1053@52.27.1868.1053" timestamp="1591399124988" />
     <state x="651" y="343" width="1022" height="737" key="SettingsEditor" timestamp="1590708114120">
       <screen x="52" y="27" width="1868" height="1053" />
     </state>

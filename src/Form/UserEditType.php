@@ -30,7 +30,7 @@ class UserEditType extends AbstractType
                     'Administrator' => 'ROLE_ADMIN',
                 ],
                 'expanded' => false,
-                'multiple' => true,
+                'multiple' => false,
 
             ]);
 

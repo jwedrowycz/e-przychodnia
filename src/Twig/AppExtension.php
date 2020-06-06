@@ -22,6 +22,7 @@ class AppExtension extends AbstractExtension
     {
         return [
             new TwigFunction('nameOfDay', [$this, 'nameOfDay']),
+            new TwigFunction('roleFormat', [$this, 'roleFormat']),
         ];
     }
 
@@ -43,6 +44,20 @@ class AppExtension extends AbstractExtension
         }
         elseif($num===5){
             return 'Piątek';
+        }
+        return False;
+    }
+
+    public function roleFormat($role)
+    {
+        if($role=='ROLE_USER'){
+            return 'Użytkownik';
+        }
+        elseif($role=='ROLE_ADMIN'){
+            return 'Administrator';
+        }
+        elseif($role=='ROLE_OPERATOR'){
+            return 'Operator';
         }
         return False;
     }

@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Choice;
 
-class FilterType extends AbstractType
+class VisitsFilterType extends AbstractType
 {
     private $doctorRepo;
     public function __construct(DoctorRepository $doctorRepo)

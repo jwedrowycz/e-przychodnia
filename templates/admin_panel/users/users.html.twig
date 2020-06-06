@@ -10,7 +10,9 @@
         {% endfor %}
     {% endfor %}
     <h1>Użytkownicy</h1>
-
+    <div class="container-select">
+        {{ include('admin_panel/users/_filters.html.twig') }}
+    </div>
     <table class="admin-table">
         <tr>
             <th>Id</th>
@@ -26,13 +28,13 @@
             <td>{{ user.email }}</td>
             <td>{{ user.name }}</td>
             <td>{{ user.lastName }}</td>
-            <td>{{ user.roles[0] }}</td>
+            <td>{{ roleFormat(user.roles[0]) }}</td>
             <td><a class="add" href="{{ path('admin.user_edit', {id:user.id}) }}">Edytuj</a></td>
             <td><a class="delete" href="{{ path('admin.user_delete', {id:user.id}) }}">Usuń</a></td>
         </tr>
         {% endfor %}
     </table>
 
-    <a href="{{ path('admin.add_user') }}">Dodaj użytkownika</a>
+    <a href="{{ path('admin.user_add') }}">Dodaj użytkownika</a>
 
 {% endblock %}

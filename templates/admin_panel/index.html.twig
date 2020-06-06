@@ -6,31 +6,15 @@
     {% block sidebar %}
         <div class="sidebar" id="sidebar">
             <a href="#" class="close" onclick="closeSlideMenu()" style="color: white;">Zamknij</a>
-            <a {% if app.request.attributes.get('_route') in [
-                'admin.users',
-                'admin.add_user',
-                'admin.users_only',
-                ] %} 
+            <a {% if app.request.attributes.get('_route')  starts with 'admin.user'%}
                 class="active"{% endif %} href="{{ path('admin.users') }}">Użytkownicy</a>
-            <a {% if app.request.attributes.get('_route') in [
-                'admin.clinics_show',
-                'admin.clinic_add',
-                ] %} 
+            <a {% if app.request.attributes.get('_route') starts with 'admin.clinic'%}
                 class="active"{% endif %}  href="{{ path('admin.clinics') }}">Poradnie</a>
-                <a {% if app.request.attributes.get('_route') in [
-                'admin.unit',
-                'admin.unit_show',
-                'admin.unit_add',
-                ] %} 
+                <a {% if app.request.attributes.get('_route') starts with 'admin.unit' %}
                 class="active"{% endif %}  href="{{ path('admin.unit') }}">Jednostki</a>
-            <a {% if app.request.attributes.get('_route') in [
-                'admin.doctors',
-                'admin.doctor_add',
-                ] %}
+            <a {% if app.request.attributes.get('_route') starts with 'admin.doctor' %}
                 class="active"{% endif %}  href="{{ path('admin.doctors') }}">Lekarze</a>
-            <a {% if app.request.attributes.get('_route') in [
-                'admin.visits',
-                ] %}
+            <a {% if app.request.attributes.get('_route') starts with 'admin.visits' %}
                 class="active"{% endif %}  href="{{ path('admin.visits') }}">Wizyty</a>
         </div>
     {% endblock sidebar %}

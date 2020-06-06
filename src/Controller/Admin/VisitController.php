@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Visit;
-use App\Form\Filter\FilterType;
+use App\Form\Filter\VisitsFilterType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Repository\VisitRepository;
 use App\Repository\DoctorRepository;
@@ -30,7 +30,7 @@ class VisitController extends AbstractController
     public function index(Request $request, VisitRepository $visitRepo): Response
     {
         $visits = $visitRepo->findAllWithJoined('','', 0);
-        $form = $this->createForm(FilterType::class);
+        $form = $this->createForm(VisitsFilterType::class);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {

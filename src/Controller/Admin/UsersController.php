@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Entity\Clinic;
+use App\Form\Filter\UsersFilterType;
+use App\Form\Filter\VisitsFilterType;
 use App\Form\UserEditType;
 use App\Form\UserType;
 use App\Repository\ClinicRepository;
@@ -20,25 +22,41 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 /**
- * @Route("/admin", name="admin.")
+ * @Route("/admin/users", name="admin.")
  */
 class UsersController extends AbstractController
 {
-   /**
-     * @Route("/users", name="users")
+    /**
+     * @Route("/", name="users")
+     * @param UserRepository $usersRepo
+     * @param Request $request
+     * @return Response
      */
-    public function users(UserRepository $usersRepo)
+    public function users(UserRepository $usersRepo, Request $request)
     {
         $users = $usersRepo->findAll();
+        $form = $this->createForm(UsersFilterType::class);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()) {
+            $role = $form->get('type')->getData();
+            $role = empty($role) ? '' : $role;
+
+            $users = $usersRepo->findAllUsersWithFilters($role);
+        }
 
         return $this->render('admin_panel/users/users.html.twig', [
-            'users' => $users
+            'users' => $users,
+            'form' => $form->createView()
         ]);
 
     }
 
     /**
-     * @Route("/add", name="add_user")
+     * @Route("/add", name="user_add")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return Response
      */
     public function add_user(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
@@ -54,7 +72,6 @@ class UsersController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
-//            $user->setRoles(['ROLE_USER']);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
@@ -91,7 +108,10 @@ class UsersController extends AbstractController
 
         $entityManager->remove($user);
         $entityManager->flush();
-
+        $this->addFlash(
+            'success',
+            'Pomyślnie usunięto użytkownika'
+        );
         return $this->redirectToRoute('admin.users');
 
     }
@@ -99,6 +119,9 @@ class UsersController extends AbstractController
 
     /**
      * @Route("/edit/{id}", name="user_edit")
+     * @param Request $request
+     * @param User $user
+     * @return Response
      */
     public function edit(Request $request, User $user): Response
     {
@@ -110,7 +133,7 @@ class UsersController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Pomyślnie usunięto użytkownika'
+                'Pomyślnie edytowano użytkownika'
             );
             return $this->redirectToRoute('admin.users');
 

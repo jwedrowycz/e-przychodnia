@@ -1,7 +1,6 @@
-<ul>
+
 {% for t in time %}
-<li>
-{{ nameOfDay(t.day) ~ ' ' ~ t.start|date("H:i") ~ ' ' ~ t.end|date("H:i")}}
-</li>
+<p>
+    <b>{{ nameOfDay(t.day) }}</b> {{ t.start|date("H:i") ~ ' ' ~ t.end|date("H:i")}}
+</p>
 {% endfor %}
-</ul>
