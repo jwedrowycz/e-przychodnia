@@ -65,7 +65,7 @@ class VisitController extends AbstractController
     public function work_time_show($idClinic, $idUnit, WorkTimeRepository $workTimeRepo, ClinicRepository $clinicRepo)
     {   
         $clinic = $clinicRepo->find($idClinic);
-        $time = $workTimeRepo->findAllWithLekarzData($idUnit);
+        $time = $workTimeRepo->findAllWithDoctorData($idUnit);
         return $this->render('visit/_worktime.html.twig', [
             'clinic' => $clinic,
             'time' => $time

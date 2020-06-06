@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DoctorRepository")
- * @UniqueEntity(fields={"num_pwz"}, message="Lekarz o tym numerze PWZ już istnieje")
+ * @UniqueEntity(fields={"numPwz"}, message="Lekarz o tym numerze PWZ już istnieje")
  */
 class Doctor
 {
@@ -32,7 +32,7 @@ class Doctor
      * @Assert\NotBlank(message = "Wpisz nazwisko lekarza")
      * @ORM\Column(type="string", length=255)
      */
-    private $last_name;
+    private $lastName;
 
     /**
      * @Assert\NotBlank(message = "Wpisz numer PWZ")
@@ -47,7 +47,7 @@ class Doctor
      *                  maxMessage = "Numer PWZ może się składać jedynie z {{ limit }} cyfr")
      * @ORM\Column(type="string", length=7)
      */
-    private $num_pwz;
+    private $numPwz;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Unit", mappedBy="doctor")
@@ -88,24 +88,24 @@ class Doctor
 
     public function getLastName(): ?string
     {
-        return $this->last_name;
+        return $this->lastName;
     }
 
-    public function setLastName(string $last_name): self
+    public function setLastName(string $lastName): self
     {
-        $this->last_name = $last_name;
+        $this->lastName = $lastName;
 
         return $this;
     }
 
     public function getNumPwz(): ?string
     {
-        return $this->num_pwz;
+        return $this->numPwz;
     }
 
-    public function setNumPwz(string $num_pwz): self
+    public function setNumPwz(string $numPwz): self
     {
-        $this->num_pwz = $num_pwz;
+        $this->numPwz = $numPwz;
 
         return $this;
     }

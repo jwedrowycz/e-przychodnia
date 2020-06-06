@@ -23,7 +23,7 @@ class UnitRepository extends ServiceEntityRepository
     {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
-            'SELECT u.id as unit, d.id, d.last_name, d.name, d.num_pwz, d.spec, d.status
+            'SELECT u.id as unit, d.id, d.lastName, d.name, d.numPwz, d.spec, d.status
             FROM App\Entity\Unit u
             JOIN u.doctor d
             JOIN u.clinic c
@@ -37,7 +37,7 @@ class UnitRepository extends ServiceEntityRepository
 //    {
 //        $entityManager = $this->getEntityManager();
 //        $query = $entityManager->createQuery(
-//            'SELECT  d.last_name, d.name, d.num_pwz, d.spec, c.name
+//            'SELECT  d.lastName, d.name, d.numPwz, d.spec, c.name
 //            FROM App\Entity\Unit j
 //            INNER JOIN u.doctor d
 //            INNER JOIN u.clinic c
@@ -51,7 +51,7 @@ class UnitRepository extends ServiceEntityRepository
     {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
-            'SELECT u.id as unit, d.id, d.last_name, d.name, d.num_pwz, d.spec, c.name as clinicName, c.id as clinicId
+            'SELECT u.id as unit, d.id, d.lastName, d.name, d.numPwz, d.spec, c.name as clinicName, c.id as clinicId
             FROM App\Entity\Unit u
             JOIN u.doctor d
             JOIN u.clinic c
@@ -63,7 +63,7 @@ class UnitRepository extends ServiceEntityRepository
     {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
-            'SELECT d.name as d_name, d.last_name, c.name, d.status, d.spec
+            'SELECT d.name as d_name, d.lastName, c.name, d.status, d.spec
             FROM App\Entity\Unit u
             JOIN u.doctor d
             JOIN u.clinic c'

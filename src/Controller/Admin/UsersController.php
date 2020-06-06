@@ -59,7 +59,7 @@ class UsersController extends AbstractController
      * @return Response
      */
     public function add_user(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
-    {
+    {   //TODO: OGARNĄĆ KURWA TWORZENIE UŻYTKOWNIKÓW-OPERATORÓW BO WYPIERDALA NULLE
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);

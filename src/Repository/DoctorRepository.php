@@ -25,7 +25,7 @@ class DoctorRepository extends ServiceEntityRepository
     {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
-            'SELECT  d.id, d.last_name, d.name, d.num_pwz, d.spec, d.status
+            'SELECT  d.id, d.lastName, d.name, d.numPwz, d.spec, d.status
             FROM App\Entity\Doctor d
             
             WHERE d.id NOT IN 
@@ -43,7 +43,7 @@ class DoctorRepository extends ServiceEntityRepository
         $query = $entityManager->createQuery(
             'SELECT d
             FROM App\Entity\Doctor d
-            ORDER BY d.last_name ASC
+            ORDER BY d.lastName ASC
             '
         );
         return $query->getResult();

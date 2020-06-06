@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Rejestracja{% endblock %}
+{% block title %} Rejestracja {% endblock %}
 
 {% block body %}
     <div class="container">
@@ -75,9 +75,9 @@
             <div class="form-item-col">
                 {{ form_label(form.numPhone, 'Numer telefonu', {'attr': {'class' : 'form-label'}} ) }}
                 {% if form_errors(form.numPhone) %}
-                    {{ form_widget(form.numPhone, {'attr': {'maxlength' : '9','class' : 'form-input form-input--error'}} ) }}
+                    {{ form_widget(form.numPhone, {'attr': {'maxlength' : '9', 'class' : 'form-input form-input--small form-input--error'}} ) }}
                 {% else %}
-                    {{ form_widget(form.numPhone, {'attr': {'maxlength' : '9','class' : 'form-input'}} ) }}
+                    {{ form_widget(form.numPhone, {'attr': {'maxlength' : '9', 'class' : 'form-input form-input--small'}} ) }}
                 {% endif %}
                 <span class="form-error">{{ form_errors(form.numPhone) }}</span>
             </div>

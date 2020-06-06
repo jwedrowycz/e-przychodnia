@@ -19,8 +19,8 @@
           </tr>
           {% for d in doctors %}
                <tr>
-                    <td>{{ d.num_pwz }}</td>
-                    <td>{{ d.last_name ~ ' ' ~ d.name }}</td>
+                    <td>{{ d.numPwz }}</td>
+                    <td>{{ d.lastName ~ ' ' ~ d.name }}</td>
                     <td>{{ d.spec }}</td>
                     <td>
                          <a class="add" href="{{ path('admin.unit_create', {'idDoctor': d.id, 'idClinic': clinic.id}) }}">Dodaj</a>

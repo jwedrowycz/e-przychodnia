@@ -52,7 +52,7 @@ class VisitRepository extends ServiceEntityRepository
 
         // INCOMING VISITS
         $qb = $this->createQueryBuilder('v') //MAIN QUERY
-            ->addSelect('v.id, v.submit_date, v.start, v.end, us.email, us.num_phone, us.name as u_name, us.last_name as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.last_name as d_lastName')
+            ->addSelect('v.id, v.submit_date, v.start, v.end, us.email, us.numPhone, us.name as u_name, us.lastName as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.lastName as d_lastName')
             ->join('v.user', 'us')
             ->join('v.unit', 'u')
             ->join('u.doctor', 'd')

@@ -12,9 +12,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(fields={"numPhone"}, message="Taki numer telefonu jest już zarejestrowany")
  * @UniqueEntity(fields={"email"}, message="Taki adres e-mail jest już zarejestrowany")
  * @UniqueEntity(fields={"PESEL"}, message="Istnieje już pacjent z takim PESELem")
- * @UniqueEntity(fields={"num_phone"}, message="Taki numer telefonu jest już zarejestrowany")
  */
 //TODO: COŚ KURWA Z TYM TELEFONEM ZASTANYM NIE DZIAŁA
 class User implements UserInterface
@@ -63,13 +63,13 @@ class User implements UserInterface
      * @Assert\Regex(
      *     pattern="/\d/",
      *     match=false,
-     *     message="LastName nie może zawierać cyfr"
+     *     message="Nazwisko nie może zawierać cyfr"
      * )
      *
      *
      * @ORM\Column(type="string", length=255)
      */
-    private $last_name;
+    private $lastName;
 
     /**
      * @Assert\NotBlank(message = "Wpisz swój numer PESEL")
@@ -99,7 +99,7 @@ class User implements UserInterface
      * @Assert\NotBlank(message = "Wpisz swój numer telefonu")
      * @ORM\Column(type="string", length=9)
      */
-    private $num_phone;
+    private $numPhone;
 
     /**
      * @Assert\NotBlank(message = "Wpisz swój adres zamieszkania, ulica/nr domu")
@@ -116,17 +116,17 @@ class User implements UserInterface
     /**
     * @Assert\Regex(pattern = "/[0-9]/",
      *               match = true,
-     *               message="Numer telefonu nie może zawierać liter")
+     *               message="Kod pocztowy nie może zawierać liter")
      * @Assert\NotBlank(message = "Wpisz kod pocztowy swojego miejsca zamieszkania")
      * @ORM\Column(type="string", length=6)
      *
      */
-    private $post_code;
+    private $postCode;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * @Assert\NotBlank(message = "Wybierz swoją date urodzenia")
@@ -244,13 +244,13 @@ class User implements UserInterface
 
     public function getLastName(): ?string
     {
-        return $this->last_name;
+        return $this->lastName;
     }
 
-    public function setLastName(string $last_name): self
+    public function setLastName(string $lastName): self
     {
 
-        $this->last_name = ucfirst(mb_strtolower($last_name,"UTF-8"));
+        $this->lastName = ucfirst(mb_strtolower($lastName,"UTF-8"));
 
         return $this;
     }
@@ -269,12 +269,12 @@ class User implements UserInterface
 
     public function getNumPhone(): ?string
     {
-        return $this->num_phone;
+        return $this->numPhone;
     }
 
-    public function setNumPhone(string $num_phone): self
+    public function setNumPhone(string $numPhone): self
     {
-        $this->num_phone = $num_phone;
+        $this->numPhone = $numPhone;
 
         return $this;
     }
@@ -305,24 +305,24 @@ class User implements UserInterface
 
     public function getPostCode(): ?string
     {
-        return $this->post_code;
+        return $this->postCode;
     }
 
-    public function setPostCode(string $post_code): self
+    public function setPostCode(string $postCode): self
     {
-        $this->post_code = $post_code;
+        $this->postCode = $postCode;
 
         return $this;
     }
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -365,7 +365,7 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->created_at = new \DateTime();
+        $this->createdAt = new \DateTime();
         $this->visit = new ArrayCollection();
     }
 

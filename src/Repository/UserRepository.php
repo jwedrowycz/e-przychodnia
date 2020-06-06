@@ -40,7 +40,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
 
         $qb = $this->createQueryBuilder('u')
-        ->orderBy('u.last_name', 'ASC');
+        ->orderBy('u.lastName', 'ASC');
         if($filter!=''){
             $qb->andWhere('u.roles LIKE :role');
             $qb->setParameter('role', '%'.$filter.'%');

@@ -34,11 +34,11 @@ class WorkTimeRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    public function findAllWithLekarzData($unitId)
+    public function findAllWithDoctorData($unitId)
     {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
-            'SELECT w.id, w.day, w.start, w.end, d.name, d.last_name
+            'SELECT w.id, w.day, w.start, w.end, d.name, d.lastName
             FROM App\Entity\WorkTime w
             JOIN w.unit u
             JOIN u.doctor d
