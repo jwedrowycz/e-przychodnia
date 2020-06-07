@@ -40,8 +40,9 @@ class ProfileController extends AbstractController
      */
     public function show($id, VisitRepository $visitRepository)
     {
+        $visit = $visitRepository->findSpecificVisit($id);
         return $this->render('profile/show.html.twig', [
-
+            'visit' => $visit
         ]);
     }
     //TODO: ZROBIĆ EDYCJE DANYCH, ZMIANE HASŁA, PRZEGLĄD WIZYT -- W PRZYSZŁOŚCI DORZUCIĆ HISTORIE CHOROBY

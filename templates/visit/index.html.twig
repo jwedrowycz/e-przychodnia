@@ -9,7 +9,7 @@
         {% for message in messages %}
             <div class="flash-{{ label }}">
                 {% if label=='success' %}
-                    Pomyślnie zarejestrowałeś się na badanie. Przejdź na swój <a class="link-green" href="{{ path('profile') }}">{{ message }}</a> aby zobaczyć szczegóły.
+                    Pomyślnie zarejestrowałeś się na badanie. Przejdź na swój <a class="link-green" href="{{ path('profile.index') }}">{{ message }}</a> aby zobaczyć szczegóły.
                 {% else %}
                     {{ message }}
                 {% endif %}

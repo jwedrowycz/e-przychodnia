@@ -4,6 +4,11 @@
 
 {% block body %}
     <div class="container">
-       awddawd
+        {% for v in visit %}
+            <h2>Wizyta {{ v[0].start|format_datetime(pattern='dd MMMM Y', locale='pl') }}</h2>
+            <p><b>Poradnia: </b>{{ v.name }}</p>
+            <p><b>Lekarz: </b>{{ v.dName ~ ' ' ~ v.dLastName }}</p>
+            <p>Historia choroby: </p>
+        {% endfor %}
     </div>
 {% endblock %}

@@ -125,8 +125,20 @@ class VisitRepository extends ServiceEntityRepository
             ->join('v.unit', 'u')
             ->join('u.clinic', 'c')
             ->addSelect('c.name');
+        return $qb->getQuery()->getResult();
+    }
 
-
+    public function findSpecificVisit($id)
+    {
+        $qb = $this->createQueryBuilder('v')
+            ->andWhere('v.id = :id')
+            ->setParameter('id', $id)
+            ->join('v.unit', 'u')
+            ->join('u.doctor', 'd')
+            ->join('u.clinic', 'c')
+            ->addSelect('d.name as dName')
+            ->addSelect('d.lastName as dLastName')
+            ->addSelect('c.name');
 
         return $qb->getQuery()->getResult();
     }
