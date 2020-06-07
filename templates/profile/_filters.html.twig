@@ -1,0 +1,8 @@
+{{ form_start(form) }}
+{{ form_label(form.clinic) }}
+    {{ form_widget(form.clinic, {'attr': {'class': 'form-select form-select--small'}}) }}
+    {{ form_label(form.type) }}
+    {{ form_widget(form.type, {'attr': {'class': 'form-select form-select--small'}}) }}
+    {{ form_label(form.sort) }}
+    {{ form_widget(form.sort, {'attr': {'class': 'form-select form-select--small'}}) }}
+{{ form_end(form) }}

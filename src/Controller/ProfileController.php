@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Visit;
+use App\Form\Filter\UserVisitsFilterType;
+use App\Form\Filter\VisitsFilterType;
 use App\Repository\UserRepository;
 use App\Repository\VisitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -17,17 +20,30 @@ class ProfileController extends AbstractController
     /**
      * @Route("/", name="index")
      * @param VisitRepository $visitRepo
+     * @param Request $request
      * @return Response
      */
-    public function index(VisitRepository $visitRepo)
+    public function index(VisitRepository $visitRepo, Request $request)
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $countVisits = $visitRepo->countAllUserVisits($user);
-        $visits = $visitRepo->findAssociatedVisits($user);
+        $visits = $visitRepo->findAllAssociatedFilter($user);
+        $form = $this->createForm(UserVisitsFilterType::class);
+        $form->handleRequest($request);
+        if($form->isSubmitted()) {
+            $clinic = $form->get('clinic')->getData();
+            $clinic = empty($clinic) ? '' : $clinic->getId();
+
+            $visitType = $form->get('type')->getData();
+            $visitSort = $form->get('sort')->getData();
+
+            $visits = $visitRepo->findAllAssociatedFilter($user, $clinic, $visitType, $visitSort);
+        }
         return $this->render('profile/index.html.twig', [
             'user' => $user,
             'visits' => $visits,
-            'countVisits' => $countVisits
+            'countVisits' => $countVisits,
+            'form' => $form->createView()
         ]);
     }
 

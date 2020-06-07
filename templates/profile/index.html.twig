@@ -14,6 +14,9 @@
     <p><b>Łączna liczba wizyt: </b>{{ countVisits }}</p>
 
     <h2>Wizyty</h2>
+    <div class="container-select">
+        {{ include('profile/_filters.html.twig') }}
+    </div>
     <table class="profile-table">
         <tr>
             <th>Data wizyty</th>

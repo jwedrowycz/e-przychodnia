@@ -116,17 +116,67 @@ class VisitRepository extends ServiceEntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
-    public function findAssociatedVisits($user)
+//    public function findAssociatedVisits($user)
+//    {
+//        $qb = $this->createQueryBuilder('v')
+//            ->orderBy('v.start','ASC')
+//            ->setParameter('user', $user)
+//            ->join('v.unit', 'u')
+//            ->join('u.clinic', 'c')
+//            ->addSelect('c.name')
+//            ->andWhere('v.start >= current_date()');
+//        return $qb->getQuery()->getResult();
+//    }
+
+    public function findAllAssociatedFilter($user, $clinic = '', $type = '', $sort = '')
     {
+        $dateStart = new \DateTime();
+        $currDateStart = $dateStart->setTime(0,0,0);
+        $currDateStart = $currDateStart->format('Y-m-d H:i:s');
+
+        $dateEnd = new \DateTime();
+        $currDateEnd = $dateEnd->setTime(23,59,59);
+        $currDateEnd = $currDateEnd->format('Y-m-d H:i:s');
+
+        // INCOMING VISITS
         $qb = $this->createQueryBuilder('v')
-            ->orderBy('v.start','DESC')
+            ->orderBy('v.start','ASC')
             ->andWhere('v.user = :user')
             ->setParameter('user', $user)
             ->join('v.unit', 'u')
             ->join('u.clinic', 'c')
             ->addSelect('c.name');
+
+        if($sort==0){
+            $qb->orderBy('v.start','ASC');
+        }
+        else if($sort==1){
+            $qb->orderBy('v.start','DESC');
+        }
+
+        if ($clinic) // IF CLINIC IS CHOSEN
+        {
+            $qb->andWhere('c.id = :clinic')
+                ->setParameter('clinic', $clinic);
+        }
+        if($type==0){ // INCOMING VISITS
+            $qb->andWhere('v.start >= current_date()');
+        } else if($type==1) { // PAST VISITS
+            $qb->andWhere('v.start < current_date()');
+
+        } else if($type==2) { // TODAY'S VISITS
+            $qb->andWhere('v.start > :dateStart')
+                ->andwhere('v.end < :dateEnd')
+                ->setParameter('dateStart' ,$currDateStart)
+                ->setParameter('dateEnd' ,$currDateEnd);
+        } else { // ALL VISITS
+            return $qb->getQuery()->getResult();
+        }
+
+
         return $qb->getQuery()->getResult();
     }
+
 
     public function findSpecificVisit($id)
     {
