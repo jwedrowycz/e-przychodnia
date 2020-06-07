@@ -23,7 +23,7 @@
     <body>
     <header>
             <ul class="navbar" id="">
-            {% if is_granted('ROLE_USER') %}
+            {% if is_granted('ROLE_USER')%}
                     <li class="navbar-li">
                         <a href="{{ path('logout') }}" class="">Wyloguj</a>
                     </li>
@@ -54,7 +54,7 @@
                         {% if app.request.attributes.get('_route') starts with 'home'%}
                         class="active" {% endif %} href="{{ path('home') }}" class="">Strona główna</a>
                 </li>
-                {% if is_granted('ROLE_ADMIN') %}
+                {% if is_granted('ROLE_OPERATOR') %}
                     <li class="navbar-li">
                         <a
                             {% if app.request.attributes.get('_route') starts with 'admin'%}

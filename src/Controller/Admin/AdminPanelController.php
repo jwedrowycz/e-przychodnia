@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
-  * @IsGranted("ROLE_ADMIN")
+  * @IsGranted("ROLE_OPERATOR")
   */
 
 /**
@@ -25,9 +25,7 @@ class AdminPanelController extends AbstractController
      */
     public function index()
     {
-        return $this->render('visits.html.twig', [
-
-        ]);
+        return null;
     }
 
 }

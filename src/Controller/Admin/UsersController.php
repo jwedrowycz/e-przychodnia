@@ -100,7 +100,10 @@ class UsersController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_ADMIN")
      * @Route("/clinic/users/delete/{id}", name="user_delete")
+     * @param User $user
+     * @return Response
      */
     public function delete(User $user)
     {
@@ -127,7 +130,6 @@ class UsersController extends AbstractController
     {
         $form = $this->createForm(UserEditType::class, $user);
         $form->handleRequest($request);
-        // TODO: OGARNĄĆ KURWA TE ROLE BO COŚ NIE BANGLA
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
