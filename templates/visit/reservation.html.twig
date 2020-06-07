@@ -1,4 +1,7 @@
 {% extends 'base.html.twig' %}
+
+{% block title %} Potwierdzenie wizyty {% endblock %}
+
 {% block body %}
 <div class="container">
     {% for label, messages in app.flashes(['success', 'fail']) %}

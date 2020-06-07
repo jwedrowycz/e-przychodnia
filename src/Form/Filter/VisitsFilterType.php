@@ -106,7 +106,7 @@ class VisitsFilterType extends AbstractType
                             'onchange' => 'this.form.submit()'
                         ],
                         'label' => 'Lekarze: ',
-                    #TODO: DO POPRAWKI W PRZYSZŁOŚCI
+                    #TODO: DO POPRAWKI W PRZYSZŁOŚCI - WYBÓR WSZYSTKICH LEKARZY, COŚ CHYBA Z AJAXEM TRZEBA
                     ]);
                 }
             }

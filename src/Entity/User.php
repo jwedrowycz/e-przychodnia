@@ -16,7 +16,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @UniqueEntity(fields={"email"}, message="Taki adres e-mail jest już zarejestrowany")
  * @UniqueEntity(fields={"PESEL"}, message="Istnieje już pacjent z takim PESELem")
  */
-//TODO: COŚ KURWA Z TYM TELEFONEM ZASTANYM NIE DZIAŁA
 class User implements UserInterface
 {
     /**

@@ -1,16 +1,34 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} {{ app.user.username }} {% endblock %}
+{% block title %} Profil {{ app.user.username }} {% endblock %}
 
 {% block body %}
 <div class="container">
     <h1>{{ app.user.name ~ ' ' ~ app.user.lastName }} </h1>
-    <span><b>Konto utworzono: </b>{{ app.user.createdAt|date('d-m-Y H:i') }}</span>
+    <span><b>Zarejestrowano: </b>{{ app.user.createdAt|date('d-m-Y H:i') }}</span>
     <p><b>Email: </b> {{ app.user.email }}</p>
     <p><b>Data urodzenia: </b> {{ app.user.birthday|date('d-m-Y') }}</p>
     <p><b>PESEL: </b> {{ app.user.PESEL }}</p>
     <p><b>Numer telefonu: </b> {{ app.user.numPhone }}</p>
     <p><b>Adres zamieszkania: </b> {{ app.user.address ~ ', ' ~ app.user.city ~ ' ' ~ app.user.postCode }}</p>
     <p><b>Łączna liczba wizyt: </b>{{ countVisits }}</p>
+
+    <h2>Wizyty</h2>
+    <table class="profile-table">
+        <tr>
+            <th>Data wizyty</th>
+            <th>Godzina wizyty</th>
+            <th>Poradnia</th>
+            <th></th>
+        </tr>
+            {% for v in visits %}
+                <tr> {# DORZUCIĆ KOLUMNE - JEŚLI WIZYTY NADCHODZODZĄCA, ARCHIWALNA #}
+                    <td>{{ v[0].start|date('d-m-Y') }}</td>
+                    <td>{{ v[0].start|date('H:i') }}</td>
+                    <td>{{ v.name }}</td>
+                    <td><a class="link-blue" href="{{ path('profile.visit_show', {'id': v[0].id}) }}">Szczegóły</a></td>
+                </tr>
+            {% endfor %}
+    </table>
 </div>
 {% endblock %}

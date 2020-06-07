@@ -116,6 +116,20 @@ class VisitRepository extends ServiceEntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function findAssociatedVisits($user)
+    {
+        $qb = $this->createQueryBuilder('v')
+            ->orderBy('v.start','DESC')
+            ->andWhere('v.user = :user')
+            ->setParameter('user', $user)
+            ->join('v.unit', 'u')
+            ->join('u.clinic', 'c')
+            ->addSelect('c.name');
+
+
+
+        return $qb->getQuery()->getResult();
+    }
     // /**
     //  * @return Visit[] Returns an array of Visit objects
     //  */

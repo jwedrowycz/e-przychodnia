@@ -48,6 +48,9 @@ body {
 .navbar-li {
     float: right;
 }
+.navbar-li.left{
+    float: left;
+}
 
 .navbar-li a {
     display: block;
@@ -486,3 +489,46 @@ body {
     transition: background 0.5s, border-color 0.5s, color 0.5s;
 }
 
+/* ---------- PROFILE TABLE -------------- */
+.profile-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.profile-table th {
+    padding: 1em;
+    text-align: left;
+
+    border-bottom: 1px solid #ddd;
+    background-color: #f5f5f5;
+}
+
+.profile-table tr:hover {
+    background-color: #f5f5f5;
+    transition: background 0.25s, border-color 0.5s, color 0.25s;
+}
+
+.profile-table td {
+    padding: 1em;
+    border-bottom: 1px solid #ddd;
+}
+
+
+.profile-table td a {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+.profile-table .delete {
+    color: red;
+}
+
+.profile-table .add {
+    color: dodgerblue;
+}
+
+.profile-table tr:hover a.link-blue {
+    color: dodgerblue;
+    transition: background 0.25s, border-color 0.5s, color 0.25s;
+}

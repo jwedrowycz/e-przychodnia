@@ -30,7 +30,7 @@
                     <li class="navbar-li">
                        <a
                         {% if app.request.attributes.get('_route') starts with 'profile'%}
-                            class="active" {% endif %} href="{{ path('profile') }}" class="">{{ app.user.username }}</a>
+                            class="active" {% endif %} href="{{ path('profile.index') }}" class="">{{ app.user.username }}</a>
                     </li>
                 {% else %}
                     <li class="navbar-li">
@@ -44,13 +44,6 @@
                             class="active" {% endif %} href="{{ path('login') }}" class="">Zaloguj</a>
                     </li>
                 {% endif %}
-                  {% if is_granted('ROLE_ADMIN') %}
-                <li class="navbar-li">
-                    <a
-                        {% if app.request.attributes.get('_route') starts with 'admin'%}
-                        class="active" {% endif %} href="{{ path('admin.index') }}" class="">Panel administratora</a>
-                </li>
-                {% endif %}
                 <li class="navbar-li">
                     <a
                         {% if app.request.attributes.get('_route') starts with 'visit'%}
@@ -61,6 +54,13 @@
                         {% if app.request.attributes.get('_route') starts with 'home'%}
                         class="active" {% endif %} href="{{ path('home') }}" class="">Strona główna</a>
                 </li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="navbar-li">
+                        <a
+                            {% if app.request.attributes.get('_route') starts with 'admin'%}
+                            class="active" {% endif %} href="{{ path('admin.index') }}" class="">Panel administratora</a>
+                    </li>
+                {% endif %}
             </ul>
     </header>
         {% block body %}
