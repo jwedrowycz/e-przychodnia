@@ -8,16 +8,18 @@ use App\Form\Filter\UsersFilterType;
 use App\Form\Filter\VisitsFilterType;
 use App\Form\UserEditType;
 use App\Form\UserType;
+use App\Form\ChangePasswordType;
 use App\Repository\ClinicRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+
 
 
 
@@ -59,7 +61,7 @@ class UsersController extends AbstractController
      * @return Response
      */
     public function add_user(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
-    {   //TODO: OGARNĄĆ KURWA TWORZENIE UŻYTKOWNIKÓW-OPERATORÓW BO WYPIERDALA NULLE
+    {   
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -129,6 +131,8 @@ class UsersController extends AbstractController
     public function edit(Request $request, User $user): Response
     {
         $form = $this->createForm(UserEditType::class, $user);
+        $formPassword = $this->createForm(ChangePasswordType::class, $user); // Wyświetl formularz do okna modal
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -143,7 +147,39 @@ class UsersController extends AbstractController
 
         return $this->render('admin_panel/users/edit.html.twig', [
             'user' => $user,
+            'id' => $user->getId(),
             'form' => $form->createView(),
+            'formPassword' => $formPassword->createView()
         ]);
+    }
+
+    /**
+     * @Route("/change-password/{id}", name="user_change_password")
+     */
+    public function change_password(Request $request, User $user, $id, UserPasswordEncoderInterface $passwordEncoder): Response
+    {
+        $formPassword = $this->createForm(ChangePasswordType::class, $user);
+        
+        $formPassword->handleRequest($request);
+        if ($formPassword->isSubmitted() && $formPassword->isValid()) {
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $formPassword->get('password')->getData()
+                )
+            );
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash(
+                'success',
+                'Pomyślnie zmnieniono hasło użytkownika'
+            );
+            return $this->redirectToRoute('admin.user_edit', ['id' => $id]);
+        }
+
+        return $this->render('admin_panel/users/change_pwd.html.twig', [
+            'id' => $id,
+            'formPassword' => $formPassword->createView()
+        ]);
+
     }
 }

@@ -1,6 +1,7 @@
-
 {% for t in time %}
 <p>
-    <b>{{ nameOfDay(t.day) }}</b> {{ t.start|date("H:i") ~ ' ' ~ t.end|date("H:i")}}
+    <b>{{ nameOfDay(t.day) }}:</b>
+    {{ t.start|date("H:i") ~ ' - ' ~ t.end|date("H:i")}}
 </p>
 {% endfor %}
+

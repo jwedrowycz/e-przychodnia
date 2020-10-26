@@ -1,0 +1,29 @@
+{% extends('admin_panel/index.html.twig') %}
+
+
+{% block content %}
+<div class="container">
+    <h1>Zmień hasło</h1>
+    {{ form_start(formPassword, {'attr': {'class': 'form', 'autocomplete':'off'}}) }}
+    <div class="form-item-col">
+        {{ form_label(formPassword.password.first, 'Hasło', {'attr': {'class' : 'form-label'} } ) }}
+        {% if form_errors(formPassword.password.first) %}
+            {{ form_widget(formPassword.password.first, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+        {% else %}
+            {{ form_widget(formPassword.password.first, {'attr': {'class' : 'form-input', 'placeholder' : '********'}} ) }}
+        {% endif %}
+    </div>
+    <div class="form-item-col">
+        {{ form_label(formPassword.password.second, 'Powtórz hasło', {'attr': {'class' : 'form-label'}} ) }}
+        {% if form_errors(formPassword.password.first) %}
+            {{ form_widget(formPassword.password.second, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+        {% else %}
+            {{ form_widget(formPassword.password.second, {'attr': {'class' : 'form-input', 'placeholder' : '********'}} ) }}
+        {% endif %}
+        <span class="form-error">{{ form_errors(formPassword.password.first) }}</span>
+    </div>
+    <button class="form-btn">Zatwierdź</button>
+    {{ form_end(formPassword) }}
+</div>
+{% endblock content %}
+

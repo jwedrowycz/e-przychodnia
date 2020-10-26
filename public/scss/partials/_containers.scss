@@ -1,0 +1,57 @@
+/* ---------------- MAIN CONTAINER ----------------- */
+@media only screen and (max-width: 768px) {
+    .container {
+        min-width: 95%;
+        padding: 5px 5px;
+        margin: 0 auto;
+        }
+    .form-btn {
+        min-width: 100%;
+    }
+
+}
+.container {
+    width: 60%;
+    padding: 10px 10px;
+    margin: 0 auto;
+    }
+
+
+
+    /* ------------------ CLINICS CONTAINER ---------- */
+
+.clinics-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.5fr;
+    gap: 2em 2em;
+    grid-template-areas: ".";
+    
+}
+
+.clinic-card {
+    background-color: #EAEAEA;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    /* border-radius: 5px; */
+    transition: background 0.5s, border-color 0.5s, color 0.5s; 
+
+}
+.clinic-card:hover {
+    background-color: #c9c9c9;
+    cursor: pointer;
+}
+
+/*.clinic-item--title {*/
+/*    font*/
+/*}*/
+
+.clinic-item {
+    padding: 15px 15px;
+}
+.clinic-item > ul {
+    list-style-type: none;
+    transition: 0.5s;
+}
+.clinic-item:hover > h3{
+    color: darkblue;
+}

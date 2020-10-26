@@ -20,7 +20,7 @@
             <th>Imie</th>
             <th>Nazwisko</th>
             <th>Rola</th>
-            <th colspan="3">Akcje</th>
+            <th colspan="4">Akcje</th>
         </tr>
 {#        {{ dump(users) }}#}
         {% for user in users %}
@@ -30,10 +30,11 @@
             <td>{{ user.name }}</td>
             <td>{{ user.lastName }}</td>
             <td>{{ roleFormat(user.roles[0]) }}</td>
-            <td><a class="add" href="{{ path('admin.user_edit', {id:user.id}) }}">Edytuj</a></td>
-            <td><a class="delete" href="{{ path('admin.user_delete', {id:user.id}) }}">Usuń</a></td>
+            <td><a class="add" href="{{ path('admin.user_edit', {id: user.id}) }}">Edytuj</a></td>
+            <td><a class="delete" href="{{ path('admin.user_delete', {id: user.id}) }}">Usuń</a></td>
             <td></td>
         </tr>
+       
         {% endfor %}
     </table>
     <a class="link" href="{{ path('admin.user_add') }}">Dodaj użytkownika</a>

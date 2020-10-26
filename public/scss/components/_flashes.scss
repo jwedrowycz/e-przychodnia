@@ -1,0 +1,23 @@
+/* ------------ FLASH MESSAGES ------------ */
+
+.flash-success {
+    padding: 20px;
+    background-color: rgba(138, 255, 136, 0.68);
+    color: black;
+    margin-bottom: 15px;
+    /*border-radius: 20px;*/
+
+}
+
+.flash-fail {
+    padding: 20px;
+    background-color: rgb(255, 156, 156);
+    color: black;
+    margin-bottom: 15px;
+
+}
+
+.flash-info{
+    padding: 5px 15px;
+    background: #d5e7ff;
+}

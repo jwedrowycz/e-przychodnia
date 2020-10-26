@@ -33,7 +33,9 @@ class UserEditType extends AbstractType
                 'expanded' => true,
                 'multiple' => false,
 
-            ]);
+            ])
+            
+            ;
 
         $builder->get('roles')
             ->addModelTransformer(new CallbackTransformer(

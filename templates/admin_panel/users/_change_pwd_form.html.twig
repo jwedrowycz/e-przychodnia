@@ -1,0 +1,21 @@
+    {{ form_start(form, {method: 'POST', 'action': path('admin.user_change_password', {'id': id}), 'attr': {'class': 'form', 'autocomplete':'off'}}) }}
+    <div class="form-item-col">
+        {{ form_label(formPassword.password.first, 'Nowe hasło', {'attr': {'class' : 'form-label'} } ) }}
+        {% if form_errors(formPassword.password.first) %}
+            {{ form_widget(formPassword.password.first, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+        {% else %}
+            {{ form_widget(formPassword.password.first, {'attr': {'class' : 'form-input', 'placeholder' : '********'}} ) }}
+        {% endif %}
+    </div>
+    <div class="form-item-col">
+        {{ form_label(formPassword.password.second, 'Powtórz nowe hasło', {'attr': {'class' : 'form-label'}} ) }}
+        {% if form_errors(formPassword.password.first) %}
+            {{ form_widget(formPassword.password.second, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+        {% else %}
+            {{ form_widget(formPassword.password.second, {'attr': {'class' : 'form-input', 'placeholder' : '********'}} ) }}
+        {% endif %}
+        <span class="form-error">{{ form_errors(formPassword.password.first) }}</span>
+        {{ form_row(formPassword._token) }}
+    </div>
+    <button class="form-btn">Zatwierdź</button>
+{{ form_end(form) }}

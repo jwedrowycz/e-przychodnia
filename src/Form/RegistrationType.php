@@ -74,7 +74,7 @@ class RegistrationType extends AbstractType
             ->add('birthday', DateType::class, [
                 'widget' => 'choice',
                 'years' => range(date('Y'), date('Y')-100),
-                'months' => range(date('m'), 12),
+                'months' => range(date('F'), 12),
                 'required' => false,
                 // 'format' => 'dd/mm/yyyy',
                 // 'html5' => false

@@ -10,6 +10,7 @@ use App\Repository\WorkTimeRepository;
 use App\Repository\VisitRepository;
 use App\Form\VisitType;
 use App\Repository\UnitRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -54,6 +55,7 @@ class VisitController extends AbstractController
     {   
         $clinic = $clinicRepo->find($id);
         $unit = $unitRepo->findAllByJoinedId($id);
+        
         // $j = $unitRepo->findOneById(16);
         return $this->render('visit/choice.html.twig', [
             'clinic' => $clinic,
@@ -64,10 +66,10 @@ class VisitController extends AbstractController
     
     public function work_time_show($idClinic, $idUnit, WorkTimeRepository $workTimeRepo, ClinicRepository $clinicRepo)
     {   
-        $clinic = $clinicRepo->find($idClinic);
+        // $clinic = $clinicRepo->find($idClinic);
         $time = $workTimeRepo->findAllWithDoctorData($idUnit);
         return $this->render('visit/_worktime.html.twig', [
-            'clinic' => $clinic,
+            // 'clinic' => $clinic,
             'time' => $time
         ]);
     }
@@ -86,7 +88,9 @@ class VisitController extends AbstractController
         ]);
     }
 
+
     /**
+     * @IsGranted("ROLE_USER")
      * @Route("/terms/reservation/{id}/", name="visit_add")
      */
     public function add($id, Request $request, UnitRepository $unitRepo, WorkTimeRepository $workTimeRepo, VisitRepository $visitRepo){
