@@ -150,6 +150,11 @@ class User implements UserInterface
      */
     private $visit;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $status;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -365,6 +370,7 @@ class User implements UserInterface
     {
         $this->createdAt = new \DateTime();
         $this->visit = new ArrayCollection();
+        $this->status = 0;
     }
 
     /**
@@ -394,6 +400,18 @@ class User implements UserInterface
                 $visit->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?bool $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

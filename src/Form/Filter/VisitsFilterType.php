@@ -87,7 +87,7 @@ class VisitsFilterType extends AbstractType
                         'attr' => [
                             'onchange' => 'this.form.submit()'
                         ],
-                        'label' => 'Lekarzed: ',
+                        'label' => 'Lekarze: ',
 
                     ]);
                 }

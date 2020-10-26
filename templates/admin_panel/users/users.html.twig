@@ -15,21 +15,19 @@
     </div>
     <table class="admin-table">
         <tr>
-            <th>Id</th>
-            <th>Login</th>
-            <th>Imie</th>
-            <th>Nazwisko</th>
+            <th>Email</th>
+            <th>Użytkownik</th>
             <th>Rola</th>
+            <th>Status</th>
             <th colspan="4">Akcje</th>
         </tr>
 {#        {{ dump(users) }}#}
         {% for user in users %}
         <tr>
-            <td>{{ user.id }}</td>
             <td>{{ user.email }}</td>
-            <td>{{ user.name }}</td>
-            <td>{{ user.lastName }}</td>
-            <td>{{ roleFormat(user.roles[0]) }}</td>
+            <td>{{ user.lastName ~ ' ' ~ user.name}}</td>
+            <td>{{ user.roles[0]|roleFormat }}</td>
+            <td>{{ user.status|statusFormat }}</td>
             <td><a class="add" href="{{ path('admin.user_edit', {id: user.id}) }}">Edytuj</a></td>
             <td><a class="delete" href="{{ path('admin.user_delete', {id: user.id}) }}">Usuń</a></td>
             <td></td>

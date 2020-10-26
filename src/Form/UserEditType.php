@@ -24,6 +24,12 @@ class UserEditType extends AbstractType
             ->add('email')
             ->add('name')
             ->add('last_name')
+            ->add('status', ChoiceType::class, [
+                'choices' => [
+                    'Aktywny' => 0,
+                    'Nieaktywny' => 1
+                ]
+            ])
             ->add('roles', ChoiceType::class, [
                 'choices' => [
                     'Operator' => 'ROLE_OPERATOR',

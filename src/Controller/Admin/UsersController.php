@@ -36,7 +36,7 @@ class UsersController extends AbstractController
      */
     public function users(UserRepository $usersRepo, Request $request)
     {
-        $users = $usersRepo->findAll();
+        $users = $usersRepo->findAllUsersWithFilters();
         $form = $this->createForm(UsersFilterType::class);
         $form->handleRequest($request);
 
@@ -44,7 +44,11 @@ class UsersController extends AbstractController
             $role = $form->get('type')->getData();
             $role = empty($role) ? '' : $role;
 
-            $users = $usersRepo->findAllUsersWithFilters($role);
+            $status = $form->get('status')->getData();
+            $status = empty($status) ? '' : $status;
+            dump($status);
+
+            $users = $usersRepo->findAllUsersWithFilters($role, $status);
         }
 
         return $this->render('admin_panel/users/users.html.twig', [

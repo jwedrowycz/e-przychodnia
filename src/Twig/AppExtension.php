@@ -15,7 +15,9 @@ class AppExtension extends AbstractExtension
             // parameter: ['is_safe' => ['html']]
             // Reference: https://twig.symfony.com/doc/2.x/advanced.html#automatic-escaping
             new TwigFilter('filter_name', [$this, 'doSomething']),
-            // new TwigFilter('nameOfDay', [$this, 'nameOfDay']),
+            new TwigFilter('statusFormat', [$this, 'statusFormat']),
+            new TwigFilter('roleFormat', [$this, 'roleFormat']),
+
 
         ];
     }
@@ -24,7 +26,7 @@ class AppExtension extends AbstractExtension
     {
         return [
             new TwigFunction('nameOfDay', [$this, 'nameOfDay']),
-            new TwigFunction('roleFormat', [$this, 'roleFormat']),
+            // new TwigFunction('roleFormat', [$this, 'roleFormat']),
             new TwigFunction('checkDuplicates', [$this, 'checkDuplicates']),
         ];
     }
@@ -61,6 +63,18 @@ class AppExtension extends AbstractExtension
         }
         elseif($role=='ROLE_OPERATOR'){
             return 'Operator';
+        }
+        return False;
+    }
+
+    public function statusFormat($status)
+    {
+        if($status == 0)
+        {
+            return 'Aktywny';
+        }
+        else {
+            return 'Nieaktywny';
         }
         return False;
     }

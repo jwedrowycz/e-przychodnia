@@ -1,4 +1,7 @@
 {{ form_start(form) }}
     {{ form_label(form.type, 'Rola: ') }}
     {{  form_widget(form.type, {'attr': {'class': 'form-select form-select--small'}}) }}
+
+    {{ form_label(form.status, 'Status: ') }}
+    {{  form_widget(form.status, {'attr': {'class': 'form-select form-select--small'}}) }}
 {{ form_end(form) }}
