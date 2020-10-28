@@ -11,11 +11,14 @@
                 </div>
             {% endfor %}
         {% endfor %}
-            {{ form_start(form, {'attr': {'class': 'form', 'autocomplete':'off'}}) }}
-            <div class="form-title">Rejestracja</div>
-            <p class="form-desc">Zarejestruj się by móc rezerwować wizyty i otrzymywać powiadomienia o zbliżających się terminach.
-            </p>
-            <div class="form-subtitle">Dane logowania</div>
+            {{ form_start(form, {'attr': {'class': 'form', 'autocomplete':'off', 'novalidate': 'true'}}) }}
+            <div class="form-title">
+                <h2>Rejestracja</h2>
+            </div>
+            <p class="form-desc">Zarejestruj się by móc rezerwować wizyty i otrzymywać powiadomienia o zbliżających się terminach.</p>
+            <div class="form-subtitle">
+                <h3>Dane logowania</h3>
+            </div>
             <div class="form-item-col">
                 {{ form_label(form.email, 'E-mail', {'attr': {'class' : 'form-label'}} ) }}
                 {% if form_errors(form.email) %}
@@ -42,7 +45,9 @@
                 {% endif %}
                 <span class="form-error">{{ form_errors(form.password.first) }}</span>
             </div>
-            <div class="form-subtitle">Dane personalne</div>
+            <div class="form-subtitle">
+                <h3>Dane personalne</h3>
+            </div>
             <div class="form-item-row">
                 <div class="form-item-col">
                     {{ form_label(form.name, 'Imię', {'attr': {'class' : 'form-label'}} ) }}
@@ -84,13 +89,15 @@
             <div class="form-item-col">
                 {{ form_label(form.birthday, 'Data urodzenia', {'attr': {'class' : 'form-label'}} ) }}
                 {% if form_errors(form.birthday) %}
-                    {{ form_widget(form.birthday, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+                    {{ form_widget(form.birthday, {'attr': {'class' : 'form-input form-input--error select'}} ) }}
                 {% else %}
                     {{ form_widget(form.birthday, {'attr': {'class' : 'form-input'}} ) }}
                 {% endif %}
                 <span class="form-error">{{ form_errors(form.birthday) }}</span>
             </div>
-            <div class="form-subtitle">Miejsce zamieszkania</div>
+            <div class="form-subtitle">
+                <h3>Miejsce zamieszkania</h3>
+            </div>
             <div class="form-item-col">
                 {{ form_label(form.address, 'Adres zamieszkania', {'attr': {'class' : 'form-label'}} ) }}
                 {% if form_errors(form.address) %}
@@ -106,7 +113,7 @@
                     {% if form_errors(form.city) %}
                         {{ form_widget(form.city, {'attr': {'class' : 'form-input form-input--error'}} ) }}
                     {% else %}
-                        {{ form_widget(form.city, {'attr': {'class' : 'form-input'}} ) }}
+                        {{ form_widget(form.city, {'attr': {'class' : 'form-input city'}} ) }}
                     {% endif %}
                     <span class="form-error">{{ form_errors(form.city) }}</span>
                 </div>
@@ -115,7 +122,7 @@
                     {% if form_errors(form.postCode) %}
                         {{ form_widget(form.postCode, {'attr': {'maxlength' : '6', 'class' : 'form-input form-input--error'}} ) }}
                     {% else %}
-                        {{ form_widget(form.postCode, {'attr': {'maxlength' : '6', 'class' : 'form-input'}} ) }}
+                        {{ form_widget(form.postCode, {'attr': {'maxlength' : '6', 'class' : 'form-input post-code'}} ) }}
                     {% endif %}
                     <span class="form-error">{{ form_errors(form.postCode) }}</span>
                 </div>

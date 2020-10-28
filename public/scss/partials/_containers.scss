@@ -1,20 +1,14 @@
 /* ---------------- MAIN CONTAINER ----------------- */
-@media only screen and (max-width: 768px) {
-    .container {
-        min-width: 95%;
-        padding: 5px 5px;
-        margin: 0 auto;
-        }
-    .form-btn {
-        min-width: 100%;
-    }
 
-}
 .container {
-    width: 60%;
-    padding: 10px 10px;
+    width: 90%;
+    padding: .1em;
     margin: 0 auto;
+
+    @include mq {
+        width: 40%;
     }
+}
 
 
 

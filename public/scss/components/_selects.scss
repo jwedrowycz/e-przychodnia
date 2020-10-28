@@ -1,0 +1,14 @@
+select { 
+    appearance: none;
+    background: $light-grey;
+    border: none;
+    padding: .8em;
+    border-radius: .5em;
+    
+}
+
+select::-ms-expand {
+    display: none;
+  }
+
+  //TODO: DOKOŃCZYĆ SELECTY

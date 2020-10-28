@@ -1,5 +1,12 @@
-@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
+h2 {
+  font-size: 3rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
 /* -------------------- FULL CALENDAR -------------- */
 .fc-nonbusiness.fc-bgevent {
   background-color: red;
@@ -410,24 +417,21 @@ template {
 body {
   font-family: "Open Sans", serif;
   margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 /* ---------------- MAIN CONTAINER ----------------- */
-@media only screen and (max-width: 768px) {
-  .container {
-    min-width: 95%;
-    padding: 5px 5px;
-    margin: 0 auto;
-  }
-  .form-btn {
-    min-width: 100%;
-  }
+.container {
+  width: 90%;
+  padding: .1em;
+  margin: 0 auto;
 }
 
-.container {
-  width: 60%;
-  padding: 10px 10px;
-  margin: 0 auto;
+@media screen and (min-width: 1000px) {
+  .container {
+    width: 40%;
+  }
 }
 
 /* ------------------ CLINICS CONTAINER ---------- */
@@ -632,227 +636,50 @@ body {
   transition: margin-left .7s;
 }
 
-/* ---------------- REGISTRATION FORM ----------------- */
-.form {
-  font-size: 16px;
+.form-item-col {
+  margin-bottom: 1em;
 }
 
-.form * {
+.form-item-col input, .form-item-col label {
+  display: block;
+}
+
+.form-item-col label {
+  margin-bottom: .3em;
+}
+
+.form-item-col input {
+  width: 100%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  line-height: 1.5;
+  background: #e9e9e9;
+  border: 1px solid transparent;
+  border-radius: .5em;
+  padding: .8em;
+  -webkit-transition: background .25s, border .25s;
+  transition: background .25s, border .25s;
 }
 
-.form-title {
-  font-size: 3em;
-  font-weight: 600;
+.form-item-col input:focus {
+  background: #FFFFFF;
+  border: 1px solid #e7e7e7;
+}
+
+.form-item-col .form-input select {
+  margin-left: .3em;
+}
+
+.form-item-col .form-input select:first-child {
+  margin-left: 0;
 }
 
 .form-subtitle {
-  padding-top: 20px;
-  font-size: 1.7em;
-  margin-bottom: 20px;
-  font-weight: 500;
-  border-bottom: 1px solid #aaa;
+  border-bottom: 1px solid #e7e7e7;
+  margin-bottom: 1em;
 }
 
-.form-item-col {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.form-item-row {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-}
-
-.form-item > * {
-  -ms-flex-item-align: start;
-      align-self: flex-start;
-}
-
-.form-label {
-  font-weight: 600;
-  padding: 1em 0;
-}
-
-.form-input {
-  -webkit-appearance: none;
-  width: 100%;
-  max-width: 425px;
-  /* Fix for safari/ios */
-  min-height: calc(0.9em + (0.8em * 2) + 0.6em);
-  padding: 0.8em;
-  font-size: 0.9em;
-  outline: none;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background: #f9f9f9;
-  -webkit-transition: background 0.5s, border-color 0.5s, color 0.5s;
-  transition: background 0.5s, border-color 0.5s, color 0.5s;
-}
-
-.form-input:focus {
-  background: #ffffff;
-}
-
-.form-input::-webkit-input-placeholder {
-  color: #bbbbbb;
-}
-
-.form-input:-ms-input-placeholder {
-  color: #bbbbbb;
-}
-
-.form-input::-ms-input-placeholder {
-  color: #bbbbbb;
-}
-
-.form-input::placeholder {
-  color: #bbbbbb;
-}
-
-.form-input--error {
-  color: #d50000;
-  background: #fff8f8;
-  border-color: #d50000;
-}
-
-.form-error > ul {
-  list-style-type: none;
-  margin: 0 0 20px;
-  padding: 0;
-}
-
-.form-input--error::-webkit-input-placeholder {
-  color: #ffbfbf;
-}
-
-.form-input--error:-ms-input-placeholder {
-  color: #ffbfbf;
-}
-
-.form-input--error::-ms-input-placeholder {
-  color: #ffbfbf;
-}
-
-.form-input--error::placeholder {
-  color: #ffbfbf;
-}
-
-.form-error {
-  padding-top: 10px;
-  color: #d50000;
-  font-size: 0.9em;
-  visibility: hidden;
-}
-
-.form-input--error + .form-error {
-  visibility: visible;
-}
-
-.form-input--small {
-  max-width: 250px;
-}
-
-.form-input--supersmall {
-  max-width: 80px;
-}
-
-.form-btn {
-  font-weight: 600;
-  font-size: 1.1em;
-  padding: 10px 16px;
-  margin: 10px 0;
-  width: 200px;
-  color: white;
-  background: #1E90FF;
-  border: 2px solid #1873cc;
-  cursor: pointer;
-  outline: none;
-}
-
-.form-btn:hover {
-  background: #1873cc;
-  -webkit-transition: background 0.5s, border-color 0.5s, color 0.5s;
-  transition: background 0.5s, border-color 0.5s, color 0.5s;
-}
-
-/*-- TODO: POPRAWIĆ FLEXA > CHILDY */
-/* -------------- SELECTS ------------------------*/
-.form-label {
-  font-weight: 600;
-  padding: 1em 0;
-}
-
-.form-select {
-  -webkit-appearance: none;
-  width: 100%;
-  max-width: 300px;
-  /* Fix for safari/ios */
-  min-height: calc(0.9em + (0.8em * 2) + 0.6em);
-  padding: 0.8em;
-  font-size: 0.9em;
-  outline: none;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background: #f9f9f9;
-  -webkit-transition: background 0.5s, border-color 0.5s, color 0.5s;
-  transition: background 0.5s, border-color 0.5s, color 0.5s;
-}
-
-.form-select:focus {
-  background: #ffffff;
-}
-
-.form-select::-webkit-input-placeholder {
-  color: #bbbbbb;
-}
-
-.form-select:-ms-input-placeholder {
-  color: #bbbbbb;
-}
-
-.form-select::-ms-input-placeholder {
-  color: #bbbbbb;
-}
-
-.form-select::placeholder {
-  color: #bbbbbb;
-}
-
-.form-select--small {
-  max-width: 200px;
-}
-
-.container-select {
-  padding-bottom: 15px;
-}
-
-/* -------------- LOGIN FORM -------------------- */
-.login-form {
-  border: 1px black solid;
-  max-width: 50%;
-  margin: 0 auto;
-}
-
-.login-item {
-  min-width: 100%;
-}
-
-/* ---------------- FORM - HIDDEN ---------- */
-.form.hidden {
-  display: none;
+.form-subtitle h3 {
+  margin-bottom: .3em;
 }
 
 .link {
@@ -942,5 +769,19 @@ body {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+select {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: #e9e9e9;
+  border: none;
+  padding: .8em;
+  border-radius: .5em;
+}
+
+select::-ms-expand {
+  display: none;
 }
 /*# sourceMappingURL=style.css.map */

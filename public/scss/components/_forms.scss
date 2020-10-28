@@ -1,186 +1,46 @@
-/* ---------------- REGISTRATION FORM ----------------- */
-
-.form {
-    font-size: 16px;
-}
-
-.form * {
-    box-sizing: border-box;
-    line-height: 1.5;
-}
-
-.form-title {
-    font-size: 3em;
-    font-weight: 600;
-}
-.form-subtitle {
-    padding-top: 20px;
-    font-size: 1.7em;
-    margin-bottom: 20px;
-    font-weight: 500;
-    border-bottom: 1px solid #aaa;
-}
-
 .form-item-col {
-    display: flex;
-    flex-direction: column;
+    margin-bottom: 1em;
+    
+    input, label {
+        display:block;
+    }
+
+    label {
+        margin-bottom: .3em;
+    }
+    input {
+        width: 100%;
+        box-sizing: border-box;
+        background: $light-grey;
+        border: 1px solid transparent;
+        border-radius: .5em;
+        padding: .8em;
+        transition: background .25s, border .25s;
+
+        @include mq {
+            // width: 50%;
+        }
+        &:focus {
+            background: $white;
+            border: 1px solid  $grey;
+        }
+    }
+
+    .form-input{
+        select {
+            margin-left: .3em;
+
+            &:first-child {
+                margin-left: 0;
+            }
+        }
+    }
 }
 
-.form-item-row {
-    display: flex;
-    flex-direction: row;
-}
-
-.form-item > * {
-    align-self: flex-start;
-}
-
-.form-label {
-    font-weight: 600;
-    padding: 1em 0;
-}
-
-.form-input {
-    -webkit-appearance: none;
-    width: 100%;
-    max-width: 425px;
-
-    /* Fix for safari/ios */
-    min-height: calc(0.9em + (0.8em * 2) + 0.6em);
-
-    padding: 0.8em;
-    font-size: 0.9em;
-
-    outline: none;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background: #f9f9f9;
-    transition: background 0.5s, border-color 0.5s, color 0.5s;
-
-}
-
-.form-input:focus {
-    background: #ffffff;
-}
-
-.form-input::placeholder {
-    color: #bbbbbb;
-}
-
-.form-input--error {
-    color: #d50000;
-    background: #fff8f8;
-    border-color: #d50000;
-}
-
-.form-error > ul {
-    list-style-type: none;
-    margin: 0 0 20px;
-    padding: 0;
-}
-
-.form-input--error::placeholder {
-    color: #ffbfbf;
-}
-
-
-.form-error {
-    padding-top: 10px;
-    color: #d50000;
-    font-size: 0.9em;
-    visibility: hidden;
-}
-
-.form-input--error + .form-error{
-    visibility: visible;
-}
-
-.form-input--small {
-    max-width: 250px;
-}
-.form-input--supersmall {
-    max-width: 80px;
-}
-
-.form-btn {
-    font-weight: 600;
-    font-size: 1.1em;
-    padding: 10px 16px;
-    margin: 10px 0;
-    width: 200px;
-    color: white;
-    background: #1E90FF;
-    border: 2px solid #1873cc;
-    cursor: pointer;
-    outline: none;
-}
-
-.form-btn:hover{
-    background: #1873cc;
-    transition: background 0.5s, border-color 0.5s, color 0.5s;
-
-}
-
-/*-- TODO: POPRAWIĆ FLEXA > CHILDY */
-
-
-/* -------------- SELECTS ------------------------*/
-.form-label {
-    font-weight: 600;
-    padding: 1em 0;
-}
-
-.form-select {
-    -webkit-appearance: none;
-    width: 100%;
-    max-width: 300px;
-
-    /* Fix for safari/ios */
-    min-height: calc(0.9em + (0.8em * 2) + 0.6em);
-
-    padding: 0.8em;
-    font-size: 0.9em;
-
-    outline: none;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background: #f9f9f9;
-    transition: background 0.5s, border-color 0.5s, color 0.5s;
-
-}
-
-.form-select:focus {
-    background: #ffffff;
-}
-
-.form-select::placeholder {
-    color: #bbbbbb;
-}
-
-.form-select--small {
-    max-width: 200px;
-}
-
-.container-select {
-    padding-bottom: 15px;
-}
-
-
-/* -------------- LOGIN FORM -------------------- */
-
-.login-form {
-    border: 1px black solid;
-    max-width: 50%;
-    margin: 0 auto;
-}
-
-.login-item {
-    min-width: 100%;
-}
-
-
-/* ---------------- FORM - HIDDEN ---------- */
-
-.form.hidden {
-    display: none;
+.form-subtitle {
+    border-bottom: 1px solid $grey;
+    margin-bottom: 1em;
+    h3 {
+        margin-bottom: .3em;
+    }
 }
