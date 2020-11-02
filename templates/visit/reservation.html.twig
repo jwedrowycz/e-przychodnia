@@ -13,25 +13,41 @@
     {% endfor %}
     <div class="flash-info">
         <p>
-            Upewnij się, że podana data i godzina wizyty są prawidłowe. W razie konieczności, możesz dokonać <a class="link" href="{{ path('visit_terms', {'id': id }) }}">wyboru </a>jeszcze raz.
+            Upewnij się, że podana data i godzina wizyty są prawidłowe. W razie konieczności, możesz dokonać <b><a class="link" href="{{ path('visit_terms', {'id': id }) }}">wyboru </a></b>jeszcze raz.
         </p>
     </div>
-    <h1>{{ clinic.name }}</h1>
-    <h2>{{doctor.name ~ ' ' ~ doctor.lastName}}</h2>
-    <h2>Data</h2>
-    <p>{{ start|format_datetime(pattern='dd MMMM Y', locale='pl') ~ ' ' ~ nameOfDay(start|date('w')) }}</p> <!-- TODO: POPRAWIĆ FORMAT DATY- LOCALIZEDDATE-->
-    <h2>Przewidywana godzina rozpoczęcia</h2>
-    <p>{{ start|date("H:i") }}</p>
-    <h2>Przewidywana godzina zakończenia</h2>
-    <p>{{ end|date("H:i") }}</p>
-
+    <div class="summary-container">
+        <div class="summary-row">
+            <div class="summary-item">
+                <h3>Poradnia</h3>
+                <span>{{ clinic.name }}</span>
+            </div>
+            <div class="summary-item">
+                <h3>Lekarz</h3>
+                <span>{{doctor.name ~ ' ' ~ doctor.lastName}}</span>
+            </div>
+            <div class="summary-item">
+                <h3>Data</h3>
+                <span>{{ start|format_datetime(pattern='dd MMMM Y', locale='pl') ~ ' ' ~ nameOfDay(start|date('w')) }}</span> <!-- TODO: POPRAWIĆ FORMAT DATY- LOCALIZEDDATE-->
+            </div>
+        </div>
+        <div class="summary-row">
+            <div class="summary-item">
+                <h3>Przewidywana godzina rozpoczęcia</h3>
+                <span>{{ start|date("H:i") }}</span>
+            </div>
+            <div class="summary-item">
+                <h3>Przewidywana godzina zakończenia</h3>
+                <span>{{ end|date("H:i") }}</span>
+            </div>
+        </div>
     {{ form_start(form) }}
     {{ form_errors(form) }}
 
     {{ form_widget(form.submit, {'attr':{'class':'form-btn'}})}}
 
     {{ form_end(form)}}
-
+    </div>
 </div>
 
 

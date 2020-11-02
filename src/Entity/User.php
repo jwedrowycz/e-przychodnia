@@ -116,7 +116,7 @@ class User implements UserInterface
     * @Assert\Regex(pattern = "/[0-9]/",
      *               match = true,
      *               message="Kod pocztowy nie może zawierać liter")
-     * @Assert\NotBlank(message = "Wpisz kod pocztowy swojego miejsca zamieszkania")
+     * @Assert\NotBlank(message = "Wpisz kod pocztowy")
      * @ORM\Column(type="string", length=6)
      *
      */

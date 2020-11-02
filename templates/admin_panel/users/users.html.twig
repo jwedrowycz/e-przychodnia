@@ -2,6 +2,7 @@
 
 
 {% block content %}
+<div class="container admin">
     {% for label, messages in app.flashes(['success', 'fail']) %}
         {% for message in messages %}
             <div class="flash-{{ label }}">
@@ -21,7 +22,6 @@
             <th>Status</th>
             <th colspan="3"></th>
         </tr>
-{#        {{ dump(users) }}#}
         {% for user in users %}
         <tr>
             <td>{{ user.email }}</td>
@@ -35,4 +35,5 @@
         {% endfor %}
     </table>
     <a class="link" href="{{ path('admin.user_add') }}">Dodaj użytkownika</a>
+</div>  
 {% endblock %}

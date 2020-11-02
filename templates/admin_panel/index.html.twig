@@ -5,7 +5,7 @@
 {% block body %}
     {% block sidebar %}
         <div class="sidebar" id="sidebar">
-            <a href="#" class="close" onclick="closeSlideMenu()" style="color: white;">Zamknij</a>
+            <a href="#" class="close" onclick="closeSlideMenu()" style="color: white;">&#10005;</a>
             <a {% if app.request.attributes.get('_route')  starts with 'admin.user'%}
                 class="active"{% endif %} href="{{ path('admin.users') }}">Użytkownicy</a>
             <a {% if app.request.attributes.get('_route') starts with 'admin.clinic'%}
@@ -19,13 +19,16 @@
         </div>
     {% endblock sidebar %}
     <div class="content" id="content">
-        <a href="#" onclick="openSlideMenu()" style="color: black;">Menu</a>
-        <div class="table-div">
+        <a href="#" id="menu-click" class="link-btn" onclick="openSlideMenu()"><i class="fas fa-chevron-right"></i></a>
+            {# <div class="table-div"> #}
+            
+            
+            {% block content %}
+        
 
-        {% block content %}
-        {% endblock content %}
-  </div>   
-</div>
+            {% endblock content %}
+            {# </div>    #}
+    </div>
 
     <script>
 
@@ -34,6 +37,9 @@
             document.getElementById('content').style.marginLeft = '0';
             document.getElementById('sidebar').style.transition = '0.7s';
             document.getElementById('content').style.transition = 'margin-left 0.7s';
+            document.getElementById('menu-click').style.display = 'block';
+            document.getElementById('menu-click').style.transition = '0.7s';
+            document.getElementById('menu-click').style.transition = 'margin-left 0.7s';
             localStorage.setItem("toggle", "no");
 
         }
@@ -43,7 +49,6 @@
             document.getElementById('sidebar').style.transition = '0.7s';
             document.getElementById('content').style.transition = 'margin-left 0.7s';
             localStorage.setItem("toggle", "yes");
-
         }
 
         if (localStorage.getItem("toggle") === null) {
@@ -51,16 +56,21 @@
             document.getElementById('content').style.marginLeft = '250px';
             document.getElementById('sidebar').style.transition = '0s';
             document.getElementById('content').style.transition = 'margin-left 0s';
+            document.getElementById('menu-click').style.display = 'block';
             localStorage.setItem("toggle", "no");
 
         }else{
             if(localStorage.getItem("toggle") === "yes"){
                 document.getElementById('sidebar').style.width = '250px';
                 document.getElementById('content').style.marginLeft = '250px';
+                document.getElementById('menu-click').style.display = 'none';
+
             }else{
                 document.getElementById('sidebar').style.width = '0';
                 document.getElementById('content').style.marginLeft = '0';
                 document.getElementById('sidebar').style.transition = '0s';
+                document.getElementById('menu-click').style.display = 'block';
+
                 document.getElementById('content').style.transition = 'margin-left 0s';
             }
         }

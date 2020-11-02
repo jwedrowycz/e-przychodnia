@@ -3,7 +3,7 @@
 
 
 {% block content %}
-{# read and display several types of flash messages #}
+<div class="container admin">
 {% for label, messages in app.flashes(['success', 'fail']) %}
     {% for message in messages %}
         <div class="flash-{{ label }}">
@@ -33,19 +33,16 @@
         </tr>
     {% endfor %}
     </table>
-{#    <a href="{{ path('admin.clinic_add') }}">Dodaj poradnie</a>#}
-    <button class="form-btn" id="toggleBtn">Dodaj poradnie</button>
-    {{ include('admin_panel/clinic/_form.html.twig') }}
-
-
-    <script>
-        $(document).ready(function() {
-            $("#toggleBtn").click(function () {
-                $(".form.hidden").slideDown();
-            });
-        });
-
-    </script>
+    <div class="modal" id="modalOpen">
+        <div class="modal-content">
+          <span id="close" class="close">&times;</span>
+          {{ include('admin_panel/clinic/_form.html.twig') }}
+        </div>
+      </div>
+      <div class="form-item-col">
+        <button class="link-as-btn" id="modalBtn">Dodaj poradnie</button>
+      </div>
+  <script src="{{asset('js/modal.js')}}"></script> 
 
 {% endblock content %}
 

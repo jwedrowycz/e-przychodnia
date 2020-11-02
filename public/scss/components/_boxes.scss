@@ -1,0 +1,31 @@
+.admin-boxes {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    @include mq {
+        flex-direction: row;
+    }
+}
+
+.box-item {
+    padding: 1em;
+    background: $white;
+    margin: 1em;
+    border-radius: .3em;
+    transition: background .25s;
+    min-width: 200px;
+    max-width: 200px;
+    text-align: center;
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+    &:hover {
+        background: $secondary-color-lt;
+        cursor: pointer;
+    }
+}
+
+.admin-boxes-title {
+    margin: 1em;
+}

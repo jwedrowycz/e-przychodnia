@@ -1,4 +1,4 @@
-{{ form_start(form, {'attr': {'class': 'form hidden', 'autocomplete':'off'}}) }}
+{{ form_start(form, {method: 'POST', 'action': path('admin.clinic_add'), 'attr': {'class': 'form', 'autocomplete':'off'}}) }}
 <div class="form-item-col">
     {{ form_label(form.name, 'Nazwa poradni', {'attr': {'class' : 'form-label'}} ) }}
     {% if form_errors(form.name) %}

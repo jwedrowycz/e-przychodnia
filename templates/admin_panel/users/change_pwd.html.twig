@@ -10,7 +10,7 @@
         {% if form_errors(formPassword.password.first) %}
             {{ form_widget(formPassword.password.first, {'attr': {'class' : 'form-input form-input--error'}} ) }}
         {% else %}
-            {{ form_widget(formPassword.password.first, {'attr': {'class' : 'form-input', 'placeholder' : '********'}} ) }}
+            {{ form_widget(formPassword.password.first, {'attr': {'class' : 'form-input'}} ) }}
         {% endif %}
     </div>
     <div class="form-item-col">
@@ -18,12 +18,16 @@
         {% if form_errors(formPassword.password.first) %}
             {{ form_widget(formPassword.password.second, {'attr': {'class' : 'form-input form-input--error'}} ) }}
         {% else %}
-            {{ form_widget(formPassword.password.second, {'attr': {'class' : 'form-input', 'placeholder' : '********'}} ) }}
+            {{ form_widget(formPassword.password.second, {'attr': {'class' : 'form-input'}} ) }}
         {% endif %}
         <span class="form-error">{{ form_errors(formPassword.password.first) }}</span>
     </div>
     <button class="form-btn">Zatwierdź</button>
+   <a class="link-as-btn cancel" href="{{ path('admin.users') }}">Rezygnuj</a>
     {{ form_end(formPassword) }}
 </div>
+
+
+
 {% endblock content %}
 

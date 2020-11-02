@@ -1,0 +1,26 @@
+{% extends('admin_panel/index.html.twig') %}
+
+
+{% block content %}
+<div class="container">
+    {{ form_start(form, {'attr': {'class': 'form hidden', 'autocomplete':'off'}}) }}
+    <div class="form-item-col">
+        <h3>Dodaj poradnie</h3>
+    </div>
+    <div class="form-item-col">
+        {{ form_label(form.name, 'Nazwa poradni', {'attr': {'class' : 'form-label'}} ) }}
+        {% if form_errors(form.name) %}
+            {{ form_widget(form.name, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+        {% else %}
+            {{ form_widget(form.name, {'attr': {'class' : 'form-input'}} ) }}
+        {% endif %}
+        <span class="form-error">{{ form_errors(form.name) }}</span>
+    </div>
+    <button class="form-btn">Dodaj</button>
+    {{ form_end(form) }}
+</div>
+
+
+
+{% endblock content %}
+

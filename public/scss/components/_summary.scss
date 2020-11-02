@@ -1,0 +1,28 @@
+.summary-container {
+    background: $white;
+    // padding: 1em;
+    display: flex;
+    flex-direction: column;
+    .summary-row {
+        display: flex;
+        flex-direction: column;
+        
+        @include mq {
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: left;
+        }
+    }
+    .summary-item {
+        margin: 1em;
+        h3 {
+            color: $primary-color-dk;
+        }
+        span {
+            font-size: 1.5rem;
+        }
+    }
+    form {
+        margin-top: 1em;
+    }
+}

@@ -10,42 +10,17 @@
             {% endfor %}
         {% endfor %}
         <h1>Edytuj użytkownika</h1>
-        <button id="myBtn">Zmień hasło</button>
-        {{ include('admin_panel/users/_form.html.twig') }}
-    </div>
-    <div class="modal" id="myModal">
-        <div class="modal-content">
-            {# {{ render(controller('App\\Controller\\UsersController::change_password', {id: id})) }} #}
-            {{ include('admin_panel/users/_change_pwd_form.html.twig') }}
-            <span class="close">&times;</span>
-            <!--TODO POPRAWIĆ MODAL - PRZY OKAZJI DODAC MODAL DO RESZTY FORMÓW TYPU: DODAWANIE LEKARZA, PORADNI ITD -->
+        <div class="form-item-col">
+          <button class="btn-as-link" id="modalBtn">Zmień hasło</button>
         </div>
+        {{ include('admin_panel/users/_form.html.twig') }}
+       
     </div>
-<script>
-    // Get the modal
-var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-
-// Get the <span> element that closes the modal
-var span = document.getElementById("close");
-
-// When the user clicks on the button, open the modal
-btn.onclick = function() {
-  modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-} 
-</script>
+    <div class="modal" id="modalChangePwd">
+      <div class="modal-content">
+        <span id="close" class="close">&times;</span>
+        {{ include('admin_panel/users/_change_pwd_form.html.twig') }}
+      </div>
+    </div>
+<script src="{{asset('js/modal.js')}}"></script> 
 {% endblock content %}

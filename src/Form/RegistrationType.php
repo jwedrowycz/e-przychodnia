@@ -71,13 +71,17 @@ class RegistrationType extends AbstractType
                 ],
                 'required'   => false,
                 ])
-            ->add('birthday', DateType::class, [
-                'widget' => 'choice',
-                'years' => range(date('Y'), date('Y')-100),
-                'months' => range(date('F'), 12),
-                'required' => false,
-                // 'format' => 'dd/mm/yyyy',
-                // 'html5' => false
+            // ->add('birthday', DateType::class, [
+            //     'widget' => 'choice',
+            //     'years' => range(date('Y'), date('Y')-100),
+            //     'months' => range(date('F'), 12),
+            //     'required' => false,
+                
+            // ])
+            ->add('birthday', BirthdayType::class, [
+                'placeholder' => [
+                    'year' => 'Rok', 'month' => 'Miesiąc', 'day' => 'Dzień',
+                ]
             ])
             ->add('gender', ChoiceType::class, [
                 'choices' => [

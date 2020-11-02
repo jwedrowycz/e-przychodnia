@@ -11,7 +11,7 @@
         <div class="clinic-card">
             {% if u.status == 1 %}
                 <div class="clinic-item"><a href="{{path('visit_terms', {'id': u.unit})}}" hidden></a>
-                <h3 class="link">{{ u.name ~ ' ' ~ u.lastName }} <br></h3>
+                <h4 class="link">{{ u.name ~ ' ' ~ u.lastName }} <br></h4>
                 {{ render(controller('App\\Controller\\VisitController::work_time_show', {'idClinic': clinic.id, 'idUnit':u.unit})) }}
                 </div>
             {% endif %}

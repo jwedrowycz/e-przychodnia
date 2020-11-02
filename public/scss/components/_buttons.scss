@@ -1,0 +1,44 @@
+.form-btn {
+    background: $primary-color;
+    color: $white;
+    border: none;
+    padding: 1em;
+    font-weight: $fw-bold;
+    transition: background .25s;
+    text-transform: uppercase;
+    &:hover {
+        cursor: pointer;
+        background: $primary-color-dk;
+    }
+}
+
+#menu-click {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    
+}
+
+.btn-as-link{
+    background: none;
+    border: none;
+    font-weight: $fw-bold;
+    padding-left: 0;
+    @extend .link;
+    cursor: pointer;
+}
+
+.link-as-btn {
+    display: inline-block;
+    text-decoration: none;
+    @extend .form-btn;
+    
+    &.cancel {
+        background: $red;
+
+        &:hover {
+            background: $red-dk;
+        }
+    }
+
+}

@@ -1,13 +1,14 @@
 {% extends 'admin_panel/index.html.twig' %}
 
 {% block content %}
+<div class="container admin">
     {% for label, messages in app.flashes(['success', 'fail']) %}
-    {% for message in messages %}
-        <div class="flash-{{ label }}">
-            {{ message }}
-        </div>
+        {% for message in messages %}
+            <div class="flash-{{ label }}">
+                {{ message }}
+            </div>
     {% endfor %}
-{% endfor %}
+    {% endfor %}
     <h1>{{ clinic.name }}</h1>
      <h1>Lekarze</h1>
     <table class="admin-table">
@@ -38,4 +39,5 @@
     </table>
 
     <a class="link" href="{{ path('admin.unit_add', {'idClinic': clinic.id}) }} ">Dodaj lekarza do poradni</a>
+</div>
 {% endblock content %}

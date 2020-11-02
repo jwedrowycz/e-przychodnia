@@ -8,35 +8,36 @@
         </div>
     {% endfor %}
 {% endfor %}
-<h1>Jednostki</h1>
-    <table class="admin-table">
-        <tr>
-            <th>Id jednostki</th>
-            <th>Id lekarza</th>
-            <th>Numer PWZ</th>
-            <th>Lekarz</th>
-            <th>Specjalizacja</th>
-            <th>Poradnia</th>
-            <th colspan="2">Akcja</th>
+<div class="container admin">
+    <h1>Jednostki</h1>
+        <table class="admin-table">
+            <tr>
+                <th>Id jednostki</th>
+                <th>Id lekarza</th>
+                <th>Numer PWZ</th>
+                <th>Lekarz</th>
+                <th>Specjalizacja</th>
+                <th>Poradnia</th>
+                <th colspan="2">Akcja</th>
 
-        </tr>
-        <tr>
-    {% for u in unit %}
-        <td>{{ u.unit }}</td>
-        <td>{{ u.id }}</td>
-        <td>{{ u.numPwz }}</td>
-        <td>{{ u.lastName ~ ' ' ~ u.name }}</td>
-        <td>{{ u.spec }}</td>
-        <td>{{ u.clinicName }}</td>
-        <td>
-            <a class="link-blue" href="{{ path('admin.work_time', {'id': u.unit}) }}">Czas pracy</a>
-        </td>
-        <td>
-            <a class="delete" href="{{ path('admin.unit_delete', {'idDoctor': u.id, 'idClinic': u.clinicId}) }}">Usuń</a>
-        </td>
-        </tr>
-    {% endfor %}
-    </table>
-    <p>Jeśli chcesz przypisać lekarza do poradni, przejdź do zakładki <a class="link" href="{{ path('admin.clinics') }}"><b>poradnie</b></a>.</p>
-
+            </tr>
+            <tr>
+        {% for u in unit %}
+            <td>{{ u.unit }}</td>
+            <td>{{ u.id }}</td>
+            <td>{{ u.numPwz }}</td>
+            <td>{{ u.lastName ~ ' ' ~ u.name }}</td>
+            <td>{{ u.spec }}</td>
+            <td>{{ u.clinicName }}</td>
+            <td>
+                <a class="link-blue" href="{{ path('admin.work_time', {'id': u.unit}) }}">Czas pracy</a>
+            </td>
+            <td>
+                <a class="delete" href="{{ path('admin.unit_delete', {'idDoctor': u.id, 'idClinic': u.clinicId}) }}">Usuń</a>
+            </td>
+            </tr>
+        {% endfor %}
+        </table>
+        <p>Jeśli chcesz przypisać lekarza do poradni, przejdź do zakładki <a class="link" href="{{ path('admin.clinics') }}"><b>poradnie</b></a>.</p>
+</div>
 {% endblock content %}

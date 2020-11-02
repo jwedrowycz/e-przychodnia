@@ -29,7 +29,7 @@ class AdminPanelController extends AbstractController
      */
     public function index() // Strona główna panelu administratora
     {
-        return $this->render('admin_panel/index.html.twig', [
+        return $this->render('admin_panel/admin_page.html.twig', [
 
         ]);
     }

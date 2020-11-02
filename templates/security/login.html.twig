@@ -3,7 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<div class="container">
+<div class="container form">
       {% for label, messages in app.flashes(['success', 'fail']) %}
         {% for message in messages %}
             <div class="flash-{{ label }}">
@@ -22,30 +22,26 @@
             Zalogowano jako {{ app.user.username }}, <a href="{{ path('logout') }}">Wyloguj</a>
         </div>
     {% endif %}
- 
-            
-                <div class="form-title">Zaloguj</div>
-                <div class="form-item-col">
-                    <label class="form-label" for="inputEmail">Login</label>
-                    <input class="form-input input-login" type="text" value="{{ last_username }}" name="email" placeholder="Wpisz adres e-mail" id="inputEmail" required autofocus>
-                </div>
-                <div class="form-item-col">
-                    <label class="form-label" for="inputPassword">Hasło</label>
-                    <input class="form-input input-login" type="password" name="password" id="inputPassword" placeholder="Wpisz hasło"  required>
-                </div>
-                <div class="form-item-col">
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                 <button class="form-btn" type="submit">Zaloguj</button>
-                </div>
-            </div>
-        
-    
-    
-            </div>
-
- </div>
-
-
+        <div class="form-title">
+            <h2>Zaloguj</h2>
+        </div>
+        <div class="form-item-col">
+            <label class="form-label" for="inputEmail">Login</label>
+            <input class="form-input input-login" type="text" value="{{ last_username }}" name="email" placeholder="Wpisz adres e-mail" id="inputEmail" required autofocus>
+        </div>
+        <div class="form-item-col">
+            <label class="form-label" for="inputPassword">Hasło</label>
+            <input class="form-input input-login" type="password" name="password" id="inputPassword" placeholder="Wpisz hasło"  required>
+        </div>
+        <div class="form-item-col">
+            <p>Jeśli nie posiadasz jeszcze konta <b><a class="link" href="{{ path('register') }}">zarejestruj się!</a></b></p>
+        </div>
+        <div class="form-item-col">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            <button class="form-btn" type="submit">Zaloguj</button>
+        </div>
+    </div>
+</div>
     {#
         Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
         See https://symfony.com/doc/current/security/remember_me.html

@@ -2,6 +2,7 @@
 {% extends 'admin_panel/index.html.twig' %}
 
 {% block content %}
+<div class="container admin">
 {% for label, messages in app.flashes(['success', 'fail']) %}
 {% for message in messages %}
     <div class="flash-{{ label }}">
@@ -36,8 +37,8 @@
     </table>
     
     <button class="form-btn" id="toggleBtn">Dodaj czas pracy</button>
-
     {{ include('admin_panel/work_time/_form.html.twig')}}
+</div>
 
     <script>
     $("#toggleBtn").click(function(){

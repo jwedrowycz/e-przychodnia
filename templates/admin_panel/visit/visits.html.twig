@@ -3,6 +3,7 @@
 {% block title %} Wizyty {% endblock %}
 
 {% block content %}
+<div class="container admin">
     {% for label, messages in app.flashes(['success', 'fail']) %}
         {% for message in messages %}
             <div class="flash-{{ label }}">
@@ -14,4 +15,5 @@
     {{ include('admin_panel/visit/_filters.html.twig') }}
     </div>
     {{ include('admin_panel/visit/_datatable.html.twig') }}
+</div>
 {% endblock content %}

@@ -1,14 +1,69 @@
 select { 
+    --webkit-apperance: none;
     appearance: none;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    line-height: inherit;
     background: $light-grey;
     border: none;
     padding: .8em;
     border-radius: .5em;
+
+    
+
+    ::-ms-expand {
+        display: none;
+    }
+}
+
+
+.form-input--select{
+    select {
+        margin-left: .3em;
+
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+
+    &.--error {
+        select {
+            background: $light-red;
+        }
+    }
+
+    &::after {
+        content: '<>';
+        position: absolute;
+        color: #333;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+        right: 11px;
+        /*Adjust for position however you want*/
+        
+        top: 18px;
+        padding: 0 0 2px;
+        border-bottom: 1px solid #999;
+        /*left line */
+        
+        position: absolute;
+        pointer-events: none;
+      }
+}
+
+.form-input.form-input--error {
+    // border: 1px solid $red;
+    background: $light-red;
     
 }
 
-select::-ms-expand {
-    display: none;
-  }
+.form-input--select.--error {
+    background: $light-red;
+}
 
-  //TODO: DOKOŃCZYĆ SELECTY
+//TODO: POPRAWIĆ SELECTY
+
+

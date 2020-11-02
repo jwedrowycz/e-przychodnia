@@ -22,10 +22,22 @@ class ClinicController extends AdminPanelController
      /**
      * @Route("/", name="clinics")
      */
-    public function clinics(Request $request, ClinicRepository $clinicRepo)
+    public function clinics( ClinicRepository $clinicRepo)
     {
+        $clinic = new Clinic();
+        $form = $this->createForm(ClinicType::class, $clinic);
         $clinics = $clinicRepo->findAll();
+        return $this->render('admin_panel/clinic/index.html.twig',[
+            'clinics' => $clinics,
+            'form' => $form->createView()
+        ]);
+    }
 
+     /**
+     * @Route("/add-clinic", name="clinic_add")
+     */
+    public function add(Request $request): Response
+    {
         $clinic = new Clinic();
         $form = $this->createForm(ClinicType::class, $clinic);
         $form->handleRequest($request);
@@ -39,15 +51,12 @@ class ClinicController extends AdminPanelController
                 'Poradnia została pomyślnie dodana'
             );
             return $this->redirectToRoute('admin.clinics');
-
         }
-        return $this->render('admin_panel/clinic/index.html.twig',[
-            'clinics' => $clinics,
-            'form' => $form->createView(),
+        return $this->render('admin_panel/clinic/add_clinic.html.twig', [
+            'form' => $form->createView()
         ]);
-    }
 
-    
+    }
 
     /**
      * @Route("/delete/{id}", name="clinic_delete")

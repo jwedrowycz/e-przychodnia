@@ -9,7 +9,7 @@
         {% for message in messages %}
             <div class="flash-{{ label }}">
                 {% if label=='success' %}
-                    Pomyślnie zarejestrowałeś się na badanie. Przejdź na swój <a class="link-green" href="{{ path('profile.index') }}">{{ message }}</a> aby zobaczyć szczegóły.
+                    Pomyślnie zarejestrowałeś się na badanie. Przejdź na swój <b><a class="link-green" href="{{ path('profile.index') }}">{{ message }}</a></b> aby zobaczyć szczegóły.
                 {% else %}
                     {{ message }}
                 {% endif %}
@@ -21,7 +21,7 @@
             {% for c in clinics %}
                 <div class="clinic-card">
                     <div class="clinic-item">
-                        <h3 class="link">{{ c.name }}<a  href="{{ path('visit_choose', {'id': c.id}) }}" hidden></a></h3>
+                        <h4 class="link">{{ c.name }}<a  href="{{ path('visit_choose', {'id': c.id}) }}" hidden></a></h4>
 
                             {% for u in units %}
                                 {% if u.status == 1 %}

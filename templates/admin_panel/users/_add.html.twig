@@ -1,6 +1,8 @@
 <div class="container">
     {{ form_start(form, {'attr': {'class': 'form', 'autocomplete':'off'}}) }}
-    <div class="form-title">Dodaj użytkownika</div>
+    <div class="form-title">
+        <h3>Dodaj użytkownika</h3>
+    </div>
 
     <div class="form-item-col">
         {{ form_label(form.email, 'E-mail', {'attr': {'class' : 'form-label'}} ) }}
@@ -59,6 +61,7 @@
     </div>
     <div class="form-item-col">
         <button class="form-btn">Dodaj</button>
+        <a class="link-as-btn cancel" href="{{ path('admin.users') }}">Rezygnuj</a>
     </div>
 
 {{ form_end(form) }}

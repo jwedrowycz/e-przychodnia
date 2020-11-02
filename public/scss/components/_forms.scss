@@ -22,18 +22,27 @@
         }
         &:focus {
             background: $white;
-            border: 1px solid  $grey;
+            border: 1px solid  $primary-color;
         }
     }
 
-    .form-input{
-        select {
-            margin-left: .3em;
-
-            &:first-child {
-                margin-left: 0;
-            }
+   
+    &.checkbox {
+        label{ 
+            display: inline-block;
+            padding-left: .3em;
+            text-indent: -.2em;
         }
+
+        input {
+            width: 13px;
+            height: 13px;
+            padding: 0;
+            margin:0;
+            top: -1px;
+          }
+
+
     }
 }
 
@@ -42,5 +51,46 @@
     margin-bottom: 1em;
     h3 {
         margin-bottom: .3em;
+    }
+}
+
+
+
+.form-error {
+    margin-top: 0;
+    margin-bottom: 1em;
+    color: red;
+
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        li {
+            font-size: .9rem;
+        }
+    }
+}
+
+@include mq {
+    .form-item-row {
+        .form-item-col {
+            display: inline-block;
+        }
+
+    }
+    .name {
+        width: 50%;
+    }
+
+    .last-name {
+        width: 49%;
+    }
+
+    .city {
+        width: 65%;
+    }
+
+    .post-code {
+        width: 34%;
     }
 }

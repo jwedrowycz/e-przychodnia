@@ -1,10 +1,10 @@
 .link {
     text-decoration: none;
-    color: dodgerblue;
+    color: $primary-color;
 }
 .link:hover {
     transition: 0.5s;
-    color: darkblue;
+    color: $primary-color-dk;
 }
 
 .link-green {
@@ -17,20 +17,15 @@
 }
 
 .link-btn {
-    font-weight: 600;
+    @extend .form-btn;
+    color: $white !important;
     text-decoration: none;
-    font-size: 1.1em;
-    padding: 10px 16px;
-    margin: 10px 0;
-    width: 200px;
-    color: white;
-    background: #1E90FF;
-    border: 2px solid #1873cc;
-    cursor: pointer;
-    outline: none;
-    transition: background 0.5s, border-color 0.5s, color 0.5s;
+    opacity: 1;
+    transition: opacity .25s;
+
 }
 
-.link-btn:hover{
-    background: #1873cc;
+.fade {
+    opacity: 0;
+    transition: opacity .25s;
 }
