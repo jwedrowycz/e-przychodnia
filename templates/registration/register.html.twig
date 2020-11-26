@@ -12,11 +12,7 @@
             {% endfor %}
         {% endfor %}
             {{ form_start(form, {'attr': {'class': 'form', 'autocomplete':'off', 'novalidate': 'true'}}) }}
-            <div class="form-error">
-            {% if form_errors(form) %}
-                {{ form_errors(form) }}
-            {% endif %}
-            </div>
+          
             <div class="form-title">
                 <h2>Rejestracja</h2>
             </div>
@@ -93,7 +89,7 @@
             </div>
             <div class="form-item-col">
                 {{ form_label(form.birthday, 'Data urodzenia', {'attr': {'class' : 'form-label'}} ) }}
-                {% if form_errors(form.birthday) %}
+                {% if form_errors(form.birthday) or form_errors(form) %}
                     {{ form_widget(form.birthday.day, {'attr': {'class' : 'form-input--select --error'}} ) }}
                     {{ form_widget(form.birthday.month, {'attr': {'class' : 'form-input--select --error'}} ) }}
                     {{ form_widget(form.birthday.year, {'attr': {'class' : 'form-input--select --error'}} ) }}
@@ -103,6 +99,8 @@
                     {{ form_widget(form.birthday.year, {'attr': {'class' : 'form-input--select '}} ) }}
                 {% endif %}
                 <span class="form-error">{{ form_errors(form.birthday) }}</span>
+                <span class="form-error">{{ form_errors(form) }}</span>
+
             </div>
             <div class="form-subtitle">
                 <h3>Miejsce zamieszkania</h3>
@@ -147,7 +145,7 @@
             </div>
             <div class="form-item-col">
                 {{ form_label(form.gender, 'Płeć', {'attr': {'class' : 'form-label'}} ) }}
-                {% if form_errors(form.gender) %}
+                {% if form_errors(form.gender) or form_errors(form) %}
                     {{ form_widget(form.gender, {'attr': {'class' : 'form-input--select --error'}} ) }}
                 {% else %}
                     {{ form_widget(form.gender, {'attr': {'class' : 'form-input--select'}} ) }}
