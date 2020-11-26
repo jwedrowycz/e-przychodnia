@@ -12,55 +12,26 @@
     <div class="admin-boxes-title">
         <h2>Na skróty</h2>
     </div>
-    <div class="admin-boxes-title">
-        <h3>Zarządzaj przychodnią</h3>
-    </div>
-    <div class="admin-boxes">
-        <div class="box-item">
-            <h4>
-                <a href="#">Dodaj lekarza</a>
-            </h4>
-        </div>
-        <div class="box-item">
-            <h4>
-                <a href="#">Dodaj poradnie</a>
-            </h4>
-        </div>
-        <div class="box-item">
-            <h4>
-                <a href="#">Dodaj jednostkę</a>
-            </h4>
-        </div>
-        <div class="box-item">
-            <h4>
-                <a href="#">Dodaj lekarza</a>
-            </h4>
-        </div>
-    </div>
 
     <div class="admin-boxes-title">
         <h3>Przeglądaj</h3>
     </div>
     <div class="admin-boxes">
-        <div class="box-item">
-            <h4>
-                <a href="#">Wizyty</a>
-            </h4>
-        </div>
-        <div class="box-item">
-            <h4>
-                <a href="#">Statystyki</a>
-            </h4>
-        </div>
-        <div class="box-item">
-            <h4>
-                <a href="#">Pacjenci</a>
-            </h4>
-        </div>
-        <div class="box-item">
-            <h4>
-                <a href="#">Lekarze</a>
-            </h4>
-        </div>
+        <a class="box-item" href="{{ path('admin.visits') }}">Wizyty</a>
+        <a class="box-item" href="#">Statystyki</a>
+        <a class="box-item" href="{{ path('admin.users') }}">Pacjenci</a>
+        <a class="box-item" href="{{ path('admin.doctors') }}">Lekarze</a>
     </div>
+
+    <div class="admin-boxes-title">
+        <h3>Zarządzaj przychodnią</h3>
+    </div>
+    <div class="admin-boxes">
+        <a class="box-item" href="{{ path('admin.doctor_add') }}">Dodaj lekarza</a>       
+        <a class="box-item" href="{{ path('admin.clinic_add') }}">Dodaj poradnie</a>
+        <a class="box-item" href="{{ path('admin.clinics') }}">Przypisz lekarza</a>
+        <a class="box-item" href="{{ path('admin.user_add') }}">Dodaj użytkownika</a>
+    </div>
+
+   
 {% endblock %}

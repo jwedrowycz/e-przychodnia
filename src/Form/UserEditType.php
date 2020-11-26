@@ -26,8 +26,8 @@ class UserEditType extends AbstractType
             ->add('last_name')
             ->add('status', ChoiceType::class, [
                 'choices' => [
-                    'Aktywny' => 0,
-                    'Nieaktywny' => 1
+                    'Aktywny' => 1,
+                    'Nieaktywny' => 0
                 ]
             ])
             ->add('roles', ChoiceType::class, [

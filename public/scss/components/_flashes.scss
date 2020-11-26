@@ -6,7 +6,6 @@
     color: black;
     margin-bottom: 15px;
     /*border-radius: 20px;*/
-
 }
 
 .flash-fail {
@@ -14,6 +13,11 @@
     background-color: rgb(255, 156, 156);
     color: black;
     margin-bottom: 15px;
+    ul {
+        list-style: none;
+        padding-left: 0;
+        margin: 0;
+    }
 
 }
 

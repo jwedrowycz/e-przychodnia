@@ -42,8 +42,11 @@
             </div>
         </div>
     {{ form_start(form) }}
-    {{ form_errors(form) }}
-
+    {% if form_errors(form) %}
+    <div class="flash-fail">
+        {{ form_errors(form) }}
+    </div>
+    {% endif %}
     {{ form_widget(form.submit, {'attr':{'class':'form-btn'}})}}
 
     {{ form_end(form)}}

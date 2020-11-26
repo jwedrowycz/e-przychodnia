@@ -46,7 +46,7 @@ class DoctorController extends AbstractController
             $entityManager->flush();
             $this->addFlash(
             'success',
-            'Pomyślnie dodano doctora'
+            'Pomyślnie dodano lekarza'
         );
 
             return $this->redirectToRoute('admin.doctors');
@@ -69,7 +69,7 @@ class DoctorController extends AbstractController
         
         $this->addFlash(
             'success',
-            'Pomyślnie usunięto doctora'
+            'Pomyślnie usunięto lekarza'
             );
         return $this->redirectToRoute('admin.doctors');
     }

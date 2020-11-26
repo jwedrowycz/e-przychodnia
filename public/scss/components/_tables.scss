@@ -37,19 +37,38 @@ table {
 .admin-table td a {
     display: block;
     text-decoration: none;
-    color: black;
+    color: $black;
 }
 
-.admin-table .delete {
-    color: red;
+.admin-table {
+    a {
+        display: inline-block;
+    }
+    .delete {
+        color: $red;    
+        transition: color .25s;
+
+        &:hover {
+            color: $red-dk;
+        }
+    }
+
+    .assign {
+        color: $primary-color;
+        transition: color .25s;
+
+        &:hover {
+            color: $primary-color-dk;
+        }
+    }
 }
 
 .admin-table .add {
-    color: dodgerblue;
+    color: $primary-color;
 }
 
 .admin-table tr:hover a.link-blue {
-    color: dodgerblue;
+    color:$primary-color;
     transition: background 0.25s, border-color 0.5s, color 0.25s;
 }
 

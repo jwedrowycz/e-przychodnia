@@ -26,7 +26,6 @@
         }
     }
 
-   
     &.checkbox {
         label{ 
             display: inline-block;
@@ -41,8 +40,16 @@
             margin:0;
             top: -1px;
           }
+    }
+}
 
-
+.form-item-radio {
+    margin-bottom: 1em;
+    input {
+        margin-right: .3em;
+    }
+    label {
+        margin-right: .5em;
     }
 }
 

@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
 h2 {
   font-size: 3rem;
+  margin: .5em 0;
 }
 
 h3 {
@@ -397,11 +398,11 @@ template {
 }
 
 .navbar-li {
-  float: left;
+  float: right;
 }
 
 .navbar-li.left {
-  float: left;
+  float: right;
 }
 
 .navbar-li a {
@@ -499,19 +500,39 @@ table {
 .admin-table td a {
   display: block;
   text-decoration: none;
-  color: black;
+  color: #353535;
+}
+
+.admin-table a {
+  display: inline-block;
 }
 
 .admin-table .delete {
-  color: red;
+  color: #e40000;
+  -webkit-transition: color .25s;
+  transition: color .25s;
+}
+
+.admin-table .delete:hover {
+  color: #941809;
+}
+
+.admin-table .assign {
+  color: #284B63;
+  -webkit-transition: color .25s;
+  transition: color .25s;
+}
+
+.admin-table .assign:hover {
+  color: #1b3342;
 }
 
 .admin-table .add {
-  color: dodgerblue;
+  color: #284B63;
 }
 
 .admin-table tr:hover a.link-blue {
-  color: dodgerblue;
+  color: #284B63;
   -webkit-transition: background 0.25s, border-color 0.5s, color 0.25s;
   transition: background 0.25s, border-color 0.5s, color 0.25s;
 }
@@ -568,6 +589,12 @@ table {
   background-color: #ff9c9c;
   color: black;
   margin-bottom: 15px;
+}
+
+.flash-fail ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
 }
 
 .flash-info {
@@ -661,6 +688,18 @@ table {
   padding: 0;
   margin: 0;
   top: -1px;
+}
+
+.form-item-radio {
+  margin-bottom: 1em;
+}
+
+.form-item-radio input {
+  margin-right: .3em;
+}
+
+.form-item-radio label {
+  margin-right: .5em;
 }
 
 .form-subtitle {
@@ -1010,20 +1049,20 @@ select ::-ms-expand {
 }
 
 .box-item {
-  padding: 1em;
+  text-decoration: none;
+  padding: 2.5em 1em;
   background: #FFFFFF;
   margin: 1em;
   border-radius: .3em;
   -webkit-transition: background .25s;
   transition: background .25s;
-  min-width: 200px;
-  max-width: 200px;
+  min-width: 250px;
+  max-width: 250px;
   text-align: center;
-}
-
-.box-item a {
-  text-decoration: none;
-  color: inherit;
+  display: block;
+  color: #353535;
+  font-weight: 600;
+  font-size: 1.5rem;
 }
 
 .box-item:hover {

@@ -8,18 +8,19 @@
 }
 
 .box-item {
-    padding: 1em;
+    text-decoration: none;
+    padding: 2.5em 1em;
     background: $white;
     margin: 1em;
     border-radius: .3em;
     transition: background .25s;
-    min-width: 200px;
-    max-width: 200px;
+    min-width: 250px;
+    max-width: 250px;
     text-align: center;
-    a {
-        text-decoration: none;
-        color: inherit;
-    }
+    display: block;
+    color: $black;
+    font-weight: $fw-bold;
+    font-size: 1.5rem;
     &:hover {
         background: $secondary-color-lt;
         cursor: pointer;

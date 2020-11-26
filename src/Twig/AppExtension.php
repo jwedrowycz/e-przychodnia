@@ -69,7 +69,7 @@ class AppExtension extends AbstractExtension
 
     public function statusFormat($status)
     {
-        if($status == 0)
+        if($status == 1)
         {
             return 'Aktywny';
         }

@@ -12,6 +12,11 @@
             {% endfor %}
         {% endfor %}
             {{ form_start(form, {'attr': {'class': 'form', 'autocomplete':'off', 'novalidate': 'true'}}) }}
+            <div class="form-error">
+            {% if form_errors(form) %}
+                {{ form_errors(form) }}
+            {% endif %}
+            </div>
             <div class="form-title">
                 <h2>Rejestracja</h2>
             </div>

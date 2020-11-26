@@ -46,7 +46,8 @@ class UserType extends AbstractType
                             'Operator' => 'ROLE_OPERATOR',
                             'Użytkownik' => 'ROLE_USER',
                             'Administrator' => 'ROLE_ADMIN',
-                            ],
+                        ],
+                
                 'expanded' => true,
                 'multiple' => false,
 

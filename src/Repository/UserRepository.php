@@ -36,7 +36,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
 
-    public function findAllUsersWithFilters($role = '', $status = 0) //TODO: DODAĆ SZUKAJ WG NAZWISKA/MAILA
+    public function findAllUsersWithFilters($role = '', $status = 1) //TODO: DODAĆ SZUKAJ WG NAZWISKA/MAILA
     {
         $qb = $this->createQueryBuilder('u')
         ->orderBy('u.lastName', 'ASC')

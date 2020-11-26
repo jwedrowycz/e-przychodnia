@@ -29,17 +29,11 @@
         {% endif %}
         <span class="form-error">{{ form_errors(form.last_name) }}</span>
     </div>
-    <div class="form-item-col">
-        {{ form_label(form.roles, 'Rola', {'attr': {'class' : 'form-label'}} ) }}
-        {% if form_errors(form.roles) %}
-            {{ form_widget(form.roles, {'attr': {'class' : 'form-input form-input--error'}} ) }}
-        {% else %}
-            {{ form_widget(form.roles, {'attr': {'class' : 'form-input'}} ) }}
-        {% endif %}
-        <span class="form-error">{{ form_errors(form.roles) }}</span>
+    <div class="form-item-radio">
+        {{ form_row(form.roles, {'label':'Role'}) }}
     </div>
     <div class="form-item-col">
-        {{ form_label(form.status, 'Rola', {'attr': {'class' : 'form-label'}} ) }}
+        {{ form_label(form.status, 'Status', {'attr': {'class' : 'form-label'}} ) }}
         {{ form_widget(form.status, {'attr': {'class' : 'form-select select--small'}} ) }}
         <span class="form-error">{{ form_errors(form.roles) }}</span>
     </div>

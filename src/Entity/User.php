@@ -107,7 +107,7 @@ class User implements UserInterface
     private $address;
 
     /**
-     * @Assert\NotBlank(message = "Wpisz w jakim mieście bądź miejscowości mieszkasz")
+     * @Assert\NotBlank(message = "Wpisz miasto")
      * @ORM\Column(type="string", length=255)
      */
     private $city;
@@ -368,9 +368,9 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->createdAt = new \DateTime();
-        $this->visit = new ArrayCollection();
-        $this->status = 0;
+        $this->createdAt = new \DateTime(); // Data rejestracji konta
+        $this->visit = new ArrayCollection(); 
+        $this->status = 1; // Status - aktywny przy rejestracji
     }
 
     /**
@@ -414,5 +414,21 @@ class User implements UserInterface
         $this->status = $status;
 
         return $this;
+    }
+
+    /**
+     * @Assert\IsTrue(message="Data urodzenia jest niezgodna z wybraną płcią")
+     */
+    public function isUserKid()
+    {
+        $bDate = $this->getBirthday();
+        $today = new \DateTime();
+        $dd = date_diff($bDate, $today);
+        if($bDate != null and $this->getGender() == 'D' and $dd->y > 15){          
+            return False;
+        }
+        if($bDate != null and ($this->getGender() == 'M' or $this->getGender() == 'K') and $dd->y < 15 ){
+            return False;
+        }
     }
 }
