@@ -41,8 +41,9 @@ class VisitController extends AbstractController
             $doctor = empty($doctor) ? '' : $doctor->getDoctor()->getId();
 
             $visitType = $form->get('type')->getData();
+            $visitStatus = $form->get('status')->getData();
 
-            $visits = $visitRepo->findAllWithJoined($clinic, $doctor, $visitType);
+            $visits = $visitRepo->findAllWithJoined($clinic, $doctor, $visitType, $visitStatus);
         }
 
         return $this->render('admin_panel/visit/visits.html.twig', [
@@ -66,6 +67,25 @@ class VisitController extends AbstractController
         $this->addFlash(
             'success',
             'Pomyślnie usunięto wizytę'
+        );
+
+        return $this->redirectToRoute('admin.visits');
+    }
+
+    /**
+     * @Route("/cancel/{id}", name="visit_cancel")
+     * @param Visit $visit
+     * 
+     */
+    public function cancel(Visit $visit)
+    {   
+        $entityManager = $this->getDoctrine()->getManager();
+        $visit->setStatus(1);
+        $entityManager->flush();
+
+        $this->addFlash(
+            'success',
+            'Pomyślnie anulowano wizytę'
         );
 
         return $this->redirectToRoute('admin.visits');

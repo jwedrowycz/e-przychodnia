@@ -47,7 +47,16 @@ class VisitsFilterType extends AbstractType
                 'placeholder' => 'Wszystkie',
                 'label' => 'Poradnie: ',
             ])
-
+            ->add('status', ChoiceType::class, [
+                'choices' => [
+                    'Aktywne' => 0,
+                    'Anulowane' => 1,
+                ],
+                'label' => 'Status: ',
+                'attr' => [
+                    'onchange' => 'this.form.submit()'
+                ],
+            ])
             ->setMethod('GET');
         $builder->get('clinic')->addEventListener(
             FormEvents::POST_SUBMIT,
@@ -95,27 +104,19 @@ class VisitsFilterType extends AbstractType
                     $form->add('doctor', EntityType::class, [
                         'class' => 'App\Entity\Doctor',
                         'placeholder' => 'Wszyscy',
-//                        'choice_label' => function ($doctor) {
-//                            return $doctor->getName() . ' ' . $doctor->getLastName();
-//                        },
-//                        'choice_value' => function (?Doctor $entity) {
-//                            return $entity ? $entity->getId() : '';
-//                        },
                         'choices' => [],
                         'attr' => [
                             'onchange' => 'this.form.submit()'
                         ],
                         'label' => 'Lekarze: ',
-                    #TODO: DO POPRAWKI W PRZYSZŁOŚCI - WYBÓR WSZYSTKICH LEKARZY, COŚ CHYBA Z AJAXEM TRZEBA
                     ]);
                 }
             }
         );
 
-//
+
         $builder->add('type', ChoiceType::class, [
-//            'multiple' => false,
-//            'expanded' => true,
+
             'choices' => [
                 'Nadchodzące' => 0,
                 'Archiwalne' => 1,

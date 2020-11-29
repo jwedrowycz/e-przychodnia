@@ -50,9 +50,15 @@ class Visit
      */
     private $submit_date;
 
+    /**
+     * @ORM\Column(type="smallint", nullable=true)
+     */
+    private $status; // 0 - aktywna, 1 - anulowana
+
     public function __construct()
     {
         $this->submit_date = new \DateTime();
+        $this->status = 0;
     }
 
     public function getId(): ?int
@@ -196,6 +202,18 @@ class Visit
         else {
             return False;
         }
+    }
+
+    public function getStatus(): ?int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?int $status): self
+    {
+        $this->status = $status;
+
+        return $this;
     }
 
 }

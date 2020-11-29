@@ -40,7 +40,7 @@ class VisitRepository extends ServiceEntityRepository
 
     }
 
-    public function findAllWithJoined($clinic = '', $doctor = '', $type = '')
+    public function findAllWithJoined($clinic = '', $doctor = '', $type = '', $status = '')
     {
         $dateStart = new \DateTime();
         $currDateStart = $dateStart->setTime(0,0,0);
@@ -85,6 +85,14 @@ class VisitRepository extends ServiceEntityRepository
             } else { // ALL VISITS
                 return $qb->getQuery()->getResult();
             }
+
+            if($status == 0){
+                $qb->andWhere('v.status = 0');
+            }
+            else if($status == 1) {
+                $qb->andWhere('v.status = 1');
+            }
+            
 
 
         return $qb->getQuery()->getResult();

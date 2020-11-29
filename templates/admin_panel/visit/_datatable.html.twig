@@ -27,7 +27,7 @@
             <td>{{ v.start|date('H:i') }}</td>
             <td>{{ v.end|date('H:i') }}</td>
             <td>{{ v.submit_date|date('d-m-Y H:i:s') }}</td>
-            <td><a class="delete" href="{{ path('admin.visit_delete', {'id': v.id} ) }}">Usuń</a></td>
+            <td><a class="delete" href="{{ path('admin.visit_cancel', {'id': v.id} ) }}">Anuluj</a></td>
         </tr>
     {% endfor %}
 </table>

@@ -68,8 +68,8 @@ class UserVisitsFilterType extends AbstractType
         ]);
         $builder->add('sort', ChoiceType::class, [
             'choices' => [
-                'Od najstarszych' => 0,
-                'Od najmdłoszych' => 1,
+                'Malejąco' => 0,
+                'Rosnąco' => 1,
             ],
             'label' => 'Sortowanie: ',
             'attr' => [
