@@ -70,15 +70,6 @@
                 </div>
             </div>
             <div class="form-item-col">
-                {{ form_label(form.PESEL, 'Numer PESEL', {'attr': {'class' : 'form-label'}} ) }}
-                {% if form_errors(form.PESEL) %}
-                    {{ form_widget(form.PESEL, {'attr': {'maxlength' : '11', 'class' : 'form-input form-input--error'}} ) }}
-                {% else %}
-                    {{ form_widget(form.PESEL, {'attr': {'maxlength' : '11', 'class' : 'form-input'}} ) }}
-                {% endif %}
-                <span class="form-error">{{ form_errors(form.PESEL) }}</span>
-            </div>
-            <div class="form-item-col">
                 {{ form_label(form.numPhone, 'Numer telefonu', {'attr': {'class' : 'form-label'}} ) }}
                 {% if form_errors(form.numPhone) %}
                     {{ form_widget(form.numPhone, {'attr': {'maxlength' : '9', 'class' : 'form-input form-input--error'}} ) }}
@@ -86,6 +77,15 @@
                     {{ form_widget(form.numPhone, {'attr': {'maxlength' : '9', 'class' : 'form-input'}} ) }}
                 {% endif %}
                 <span class="form-error">{{ form_errors(form.numPhone) }}</span>
+            </div>
+            <div class="form-item-col">
+                {{ form_label(form.PESEL, 'Numer PESEL', {'attr': {'class' : 'form-label'}} ) }}
+                {% if form_errors(form.PESEL) %}
+                    {{ form_widget(form.PESEL, {'attr': {'maxlength' : '11', 'class' : 'form-input form-input--error'}} ) }}
+                {% else %}
+                    {{ form_widget(form.PESEL, {'attr': {'maxlength' : '11', 'class' : 'form-input'}} ) }}
+                {% endif %}
+                <span class="form-error">{{ form_errors(form.PESEL) }}</span>
             </div>
             <div class="form-item-col">
                 {{ form_label(form.birthday, 'Data urodzenia', {'attr': {'class' : 'form-label'}} ) }}
@@ -100,7 +100,6 @@
                 {% endif %}
                 <span class="form-error">{{ form_errors(form.birthday) }}</span>
                 <span class="form-error">{{ form_errors(form) }}</span>
-
             </div>
             <div class="form-subtitle">
                 <h3>Miejsce zamieszkania</h3>

@@ -781,6 +781,18 @@ table {
   transition: opacity .25s;
 }
 
+.link-blue {
+  text-decoration: none;
+  font-weight: 600;
+  color: #284B63;
+  -webkit-transition: .25s color;
+  transition: .25s color;
+}
+
+.link-blue:hover {
+  color: #1b3342;
+}
+
 .modal {
   display: none;
   /* Hidden by default */

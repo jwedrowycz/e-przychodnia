@@ -39,6 +39,9 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\Length(min=8,
+*                       minMessage = "Hasło musi składać się z conajmniej {{ limit }} znaków",
+     *                )
      */
     private $password;
 
