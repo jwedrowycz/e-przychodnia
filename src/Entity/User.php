@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields={"numPhone"}, message="Taki numer telefonu jest już zarejestrowany")
@@ -131,7 +132,7 @@ class User implements UserInterface
     private $createdAt;
 
     /**
-     * @Assert\NotBlank(message = "Wybierz swoją date urodzenia")
+     * @Assert\NotBlank(message = "Wpisz date urodzenia")
      * @ORM\Column(type="date", nullable=true)
      */
     private $birthday;
@@ -157,6 +158,12 @@ class User implements UserInterface
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $status;
+
+    /**
+     * @ORM\Column(type="uuid")
+     */
+    private $uid;
+        
 
     public function getId(): ?int
     {
@@ -269,7 +276,9 @@ class User implements UserInterface
     public function setPESEL(string $PESEL): self
     {
         $this->PESEL = $PESEL;
-
+        $date = $this->getDateFromPesel($PESEL);
+        
+        $this->birthday = new \DateTime($date);;
         return $this;
     }
 
@@ -333,15 +342,17 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getBirthday(): ?\DateTimeInterface
-    {
+    public function getBirthday()
+    {   
+        
         return $this->birthday;
     }
 
-    public function setBirthday(?\DateTimeInterface $birthday): self
-    {
+    
+    public function setBirthday(?\DateTimeInterface $birthday)
+    {   
+        
         $this->birthday = $birthday;
-
         return $this;
     }
 
@@ -373,9 +384,11 @@ class User implements UserInterface
     {
         $this->createdAt = new \DateTime(); // Data rejestracji konta
         $this->visit = new ArrayCollection(); 
-        $this->status = 1; // Status - aktywny przy rejestracji
-    }
+        $this->status = 0; // Status - nieaktywny przy rejestracji - wymaga potwierdzenia
+        $this->roles = ['ROLE_USER'];
+    }   
 
+  
     /**
      * @return Collection|Visit[]
      */
@@ -425,13 +438,81 @@ class User implements UserInterface
     public function isUserKid()
     {
         $bDate = $this->getBirthday();
-        $today = new \DateTime();
-        $dd = date_diff($bDate, $today);
-        if($bDate != null and $this->getGender() == 'D' and $dd->y > 15){          
+        if($bDate != null){
+            $today = new \DateTime();
+            $dd = date_diff($bDate, $today);
+            if($bDate != null and $this->getGender() == 'D' and $dd->y > 15){          
+                return False;
+            }
+            if($bDate != null and ($this->getGender() == 'M' or $this->getGender() == 'K') and $dd->y < 15 ){
+                return False;
+            }
+        }
+        else {
             return False;
         }
-        if($bDate != null and ($this->getGender() == 'M' or $this->getGender() == 'K') and $dd->y < 15 ){
-            return False;
+        
+        return True;
+    }
+
+    /**
+     * @Assert\IsTrue(message="Nieprawidłowy nr PESEL")
+     */
+    public function isDateValid()
+    {
+        $month = substr($this->PESEL, 2,2);
+        $day = substr($this->PESEL, 4,2);
+        $century = 0;
+        if (substr($month,0,1)=='2' || substr($month,0,1)=='3') { 
+            $century = 2000; 
+            $month = intval($month) - 20;
+        }
+        $year = $century + substr($this->PESEL, 0, 2);
+        $days = date('t', mktime(0, 0, 0, $month, 1, $year)); 
+
+        if ($days < $day)
+        {
+            return False;   
         }
     }
+
+    public function getDateFromPesel($pesel)
+    {
+        $month = substr($pesel, 2, 2);
+        $day = substr($pesel, 4, 2);
+        $arrAdditionalMonths = [ 0, 20];
+        $arrBaseMonths = range(1,12);
+        $century = 0;
+        
+        foreach ($arrAdditionalMonths as $additionalMonth) {
+            foreach ($arrBaseMonths as $baseMonth) {
+                $arrMonths[] = $additionalMonth + $baseMonth; 
+            }
+        }
+
+        if (substr($month,0,1)=='0' || substr($month,0,1)=='1') $century = 1900;
+        if (substr($month,0,1)=='2' || substr($month,0,1)=='3') $century = 2000;
+        if ($century == 2000) $month = intval($month) - 20;
+        
+        $year = $century + substr($pesel,0,2);
+        $newDateString = $year . '-' . $month . '-' . $day;
+        // $days = date('t', mktime(0, 0, 0, $month, 1, $year)); 
+
+        return $newDateString;
+    }
+
+    public function getUid()
+    {
+        return $this->uid;
+    }
+
+    public function setUid($uid): self
+    {
+        $this->uid = $uid;
+
+        return $this;
+    }
+    
+
+    
 }

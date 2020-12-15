@@ -70,9 +70,9 @@ class CustomAuthenticator extends AbstractFormLoginAuthenticator implements Pass
 
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
 
-        if (!$user) {
+        if (!$user or $user->getStatus() == 0) {
             // fail authentication with a custom error
-            throw new CustomUserMessageAuthenticationException('Nieprawidłowe dane.');
+            throw new CustomUserMessageAuthenticationException('Nieprawidłowe dane lub konto wymaga aktywacji.');
         }
 
         return $user;

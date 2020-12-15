@@ -29,6 +29,10 @@ services:
     App\EventSubscriber\CalendarSubscriber:
         tags: []
 
+    # App\Service\MailSender:
+    #     arguments:
+    #         $adminEmail: 'jakub.kopniewski@mwomp.pl'
+
 
 
     # add more service definitions when explicit configuration is needed

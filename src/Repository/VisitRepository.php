@@ -52,7 +52,7 @@ class VisitRepository extends ServiceEntityRepository
 
         // INCOMING VISITS
         $qb = $this->createQueryBuilder('v') //MAIN QUERY
-            ->addSelect('v.id, v.submit_date, v.start, v.end, us.email, us.numPhone, us.name as u_name, us.lastName as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.lastName as d_lastName')
+            ->addSelect('v.id, v.submit_date, v.status, v.start, v.end, us.email, us.numPhone, us.name as u_name, us.lastName as u_lastName, us.PESEL, c.name as c_name, d.name as d_name, d.lastName as d_lastName')
             ->join('v.user', 'us')
             ->join('v.unit', 'u')
             ->join('u.doctor', 'd')
@@ -73,6 +73,13 @@ class VisitRepository extends ServiceEntityRepository
 
             }
 
+            if($status == 0){
+                $qb->andWhere('v.status = 0');
+            }
+            else if($status == 1) {
+                $qb->andWhere('v.status = 1');
+            }
+
             if($type==0){ // INCOMING VISITS
                 $qb->andWhere('v.start >= current_date()');
             } else if($type==1) { // PAST VISITS
@@ -86,12 +93,7 @@ class VisitRepository extends ServiceEntityRepository
                 return $qb->getQuery()->getResult();
             }
 
-            if($status == 0){
-                $qb->andWhere('v.status = 0');
-            }
-            else if($status == 1) {
-                $qb->andWhere('v.status = 1');
-            }
+           
             
 
 

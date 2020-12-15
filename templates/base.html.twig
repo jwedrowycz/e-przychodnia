@@ -36,13 +36,13 @@
                 {% else %}
                     <li class="navbar-li">
                         <a
-                            {% if app.request.attributes.get('_route') starts with 'register'%}
-                            class="active" {% endif %} href="{{ path('register') }}" class="">Rejestracja</a>
+                            {% if app.request.attributes.get('_route') starts with 'login'%}
+                            class="active" {% endif %} href="{{ path('login') }}" class="">Zaloguj</a>
                     </li>
                     <li class="navbar-li">
                         <a
-                            {% if app.request.attributes.get('_route') starts with 'login'%}
-                            class="active" {% endif %} href="{{ path('login') }}" class="">Zaloguj</a>
+                            {% if app.request.attributes.get('_route') starts with 'register'%}
+                            class="active" {% endif %} href="{{ path('register') }}" class="">Rejestracja</a>
                     </li>
                 {% endif %}
                 <li class="navbar-li">

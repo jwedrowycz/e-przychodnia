@@ -87,7 +87,7 @@
                 {% endif %}
                 <span class="form-error">{{ form_errors(form.PESEL) }}</span>
             </div>
-            <div class="form-item-col">
+            {# <div class="form-item-col">
                 {{ form_label(form.birthday, 'Data urodzenia', {'attr': {'class' : 'form-label'}} ) }}
                 {% if form_errors(form.birthday) or form_errors(form) %}
                     {{ form_widget(form.birthday.day, {'attr': {'class' : 'form-input--select --error'}} ) }}
@@ -100,7 +100,7 @@
                 {% endif %}
                 <span class="form-error">{{ form_errors(form.birthday) }}</span>
                 <span class="form-error">{{ form_errors(form) }}</span>
-            </div>
+            </div> #}
             <div class="form-subtitle">
                 <h3>Miejsce zamieszkania</h3>
             </div>
@@ -150,6 +150,7 @@
                     {{ form_widget(form.gender, {'attr': {'class' : 'form-input--select'}} ) }}
                 {% endif %}
                 <span class="form-error">{{ form_errors(form.gender) }}</span>
+                <span class="form-error">{{ form_errors(form) }}</span>
             </div>
             <div class="form-item-col checkbox">
                 {{ form_label(form.agreeTerms, 'Akceptuję warunki', {'attr': {'class' : 'form-label'}} ) }}

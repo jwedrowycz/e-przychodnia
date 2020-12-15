@@ -27,10 +27,22 @@
             <td>{{ v.start|date('H:i') }}</td>
             <td>{{ v.end|date('H:i') }}</td>
             <td>{{ v.submit_date|date('d-m-Y H:i:s') }}</td>
-            <td><a class="delete" href="{{ path('admin.visit_cancel', {'id': v.id} ) }}">Anuluj</a></td>
+            {% if v.status == 0 %}
+                <td><a class="delete" onclick="showAlert('Czy na pewno chcesz wykonać tę operację?')" href="{{ path('admin.visit_cancel', {'id': v.id} ) }}">Anuluj</a></td>
+            {% else %}
+                <td></td>
+            {% endif %}
+
         </tr>
     {% endfor %}
 </table>
 {% if visits|length == 0 %}
     <p>Brak wizyt</p>
 {% endif %}
+
+<script>
+function showAlert(text)
+{
+    alert(text);
+}
+</script>

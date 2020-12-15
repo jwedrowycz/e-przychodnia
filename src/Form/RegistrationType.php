@@ -78,11 +78,11 @@ class RegistrationType extends AbstractType
             //     'required' => false,
                 
             // ])
-            ->add('birthday', BirthdayType::class, [
-                'placeholder' => [
-                    'year' => 'Rok', 'month' => 'Miesiąc', 'day' => 'Dzień',
-                ]
-            ])
+            // ->add('birthday', BirthdayType::class, [
+            //     'placeholder' => [
+            //         'year' => 'Rok', 'month' => 'Miesiąc', 'day' => 'Dzień',
+            //     ]
+            // ])
             ->add('gender', ChoiceType::class, [
                 'choices' => [
                             'Wybierz płeć' => '',
