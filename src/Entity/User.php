@@ -163,6 +163,16 @@ class User implements UserInterface
      * @ORM\Column(type="uuid")
      */
     private $uid;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $token;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $tokenTimestamp;
         
 
     public function getId(): ?int
@@ -509,6 +519,30 @@ class User implements UserInterface
     public function setUid($uid): self
     {
         $this->uid = $uid;
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    public function getTokenTimestamp(): ?\DateTimeInterface
+    {
+        return $this->tokenTimestamp;
+    }
+
+    public function setTokenTimestamp(?\DateTimeInterface $tokenTimestamp): self
+    {
+        $this->tokenTimestamp = $tokenTimestamp;
 
         return $this;
     }

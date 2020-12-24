@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="container form">
+    <h1>Zmień hasło</h1>
+    {{ form_start(form, {'attr': {'class': 'form', 'autocomplete':'off'}}) }}
+    <div class="form-item-col">
+        {{ form_label(form.password.first, 'Hasło', {'attr': {'class' : 'form-label'} } ) }}
+        {% if form_errors(form.password.first) %}
+            {{ form_widget(form.password.first, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+        {% else %}
+            {{ form_widget(form.password.first, {'attr': {'class' : 'form-input'}} ) }}
+        {% endif %}
+    </div>
+    <div class="form-item-col">
+        {{ form_label(form.password.second, 'Powtórz hasło', {'attr': {'class' : 'form-label'}} ) }}
+        {% if form_errors(form.password.first) %}
+            {{ form_widget(form.password.second, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+        {% else %}
+            {{ form_widget(form.password.second, {'attr': {'class' : 'form-input'}} ) }}
+        {% endif %}
+        <span class="form-error">{{ form_errors(form.password.first) }}</span>
+    </div>
+    <button class="form-btn">Zatwierdź</button>
+   <a class="link-as-btn cancel" href="{{ path('admin.users') }}">Rezygnuj</a>
+    {{ form_end(form) }}
+</div>
+
+
+
+{% endblock body %}
+

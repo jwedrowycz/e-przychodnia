@@ -61,27 +61,29 @@ class RegistrationController extends AbstractController
      */
     public function activation(Request $request, UserRepository $userRepo)
     {   
-        $userId = $request->query->get('user');
         $uid = $request->query->get('uid');
-        $user = $userRepo->findOneBy(['id'=>$userId, 'uid'=>$uid]);
+        $user = $userRepo->findOneBy(['uid'=>$uid]);
         if($user)
         {
-            $user->setStatus(1);
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
-            
-            $this->addFlash(
-                'success',
-                'Pomyślnie aktywowałeś konto. Teraz możesz się zalogować.'
-                );
+            if($user->getStatus() != 1){
+                $user->setStatus(1);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
+                
+                $this->addFlash(
+                    'success',
+                    'Pomyślnie aktywowałeś konto. Teraz możesz się zalogować.'
+                    );
+            }
+            else {
+                $this->addFlash(
+                    'info',
+                    'Konto jest już aktywne.'
+                    );
+            }
         }
-        else {
-            $this->addFlash(
-                'fail',
-                'Wygląda na to że link wygasł lub konto jest nieprawdiłowe.'
-                );
-        }
+       
         
         return $this->redirectToRoute('login');
     }

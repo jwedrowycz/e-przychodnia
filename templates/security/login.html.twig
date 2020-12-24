@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="container form">
-      {% for label, messages in app.flashes(['success', 'fail']) %}
+      {% for label, messages in app.flashes(['success', 'fail', 'info']) %}
         {% for message in messages %}
             <div class="flash-{{ label }}">
                 {{ message }}
@@ -26,7 +26,7 @@
             <h2>Zaloguj</h2>
         </div>
         <div class="form-item-col">
-            <label class="form-label" for="inputEmail">Login</label>
+            <label class="form-label" for="inputEmail">Email</label>
             <input class="form-input input-login" type="text" value="{{ last_username }}" name="email" placeholder="Wpisz adres e-mail" id="inputEmail" required autofocus>
         </div>
         <div class="form-item-col">
@@ -35,6 +35,7 @@
         </div>
         <div class="form-item-col">
             <p>Jeśli nie posiadasz jeszcze konta <b><a class="link" href="{{ path('register') }}">zarejestruj się!</a></b></p>
+            <small><a class="link" href="{{ path('forgot_password') }}">Zapomniałem hasła</a></small>
         </div>
         <div class="form-item-col">
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">

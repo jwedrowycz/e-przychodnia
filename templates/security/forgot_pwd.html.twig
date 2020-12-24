@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<div class="container form">
+      {% for label, messages in app.flashes(['success', 'fail']) %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {{ form_start(form) }}
+    <h4>Podaj swój adres email na który jest zarejestrowane Twoje konto.</h4>
+    <div class="form-item-col">
+        {{ form_label(form.email, 'Email', {'attr': {'class' : 'form-label'}} ) }}
+        {{ form_widget(form.email, {'attr': {'class' : 'form-input'}} ) }}
+    </div>
+    <div class="form-item-col">
+        <button type="submit" class="form-btn">Wyślij</button>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

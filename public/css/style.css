@@ -579,7 +579,7 @@ table {
 .flash-success {
   padding: 20px;
   background-color: rgba(138, 255, 136, 0.68);
-  color: black;
+  color: #353535;
   margin-bottom: 15px;
   /*border-radius: 20px;*/
 }
@@ -587,7 +587,7 @@ table {
 .flash-fail {
   padding: 20px;
   background-color: #ff9c9c;
-  color: black;
+  color: #353535;
   margin-bottom: 15px;
 }
 
@@ -598,7 +598,8 @@ table {
 }
 
 .flash-info {
-  padding: .5em 1em;
+  padding: 20px;
+  color: #353535;
   background: #d5e7ff;
 }
 

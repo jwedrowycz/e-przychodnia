@@ -34,7 +34,7 @@ class MailSender
                 'name' => $user->getName(),
                 'lastName' => $user->getLastName(),
                 'uid' => $user->getUid(),
-                'link' => $activationUrl . '?uid='.$user->getUid() .'&user=' . $user->getId()
+                'link' => $activationUrl . '?uid='.$user->getUid()
             ]);
             
         try {
@@ -46,5 +46,28 @@ class MailSender
     
         return true;
 
+    }
+
+    public function sendResetPasswordRequest($user, $token): bool
+    {   
+        
+        $resetPasswordUrl = $this->router->generate('reset_password', [],  UrlGeneratorInterface::ABSOLUTE_URL);
+        $email = (new TemplatedEmail())
+        ->from(new Address('jakub.kopniewski@gmail.com', 'Przychodnia'))
+        ->to($user->getEmail())
+        ->subject('Resetowanie hasła')
+        ->htmlTemplate('emails/reset_pwd.html.twig')
+        ->context([
+            'link' => $resetPasswordUrl . '?token=' . $token . '&uid=' . $user->getUid()
+        ]);
+
+        try {
+            $this->mailer->send($email);
+        } catch (TransportExceptionInterface $e) {
+            echo 'Wystąpił problem z wysłaniem maila';
+            echo $e;
+        }
+    
+        return true;
     }
 }
