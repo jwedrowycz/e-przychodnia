@@ -70,4 +70,28 @@ class MailSender
     
         return true;
     }
+
+    public function sendVisitConfirmation($user, $visit): bool
+    {
+        $confirmVisitUrl = $this->router->generate('', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $email = (new TemplatedEmail())
+
+        ->from(new Address('jakub.kopniewski@gmail.com', 'Przychodnia'))
+        ->to($user->getEmail())
+        ->subject('Potwierdzenie wizyty')
+        ->htmlTemplate('emails/reset_pwd.html.twig')
+        ->context([
+            'link' => $confirmVisitUrl . '?uid=' . $user->getUid() . '&visit=' . $visit->getId()
+        ]);
+        
+        // try {
+        //     $this->mailer->send($email);
+        // } catch (TransportExceptionInterface $e) {
+        //     echo 'Wystąpił problem z wysłaniem maila';
+        //     echo $e;
+        // }
+    
+
+        return true;
+    }
 }

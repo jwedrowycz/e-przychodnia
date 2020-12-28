@@ -110,8 +110,6 @@ class VisitController extends AbstractController
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $form = $this->createForm(VisitType::class, $visit);
         $form->handleRequest($request);
-        // echo $start->format('Y-m-d H:i:s');
-        // echo $end->format('Y-m-d H:i:s');
         $v = $visitRepo->findOverlapping($start,$end, $unit->getId());
         if ($form->isSubmitted() && $form->isValid()) {
 
@@ -140,6 +138,16 @@ class VisitController extends AbstractController
         ]);
 
 
+    }
+
+
+     /**
+     * @Route("/confirm/", name="visit_confirm")
+     * 
+     */
+    public function confirm()
+    {
+        
     }
 
    

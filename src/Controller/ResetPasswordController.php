@@ -22,21 +22,29 @@ class ResetPasswordController extends AbstractController
     {   
         $form = $this->createForm(ForgotPwdType::class);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $token = $tokenGenerator->generateToken();
             $email = $form->get('email')->getData();
             $user = $userRepository->findOneBy(['email' => $email]);
-            $user->settoken($token);
-            $user->setTokenTimestamp(new \DateTime());
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
-            $mailSender->sendResetPasswordRequest($user, $token);   
-            $this->addFlash(
-                'success',
-                'Wysłaliśmy wiadomość na podany adres ' . $user->getEmail() .' z dalszymi instrukcjami dotyczącymi zmiany hasła.'
-            );
-            return $this->redirectToRoute('forgot_password');
+            if(!$user) {
+                $this->addFlash(
+                    'success',
+                    'Wysłaliśmy wiadomość na podany adres ' . $email .' z dalszymi instrukcjami dotyczącymi zmiany hasła.'
+                );
+            } else {
+                $user->settoken($token);
+                $user->setTokenTimestamp(new \DateTime());
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+                $mailSender->sendResetPasswordRequest($user, $token);   
+                $this->addFlash(
+                    'success',
+                    'Wysłaliśmy wiadomość na podany adres ' . $user->getEmail() .' z dalszymi instrukcjami dotyczącymi zmiany hasła.'
+                );
+                return $this->redirectToRoute('forgot_password');
+            }
         }
         return $this->render('security/forgot_pwd.html.twig', [
             'form' => $form->createView()
