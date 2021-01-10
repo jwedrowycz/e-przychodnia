@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator\PeselCorrect;
 
 
 
@@ -75,6 +76,7 @@ class User implements UserInterface
     private $lastName;
 
     /**
+     * @PeselCorrect()
      * @Assert\NotBlank(message = "Wpisz swój numer PESEL")
      * @Assert\Regex(
      *     pattern="/[^0-9]/",
@@ -288,7 +290,7 @@ class User implements UserInterface
         $this->PESEL = $PESEL;
         $date = $this->getDateFromPesel($PESEL);
         
-        $this->birthday = new \DateTime($date);;
+        $this->birthday = new \DateTime($date);
         return $this;
     }
 
@@ -398,7 +400,32 @@ class User implements UserInterface
         $this->roles = ['ROLE_USER'];
     }   
 
-  
+    public function getDateFromPesel($pesel)
+    {
+        $month = substr($pesel, 2, 2);
+        $day = substr($pesel, 4, 2);
+        $arrAdditionalMonths = [ 0, 20];
+        $arrBaseMonths = range(1,12);
+        $century = 0;
+        
+        foreach ($arrAdditionalMonths as $additionalMonth) {
+            foreach ($arrBaseMonths as $baseMonth) {
+                $arrMonths[] = $additionalMonth + $baseMonth; 
+            }
+        }
+
+        if (substr($month,0,1)=='0' || substr($month,0,1)=='1') $century = 1900;
+        if (substr($month,0,1)=='2' || substr($month,0,1)=='3') $century = 2000;
+        if ($century == 2000) $month = intval($month) - 20;
+        
+        $year = $century + substr($pesel,0,2);
+        $newDateString = $year . '-' . $month . '-' . $day;
+
+        if($day > 31) return false; # prevent from parsing 'day 32' to Date format
+
+        return $newDateString;
+    }
+
     /**
      * @return Collection|Visit[]
      */
@@ -464,52 +491,7 @@ class User implements UserInterface
         
         return True;
     }
-
-    /**
-     * @Assert\IsTrue(message="Nieprawidłowy nr PESEL")
-     */
-    public function isDateValid()
-    {
-        $month = substr($this->PESEL, 2,2);
-        $day = substr($this->PESEL, 4,2);
-        $century = 0;
-        if (substr($month,0,1)=='2' || substr($month,0,1)=='3') { 
-            $century = 2000; 
-            $month = intval($month) - 20;
-        }
-        $year = $century + substr($this->PESEL, 0, 2);
-        $days = date('t', mktime(0, 0, 0, $month, 1, $year)); 
-
-        if ($days < $day)
-        {
-            return False;   
-        }
-    }
-
-    public function getDateFromPesel($pesel)
-    {
-        $month = substr($pesel, 2, 2);
-        $day = substr($pesel, 4, 2);
-        $arrAdditionalMonths = [ 0, 20];
-        $arrBaseMonths = range(1,12);
-        $century = 0;
-        
-        foreach ($arrAdditionalMonths as $additionalMonth) {
-            foreach ($arrBaseMonths as $baseMonth) {
-                $arrMonths[] = $additionalMonth + $baseMonth; 
-            }
-        }
-
-        if (substr($month,0,1)=='0' || substr($month,0,1)=='1') $century = 1900;
-        if (substr($month,0,1)=='2' || substr($month,0,1)=='3') $century = 2000;
-        if ($century == 2000) $month = intval($month) - 20;
-        
-        $year = $century + substr($pesel,0,2);
-        $newDateString = $year . '-' . $month . '-' . $day;
-        // $days = date('t', mktime(0, 0, 0, $month, 1, $year)); 
-
-        return $newDateString;
-    }
+  
 
     public function getUid()
     {

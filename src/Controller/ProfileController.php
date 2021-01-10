@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Visit;
 use App\Form\Filter\UserVisitsFilterType;
 use App\Form\Filter\VisitsFilterType;
+use App\Form\UserEditType;
 use App\Repository\UserRepository;
 use App\Repository\VisitRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -61,5 +62,33 @@ class ProfileController extends AbstractController
             'visit' => $visit
         ]);
     }
-    //TODO: ZROBIĆ EDYCJE DANYCH, ZMIANE HASŁA, PRZEGLĄD WIZYT -- W PRZYSZŁOŚCI DORZUCIĆ HISTORIE CHOROBY
+    
+
+    /**
+     * @Route("/edit", name="profile_edit")
+     */
+    public function edit(Request $request): Response
+    {
+        $user = $this->getUser();
+        $form = $this->createForm(UserEditType::class, $user);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash(
+                'success',
+                'Pomyślnie edytowałeś swoje dane'
+            );
+            return $this->redirectToRoute('profile.index');
+
+        }
+
+        return $this->render('profile/edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    
+
 }
