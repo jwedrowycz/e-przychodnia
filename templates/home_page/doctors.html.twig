@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Przychodnia rejonowa{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        {% for label, messages in app.flashes(['success', 'fail']) %}
+            {% for message in messages %}
+                <div class="flash-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+        <h1>Strona główna</h1>
+        <div class="clinics-container">
+
+            {% for doctor in doctors %}
+                <div class="clinic-card">
+                    <div class="clinic-item">
+                        <p>{{dump(doctors)}}</p>   
+                    </div>
+                </div>
+            {% endfor %}         
+          
+    </div>
+    </div>
+
+{% endblock %}

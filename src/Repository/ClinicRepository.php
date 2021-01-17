@@ -23,13 +23,16 @@ class ClinicRepository extends ServiceEntityRepository
     }
 
     public function findAllOrderedByName()
-    {
-        return $this->getEntityManager()
-            ->createQuery(
-                'SELECT clinic FROM App:Clinic clinic ORDER BY clinic.name ASC'
-            )
-            ->getResult();
+    {   
+
+        $qb = $this->createQueryBuilder('c')
+        
+            ->orderBy('c.name', 'ASC');
+
+        return $qb->getQuery()->getResult();
     }
+
+    
 
    
 }

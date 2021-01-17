@@ -18,7 +18,7 @@ small {
 
 /* -------------------- FULL CALENDAR -------------- */
 .fc-nonbusiness.fc-bgevent {
-  background-color: red;
+  background-color: #ff0000;
 }
 
 /* .fc-content {
@@ -468,6 +468,36 @@ body {
   .container.admin {
     width: 99%;
   }
+}
+
+.legend-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 50%;
+}
+
+.legend-container .red-slot {
+  padding: .5em;
+  background-color: #ffb2b2;
+}
+
+.legend-container .empty-slot {
+  padding: .5em;
+  border: 1px solid #dddddd;
+  margin-left: 1em;
+  background: #ffffff;
+}
+
+.legend-container .chosen-slot {
+  margin-left: 1em;
+  padding: .5em;
+  color: #FFFFFF;
+  background: red;
 }
 
 table {
@@ -1089,5 +1119,9 @@ select ::-ms-expand {
 
 .admin-boxes-title {
   margin: 1em;
+}
+
+.margin-top {
+  margin-top: 1em;
 }
 /*# sourceMappingURL=style.css.map */

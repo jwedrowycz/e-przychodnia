@@ -12,8 +12,27 @@
                 </div>
             {% endfor %}
         {% endfor %}
-        <h1>Strona główna przychodni</h1>
-       
+        <h1>Strona główna</h1>
+        <div class="clinics-container">
+         
+                <div class="clinic-card">
+                    <div class="clinic-item">
+                        <h3><a class="link" href="{{ path('register') }}">Rejestracja</a></h3>
+
+                    </div>
+                </div>
+                <div class="clinic-card">
+                    <div class="clinic-item">
+                        <h3><a class="link" href="{{ path('visit') }}">Poradnie</a></h3>
+                    </div>
+                </div>
+                <div class="clinic-card">
+                    <div class="clinic-item">
+                        <h3><a class="link" href="{{ path('doctors') }}">Lekarze</a></h3>
+                    </div>
+                </div>
+          
+    </div>
     </div>
 
 {% endblock %}

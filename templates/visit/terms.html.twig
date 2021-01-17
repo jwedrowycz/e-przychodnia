@@ -5,8 +5,15 @@
 {% block body %}
 <div class="container">
     <div id="calendar-holder"></div>
+    <div class="legend-container">
+        <div class="red-slot">Termin niedostępny</div>
+        <div class="empty-slot">Termin wolny</div>
+        <div class="chosen-slot">Termin zajęty</div>
+    </div>
+    <input name="action" class="link-as-btn margin-top" onclick="history.back()" type="submit" value="Powrót"/>
+    <input name="action" class="link-as-btn margin-top" onClick="window.location.reload();" type="submit" value="Odśwież"/>
 </div>
-<!-- TODO: POPRAWIĆ MOŻLIWOŚĆ REZERWACJI -->
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             var calendarEl = document.getElementById('calendar-holder');

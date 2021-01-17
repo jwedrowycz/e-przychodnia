@@ -34,4 +34,26 @@
 }
 
 
-  
+.legend-container {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    .red-slot {
+        padding: .5em;
+        background-color: #ffb2b2;
+    }
+
+    .empty-slot {
+        padding: .5em;
+        border: 1px solid $grey;
+        margin-left: 1em;
+        background: #ffffff;
+    }
+
+    .chosen-slot {
+        margin-left: 1em;
+        padding: .5em;
+        color: $white;
+        background: red;
+    }
+}

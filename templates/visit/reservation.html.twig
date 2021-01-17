@@ -48,9 +48,10 @@
     </div>
     {% endif %}
     {{ form_widget(form.submit, {'attr':{'class':'form-btn'}})}}
-
+    <input name="action" class="link-as-btn cancel" onclick="history.back()" type="submit" value="Rezygnuj"/>
     {{ form_end(form)}}
     </div>
+    
 </div>
 
 

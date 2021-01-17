@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\DoctorRepository;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomePageController extends AbstractController
 {
@@ -13,6 +14,18 @@ class HomePageController extends AbstractController
     public function index()
     {
         return $this->render('home_page/index.html.twig', [
+        ]);
+    }
+
+    /**
+     * @Route("/doctors", name="doctors")
+     */
+    public function doctors(DoctorRepository $doctorRepo)
+    {
+        $doctors = $doctorRepo->findAllAlphabetical();
+
+        return $this->render('home_page/doctors.html.twig', [
+            'doctors' => $doctors
         ]);
     }
 }
