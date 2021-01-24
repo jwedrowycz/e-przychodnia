@@ -2,6 +2,7 @@
 
 
 {% block content %}
+
     {% for label, messages in app.flashes(['success', 'fail']) %}
         {% for message in messages %}
             <div class="flash-{{ label }}">
@@ -9,6 +10,7 @@
             </div>
         {% endfor %}
     {% endfor %}
+    
     <div class="admin-boxes-title">
         <h2>Na skróty</h2>
     </div>
@@ -33,5 +35,4 @@
         <a class="box-item" href="{{ path('admin.user_add') }}">Dodaj użytkownika</a>
     </div>
 
-   
 {% endblock %}

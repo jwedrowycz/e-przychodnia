@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
+ * @IsGranted("ROLE_ADMIN")
  * @Route("/admin", name="admin.")
  */
 class AdminPanelController extends AbstractController
@@ -24,11 +25,3 @@ class AdminPanelController extends AbstractController
     }
 }
 
-
-
-
-
-
-/**
-  * @IsGranted("ROLE_ADMIN")
-  */
