@@ -48,6 +48,15 @@ class DoctorRepository extends ServiceEntityRepository
         );
         return $query->getResult();
     }
+
+    // public function findAllAlphabetical()
+    // {
+    //     $qb = $this->createQueryBuilder('d')
+        
+    //         ->orderBy('d.lastName', 'ASC');
+
+    //     return $qb->getQuery()->getResult();
+    // }
     // /**
     //  * @return Doctor[] Returns an array of Doctor objects
     //  */

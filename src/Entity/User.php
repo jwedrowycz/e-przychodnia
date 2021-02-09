@@ -41,9 +41,6 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Assert\Length(min=8,
-*                       minMessage = "Hasło musi składać się z conajmniej {{ limit }} znaków",
-     *                )
      */
     private $password;
 
@@ -400,32 +397,6 @@ class User implements UserInterface
         $this->roles = ['ROLE_USER'];
     }   
 
-    public function getDateFromPesel($pesel)
-    {
-        $month = substr($pesel, 2, 2);
-        $day = substr($pesel, 4, 2);
-        $arrAdditionalMonths = [ 0, 20];
-        $arrBaseMonths = range(1,12);
-        $century = 0;
-        
-        foreach ($arrAdditionalMonths as $additionalMonth) {
-            foreach ($arrBaseMonths as $baseMonth) {
-                $arrMonths[] = $additionalMonth + $baseMonth; 
-            }
-        }
-
-        if (substr($month,0,1)=='0' || substr($month,0,1)=='1') $century = 1900;
-        if (substr($month,0,1)=='2' || substr($month,0,1)=='3') $century = 2000;
-        if ($century == 2000) $month = intval($month) - 20;
-        
-        $year = $century + substr($pesel,0,2);
-        $newDateString = $year . '-' . $month . '-' . $day;
-
-        if($day > 31) return false; # prevent from parsing 'day 32' to Date format
-
-        return $newDateString;
-    }
-
     /**
      * @return Collection|Visit[]
      */
@@ -469,29 +440,6 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @Assert\IsTrue(message="Data urodzenia jest niezgodna z wybraną płcią")
-     */
-    public function isUserKid()
-    {
-        $bDate = $this->getBirthday();
-        if($bDate != null){
-            $today = new \DateTime();
-            $dd = date_diff($bDate, $today);
-            if($bDate != null and $this->getGender() == 'D' and $dd->y > 15){          
-                return False;
-            }
-            if($bDate != null and ($this->getGender() == 'M' or $this->getGender() == 'K') and $dd->y < 15 ){
-                return False;
-            }
-        }
-        else {
-            return False;
-        }
-        
-        return True;
-    }
-  
 
     public function getUid()
     {
@@ -527,6 +475,55 @@ class User implements UserInterface
         $this->tokenTimestamp = $tokenTimestamp;
 
         return $this;
+    }
+    
+    public function getDateFromPesel($pesel)
+    {
+        $month = substr($pesel, 2, 2);
+        $day = substr($pesel, 4, 2);
+        $arrAdditionalMonths = [ 0, 20];
+        $arrBaseMonths = range(1,12);
+        $century = 0;
+        
+        foreach ($arrAdditionalMonths as $additionalMonth) {
+            foreach ($arrBaseMonths as $baseMonth) {
+                $arrMonths[] = $additionalMonth + $baseMonth; 
+            }
+        }
+
+        if (substr($month,0,1)=='0' || substr($month,0,1)=='1') $century = 1900;
+        if (substr($month,0,1)=='2' || substr($month,0,1)=='3') $century = 2000;
+        if ($century == 2000) $month = intval($month) - 20;
+        
+        $year = $century + substr($pesel,0,2);
+        $newDateString = $year . '-' . $month . '-' . $day;
+
+        if($day > 31) return false; # prevent from parsing 'day 32' to Date format
+
+        return $newDateString;
+    }
+
+    /**
+     * @Assert\IsTrue(message="Data urodzenia jest niezgodna z wybraną płcią")
+     */
+    public function isUserKid()
+    {
+        $bDate = $this->getBirthday();
+        if($bDate != null){
+            $today = new \DateTime();
+            $dd = date_diff($bDate, $today);
+            if($bDate != null and $this->getGender() == 'D' and $dd->y > 15){          
+                return False;
+            }
+            if($bDate != null and ($this->getGender() == 'M' or $this->getGender() == 'K') and $dd->y < 15 ){
+                return False;
+            }
+        }
+        else {
+            return False;
+        }
+        
+        return True;
     }
     
 

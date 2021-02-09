@@ -5,20 +5,14 @@
 {% block body %}
 
     <div class="container">
-        {% for label, messages in app.flashes(['success', 'fail']) %}
-            {% for message in messages %}
-                <div class="flash-{{ label }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endfor %}
-        <h1>Strona główna</h1>
+        <h1>Lekarze</h1>
         <div class="clinics-container">
 
             {% for doctor in doctors %}
-                <div class="clinic-card">
+                <div class="clinic-card not-clickable">
                     <div class="clinic-item">
-                        <p>{{dump(doctors)}}</p>   
+                        <h3>{{ doctor.name ~ ' ' ~ doctor.lastName }}</h3>
+                        <p>Specjalizacja: {{ doctor.spec }}</p>
                     </div>
                 </div>
             {% endfor %}         

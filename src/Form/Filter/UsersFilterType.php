@@ -41,13 +41,13 @@ class UsersFilterType extends AbstractType
             ])
             ->add('status', ChoiceType::class, [
                 'choices' => [
-                    'Aktywni' => 0,
-                    'Nieaktywni' => 1
+                    'Aktywni' => 1,
+                    'Nieaktywni' => 0
                 ],
                 'attr' => [
                     'onchange' => 'this.form.submit()'
                 ],
-                'data' => 0
+                'data' => 1
             ])
             ->setMethod('GET');
     }

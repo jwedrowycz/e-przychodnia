@@ -1,14 +1,17 @@
 .form-btn {
     background: $primary-color;
+    border: 3px solid $primary-color;
+
     color: $white;
-    border: none;
     padding: 1em;
     font-weight: $fw-bold;
-    transition: background .25s;
+    transition: background .25s, border .25s;
     text-transform: uppercase;
     &:hover {
         cursor: pointer;
         background: $primary-color-dk;
+        border: 3px solid $primary-color-dk;
+        
     }
 }
 
@@ -21,23 +24,41 @@
 
 .btn-as-link{
     background: none;
-    border: none;
     font-weight: $fw-bold;
     padding-left: 0;
+    border: none;
     @extend .link;
     cursor: pointer;
+
 }
 
 .link-as-btn {
     display: inline-block;
     text-decoration: none;
     @extend .form-btn;
+    border: 3px solid $primary-color;
+
     
     &.cancel {
         background: $red;
-
+        border: 3px solid $red;
         &:hover {
             background: $red-dk;
+            border: 3px solid $red-dk;
+
+        }
+    }
+
+    &.back {
+        background: $white;
+        border: 3px solid $primary-color;
+        color: $primary-color;
+        transition: background .25s, color .25s, border .25s;
+        &:hover {
+            cursor: pointer;
+            background: $primary-color;
+            color: $white;
+            
         }
     }
 

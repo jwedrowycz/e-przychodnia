@@ -18,6 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class RegistrationType extends AbstractType
 {
@@ -71,18 +72,6 @@ class RegistrationType extends AbstractType
                 ],
                 'required'   => false,
                 ])
-            // ->add('birthday', DateType::class, [
-            //     'widget' => 'choice',
-            //     'years' => range(date('Y'), date('Y')-100),
-            //     'months' => range(date('F'), 12),
-            //     'required' => false,
-                
-            // ])
-            // ->add('birthday', BirthdayType::class, [
-            //     'placeholder' => [
-            //         'year' => 'Rok', 'month' => 'Miesiąc', 'day' => 'Dzień',
-            //     ]
-            // ])
             ->add('gender', ChoiceType::class, [
                 'choices' => [
                             'Wybierz płeć' => '',
@@ -111,11 +100,16 @@ class RegistrationType extends AbstractType
                         'message' => 'Wpisz hasło',
                     ]),
                     new Length([
-                        'min' => 6,
+                        'min' => 8,
                         'minMessage' => 'Twoje hasło powinno mieć przynajmniej {{ limit }} znaków',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
+                    new Regex([
+                        'pattern'   => '/^(?=.*[a-z])(?=.*\d).{8,}$/i',
+                        'match'     => true,
+                        'message'   => 'Hasło musi zawierać przynajmniej jedną wielką litere, cyfre oraz znak specjalny'])
+
                 ],
                 'first_options' => ['label' => 'Hasło' ],
                 'second_options' => ['label' => 'Powtórz hasło'],

@@ -1,9 +1,7 @@
-<div class="container">
-        {{ form_start(form, {'attr': {'class': 'form', 'autocomplete':'off', 'novalidate': 'true'}}) }}
+
+
+    {{ form_start(form, {'attr': {'class': 'form', 'autocomplete':'off', 'novalidate': 'true'}}) }}
           
-            <div class="form-title">
-                <h2>Dodaj użytkownika</h2>
-            </div>
             <div class="form-subtitle">
                 <h3>Dane logowania</h3>
             </div>
@@ -15,23 +13,6 @@
                     {{ form_widget(form.email, {'attr': {'class' : 'form-input'}} ) }}
                 {% endif %}
                 <span class="form-error">{{ form_errors(form.email) }}</span>
-            </div>
-            <div class="form-item-col">
-                {{ form_label(form.password.first, 'Hasło', {'attr': {'class' : 'form-label'}} ) }}
-                {% if form_errors(form.password.first) %}
-                    {{ form_widget(form.password.first, {'attr': {'class' : 'form-input form-input--error'}} ) }}
-                {% else %}
-                    {{ form_widget(form.password.first, {'attr': {'class' : 'form-input'}} ) }}
-                {% endif %}
-            </div>
-            <div class="form-item-col">
-                {{ form_label(form.password.second, 'Powtórz hasło', {'attr': {'class' : 'form-label'}} ) }}
-                {% if form_errors(form.password.first) %}
-                    {{ form_widget(form.password.second, {'attr': {'class' : 'form-input form-input--error'}} ) }}
-                {% else %}
-                    {{ form_widget(form.password.second, {'attr': {'class' : 'form-input'}} ) }}
-                {% endif %}
-                <span class="form-error">{{ form_errors(form.password.first) }}</span>
             </div>
             <div class="form-subtitle">
                 <h3>Dane personalne</h3>
@@ -125,10 +106,16 @@
                 <span class="form-error">{{ form_errors(form.gender) }}</span>
                 <span class="form-error">{{ form_errors(form) }}</span>
             </div>
+             <div class="form-item-radio">
+                {{ form_row(form.roles, {'label':'Role'}) }}
+            </div>
+            <div class="form-item-col">
+                {{ form_label(form.status, 'Status', {'attr': {'class' : 'form-label'}} ) }}
+                {{ form_widget(form.status, {'attr': {'class' : 'form-select select--small'}} ) }}
+                <span class="form-error">{{ form_errors(form.status) }}</span>
+            </div>
 
             {{ form_widget(form.submit, {'attr': {'class' : 'form-btn'}} ) }}
-            <input name="action" class="link-as-btn margin-top back" onclick="history.back()" type="submit" value="Powrót"/>
+            <a class="link-as-btn cancel" href="{{ path('admin.users') }}">Rezygnuj</a>                
+            {{ form_end(form) }}
 
-                
-                {{ form_end(form) }}
-</div>

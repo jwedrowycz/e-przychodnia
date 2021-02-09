@@ -9,6 +9,7 @@ use App\Form\Filter\VisitsFilterType;
 use App\Form\Admin\UserEditType;
 use App\Form\Admin\UserType;
 use App\Form\ChangePasswordType;
+use App\Form\UserAddType;
 use App\Repository\ClinicRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
@@ -19,9 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
-
-
+use Symfony\Component\Uid\Uuid;
 
 /**
  * @Route("/admin/users", name="admin.")
@@ -46,7 +45,6 @@ class UsersController extends AbstractController
 
             $status = $form->get('status')->getData();
             $status = empty($status) ? '' : $status;
-            dump($status);
 
             $users = $usersRepo->findAllUsersWithFilters($role, $status);
         }
@@ -67,10 +65,12 @@ class UsersController extends AbstractController
     public function add_user(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {   
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserAddType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $uid = Uuid::v1();
+            $user->setUid($uid);
             // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
@@ -135,7 +135,7 @@ class UsersController extends AbstractController
     public function edit(Request $request, User $user): Response
     {
         $form = $this->createForm(UserEditType::class, $user);
-        $formPassword = $this->createForm(ChangePasswordType::class, $user); // Wyświetl formularz do okna modal
+        $formPassword = $this->createForm(ChangePasswordType::class, $user); // Tworzy formularz do okna modal
 
         $form->handleRequest($request);
 

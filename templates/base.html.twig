@@ -24,6 +24,7 @@
     <body>
     <header>
             <ul class="navbar" id="">
+                <div class="right-side">
             {% if is_granted('ROLE_USER')%}
                     <li class="navbar-li">
                         <a href="{{ path('logout') }}" class="">Wyloguj</a>
@@ -62,6 +63,12 @@
                             class="active" {% endif %} href="{{ path('admin.index') }}" class="">Panel administratora</a>
                     </li>
                 {% endif %}
+            </div>
+                <div class="left-side">
+                    <li class="navbar-li left">
+                        <span>System e-Rejestracji Przychodni Rejonowej</span>
+                    </li>
+                </div>
             </ul>
     </header>
         {% block body %}
