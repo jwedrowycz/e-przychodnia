@@ -70,8 +70,7 @@ h1 {
    * 2. Show the overflow in Edge and IE.
    */
 hr {
-  -webkit-box-sizing: content-box;
-          box-sizing: content-box;
+  box-sizing: content-box;
   /* 1 */
   height: 0;
   /* 1 */
@@ -108,8 +107,7 @@ abbr[title] {
   /* 1 */
   text-decoration: underline;
   /* 2 */
-  -webkit-text-decoration: underline dotted;
-          text-decoration: underline dotted;
+  text-decoration: underline dotted;
   /* 2 */
 }
 
@@ -256,8 +254,7 @@ fieldset {
    *    `fieldset` elements in all browsers.
    */
 legend {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   /* 1 */
   color: inherit;
   /* 2 */
@@ -291,8 +288,7 @@ textarea {
    */
 [type="checkbox"],
 [type="radio"] {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   /* 1 */
   padding: 0;
   /* 2 */
@@ -420,7 +416,6 @@ template {
   text-align: center;
   padding: 16px 16px;
   text-decoration: none;
-  -webkit-transition: background 0.5s, border-color 0.5s, color 0.5s;
   transition: background 0.5s, border-color 0.5s, color 0.5s;
 }
 
@@ -435,8 +430,7 @@ template {
 body {
   font-family: "Open Sans", serif;
   margin: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   background: #d9dee3;
 }
 
@@ -450,8 +444,7 @@ body {
   background: #FFFFFF;
   padding: 2em;
   border-radius: .3em;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 @media screen and (min-width: 1000px) {
@@ -476,13 +469,8 @@ body {
 }
 
 .legend-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  flex-direction: row;
   width: 50%;
 }
 
@@ -503,6 +491,11 @@ body {
   padding: .5em;
   color: #FFFFFF;
   background: red;
+}
+
+.info-container {
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 table {
@@ -527,7 +520,6 @@ table {
 
 .admin-table tr:hover {
   background-color: #f5f5f5;
-  -webkit-transition: background 0.25s, border-color 0.5s, color 0.25s;
   transition: background 0.25s, border-color 0.5s, color 0.25s;
 }
 
@@ -548,7 +540,6 @@ table {
 
 .admin-table .delete {
   color: #e40000;
-  -webkit-transition: color .25s;
   transition: color .25s;
 }
 
@@ -558,7 +549,6 @@ table {
 
 .admin-table .assign {
   color: #284B63;
-  -webkit-transition: color .25s;
   transition: color .25s;
 }
 
@@ -572,7 +562,6 @@ table {
 
 .admin-table tr:hover a.link-blue {
   color: #284B63;
-  -webkit-transition: background 0.25s, border-color 0.5s, color 0.25s;
   transition: background 0.25s, border-color 0.5s, color 0.25s;
 }
 
@@ -587,7 +576,6 @@ table {
   text-align: left;
   border-bottom: 1px solid #ddd;
   background-color: #f5f5f5;
-  -webkit-transition: background 0.25s, border-color 0.5s, color 0.25s;
   transition: background 0.25s, border-color 0.5s, color 0.25s;
 }
 
@@ -606,7 +594,6 @@ table {
 
 .profile-table .add {
   color: dodgerblue;
-  -webkit-transition: background 0.25s, border-color 0.5s, color 0.25s;
   transition: background 0.25s, border-color 0.5s, color 0.25s;
 }
 
@@ -652,7 +639,6 @@ table {
   background-color: #353535;
   overflow-x: hidden;
   padding-top: 3em;
-  -webkit-transition: 0.7s;
   transition: 0.7s;
 }
 
@@ -666,7 +652,6 @@ table {
 
 .sidebar a:hover {
   background-color: #3C6E71;
-  -webkit-transition: background 0.5s, border-color 0.5s, color 0.5s;
   transition: background 0.5s, border-color 0.5s, color 0.5s;
 }
 
@@ -683,7 +668,6 @@ table {
 .content {
   margin-left: 250px;
   padding: 2.5em;
-  -webkit-transition: margin-left .7s;
   transition: margin-left .7s;
 }
 
@@ -701,13 +685,11 @@ table {
 
 .form-item-col input {
   width: 100%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   background: #f0f0f0;
   border: 1px solid transparent;
   border-radius: .5em;
   padding: .8em;
-  -webkit-transition: background .25s, border .25s;
   transition: background .25s, border .25s;
 }
 
@@ -785,13 +767,16 @@ table {
   }
 }
 
+.form.hidden {
+  margin-top: 1em;
+}
+
 .link, .btn-as-link {
   text-decoration: none;
   color: #284B63;
 }
 
 .link:hover, .btn-as-link:hover {
-  -webkit-transition: 0.5s;
   transition: 0.5s;
   color: #1b3342;
 }
@@ -799,7 +784,6 @@ table {
 .link-green {
   text-decoration: none;
   color: rgba(0, 116, 12, 0.68);
-  -webkit-transition: color 0.5s;
   transition: color 0.5s;
 }
 
@@ -811,13 +795,11 @@ table {
   color: #FFFFFF !important;
   text-decoration: none;
   opacity: 1;
-  -webkit-transition: opacity .25s;
   transition: opacity .25s;
 }
 
 .fade {
   opacity: 0;
-  -webkit-transition: opacity .25s;
   transition: opacity .25s;
 }
 
@@ -825,7 +807,6 @@ table {
   text-decoration: none;
   font-weight: 600;
   color: #284B63;
-  -webkit-transition: .25s color;
   transition: .25s color;
 }
 
@@ -882,9 +863,7 @@ table {
 
 select {
   --webkit-apperance: none;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  appearance: none;
   font-family: inherit;
   font-size: inherit;
   cursor: pointer;
@@ -915,7 +894,6 @@ select ::-ms-expand {
   content: '<>';
   position: absolute;
   color: #333;
-  -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
   right: 11px;
   /*Adjust for position however you want*/
@@ -937,21 +915,16 @@ select ::-ms-expand {
 
 /* ------------------ CLINICS CONTAINER ---------- */
 .clinics-container {
-  display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr;
-      grid-template-columns: 1fr;
-  -ms-grid-rows: 0.5fr;
-      grid-template-rows: 0.5fr;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr;
   gap: 2em 2em;
-      grid-template-areas: ".";
+  grid-template-areas: ".";
 }
 
 .clinic-card {
   background-color: #EAEAEA;
-  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  -webkit-transition: background 0.5s, border-color 0.5s, color 0.5s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: background 0.5s, border-color 0.5s, color 0.5s;
 }
 
@@ -971,7 +944,6 @@ select ::-ms-expand {
 
 .clinic-card .clinic-item ul {
   list-style-type: none;
-  -webkit-transition: 0.25s;
   transition: 0.25s;
 }
 
@@ -982,7 +954,6 @@ select ::-ms-expand {
 .clinic-card.not-clickable {
   font-weight: 600;
   color: #284B63;
-  -webkit-transition: none;
   transition: none;
 }
 
@@ -997,7 +968,6 @@ select ::-ms-expand {
   color: #FFFFFF;
   padding: 1em;
   font-weight: 600;
-  -webkit-transition: background .25s, border .25s;
   transition: background .25s, border .25s;
   text-transform: uppercase;
 }
@@ -1042,7 +1012,6 @@ select ::-ms-expand {
   background: #FFFFFF;
   border: 3px solid #284B63;
   color: #284B63;
-  -webkit-transition: background .25s, color .25s, border .25s;
   transition: background .25s, color .25s, border .25s;
 }
 
@@ -1058,37 +1027,20 @@ select ::-ms-expand {
 
 .summary-container {
   background: #FFFFFF;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
 }
 
 .summary-container .summary-row {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
 }
 
 @media screen and (min-width: 1000px) {
   .summary-container .summary-row {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;
-    -webkit-box-pack: left;
-        -ms-flex-pack: left;
-            justify-content: left;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: left;
   }
 }
 
@@ -1109,23 +1061,14 @@ select ::-ms-expand {
 }
 
 .admin-boxes {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
 @media screen and (min-width: 1000px) {
   .admin-boxes {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
+    flex-direction: row;
   }
 }
 
@@ -1135,7 +1078,6 @@ select ::-ms-expand {
   background: #FFFFFF;
   margin: 1em;
   border-radius: .3em;
-  -webkit-transition: background .25s;
   transition: background .25s;
   min-width: 250px;
   max-width: 250px;

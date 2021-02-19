@@ -21,7 +21,7 @@ class MailSender
         $this->router = $router;
     }
 
-    public function sendRegisterConfirmation($user): bool
+    public function sendRegisterConfirmation(User $user): bool
     {   
 
         $activationUrl = $this->router->generate('register_activation', [],  UrlGeneratorInterface::ABSOLUTE_URL);

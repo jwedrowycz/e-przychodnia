@@ -28,12 +28,15 @@
             <td>{{ v.end|date('H:i') }}</td>
             <td>{{ v.submit_date|date('d-m-Y H:i:s') }}</td>
             {% if v.status == 0 %}
-                <td><a class="delete" onclick="showAlert('Czy na pewno chcesz wykonać tę operację?')" href="{{ path('admin.visit_cancel', {'id': v.id} ) }}">Anuluj</a></td>
+                <td><a class="delete" onclick="return confirm('Czy jesteś pewny, że chcesz wykonać tę oparcję?')" href="{{ path('admin.visit_cancel', {'id': v.id} ) }}">Anuluj</a></td>
             {% else %}
                 <td></td>
             {% endif %}
 
         </tr>
+        <script>
+        var url = {{ path('admin.visit_cancel', {'id': v.id} ) }};
+        </script>
     {% endfor %}
 </table>
 {% if visits|length == 0 %}
@@ -43,6 +46,9 @@
 <script>
 function showAlert(text)
 {
-    confirm(text);
+    if (confirm(text)) 
+        {onclick="showAlert()" 
+        window.location.href = url;
+    };
 }
 </script>

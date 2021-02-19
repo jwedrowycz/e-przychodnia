@@ -33,17 +33,6 @@ class PeselCorrectValidator extends ConstraintValidator
             ->buildViolation($constraint->message)
             ->addViolation();
         }
-
-        // if(count($workTimeValid)==0){
-        //     $this->context
-        //     ->buildViolation($constraint->message)
-        //     ->addViolation();
-        // }
-        // if(count($existingVisit) > 0){
-        //     $this->context
-        //     ->buildViolation($constraint->message)
-        //     ->addViolation();
-        // }
     }
 
   

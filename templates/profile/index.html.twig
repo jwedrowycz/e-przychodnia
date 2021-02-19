@@ -8,19 +8,21 @@
     <span><b>Zarejestrowano: </b>{{ app.user.createdAt|date('d-m-Y H:i') }}</span>
     <p><b>Email: </b> {{ app.user.email }}</p>
     <p><b>Data urodzenia: </b> {{ app.user.birthday|date('d-m-Y') }}</p>
-    <p>{{ app.user.address ~ ', ' ~ app.user.city ~ ' ' ~ app.user.postCode }}</p>
-    <p>{{ app.user.numPhone }}</p>
+    <h3>Dane kontaktowe</h3>
+    <p><b>Adres: </b>{{ app.user.address ~ ', ' ~ app.user.city ~ ' ' ~ app.user.postCode }}</p>
+    <p><b>Numer telefonu: </b>{{ phoneFormat(app.user.numPhone) }}</p>
     
     <a href="{{ path('profile.profile_edit') }}" class="link-as-btn">Edytuj profil</a>
     <h2>Wizyty</h2>
     <div class="container-select">
-        {{ include('profile/_filters.html.twig') }}
+         {{ include('profile/_filters.html.twig') }} 
     </div>
     <table class="profile-table">
         <tr>
             <th>Data wizyty</th>
             <th>Godzina wizyty</th>
             <th>Poradnia</th>
+            <th>Akcje</th>
             <th></th>
         </tr>
             {% for v in visits %}
@@ -29,6 +31,11 @@
                     <td>{{ v[0].start|date('H:i') }}</td>
                     <td>{{ v.name }}</td>
                     <td><a class="link-blue" href="{{ path('profile.visit_show', {'id': v[0].id}) }}">Szczegóły</a></td>
+                    {% if v[0].status == 0 %}
+                        <td><a class="delete" onclick="showAlert('Czy na pewno chcesz wykonać tę operację?')" href="{{ path('profile.visit_cancel', {'id': v[0].id} ) }}">Anuluj</a></td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
     </table>

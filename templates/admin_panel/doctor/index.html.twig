@@ -22,7 +22,7 @@
     {% for d in doctors %}
         <tr>
             <td>{{ d.id }}</td>
-            <td>{{ d.NumPwz }}</td>
+            <td>{{ d.numPwz }}</td>
             <td>{{ d.lastName ~ ' ' ~ d.name }}</td>
             <td>{{ d.spec }}</td>
             {% if d.status == 1 %}
@@ -31,7 +31,6 @@
             <td>Nieaktywny</td>
             {% endif %}
             <td><a class="link-blue" href="{{ path('admin.doctor_edit', {'id':d.id}) }}">Edytuj</a></td>
-            <td><a class="delete" href="{{ path('admin.doctor_delete', {'id':d.id}) }}">Usuń</a></td>
         </tr>
     {% endfor %}
     </table>

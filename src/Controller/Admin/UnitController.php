@@ -42,7 +42,7 @@ class UnitController extends AbstractController
             ->getRepository(Unit::class)
             ->findAllByJoinedId($id);
         return $this->render('admin_panel/unit/show.html.twig',[
-            'doctors' => $unit,
+            'units' => $unit,
             'clinic' => $clinic,
         ]);
 

@@ -17,9 +17,5 @@ class VisitOverlapping extends Constraint
     {
         return \get_class($this).'Validator';
     }
-    /*
-     * Any public properties become valid options for the annotation.
-     * Then, use these in your validator class.
-     */
-    public $message = 'Wprowadź poprawną datę wizyty.';
+    public $message = 'Wprowadź poprawny termin wizyty.';
 }

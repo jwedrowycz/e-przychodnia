@@ -19,24 +19,24 @@ class Unit
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Doctor", inversedBy="unit") 
+     * @ORM\ManyToOne(targetEntity="App\Entity\Doctor", inversedBy="unit",  fetch="EAGER") 
      * @ORM\JoinColumn(nullable=false)
      */
     private $doctor;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Clinic", inversedBy="unit")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Clinic", inversedBy="unit",  fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $clinic;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\WorkTime", mappedBy="unit", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\WorkTime", mappedBy="unit", cascade={"persist", "remove"}, fetch="EAGER")
      */
     private $workTime;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Visit", mappedBy="unit")
+     * @ORM\OneToMany(targetEntity="App\Entity\Visit", mappedBy="unit",  fetch="EAGER")
      */
     private $visit;
 

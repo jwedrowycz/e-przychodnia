@@ -11,15 +11,15 @@
             </div>
         {% endfor %}
     {% endfor %}
+    
 <form class="form" method="post">
-
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
     {% if app.user %}
-        <div class="mb-3">
-            Zalogowano jako {{ app.user.username }}, <a href="{{ path('logout') }}">Wyloguj</a>
+        <div>
+            Zalogowano jako {{ app.user.email }}, <a href="{{ path('logout') }}">Wyloguj</a>
         </div>
     {% endif %}
         <div class="form-title">
@@ -44,7 +44,7 @@
     </div>
 </div>
     {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+       S Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
         See https://symfony.com/doc/current/security/remember_me.html
 
         <div class="checkbox mb-3">

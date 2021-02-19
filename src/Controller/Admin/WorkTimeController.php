@@ -54,17 +54,13 @@ class WorkTimeController extends AbstractController
     /**
      * @Route("/work-time/{id}", name="work_time", methods={"GET", "POST"})
      */
-    public function showAndAdd($id, unitRepository $unitRepo, Request $request){
+    public function showAndAdd($id, UnitRepository $unitRepo, Request $request){
 
         $entityManager = $this->getDoctrine()->getManager();
         
         $time = $entityManager->getRepository('App:WorkTime')->findAllByUnitId($id);
-        $unit = $this->getDoctrine()
-            ->getRepository(Unit::class)
-            ->findOneBy(['id'=>$id]);
-        
+        $unit = $unitRepo->find($id);
         $timeGet = new WorkTime();
-
         $form = $this->createForm(WorkTimeType::class, $timeGet);
         $form->handleRequest($request);
 

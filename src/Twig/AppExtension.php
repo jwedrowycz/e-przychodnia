@@ -17,6 +17,7 @@ class AppExtension extends AbstractExtension
             new TwigFilter('filter_name', [$this, 'doSomething']),
             new TwigFilter('statusFormat', [$this, 'statusFormat']),
             new TwigFilter('roleFormat', [$this, 'roleFormat']),
+            new TwigFilter('phoneFormat', [$this, 'phoneFormat']),
 
 
         ];
@@ -28,28 +29,27 @@ class AppExtension extends AbstractExtension
             new TwigFunction('nameOfDay', [$this, 'nameOfDay']),
             // new TwigFunction('roleFormat', [$this, 'roleFormat']),
             new TwigFunction('checkDuplicates', [$this, 'checkDuplicates']),
+            new TwigFunction('phoneFormat', [$this, 'phoneFormat']),
         ];
     }
 
-    //TODO: ZROBIĆ FILTR FORMATU TELEFONU
+    public function phoneFormat($number)
+    {
+        $firstChain = substr($number, 0, 3);
+        $secondChain = substr($number, 3, 3);
+        $thirdChain = substr($number, 6, 3);
+        $formatedNumberPhone = $firstChain . ' ' . $secondChain . ' ' . $thirdChain;
+
+        return $formatedNumberPhone;
+    }
 
     public function nameOfDay($num)
     {        
-        if($num===1){
-            return 'Poniedziałek';
-        }
-        elseif($num===2){
-            return 'Wtorek'; 
-        }
-        elseif($num===3){
-            return 'Środa';
-        }
-        elseif($num===4){
-            return 'Czwartek';
-        }
-        elseif($num===5){
-            return 'Piątek';
-        }
+        if($num===1) return 'Poniedziałek';
+        elseif($num===2) return 'Wtorek'; 
+        elseif($num===3) return 'Środa';
+        elseif($num===4) return 'Czwartek';
+        elseif($num===5) return 'Piątek';
         return False;
     }
 

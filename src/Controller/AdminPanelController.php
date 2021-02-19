@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminPanelController extends AbstractController
 {
     /**
-     * @Route("/", name="index")
+     * @Route("/", name="panel")
      */
     public function index() // Strona główna panelu administratora
     {

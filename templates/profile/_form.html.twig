@@ -2,7 +2,7 @@
 
     {{ form_start(form, {'attr': {'class': 'form', 'autocomplete':'off', 'novalidate': 'true'}}) }}
 
-    {# <div class="form-item-col">
+    <div class="form-item-col">
         {{ form_label(form.email, 'E-mail', {'attr': {'class' : 'form-label'}} ) }}
         {% if form_errors(form.email) %}
             {{ form_widget(form.email, {'attr': {'class' : 'form-input form-input--error'}} ) }}
@@ -10,34 +10,27 @@
             {{ form_widget(form.email, {'attr': {'class' : 'form-input'}} ) }}
         {% endif %}
         <span class="form-error">{{ form_errors(form.email) }}</span>
-    </div> #}
-    <div class="form-item-col">
-        {{ form_label(form.name, 'Imię', {'attr': {'class' : 'form-label'}} ) }}
-        {% if form_errors(form.name) %}
-            {{ form_widget(form.name, {'attr': {'class' : 'form-input form-input--error'}} ) }}
-        {% else %}
-            {{ form_widget(form.name, {'attr': {'class' : 'form-input'}} ) }}
-        {% endif %}
-        <span class="form-error">{{ form_errors(form.name) }}</span>
     </div>
-    <div class="form-item-col">
-        {{ form_label(form.last_name, 'Nazwisko', {'attr': {'class' : 'form-label'}} ) }}
-        {% if form_errors(form.last_name) %}
-            {{ form_widget(form.last_name, {'attr': {'class' : 'form-input form-input--error'}} ) }}
-        {% else %}
-            {{ form_widget(form.last_name, {'attr': {'class' : 'form-input'}} ) }}
-        {% endif %}
-        <span class="form-error">{{ form_errors(form.last_name) }}</span>
-    </div>
-    <div class="form-item-col city">
-        {{ form_label(form.city, 'Miasto', {'attr': {'class' : 'form-label'}} ) }}
-        {% if form_errors(form.city) %}
-            {{ form_widget(form.city, {'attr': {'class' : 'form-input form-input--error'}} ) }}
-        {% else %}
-            {{ form_widget(form.city, {'attr': {'class' : 'form-input city'}} ) }}
-        {% endif %}
-        <span class="form-error">{{ form_errors(form.city) }}</span>
-    </div>
+    <div class="form-item-row">
+                <div class="form-item-col city">
+                    {{ form_label(form.city, 'Miasto', {'attr': {'class' : 'form-label'}} ) }}
+                    {% if form_errors(form.city) %}
+                        {{ form_widget(form.city, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+                    {% else %}
+                        {{ form_widget(form.city, {'attr': {'class' : 'form-input city'}} ) }}
+                    {% endif %}
+                    <span class="form-error">{{ form_errors(form.city) }}</span>
+                </div>
+                <div class="form-item-col post-code">
+                    {{ form_label(form.postCode, 'Kod pocztowy', {'attr': {'class' : 'form-label'}} ) }}
+                    {% if form_errors(form.postCode) %}
+                        {{ form_widget(form.postCode, {'attr': {'maxlength' : '6', 'class' : 'form-input form-input--error'}} ) }}
+                    {% else %}
+                        {{ form_widget(form.postCode, {'attr': {'maxlength' : '6', 'class' : 'form-input post-code'}} ) }}
+                    {% endif %}
+                    <span class="form-error">{{ form_errors(form.postCode) }}</span>
+                </div>
+            </div>
     <div class="form-item-col city">
         {{ form_label(form.numPhone, 'Numer telefonu', {'attr': {'class' : 'form-label'}} ) }}
         {% if form_errors(form.numPhone) %}

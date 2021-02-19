@@ -16,19 +16,12 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class CalendarSubscriber implements EventSubscriberInterface
 {
-    private $workTimeRepo;
     private $visitRepo;
-    private $router;
     private $request;
 
-    public function __construct(
-        VisitRepository $visitRepo,
-        UrlGeneratorInterface $router,
-        RequestStack $requestStack
-        
-    ) {
+    public function __construct(VisitRepository $visitRepo,  RequestStack $requestStack) 
+    {
         $this->visitRepo = $visitRepo;
-        $this->router = $router;
         $this->request = $requestStack->getCurrentRequest();
     }
 
@@ -48,10 +41,8 @@ class CalendarSubscriber implements EventSubscriberInterface
 
         $visits = $this->visitRepo->findAllVisits($start,$end, $id);
         $title = 'ZAJĘTY';
-
-        // $err = 'Zajęta';
+        
         foreach ($visits as $visit) {
-            // this create the events with your data (here booking data) to fill calendar
             $visitEvent = new Event(
                 
                 $title,
@@ -59,25 +50,11 @@ class CalendarSubscriber implements EventSubscriberInterface
                 $visit->getEnd(),
             );
 
-            /*
-             * Add custom options to events
-             *
-             * For more information see: https://fullcalendar.io/docs/event-object
-             * and: https://github.com/fullcalendar/fullcalendar/blob/master/src/core/options.ts
-             */
-
             $visitEvent->setOptions([
                 'backgroundColor' => 'red',
                 'borderColor' => 'darkred',
             ]);
-            // $wizytaEvent->addOption(
-            //     'url',
-            //     $this->router->generate('booking_show', [
-            //         'id' => $booking->getId(),
-            //     ])
-            // );
 
-            // finally, add the event to the CalendarEvent to fill the calendar
             $calendar->addEvent($visitEvent);
         }
     }

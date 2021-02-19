@@ -4,20 +4,17 @@
 {% block content %}
 <div class="container admin">
 {% for label, messages in app.flashes(['success', 'fail']) %}
-{% for message in messages %}
-    <div class="flash-{{ label }}">
-        {{ message }}
-    </div>
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
 {% endfor %}
-{% endfor %}
 
 
-
-{% for u in unit %}
-     <h2>Lekarz: {{ u.last_name ~ ' ' ~ u.name}}</h2>
-     <h2>{{ u.name }} </h2>
-     {% endfor %}
-     <h3>Godziny pracy jednostki</h3>
+    <h3>Godziny pracy</h3>
+    <h4>{{ unit.clinic.name }}</h4>
+    <h4>Lekarz {{ unit.doctor.name ~ ' ' ~ unit.doctor.lastName}}</h4>
     <table class="admin-table">
         <tr>
             <th>Dzień tygodnia</th>
@@ -35,17 +32,11 @@
     {% endfor %}
 
     </table>
-    
-    <button class="form-btn" id="toggleBtn">Dodaj czas pracy</button>
+
     {{ include('admin_panel/work_time/_form.html.twig')}}
 </div>
 
-    <script>
-    $("#toggleBtn").click(function(){
-        $(".form.hidden").toggle();
-    });
-    </script>
-
+    
 {% endblock content %}
 
    

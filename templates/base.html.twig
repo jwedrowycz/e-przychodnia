@@ -60,7 +60,7 @@
                     <li class="navbar-li">
                         <a
                             {% if app.request.attributes.get('_route') starts with 'admin'%}
-                            class="active" {% endif %} href="{{ path('admin.index') }}" class="">Panel administratora</a>
+                            class="active" {% endif %} href="{{ path('admin.panel') }}" class="">Panel administratora</a>
                     </li>
                 {% endif %}
             </div>

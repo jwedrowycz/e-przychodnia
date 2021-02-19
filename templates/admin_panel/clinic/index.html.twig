@@ -25,13 +25,11 @@
         <tr>
             <td>{{ c.id }}</td>
             <td>{{ c.name }}</td>
-            {% if is_granted('ROLE_ADMIN') %}
             <td>
                 <a class="delete" href="{{ path('admin.clinic_delete', {id: c.id}) }}">Usuń</a>
                 <a class="assign" href="{{ path('admin.unit_show', {id: c.id}) }}">Wyświetl</a>
                 <a class="assign" href="{{ path('admin.unit_add', {'idClinic': c.id}) }} ">Przypisz lekarza</a>
             </td>
-            {% endif %}
         </tr>
     {% endfor %}
     </table>

@@ -89,6 +89,23 @@ class ProfileController extends AbstractController
         ]);
     }
 
-    
+     /**
+     * @Route("/cancel/{id}", name="visit_cancel")
+     * @param Visit $visit
+     * 
+     */
+     public function cancel(Visit $visit)
+     {   
+         $entityManager = $this->getDoctrine()->getManager();
+         $visit->setStatus(1);
+         $entityManager->flush();
+ 
+         $this->addFlash(
+             'success',
+             'Pomyślnie anulowano wizytę'
+         );
+ 
+         return $this->redirectToRoute('profile.index');
+     }
 
 }

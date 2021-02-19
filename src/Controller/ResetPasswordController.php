@@ -74,7 +74,7 @@ class ResetPasswordController extends AbstractController
         $tokenTimeStamp = $user->getTokenTimestamp();
         $diff = $timestamp->diff($tokenTimeStamp);
         dump($diff->format('%i'));
-        if(intval($diff->format('%i')) >= 15)
+        if(intval($diff->format('%i')) > 15)
         {
             $this->addFlash(
                 'fail',

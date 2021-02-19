@@ -10,6 +10,7 @@
         <div class="empty-slot">Termin wolny</div>
         <div class="chosen-slot">Termin zajęty</div>
     </div>
+    <div class="info-container"><span></span>W celu rezerwacji terminu, kliknij w biały prostokąt.<span></div>
     <input name="action" class="link-as-btn margin-top" onclick="history.back()" type="submit" value="Powrót"/>
     <input name="action" class="link-as-btn margin-top" onClick="window.location.reload();" type="submit" value="Odśwież"/>
 </div>
@@ -21,7 +22,6 @@
             var end = new Date();
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 defaultView: 'timeGridWeek',
-                editable: true,
                 timeZone: 'Europe/Warsaw',
                 locale: 'pl',
                 allDaySlot: false,
@@ -45,11 +45,7 @@
                     list: 'lista',
                 },
 
-                selectOverlap: function(event) {
-                    return event.rendering === 'background';
-                },
-
-                businessHours: [ // specify an array instead
+                businessHours: [ 
                     {% for t in workTime %}
                     {
                         daysOfWeek: [ {{ t.day }}],
@@ -64,9 +60,6 @@
                         method: "POST",
                         extraParams: {
                             filters: JSON.stringify({id:'{{id}}' })
-                        },
-                        failure: () => {
-                            // alert("There was an error while fetching FullCalendar!");
                         },
                     },
                 ],

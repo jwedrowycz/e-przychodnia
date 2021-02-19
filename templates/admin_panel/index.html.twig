@@ -11,7 +11,7 @@
             <a {% if app.request.attributes.get('_route') starts with 'admin.clinic'%}
                 class="active"{% endif %}  href="{{ path('admin.clinics') }}">Poradnie</a>
                 <a {% if app.request.attributes.get('_route') starts with 'admin.unit' %}
-                class="active"{% endif %}  href="{{ path('admin.unit') }}">Jednostki</a>
+                class="active"{% endif %}  href="{{ path('admin.unit') }}">Gabinety</a>
             <a {% if app.request.attributes.get('_route') starts with 'admin.doctor' %}
                 class="active"{% endif %}  href="{{ path('admin.doctors') }}">Lekarze</a>
             <a {% if app.request.attributes.get('_route') starts with 'admin.visits' %}

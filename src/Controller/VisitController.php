@@ -45,18 +45,12 @@ class VisitController extends AbstractController
 
     /**
      * @Route("/choice/{id}", name="visit_choose")
-     * @param $id
-     * @param UnitRepository $unitRepo
-     * @param ClinicRepository $clinicRepo
-     * @param WorkTimeRepository $workTimeRepo
-     * @return Response
      */
-    public function choose($id, UnitRepository $unitRepo, ClinicRepository $clinicRepo, WorkTimeRepository $workTimeRepo)
+    public function choose($id, UnitRepository $unitRepo, ClinicRepository $clinicRepo)
     {   
         $clinic = $clinicRepo->find($id);
         $unit = $unitRepo->findAllByJoinedId($id);
         
-        // $j = $unitRepo->findOneById(16);
         return $this->render('visit/choice.html.twig', [
             'clinic' => $clinic,
             'unit' => $unit,
@@ -64,12 +58,10 @@ class VisitController extends AbstractController
     }
 
     
-    public function work_time_show($idClinic, $idUnit, WorkTimeRepository $workTimeRepo, ClinicRepository $clinicRepo)
+    public function work_time_show($idUnit, WorkTimeRepository $workTimeRepo)
     {   
-        // $clinic = $clinicRepo->find($idClinic);
         $time = $workTimeRepo->findAllWithDoctorData($idUnit);
         return $this->render('visit/_worktime.html.twig', [
-            // 'clinic' => $clinic,
             'time' => $time
         ]);
     }
@@ -93,26 +85,22 @@ class VisitController extends AbstractController
      * @IsGranted("ROLE_USER")
      * @Route("/terms/reservation/{id}/", name="visit_add")
      */
-    public function add($id, Request $request, UnitRepository $unitRepo, WorkTimeRepository $workTimeRepo, VisitRepository $visitRepo){
+    public function add($id, Request $request, UnitRepository $unitRepo, VisitRepository $visitRepo){
         $visit = new Visit();
         
         $unit = $unitRepo->find($id);
-        $workTime = $workTimeRepo->findAllByUnitId($id);
         $doctor = $unit->getDoctor();
         $clinic = $unit->getClinic();
         $start = $request->query->get('start');
-        $end = $request->query->get('end');
-        $start = new \DateTime($start);
-        $end = new \DateTime($end);
-        $visit->setStart($start);
-        $visit->setEnd($end);
+        $end = $request->query->get('end'); 
+        $visit->setStart(new \DateTime($start));
+        $visit->setEnd(new \DateTime($end));
         $visit->setUnit($unit);
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $form = $this->createForm(VisitType::class, $visit);
         $form->handleRequest($request);
         $v = $visitRepo->findOverlapping($start,$end, $unit->getId());
         if ($form->isSubmitted() && $form->isValid()) {
-
             $entityManager = $this->getDoctrine()->getManager();
             $visit->setUser($user);
             $entityManager->persist($visit);
@@ -124,9 +112,6 @@ class VisitController extends AbstractController
             return $this->redirectToRoute('visit');
 
         }
-        $diff = $start->diff($end);
-
-        $test = $workTimeRepo->checkWorkDay($start->format('H:i:s'), $end->format('H:i:s'), $unit->getId(), $start->format('w'));
         return $this->render('visit/reservation.html.twig', [
             'clinic' => $clinic,
             'doctor' => $doctor,

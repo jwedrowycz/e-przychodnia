@@ -50,22 +50,21 @@ class UserVisitsFilterType extends AbstractType
 
             ->setMethod('GET');
 
-//
         $builder->add('type', ChoiceType::class, [
-//            'multiple' => false,
-//            'expanded' => true,
             'choices' => [
                 'Nadchodzące' => 0,
                 'Archiwalne' => 1,
                 'Dzisiaj' => 2,
-                'Wszystkie' => 3,
+                'Anulowane' => 3,
+                'Aktywne' => 4,
+                'Wszystkie' => 5,
             ],
             'label' => 'Wizyty: ',
             'attr' => [
                 'onchange' => 'this.form.submit()'
             ],
-
-        ]);
+        ])
+        ->setMethod('GET');
         $builder->add('sort', ChoiceType::class, [
             'choices' => [
                 'Malejąco' => 0,

@@ -23,7 +23,7 @@ class UnitRepository extends ServiceEntityRepository
     {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
-            'SELECT u.id as unit, d.id, d.lastName, d.name, d.numPwz, d.spec, d.status
+            'SELECT u.id as unit, d.id, d.lastName, d.name, d.status, d.numPwz, d.spec
             FROM App\Entity\Unit u
             JOIN u.doctor d
             JOIN u.clinic c

@@ -38,11 +38,9 @@ class WorkTimeRepository extends ServiceEntityRepository
     {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
-            'SELECT w.id, w.day, w.start, w.end, d.name, d.lastName
+            'SELECT w.id, w.day, w.start, w.end
             FROM App\Entity\WorkTime w
-            JOIN w.unit u
-            JOIN u.doctor d
-            
+            JOIN w.unit u           
             WHERE w.unit = :id
             ORDER BY w.day ASC'
         )->setParameter('id', $unitId);
@@ -50,16 +48,14 @@ class WorkTimeRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
-    public function checkWorkDay($start, $end, $unitId, $day)
+    public function checkWorkDay($unitId, $day)
     {
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
             'SELECT w.id, w.day, w.start, w.end
             FROM App\Entity\WorkTime w            
-            WHERE w.unit = :id AND w.start < :end AND w.end > :start AND w.day = :day')
+            WHERE w.unit = :id AND w.day = :day')
             ->setParameter('id', $unitId)
-            ->setParameter('start', $start)
-            ->setParameter('end', $end)
             ->setParameter('day', $day);
 
         return $query->getResult();

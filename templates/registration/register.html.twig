@@ -11,41 +11,41 @@
                 </div>
             {% endfor %}
         {% endfor %}
-            {{ form_start(form, {'attr': {'class': 'form', 'autocomplete':'off', 'novalidate': 'true'}}) }}
-          
-            <div class="form-title">
-                <h2>Rejestracja</h2>
-            </div>
-            <p class="form-desc">Zarejestruj się by móc rezerwować wizyty i otrzymywać powiadomienia o zbliżających się terminach.</p>
-            <div class="form-subtitle">
-                <h3>Dane logowania</h3>
-            </div>
-            <div class="form-item-col">
-                {{ form_label(form.email, 'E-mail', {'attr': {'class' : 'form-label'}} ) }}
-                {% if form_errors(form.email) %}
-                    {{ form_widget(form.email, {'attr': {'class' : 'form-input form-input--error'}} ) }}
-                {% else %}
-                    {{ form_widget(form.email, {'attr': {'class' : 'form-input'}} ) }}
-                {% endif %}
-                <span class="form-error">{{ form_errors(form.email) }}</span>
-            </div>
-            <div class="form-item-col">
-                {{ form_label(form.password.first, 'Hasło', {'attr': {'class' : 'form-label'}} ) }}
-                {% if form_errors(form.password.first) %}
-                    {{ form_widget(form.password.first, {'attr': {'class' : 'form-input form-input--error'}} ) }}
-                {% else %}
-                    {{ form_widget(form.password.first, {'attr': {'class' : 'form-input'}} ) }}
-                {% endif %}
-            </div>
-            <div class="form-item-col">
-                {{ form_label(form.password.second, 'Powtórz hasło', {'attr': {'class' : 'form-label'}} ) }}
-                {% if form_errors(form.password.first) %}
-                    {{ form_widget(form.password.second, {'attr': {'class' : 'form-input form-input--error'}} ) }}
-                {% else %}
-                    {{ form_widget(form.password.second, {'attr': {'class' : 'form-input'}} ) }}
-                {% endif %}
-                <span class="form-error">{{ form_errors(form.password.first) }}</span>
-            </div>
+{{ form_start(form, {'attr': {'class': 'form', 'autocomplete':'off', 'novalidate': 'true'}}) }}
+
+<div class="form-title">
+    <h2>Rejestracja</h2>
+</div>
+<p class="form-desc">Zarejestruj się by móc rezerwować wizyty i otrzymywać powiadomienia o zbliżających się terminach.</p>
+<div class="form-subtitle">
+    <h3>Dane logowania</h3>
+</div>
+<div class="form-item-col">
+    {{ form_label(form.email, 'E-mail', {'attr': {'class' : 'form-label'}} ) }}
+    {% if form_errors(form.email) %}
+        {{ form_widget(form.email, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+    {% else %}
+        {{ form_widget(form.email, {'attr': {'class' : 'form-input'}} ) }}
+    {% endif %}
+    <span class="form-error">{{ form_errors(form.email) }}</span>
+</div>
+<div class="form-item-col">
+    {{ form_label(form.password.first, 'Hasło', {'attr': {'class' : 'form-label'}} ) }}
+    {% if form_errors(form.password.first) %}
+        {{ form_widget(form.password.first, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+    {% else %}
+        {{ form_widget(form.password.first, {'attr': {'class' : 'form-input'}} ) }}
+    {% endif %}
+</div>
+<div class="form-item-col">
+    {{ form_label(form.password.second, 'Powtórz hasło', {'attr': {'class' : 'form-label'}} ) }}
+    {% if form_errors(form.password.first) %}
+        {{ form_widget(form.password.second, {'attr': {'class' : 'form-input form-input--error'}} ) }}
+    {% else %}
+        {{ form_widget(form.password.second, {'attr': {'class' : 'form-input'}} ) }}
+    {% endif %}
+    <span class="form-error">{{ form_errors(form.password.first) }}</span>
+</div>
             <div class="form-subtitle">
                 <h3>Dane personalne</h3>
             </div>
@@ -87,20 +87,6 @@
                 {% endif %}
                 <span class="form-error">{{ form_errors(form.PESEL) }}</span>
             </div>
-            {# <div class="form-item-col">
-                {{ form_label(form.birthday, 'Data urodzenia', {'attr': {'class' : 'form-label'}} ) }}
-                {% if form_errors(form.birthday) or form_errors(form) %}
-                    {{ form_widget(form.birthday.day, {'attr': {'class' : 'form-input--select --error'}} ) }}
-                    {{ form_widget(form.birthday.month, {'attr': {'class' : 'form-input--select --error'}} ) }}
-                    {{ form_widget(form.birthday.year, {'attr': {'class' : 'form-input--select --error'}} ) }}
-                {% else %}
-                    {{ form_widget(form.birthday.day, {'attr': {'class' : 'form-input--select'}} ) }}
-                    {{ form_widget(form.birthday.month, {'attr': {'class' : 'form-input--select'}} ) }}
-                    {{ form_widget(form.birthday.year, {'attr': {'class' : 'form-input--select '}} ) }}
-                {% endif %}
-                <span class="form-error">{{ form_errors(form.birthday) }}</span>
-                <span class="form-error">{{ form_errors(form) }}</span>
-            </div> #}
             <div class="form-subtitle">
                 <h3>Miejsce zamieszkania</h3>
             </div>

@@ -23,19 +23,17 @@ class VisitRepository extends ServiceEntityRepository
 
     public function findAllVisits($start, $end, $id)
     {
-
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
             'SELECT v
             FROM App\Entity\Visit v
-            WHERE (v.start BETWEEN :start AND :end OR v.end BETWEEN :start and :end)
+            WHERE (v.start BETWEEN :start AND :end OR v.end BETWEEN :start and :end) AND v.status = 0
             AND v.unit = :id
             
             ')
             ->setParameter('start', $start->format('Y-m-d H:i:s'))
             ->setParameter('end', $end->format('Y-m-d H:i:s'))
             ->setParameter('id', $id);
-
         return $query->getResult();
 
     }
@@ -163,22 +161,27 @@ class VisitRepository extends ServiceEntityRepository
         else if($sort==1){
             $qb->orderBy('v.start','DESC');
         }
-
         if ($clinic) // IF CLINIC IS CHOSEN
         {
             $qb->andWhere('c.id = :clinic')
                 ->setParameter('clinic', $clinic);
         }
         if($type==0){ // INCOMING VISITS
-            $qb->andWhere('v.start >= current_date()');
+            $qb->andWhere('v.start >= current_date()')
+                ->andWhere('v.status = 0');
         } else if($type==1) { // PAST VISITS
-            $qb->andWhere('v.start < current_date()');
+            $qb->andWhere('v.start < current_date()')
+                ->andWhere('v.status = 0');
 
         } else if($type==2) { // TODAY'S VISITS
             $qb->andWhere('v.start > :dateStart')
                 ->andwhere('v.end < :dateEnd')
                 ->setParameter('dateStart' ,$currDateStart)
                 ->setParameter('dateEnd' ,$currDateEnd);
+        } else if ($type==3) { // CANCELED
+            $qb->andWhere('v.status = 1');
+        } else if ($type==4) { // ACTIVE
+            $qb->andWhere('v.status = 0');
         } else { // ALL VISITS
             return $qb->getQuery()->getResult();
         }

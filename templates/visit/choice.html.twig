@@ -12,7 +12,7 @@
             {% if u.status == 1 %}
                 <div class="clinic-item"><a href="{{path('visit_terms', {'id': u.unit})}}" hidden></a>
                 <h4 class="link">{{ u.name ~ ' ' ~ u.lastName }} <br></h4>
-                {{ render(controller('App\\Controller\\VisitController::work_time_show', {'idClinic': clinic.id, 'idUnit':u.unit})) }}
+                {{ render(controller('App\\Controller\\VisitController::work_time_show', {'idUnit':u.unit})) }}
                 </div>
             {% endif %}
         </div>
