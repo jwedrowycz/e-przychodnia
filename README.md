@@ -5,7 +5,7 @@ System umożliwia użytkownikom m.in.:
 - rejestracje w przychodni
 - przegląd lekarzy wraz z poradniami
 - wybór danego lekarza i poradni
-- przegląd i wybór wolnego terminu no wcześniej wybranego lekarza
+- przegląd i wybór wolnego terminu wraz z rezerwacją wizyty
 
 Personelowi przychodni system pozwala na m.in.:
 - tworzenie nowych gabinetów (dodawanie poradni wraz z lekarzami)
